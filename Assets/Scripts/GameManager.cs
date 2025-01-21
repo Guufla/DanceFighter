@@ -7,41 +7,35 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
 
+
     [Header("Player1")]
 
+    public GameObject player1; // This is a game object reference to player 1 that lets us easily call it from different scripts
 
-    public GameObject player1;
+    // This is used to represent how much knockback any given attack does. It will usually be zero but while doing an attack it will switch around depending on the setKnockback() function.
+    public float P1AttackKnockBackX; // When the knockback is set on an attack its x float will be held here. 
 
-    public float player1MaxHP;
-
-    public float player1HP;
-
-    public float P1AttackKnockBackX;
-
-    public float P1AttackKnockBackY;
+    public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
 
 
-    public bool player1IsOnGround;
+    public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
 
-
+    // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
     [Header("Player2")]
 
+    public GameObject player2; // This is a game object reference to player 2 that lets us easily call it from different scripts
+
+    // This is used to represent how much knockback any given attack does. It will usually be zero but while doing an attack it will switch around depending on the setKnockback() function.
+    public float P2AttackKnockBackX; // When the knockback is set on an attack its x float will be held here. 
+
+    public float P2AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
 
 
-    public GameObject player2;
-
-    public float player2MaxHP;
-
-    public float player2HP;
-
-    public float P2AttackKnockBackX;
-
-    public float P2AttackKnockBackY;
+    public bool player2IsOnGround; // Tells you if the player is on the ground or not
 
 
-    public bool player2IsOnGround;
-
+    // Used to make the game manager. Doesnt really need to be edited
     public static GameManager Instance
     {
         get
@@ -54,8 +48,10 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    private void Awake(){
-        if(_instance){
+    private void Awake()
+    {
+        if(_instance)
+        {
             Destroy(gameObject);
         }
         else{
@@ -64,7 +60,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Start(){
+    void Start()
+    {
+        // Sets the ground variables to false by default
         player1IsOnGround = false;
         player2IsOnGround = false;
     }

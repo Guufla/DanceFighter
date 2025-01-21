@@ -53,18 +53,19 @@ public class PlayerAttack : MonoBehaviour
 
 
 
-        attackAnimator = attackBoxObject.GetComponent<Animator>();
-        attackBoxCollider = attackBoxObject.GetComponent<CapsuleCollider2D>();
+        attackAnimator = attackBoxObject.GetComponent<Animator>(); // Reference to the attack hitbox animator
+        attackBoxCollider = attackBoxObject.GetComponent<CapsuleCollider2D>(); // Reference to the actual collider of the attack box object
 
 
-        canAttack = true;
-        comboResetTimerActive = false;
-
-
+        canAttack = true; // Determines if the player can attack or not
+        comboResetTimerActive = false; // used for the reset combo timer (Explained more near that section)
         comboResetTimer = 0;
-        knockbackX = 0;
+
+
+        knockbackX = 0; 
         knockbackY = 0;
-        curCombo = 0;
+
+        curCombo = 0; // Keeps track of the current combo. Used to move from one attack to the next like light attack 1 to light attack 2
 
 
         
@@ -73,14 +74,15 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        newAttacks();
-        attackColliderUpdate();
-        //attacks();
-        resetTimerCheck();
+        attackColliderUpdate(); // Update function for the attack collider
+        newAttacks(); // Update function for the attack system
+        resetTimerCheck(); // Update function for resetting the combo timer
     }
 
     
     void attackColliderUpdate(){
+
+        // Determines if the attack hitbox object should be enabled or disabled. In the actual game there wont be a sprite so its like enabling and disabling the hitbox itself
         if(currentAttackPressed == attackType.none){
             attackBoxObject.SetActive(false);
         }
@@ -95,14 +97,16 @@ public class PlayerAttack : MonoBehaviour
         currentStateInfo = attackAnimator.GetCurrentAnimatorStateInfo(0); // Gets the current state of the animator
 
         
-
+        // When you are able to attack it records the key you press
         if(canAttack == true){
             currentAttackPressed = attackPressed;
-            attackPressed = attackType.none;
+            attackPressed = attackType.none; // Resets the attack pressed for the next loop
         }
 
         if(currentAttackPressed == attackType.attackE){
-            canAttack = false;
+            
+            canAttack = false; // Sets canAttack to false to prevent a backlog of attacks from building up
+
             if(curCombo == 0){
                 attackAnimator.SetBool("EAttack1",true); // Sets the first combo attack in motion
 
