@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
 
     bool comboResetTimerActive;
 
-    public float comboResetTimer;
+    [SerializeField] float comboResetTimer;
 
     [SerializeField] float coolDownTime = 2f;
 
