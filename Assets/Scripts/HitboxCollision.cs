@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitboxCollision : MonoBehaviour
 {
@@ -18,7 +19,11 @@ public class HitboxCollision : MonoBehaviour
 
 
 
+    public float playerHealth = 100;
+
+    public Slider healthbar;
     // All opponent variables
+<<<<<<< Updated upstream
     GameObject oppositePlayer;
     Rigidbody2D oppositeRigidBody;
 
@@ -27,13 +32,32 @@ public class HitboxCollision : MonoBehaviour
     float facingX;
 
     float facingY;
+=======
+    private GameObject oppositePlayer;
+    private Rigidbody2D oppositeRigidBody;
+    public float oppositeHealth = 100;  // opponents health variable
+>>>>>>> Stashed changes
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< Updated upstream
         
+=======
+
+        player = transform.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
+
+        healthbar.value = oppositeHealth; // Sets the value of the health bar to the player health
+
+
+        if (player.CompareTag("Player1"))
+        {
+            // Takes the attack knockback variable that is set in the player attack script and creates variables for them to be used later 
+            basicAttackKnockBackX = 0; 
+            basicAttackKnockBackY = 0;
+>>>>>>> Stashed changes
 
         player = transform.parent.gameObject;
 
@@ -89,10 +113,23 @@ public class HitboxCollision : MonoBehaviour
 
             // facing accounts for which way the player is facing
 
+<<<<<<< Updated upstream
             // Needs to be more complex so that depending on where its hit from there will be a different knockback and stun
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY * facingY );
+=======
+            // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
+            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY * facingY);
 
-            Debug.Log("Hit");
+            // When the player is hit they lose a certain amount of health 
+            oppositeHealth -= 10;
+            healthbar.value = oppositeHealth; // Updates the health bar to the new health value
+            if (oppositeHealth <= 0)
+            { 
+                Debug.Log("Player is dead");
+            }
+            // We need to adjust this later to be more dynamic
+>>>>>>> Stashed changes
+
         }
 
 
