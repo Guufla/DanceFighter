@@ -11,6 +11,8 @@ public class HitboxCollision : MonoBehaviour
     private float basicAttackKnockBackX;
 
     private float basicAttackKnockBackY;
+    
+    private bool hasCollided = false;
 
     // All opponent variables
     private GameObject oppositePlayer;
@@ -74,21 +76,25 @@ public class HitboxCollision : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
+    
+        if(hasCollided){
+            hasCollided = false;
+            return;
+        }
         if(other.CompareTag(oppositePlayer.tag))
         {
-            
             // Updates the variables with the value representing where the player if facing
             facingX = player.transform.localScale.x;
             facingY = player.transform.localScale.y;
-
-            
 
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY * facingY );
 
             Debug.Log("Hit");
+            hasCollided = true;
         }
 
 
     }
+    
 }
