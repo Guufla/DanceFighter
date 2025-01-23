@@ -52,12 +52,14 @@ public class GameManager : MonoBehaviour
     {
         if(_instance)
         {
+            Debug.LogError("GameManager is already in the scene");
             Destroy(gameObject);
         }
         else{
             _instance = this;
+            DontDestroyOnLoad(this); 
         }
-        DontDestroyOnLoad(this);
+        
     }
 
     void Start()
