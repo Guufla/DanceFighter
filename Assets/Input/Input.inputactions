@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AttackF",
+                    "type": "Button",
+                    "id": "b7d6a9a8-aad1-4eb6-8157-d917521a91e0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -305,12 +314,13 @@
                 },
                 {
                     "name": "",
-                    "id": "eae6fde1-1340-4266-b7bd-e6aaa0e515b4",
-                    "path": "<Keyboard>/r",
+                    "id": "b34d74f6-c946-456e-aaf1-d85f388a101e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "AttackR",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "AttackF",
+
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

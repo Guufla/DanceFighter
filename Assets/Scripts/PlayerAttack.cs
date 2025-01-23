@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 enum attackType : int{
-        none,attackE, attackR 
+        none,attackE, attackR, attackF
     }
 
 public class PlayerAttack : MonoBehaviour
@@ -68,7 +68,6 @@ public class PlayerAttack : MonoBehaviour
         curCombo = 0; // Keeps track of the current combo. Used to move from one attack to the next like light attack 1 to light attack 2
 
 
-        
     }
 
     // Update is called once per frame
@@ -160,7 +159,6 @@ public class PlayerAttack : MonoBehaviour
             }
 
 
-
             // Updates the knockback variables in the game instance
 
             if(gameObject.CompareTag("Player1")){
@@ -176,6 +174,91 @@ public class PlayerAttack : MonoBehaviour
             }
 
         }
+        
+        if(currentAttackPressed == attackType.attackF)
+{
+
+    canAttack = false;
+    
+    if(curCombo == 0){
+        attackAnimator.SetBool("FAttack1",true);
+
+        setKnockback(1.5f,0f);
+
+        if(!comboResetTimerActive){
+            comboResetTimer = coolDownTime;
+            comboResetTimerActive = true;
+        }
+
+        if(currentStateInfo.IsName("HeavyAttack1") && currentStateInfo.normalizedTime >= 1 ){
+            Debug.Log("F attack combo 1 finished");
+            canAttack = true;
+            curCombo++;
+            attackAnimator.SetBool("FAttack1",false);
+            resetKnockback();
+        }
+    }
+    else if(curCombo == 1){
+        attackAnimator.SetBool("FAttack2",true);
+
+        setKnockback(1.5f,0f);
+
+        if(!comboResetTimerActive){
+            comboResetTimer = coolDownTime;
+            comboResetTimerActive = true;
+        }
+
+        if(currentStateInfo.IsName("HeavyAttack2") && currentStateInfo.normalizedTime >= 1 ){
+            Debug.Log("F attack combo 2 finished");
+            canAttack = true;
+            curCombo++;
+            attackAnimator.SetBool("FAttack2",false);
+            resetKnockback();
+        }
+    }
+    else if(curCombo == 2){
+        attackAnimator.SetBool("FAttack3",true);
+
+        setKnockback(0.5f,3f);
+
+        if(!comboResetTimerActive){
+            comboResetTimer = coolDownTime;
+            comboResetTimerActive = true;
+        }
+
+        if(currentStateInfo.IsName("HeavyAttack3") && currentStateInfo.normalizedTime >= 1 ){
+            Debug.Log("F attack combo 3 finished");
+            canAttack = true;
+            curCombo++;
+            attackAnimator.SetBool("FAttack3",false);
+            resetKnockback();
+        }
+    } else if(curCombo == 3) {
+        attackAnimator.SetBool("FAttack4",true);
+
+        setKnockback(4f,0.5f);
+
+        comboResetTimerActive = false;
+
+        if(currentStateInfo.IsName("HeavyAttack4") && currentStateInfo.normalizedTime >= 1 ){
+            resetAttacks();
+            canAttack = true;
+            resetKnockback();
+        }
+    }
+
+    if(gameObject.CompareTag("Player1")){
+        GameManager.Instance.P1AttackKnockBackX = knockbackX;
+        GameManager.Instance.P1AttackKnockBackY = knockbackY;
+    }
+    else if (gameObject.CompareTag("Player2")) {
+        GameManager.Instance.P2AttackKnockBackX = knockbackX;
+        GameManager.Instance.P2AttackKnockBackY = knockbackY;
+    }
+    else{
+        Debug.Log("Error assigning knockback to players");
+    }
+}
 
 
     }
@@ -190,7 +273,9 @@ public class PlayerAttack : MonoBehaviour
         attackPressed = attackType.attackE;
     }
 
-
+    void OnAttackF(InputValue value){
+        attackPressed = attackType.attackF;
+    }
 
     
     // When the player sits on a combo for too long without pressing anything the combo resets to zero
@@ -218,8 +303,12 @@ public class PlayerAttack : MonoBehaviour
         attackAnimator.SetBool("EAttack1",false);
         attackAnimator.SetBool("EAttack2",false);
         attackAnimator.SetBool("EAttack3",false);
+        
+        attackAnimator.SetBool("FAttack1",false);
+        attackAnimator.SetBool("FAttack2",false);
+        attackAnimator.SetBool("FAttack3",false);
+        attackAnimator.SetBool("FAttack4",false);
     }
-
 
 
     // Quick function for setting the knockback variables
