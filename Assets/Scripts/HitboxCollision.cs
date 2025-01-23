@@ -19,9 +19,9 @@ public class HitboxCollision : MonoBehaviour
 
 
 
-    public float playerHealth = 100;
+    //public float playerHealth = 100;
 
-    public Slider healthbar;
+    //public Slider healthbar;
     // All opponent variables
 
 
@@ -43,7 +43,7 @@ public class HitboxCollision : MonoBehaviour
 
         player = transform.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
 
-        healthbar.value = oppositeHealth; // Sets the value of the health bar to the player health
+        //healthbar.value = oppositeHealth; // Sets the value of the health bar to the player health
 
 
         if (player.CompareTag("Player1"))
@@ -124,12 +124,12 @@ public class HitboxCollision : MonoBehaviour
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX, basicAttackKnockBackY * facingY);
 
             // When the player is hit they lose a certain amount of health 
-            oppositeHealth -= 10;
-            healthbar.value = oppositeHealth; // Updates the health bar to the new health value
-            if (oppositeHealth <= 0)
-            {
-                Debug.Log("Player is dead");
-            }
+            //oppositeHealth -= 10;
+            //healthbar.value = oppositeHealth; // Updates the health bar to the new health value
+            //if (oppositeHealth <= 0)
+            //{
+                //Debug.Log("Player is dead");
+            //}
             // We need to adjust this later to be more dynamic
 
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1166863949176543986}
   m_Layer: 0
   m_Name: PlayerCollider
-  m_TagString: Untagged
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,10 +97,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6260808928092158888}
+  - {fileID: 8037462439260255962}
   - {fileID: 280035492232048498}
   - {fileID: 6580030694079278411}
-  - {fileID: 8037462439260255962}
-  - {fileID: 6260808928092158888}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4189392029246729313
@@ -221,7 +221,8 @@ GameObject:
   - component: {fileID: 280035492232048498}
   - component: {fileID: 2086651328824478918}
   - component: {fileID: 7840306953734351606}
-  m_Layer: 0
+  - component: {fileID: 6405902167903899462}
+  m_Layer: 7
   m_Name: AttackHitbox1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,6 +331,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.0000009536743}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &6405902167903899462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517163613753712381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61080f9c503881649a189a2dd7ad4a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oppositeHealth: 100
 --- !u!1 &7944265399356065905
 GameObject:
   m_ObjectHideFlags: 0
