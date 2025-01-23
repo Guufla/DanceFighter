@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AttackR",
+                    "type": "Button",
+                    "id": "9989dfb2-0b9e-4896-bfc7-b35e67e2c8f2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "61085fe7-4a67-43b0-9290-6ba45007531a",
@@ -311,6 +320,7 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "AttackF",
+
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
