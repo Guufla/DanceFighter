@@ -320,7 +320,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "AttackF",
-
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a2c46746-ffac-4996-882b-0f4bce97f510",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
