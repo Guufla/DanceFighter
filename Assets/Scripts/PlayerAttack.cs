@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
 {
     Animator attackAnimator;
 
-    GameObject attackBoxObject;
+    [SerializeField]GameObject attackBoxObject;
 
     CapsuleCollider2D attackBoxCollider;
 
@@ -43,7 +43,6 @@ public class PlayerAttack : MonoBehaviour
         attackPressed = attackType.none; // Used to signify which attack button is pressed
 
         // Would need to change the code surrounding this if I want to use multiple hitboxes
-        attackBoxObject = transform.GetChild(2).gameObject; // Gets the attack hitbox game object
         attackAnimator = attackBoxObject.GetComponent<Animator>(); // Reference to the attack hitbox animator
         attackBoxCollider = attackBoxObject.GetComponent<CapsuleCollider2D>(); // Reference to the actual collider of the attack box object
 
