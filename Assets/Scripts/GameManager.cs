@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
+    public bool P1frozen; // Tells you if the player can move
+
 
     // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
     [Header("Player2")]
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
+
+    public bool P2frozen; // Tells you if the player can move
 
 
     // Used to make the game manager. Doesnt really need to be edited

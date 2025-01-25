@@ -27,7 +27,7 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "501abade-058d-4b6e-89c1-79752e4c7d43",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -63,6 +63,15 @@
                     "name": "AttackF",
                     "type": "Button",
                     "id": "b7d6a9a8-aad1-4eb6-8157-d917521a91e0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "bbb73b44-8457-43e7-af8b-4b1b14cbab57",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -375,6 +384,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "AttackR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd0bc398-9aa9-4a39-891b-9df3fdbddcf6",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1bcc7523-bd69-4a18-9424-a3939dc1ac15",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
