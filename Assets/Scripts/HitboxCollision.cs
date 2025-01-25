@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,6 +94,8 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackX = GameManager.Instance.P1AttackKnockBackX;
 
             basicAttackKnockBackY = GameManager.Instance.P1AttackKnockBackY;
+
+            
         }
         else if (player.CompareTag("Player2"))
         {
@@ -128,13 +131,23 @@ public class HitboxCollision : MonoBehaviour
             //healthbar.value = oppositeHealth; // Updates the health bar to the new health value
             //if (oppositeHealth <= 0)
             //{
-                //Debug.Log("Player is dead");
+            //Debug.Log("Player is dead");
             //}
             // We need to adjust this later to be more dynamic
 
 
         }
-
-
+        //if player 1 hits player 2 call the player 1 hits player 2 function from game manager
+        if (player.CompareTag("Player1") && other.CompareTag("Player2")) 
+        {
+            GameManager.Instance.Player1HitsPlayer2();
+        }
+        //if player 2 hits player 1 call the player 2 hits player 1 function from game manager
+        if (player.CompareTag("Player2") && other.CompareTag("Player1"))
+        {
+            GameManager.Instance.Player2HitsPlayer1();
+        }
     }
+
+
 }

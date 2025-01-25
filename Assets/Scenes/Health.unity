@@ -1506,6 +1506,14 @@ PrefabInstance:
       propertyPath: player2
       value: 
       objectReference: {fileID: 1933537752}
+    - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 542740723}
+    - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
+      propertyPath: opponentHealth
+      value: 
+      objectReference: {fileID: 647249000}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
