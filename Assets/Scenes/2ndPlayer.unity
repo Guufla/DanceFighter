@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 86861716}
   - component: {fileID: 86861717}
   - component: {fileID: 86861718}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 134010035}
   - component: {fileID: 134010036}
   - component: {fileID: 134010037}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 771357290}
   - component: {fileID: 771357291}
   - component: {fileID: 771357292}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -708,22 +708,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 165015594766266133, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
-      propertyPath: m_NeverAutoSwitchControlSchemes
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1104459731530393888, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
-      propertyPath: m_TagString
-      value: Player1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555979718933275627, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1555979718933275627, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4077496784279841329, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.74
@@ -763,10 +747,6 @@ PrefabInstance:
     - target: {fileID: 4077496784279841329, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489328126292381477, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7630277335479505994, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_Name
