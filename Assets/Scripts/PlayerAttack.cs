@@ -37,12 +37,6 @@ public class PlayerAttack : MonoBehaviour
     float curCombo;
 
 
-
-
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -50,9 +44,6 @@ public class PlayerAttack : MonoBehaviour
 
         // Would need to change the code surrounding this if I want to use multiple hitboxes
         attackBoxObject = transform.GetChild(2).gameObject; // Gets the attack hitbox game object
-
-
-
         attackAnimator = attackBoxObject.GetComponent<Animator>(); // Reference to the attack hitbox animator
         attackBoxCollider = attackBoxObject.GetComponent<CapsuleCollider2D>(); // Reference to the actual collider of the attack box object
 
@@ -106,7 +97,8 @@ public class PlayerAttack : MonoBehaviour
             
             canAttack = false; // Sets canAttack to false to prevent a backlog of attacks from building up
 
-            if(curCombo == 0){
+            if(curCombo > 2 || curCombo == 0)
+            {
                 attackAnimator.SetBool("EAttack1",true); // Sets the first combo attack in motion
 
                 setKnockback(1.5f,0f); // Sets knockback stats for this attack
@@ -119,12 +111,13 @@ public class PlayerAttack : MonoBehaviour
 
                 if(currentStateInfo.IsName("LightAttack1") && currentStateInfo.normalizedTime >= 1 ){
                     canAttack = true;
-                    curCombo++;
+                    curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
                     attackAnimator.SetBool("EAttack1",false); // Sets the animation state back to Idle
                     resetKnockback(); // Resets the knockback stats for this attack
                 }
             }
-            else if(curCombo == 1){
+            else if(curCombo == 1)
+            {
                 attackAnimator.SetBool("EAttack2",true); // Sets the first combo attack in motion
 
                 setKnockback(1.5f,0f); // Sets knockback stats for this attack
@@ -142,7 +135,8 @@ public class PlayerAttack : MonoBehaviour
                     resetKnockback(); // Resets the knockback stats for this attack
                 }
             }
-            else if(curCombo == 2){
+            else if(curCombo == 2)
+            {
                 attackAnimator.SetBool("EAttack3",true); // Sets the first combo attack in motion
 
                 setKnockback(1f,4f); // Sets knockback stats for this attack
@@ -152,8 +146,7 @@ public class PlayerAttack : MonoBehaviour
             
 
                 if(currentStateInfo.IsName("LightAttack3") && currentStateInfo.normalizedTime >= 1 ){
-                    resetAttacks();
-                    canAttack = true;
+                    resetAttacks(); // Reset attacks sets can attack to true
                     resetKnockback(); // Resets the knockback stats for this attack
                 }
             }
@@ -174,91 +167,188 @@ public class PlayerAttack : MonoBehaviour
             }
 
         }
-        
-        if(currentAttackPressed == attackType.attackF)
-{
 
-    canAttack = false;
-    
-    if(curCombo == 0){
-        attackAnimator.SetBool("FAttack1",true);
+        if (currentAttackPressed == attackType.attackR)
+        {
+            canAttack = false; // Sets canAttack to false to prevent a backlog of attacks from building up
 
-        setKnockback(1.5f,0f);
+            if(curCombo > 4 || curCombo == 0){
+                attackAnimator.SetBool("RAttack1",true);
 
-        if(!comboResetTimerActive){
-            comboResetTimer = coolDownTime;
-            comboResetTimerActive = true;
+                setKnockback(1.5f,0f);
+
+                if(!comboResetTimerActive){
+                    comboResetTimer = coolDownTime;
+                    comboResetTimerActive = true;
+                }
+
+                if(currentStateInfo.IsName("MediumAttack1") && currentStateInfo.normalizedTime >= 1 ){
+                    //Debug.Log("F attack combo 1 finished");
+                    canAttack = true;
+                    curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
+                    attackAnimator.SetBool("RAttack1",false);
+                    resetKnockback();
+                }
+            }
+            else if(curCombo == 1){
+                attackAnimator.SetBool("RAttack2",true);
+
+                setKnockback(1.5f,0f);
+
+                if(!comboResetTimerActive){
+                    comboResetTimer = coolDownTime;
+                    comboResetTimerActive = true;
+                }
+
+                if(currentStateInfo.IsName("MediumAttack2") && currentStateInfo.normalizedTime >= 1 ){
+                    //Debug.Log("F attack combo 2 finished");
+                    canAttack = true;
+                    curCombo++;
+                    attackAnimator.SetBool("RAttack2",false);
+                    resetKnockback();
+                }
+            }
+            else if(curCombo == 2){
+                attackAnimator.SetBool("RAttack3",true);
+
+                setKnockback(0.5f,3f);
+
+                if(!comboResetTimerActive){
+                    comboResetTimer = coolDownTime;
+                    comboResetTimerActive = true;
+                }
+
+                if(currentStateInfo.IsName("MediumAttack3") && currentStateInfo.normalizedTime >= 1 ){
+                    //Debug.Log("F attack combo 3 finished");
+                    canAttack = true;
+                    curCombo++;
+                    attackAnimator.SetBool("RAttack3",false);
+                    resetKnockback();
+                }
+            } else if(curCombo == 3) {
+                attackAnimator.SetBool("RAttack4",true);
+
+                setKnockback(4f,0.5f);
+
+                comboResetTimerActive = false;
+
+                if(currentStateInfo.IsName("MediumAttack4") && currentStateInfo.normalizedTime >= 1 ){
+                    canAttack = true;
+                    curCombo++;
+                    attackAnimator.SetBool("RAttack4",false);
+                    resetKnockback();
+                }
+            }
+             else if(curCombo == 4) {
+                Debug.Log("Rattack 5 activate");
+                attackAnimator.SetBool("RAttack5",true);
+
+                setKnockback(4f,0.5f);
+
+                comboResetTimerActive = false;
+
+                if(currentStateInfo.IsName("MediumAttack5") && currentStateInfo.normalizedTime >= 1 ){
+                    resetAttacks(); // Reset attacks sets can attack to true
+                    resetKnockback();
+                }
+            }
+
+            if(gameObject.CompareTag("Player1")){
+                GameManager.Instance.P1AttackKnockBackX = knockbackX;
+                GameManager.Instance.P1AttackKnockBackY = knockbackY;
+            }
+            else if (gameObject.CompareTag("Player2")) {
+                GameManager.Instance.P2AttackKnockBackX = knockbackX;
+                GameManager.Instance.P2AttackKnockBackY = knockbackY;
+            }
+            else{
+                Debug.Log("Error assigning knockback to players");
+            }
         }
 
-        if(currentStateInfo.IsName("HeavyAttack1") && currentStateInfo.normalizedTime >= 1 ){
-            Debug.Log("F attack combo 1 finished");
-            canAttack = true;
-            curCombo++;
-            attackAnimator.SetBool("FAttack1",false);
-            resetKnockback();
-        }
+        if (currentAttackPressed == attackType.attackF)
+        {
+
+            canAttack = false;
+            
+            if(curCombo > 3 || curCombo == 0){
+                attackAnimator.SetBool("FAttack1",true);
+
+                setKnockback(1.5f,0f);
+
+                if(!comboResetTimerActive){
+                    comboResetTimer = coolDownTime;
+                    comboResetTimerActive = true;
+                }
+
+                if(currentStateInfo.IsName("HeavyAttack1") && currentStateInfo.normalizedTime >= 1 ){
+                    //Debug.Log("F attack combo 1 finished");
+                    canAttack = true;
+                    curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
+                    attackAnimator.SetBool("FAttack1",false);
+                    resetKnockback();
+                }
+            }
+            else if(curCombo == 1){
+                attackAnimator.SetBool("FAttack2",true);
+
+                setKnockback(1.5f,0f);
+
+                if(!comboResetTimerActive){
+                    comboResetTimer = coolDownTime;
+                    comboResetTimerActive = true;
+                }
+
+                if(currentStateInfo.IsName("HeavyAttack2") && currentStateInfo.normalizedTime >= 1 ){
+                    //Debug.Log("F attack combo 2 finished");
+                    canAttack = true;
+                    curCombo++;
+                    attackAnimator.SetBool("FAttack2",false);
+                    resetKnockback();
+                }
+            }
+            else if(curCombo == 2){
+                attackAnimator.SetBool("FAttack3",true);
+
+                setKnockback(0.5f,3f);
+
+                if(!comboResetTimerActive){
+                    comboResetTimer = coolDownTime;
+                    comboResetTimerActive = true;
+                }
+
+                if(currentStateInfo.IsName("HeavyAttack3") && currentStateInfo.normalizedTime >= 1 ){
+                    //Debug.Log("F attack combo 3 finished");
+                    canAttack = true;
+                    curCombo++;
+                    attackAnimator.SetBool("FAttack3",false);
+                    resetKnockback();
+                }
+            } else if(curCombo == 3) {
+                attackAnimator.SetBool("FAttack4",true);
+
+                setKnockback(4f,0.5f);
+
+                comboResetTimerActive = false;
+
+                if(currentStateInfo.IsName("HeavyAttack4") && currentStateInfo.normalizedTime >= 1 ){
+                    resetAttacks(); // Reset attacks sets can attack to true
+                    resetKnockback();
+                }
+            }
+
+            if(gameObject.CompareTag("Player1")){
+                GameManager.Instance.P1AttackKnockBackX = knockbackX;
+                GameManager.Instance.P1AttackKnockBackY = knockbackY;
+            }
+            else if (gameObject.CompareTag("Player2")) {
+                GameManager.Instance.P2AttackKnockBackX = knockbackX;
+                GameManager.Instance.P2AttackKnockBackY = knockbackY;
+            }
+            else{
+                Debug.Log("Error assigning knockback to players");
+            }
     }
-    else if(curCombo == 1){
-        attackAnimator.SetBool("FAttack2",true);
-
-        setKnockback(1.5f,0f);
-
-        if(!comboResetTimerActive){
-            comboResetTimer = coolDownTime;
-            comboResetTimerActive = true;
-        }
-
-        if(currentStateInfo.IsName("HeavyAttack2") && currentStateInfo.normalizedTime >= 1 ){
-            Debug.Log("F attack combo 2 finished");
-            canAttack = true;
-            curCombo++;
-            attackAnimator.SetBool("FAttack2",false);
-            resetKnockback();
-        }
-    }
-    else if(curCombo == 2){
-        attackAnimator.SetBool("FAttack3",true);
-
-        setKnockback(0.5f,3f);
-
-        if(!comboResetTimerActive){
-            comboResetTimer = coolDownTime;
-            comboResetTimerActive = true;
-        }
-
-        if(currentStateInfo.IsName("HeavyAttack3") && currentStateInfo.normalizedTime >= 1 ){
-            Debug.Log("F attack combo 3 finished");
-            canAttack = true;
-            curCombo++;
-            attackAnimator.SetBool("FAttack3",false);
-            resetKnockback();
-        }
-    } else if(curCombo == 3) {
-        attackAnimator.SetBool("FAttack4",true);
-
-        setKnockback(4f,0.5f);
-
-        comboResetTimerActive = false;
-
-        if(currentStateInfo.IsName("HeavyAttack4") && currentStateInfo.normalizedTime >= 1 ){
-            resetAttacks();
-            canAttack = true;
-            resetKnockback();
-        }
-    }
-
-    if(gameObject.CompareTag("Player1")){
-        GameManager.Instance.P1AttackKnockBackX = knockbackX;
-        GameManager.Instance.P1AttackKnockBackY = knockbackY;
-    }
-    else if (gameObject.CompareTag("Player2")) {
-        GameManager.Instance.P2AttackKnockBackX = knockbackX;
-        GameManager.Instance.P2AttackKnockBackY = knockbackY;
-    }
-    else{
-        Debug.Log("Error assigning knockback to players");
-    }
-}
 
 
     }
@@ -269,11 +359,18 @@ public class PlayerAttack : MonoBehaviour
 
 
     // Create more In the input manager with a different letter to indicate the different buttons used
-    void OnAttackE(InputValue value){
+    void OnAttackE(InputValue value)
+    {
         attackPressed = attackType.attackE;
     }
 
-    void OnAttackF(InputValue value){
+    void OnAttackR(InputValue value)
+    {
+        attackPressed = attackType.attackR;
+    }
+
+    void OnAttackF(InputValue value)
+    {
         attackPressed = attackType.attackF;
     }
 
@@ -299,6 +396,7 @@ public class PlayerAttack : MonoBehaviour
         attackPressed = 0;
         curCombo = 0;
         currentAttackPressed = attackType.none;
+        canAttack = true;
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("EAttack1",false);
         attackAnimator.SetBool("EAttack2",false);
