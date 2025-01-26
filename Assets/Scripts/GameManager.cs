@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,10 @@ public class GameManager : MonoBehaviour
     // This is used to represent how much knockback any given attack does. It will usually be zero but while doing an attack it will switch around depending on the setKnockback() function.
     public float P1AttackKnockBackX; // When the knockback is set on an attack its x float will be held here. 
 
-    public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
+    public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here.
+
+    public Boolean stopP1Movement; 
+    public Boolean stopP1YMovement; 
 
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
@@ -33,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     public float P2AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
 
+    public Boolean stopP2Movement; 
+    public Boolean stopP2YMovement;
+    
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
 
