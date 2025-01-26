@@ -72,5 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Added by Alex
-/Assets/Overhaul/
-/Assets/Overhaul.meta
+/Assets/IGNORE/
+/Assets/IGNORE.meta
