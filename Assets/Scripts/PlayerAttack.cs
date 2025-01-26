@@ -361,11 +361,31 @@ public class PlayerAttack : MonoBehaviour
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
+        //sets aggro to false, change in future
+        if(gameObject.CompareTag("Player1"))
+        {
+            GameManager.Instance.P1Aggro = false;
+        }
+        else if(gameObject.CompareTag("Player2"))
+        {
+            GameManager.Instance.P2Aggro = false;
+        }
+        AudioManager.Instance.StateChange();
         attackPressed = attackType.attackE;
     }
 
     void OnAttackR(InputValue value)
     {
+        //sets aggro to true, change in future
+        if(gameObject.CompareTag("Player1"))
+        {
+            GameManager.Instance.P1Aggro = true;
+        }
+        else if(gameObject.CompareTag("Player2"))
+        {
+            GameManager.Instance.P2Aggro = true;
+        }
+        AudioManager.Instance.StateChange();
         attackPressed = attackType.attackR;
     }
 

@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
+    public bool P1Aggro; // Tells if the player is in aggro mode
+
 
     // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
     [Header("Player2")]
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
+
+    public bool P2Aggro; // Tells if the player is in aggro mode
 
 
     // Used to make the game manager. Doesnt really need to be edited
