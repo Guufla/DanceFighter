@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void movement(){
-        Vector2 playerVelocity = new Vector2(moveInput.x *  movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
+        Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
         playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
     }
     void OnJump(InputValue value){

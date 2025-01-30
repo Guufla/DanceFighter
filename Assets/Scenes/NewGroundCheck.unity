@@ -411,6 +411,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 1109601088118999021, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408449875225785419, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4077496784279841329, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.37
@@ -451,13 +459,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5100655869653202300, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5809001673095037276, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
       propertyPath: m_TagString
       value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 6489328126292381477, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6489328126292381477, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
       propertyPath: m_TagString

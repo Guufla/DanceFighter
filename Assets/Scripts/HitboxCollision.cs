@@ -88,9 +88,9 @@ public class HitboxCollision : MonoBehaviour
             facingY = player.transform.localScale.y;
 
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
-            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY * facingY );
+            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
-            Debug.Log("Hit");
+            // Debug.Log("Hit");
             hasCollided = true;
         }
 
