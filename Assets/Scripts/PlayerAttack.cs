@@ -32,6 +32,7 @@ public class PlayerAttack : MonoBehaviour
     bool isOnGround;
 
     bool canAttack;
+    bool canInput;
 
     bool canAirCombo;
 
@@ -77,6 +78,7 @@ public class PlayerAttack : MonoBehaviour
 
         canAttack = true; // Determines if the player can attack or not
         canAirCombo = true;
+        canInput = true;
         currentlyAttacking = false;
         comboResetTimerActive = false; // used for the reset combo timer (Explained more near that section)
         comboResetTimer = 0;
@@ -102,7 +104,8 @@ public class PlayerAttack : MonoBehaviour
         newAttacks(); // Update function for the attack system
         resetTimerCheck(); // Update function for resetting the combo timer
         updateMovement(); // If the player is to have their movement stopped it is sent to here
-        
+
+        Debug.Log(canInput);
     }
 
     
@@ -152,19 +155,21 @@ public class PlayerAttack : MonoBehaviour
         if(currentAttackPressed == attackType.attackE){
             
             canAttack = false; // Sets canAttack to false to prevent a backlog of attacks from building up
-            if(isOnGround){
-                resetAirAttacks();
-            }
+            
             
             // These can be switched into certain attacks 
 
-            if(!isOnGround || isAirAttacking == true){
-                if(holdingUp && currentlyAttacking == false || attackAnimator.GetBool("AirUpTilt") && currentlyAttacking == false)
+            if(isAirAttacking == true || !isOnGround ){
+                if(isOnGround){
+                    resetAirAttacks();
+                }
+
+                else if(attackAnimator.GetBool("AirUpTilt")&& currentlyAttacking == false || holdingUp && currentlyAttacking == false )
                 {
                     stopMovement(false, false);
                     hitboxAnimation(4,"AirUpTilt","airUpTilt", true, 1.5f,0f,0f,0f);
                 }
-                else if(holdingDown && currentlyAttacking == false || attackAnimator.GetBool("AirDownTilt") && currentlyAttacking == false)
+                else if(attackAnimator.GetBool("AirDownTilt")&& currentlyAttacking == false || holdingDown && currentlyAttacking == false )
                 {
                     stopMovement(false, false);
                     hitboxAnimation(4,"AirDownTilt","airDownTilt", true, 1.5f,0f,0f,0f);
@@ -192,12 +197,12 @@ public class PlayerAttack : MonoBehaviour
                 
             }
 
-            else if(holdingUp && currentlyAttacking == false || attackAnimator.GetBool("UpTilt") && currentlyAttacking == false)
+            else if(attackAnimator.GetBool("UpTilt") && currentlyAttacking == false || holdingUp && currentlyAttacking == false)
             {
                 stopMovement(true, true);
                 hitboxAnimation(4,"UpTilt","UpTilt", false, 1.5f,0f,0f,0f);
             }
-            else if(holdingDown && currentlyAttacking == false || attackAnimator.GetBool("DownTilt") && currentlyAttacking == false)
+            else if(attackAnimator.GetBool("DownTilt") && currentlyAttacking == false|| holdingDown && currentlyAttacking == false )
             {
                 stopMovement(true, true);
                 hitboxAnimation(4,"DownTilt","DownTilt", false, 1.5f,0f,1f,0f);
@@ -315,6 +320,8 @@ public class PlayerAttack : MonoBehaviour
 
         // Version 1 refers to when it is a first attack in the combo
         if(version == 1){
+            
+
             currentlyAttacking = true;
 
             // Animator bool example: "EAttack1"
@@ -327,6 +334,13 @@ public class PlayerAttack : MonoBehaviour
             if(!comboResetTimerActive){ 
                 comboResetTimer = coolDownTime;
                 comboResetTimerActive = true;
+            }
+
+            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime <= 0.6){
+                canInput = false;
+            }
+            else{
+                canInput = true;
             }
 
             // animation name would be something like LightAttack1 and refers to the animation itself
@@ -346,6 +360,7 @@ public class PlayerAttack : MonoBehaviour
         
         // version 2 refers to the middle part of combos
         else if(version == 2){
+
             currentlyAttacking = true;
             attackAnimator.SetBool(animatorBool,true); // Sets the first combo attack in motion
 
@@ -356,6 +371,13 @@ public class PlayerAttack : MonoBehaviour
             if(!comboResetTimerActive){ 
                 comboResetTimer = coolDownTime;
                 comboResetTimerActive = true;
+            }
+
+            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime <= 0.6){
+                canInput = false;
+            }
+            else{
+                canInput = true;
             }
 
             if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
@@ -372,6 +394,8 @@ public class PlayerAttack : MonoBehaviour
         }
         // Version 3 refers to the end of the combo
         else if(version == 3){
+
+
             currentlyAttacking = true;
             attackAnimator.SetBool(animatorBool,true); // Sets the first combo attack in motion
 
@@ -381,6 +405,12 @@ public class PlayerAttack : MonoBehaviour
             //Since this is the third attack things are slightly different
             comboResetTimerActive = false; // No timer needed since we are now waiting on the animation to finish
         
+            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime <= 0.6){
+                canInput = false;
+            }
+            else{
+                canInput = true;
+            }
 
             if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
                 this.isAirAttacking = false;
@@ -391,10 +421,18 @@ public class PlayerAttack : MonoBehaviour
         // version 4 is used for the up tilt and down tilts
         else if(version == 4)
         {
+
             attackAnimator.SetBool(animatorBool,true); 
 
             setKnockback(knockBackX,knockBackY); // Sets knockback stats for this attack
             //dashWithAttack(dashX,dashY);
+
+            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime <= 0.6){
+                canInput = false;
+            }
+            else{
+                canInput = true;
+            }
 
             if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 )
             {
@@ -412,6 +450,7 @@ public class PlayerAttack : MonoBehaviour
         // Basically number 3 but now it gets rid of the air combo so the player cant just fly
         else if(version == 5)
         {
+
             currentlyAttacking = true;
             attackAnimator.SetBool(animatorBool,true); // Sets the first combo attack in motion
 
@@ -421,6 +460,12 @@ public class PlayerAttack : MonoBehaviour
             //Since this is the third attack things are slightly different
             comboResetTimerActive = false; // No timer needed since we are now waiting on the animation to finish
         
+            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime <= 0.6){
+                canInput = false;
+            }
+            else{
+                canInput = true;
+            }
 
             if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
                 canAirCombo = false;
@@ -436,13 +481,14 @@ public class PlayerAttack : MonoBehaviour
 
     void resetAirAttacks()
     {
-        isAirAttacking = false;
         attackAnimator.SetBool("AirUpTilt", false);
         attackAnimator.SetBool("AirDownTilt", false);
         attackAnimator.SetBool("AAttack1", false);
         attackAnimator.SetBool("AAttack2", false);
         attackAnimator.SetBool("AAttack3", false);
         attackAnimator.SetBool("AAttack4", false);
+        canInput = true;
+        isAirAttacking = false;
     }
 
     void resetKnockback(){
@@ -453,17 +499,23 @@ public class PlayerAttack : MonoBehaviour
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
-        attackPressed = attackType.attackE;
+        if(canInput){
+            attackPressed = attackType.attackE;
+        }
     }
 
     void OnAttackR(InputValue value)
     {
-        attackPressed = attackType.attackR;
+        if(canInput){
+            attackPressed = attackType.attackR;
+        }
     }
 
     void OnAttackF(InputValue value)
     {
-        attackPressed = attackType.attackF;
+        if(canInput){
+            attackPressed = attackType.attackF;
+        }
     }
 
     void OnUpPressed(InputValue value){
