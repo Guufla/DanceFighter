@@ -56,10 +56,10 @@ public class GameManager : MonoBehaviour
     //Offensive mode variables
     private float offensiveTimer1 = 0f;
     private float offensiveTimer2 = 0f;
-    private float offensiveInterval = 1f;
-    private float offensiveAmount = 50f;
-    public int amount = 50;
-    public int offensiveamount2;
+    private float offensiveInterval = 1f; //every 1 second increase it by amount  
+    public int amount = 50; //amount to increase by
+    public int offensiveAmount = 50; //amount to decrease every second by when in offensive mode
+    public int offensiveamount2; // amount to increase by when in offensive mode and you hit someone
     public int offensiveamount1;
 
 
@@ -114,10 +114,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        offensiveTimer1 += Time.deltaTime;
+        offensiveTimer1 += Time.deltaTime; //Calulate the time that has passed
         offensiveTimer2 += Time.deltaTime;
 
-        if (offensiveTimer1 >= offensiveInterval)
+        if (offensiveTimer1 >= offensiveInterval) //If the time that has passed is greater than the interval (1sec) then do the following
         {
             if (!isoffensive1)
             {
@@ -127,10 +127,10 @@ public class GameManager : MonoBehaviour
             {
                 DecreaseOffensiveSlider(p1offensive, ref isoffensive1);
             }
-            offensiveTimer1 = 0;
+            offensiveTimer1 = 0; //Reset the timer
         }
 
-        if (offensiveTimer2 >= offensiveInterval)
+        if (offensiveTimer2 >= offensiveInterval) // what was before but just for player 2
         {
             if (!isoffensive2)
             {
@@ -143,7 +143,8 @@ public class GameManager : MonoBehaviour
             offensiveTimer2 = 0;
         }
 
-        if (p1offensive.value == 1000)
+        // If the offensive bar is full then activate the offensive mode and reset the amount
+        if (p1offensive.value == 1000) 
         {
             isoffensive1 = true;
             offensiveamount1 = 45;
@@ -157,9 +158,10 @@ public class GameManager : MonoBehaviour
 
     private void DecreaseOffensiveSlider(Slider offensiveSlider, ref bool isoffensive)
     {
+        //subtract the offensive amount from the bar value but dont go below 0
         offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveAmount, 0);
 
-        if (offensiveSlider.value == 0)
+        if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
         {
             isoffensive = false;
         }
@@ -178,6 +180,7 @@ public class GameManager : MonoBehaviour
         opponentHealth.value = p2health;
         if (!isoffensive1)
         {
+            // add 50 to the offensive bar but dont go over the max value which is 1000
             p1offensive.value = Mathf.Min(p1offensive.value + amount, p1offensive.maxValue);
 
         }
@@ -185,13 +188,16 @@ public class GameManager : MonoBehaviour
         //when p1 hits p2 add an extra boost to the offensive bar
         if (isoffensive1 && offensiveamount1 > 0)
         {
+            // if you hit player while in offensive mode add 45 to the bar value but dont go over the max value which is 1000
             p1offensive.value = Mathf.Min(p1offensive.value + offensiveamount1, p1offensive.maxValue);
+            // minus the value by 15 so they cant have infinite offensive mode
             offensiveamount1 -= 15;
 
         }
 
         if (isoffensive2)
         {
+            //if player 2 if in offensive mode and you hit them decrease the offensive bar by 50 but dont go below 0
             p2offensive.value = Mathf.Max(p2offensive.value - amount, 0);
 
         }
