@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Numerics;
 using UnityEngine;
 
 public class PlayerGroundCheck : MonoBehaviour
@@ -30,21 +32,18 @@ public class PlayerGroundCheck : MonoBehaviour
             GameManager.Instance.player2IsOnGround = playerGroundCheck;
         }
 
+        
 
-    }
+        Debug.DrawRay(transform.position, new UnityEngine.Vector2(0,-1.6f));
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if(other.CompareTag("Ground")){
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, UnityEngine.Vector2.down, 1.6f, LayerMask.GetMask("Environment"));
+
+        if (hit.collider != null) {
             playerGroundCheck = true;
         }
-    }
-
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if(other.CompareTag("Ground")){
+        else{
             playerGroundCheck = false;
         }
+
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
 {
     Animator attackAnimator;
 
-    GameObject attackBoxObject;
+    [SerializeField]GameObject attackBoxObject;
 
     CapsuleCollider2D attackBoxCollider;
 
@@ -36,6 +37,12 @@ public class PlayerAttack : MonoBehaviour
 
     float curCombo;
 
+    Boolean stopPlayerMovement; // For when an attack stops the player from making any more movements
+
+    Boolean stopPlayerYMovement;
+
+    Rigidbody2D playerRigidbody;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +50,6 @@ public class PlayerAttack : MonoBehaviour
         attackPressed = attackType.none; // Used to signify which attack button is pressed
 
         // Would need to change the code surrounding this if I want to use multiple hitboxes
-        attackBoxObject = transform.GetChild(2).gameObject; // Gets the attack hitbox game object
         attackAnimator = attackBoxObject.GetComponent<Animator>(); // Reference to the attack hitbox animator
         attackBoxCollider = attackBoxObject.GetComponent<CapsuleCollider2D>(); // Reference to the actual collider of the attack box object
 
@@ -58,6 +64,10 @@ public class PlayerAttack : MonoBehaviour
 
         curCombo = 0; // Keeps track of the current combo. Used to move from one attack to the next like light attack 1 to light attack 2
 
+        stopPlayerMovement = false;
+        stopPlayerYMovement = false;
+        
+        playerRigidbody = transform.GetComponent<Rigidbody2D>();
 
     }
 
@@ -67,6 +77,18 @@ public class PlayerAttack : MonoBehaviour
         attackColliderUpdate(); // Update function for the attack collider
         newAttacks(); // Update function for the attack system
         resetTimerCheck(); // Update function for resetting the combo timer
+        updateMovement(); // If the player is to have their movement stopped it is sent to here
+    }
+
+    void updateMovement(){
+        if(transform.tag == "Player1"){
+            GameManager.Instance.stopP1Movement = stopPlayerMovement;
+            GameManager.Instance.stopP1YMovement = stopPlayerYMovement;
+        }
+        else{
+            GameManager.Instance.stopP2Movement = stopPlayerMovement;
+            GameManager.Instance.stopP2YMovement = stopPlayerYMovement;
+        }
     }
 
     
@@ -96,12 +118,15 @@ public class PlayerAttack : MonoBehaviour
         if(currentAttackPressed == attackType.attackE){
             
             canAttack = false; // Sets canAttack to false to prevent a backlog of attacks from building up
+            stopPlayerMovement = true;
+            stopPlayerYMovement = true;
 
             if(curCombo > 2 || curCombo == 0)
             {
                 attackAnimator.SetBool("EAttack1",true); // Sets the first combo attack in motion
 
                 setKnockback(1.5f,0f); // Sets knockback stats for this attack
+                dashWithAttack(2f,0f);
 
                 // Timer so if the player doesnt press anything it resets the combo
                 if(!comboResetTimerActive){ 
@@ -111,6 +136,10 @@ public class PlayerAttack : MonoBehaviour
 
                 if(currentStateInfo.IsName("LightAttack1") && currentStateInfo.normalizedTime >= 1 ){
                     canAttack = true;
+                    stopPlayerMovement = false;
+                    stopPlayerYMovement = false;
+
+
                     curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
                     attackAnimator.SetBool("EAttack1",false); // Sets the animation state back to Idle
                     resetKnockback(); // Resets the knockback stats for this attack
@@ -121,6 +150,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("EAttack2",true); // Sets the first combo attack in motion
 
                 setKnockback(1.5f,0f); // Sets knockback stats for this attack
+                dashWithAttack(2f,0f);
 
                 // Timer so if the player doesnt press anything it resets the combo
                 if(!comboResetTimerActive){ 
@@ -130,6 +160,9 @@ public class PlayerAttack : MonoBehaviour
 
                 if(currentStateInfo.IsName("LightAttack2") && currentStateInfo.normalizedTime >= 1 ){
                     canAttack = true;
+                    stopPlayerMovement = false;
+                    stopPlayerYMovement = false;
+                    
                     curCombo++;
                     attackAnimator.SetBool("EAttack2",false); // Sets the animation state back to Idle
                     resetKnockback(); // Resets the knockback stats for this attack
@@ -140,6 +173,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("EAttack3",true); // Sets the first combo attack in motion
 
                 setKnockback(1f,4f); // Sets knockback stats for this attack
+                dashWithAttack(2f,0f);
 
                 //Since this is the third attack things are slightly different
                 comboResetTimerActive = false; // No timer needed since we are now waiting on the animation to finish
@@ -171,11 +205,13 @@ public class PlayerAttack : MonoBehaviour
         if (currentAttackPressed == attackType.attackR)
         {
             canAttack = false; // Sets canAttack to false to prevent a backlog of attacks from building up
+            stopPlayerMovement = true;
 
             if(curCombo > 4 || curCombo == 0){
                 attackAnimator.SetBool("RAttack1",true);
 
                 setKnockback(1.5f,0f);
+                dashWithAttack(2f,0f);
 
                 if(!comboResetTimerActive){
                     comboResetTimer = coolDownTime;
@@ -185,6 +221,8 @@ public class PlayerAttack : MonoBehaviour
                 if(currentStateInfo.IsName("MediumAttack1") && currentStateInfo.normalizedTime >= 1 ){
                     //Debug.Log("F attack combo 1 finished");
                     canAttack = true;
+                    stopPlayerMovement = false;
+
                     curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
                     attackAnimator.SetBool("RAttack1",false);
                     resetKnockback();
@@ -194,6 +232,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("RAttack2",true);
 
                 setKnockback(1.5f,0f);
+                dashWithAttack(2f,0f);
 
                 if(!comboResetTimerActive){
                     comboResetTimer = coolDownTime;
@@ -203,6 +242,7 @@ public class PlayerAttack : MonoBehaviour
                 if(currentStateInfo.IsName("MediumAttack2") && currentStateInfo.normalizedTime >= 1 ){
                     //Debug.Log("F attack combo 2 finished");
                     canAttack = true;
+                    stopPlayerMovement = false;
                     curCombo++;
                     attackAnimator.SetBool("RAttack2",false);
                     resetKnockback();
@@ -212,6 +252,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("RAttack3",true);
 
                 setKnockback(0.5f,3f);
+                dashWithAttack(2f,0f);
 
                 if(!comboResetTimerActive){
                     comboResetTimer = coolDownTime;
@@ -221,6 +262,7 @@ public class PlayerAttack : MonoBehaviour
                 if(currentStateInfo.IsName("MediumAttack3") && currentStateInfo.normalizedTime >= 1 ){
                     //Debug.Log("F attack combo 3 finished");
                     canAttack = true;
+                    stopPlayerMovement = false;
                     curCombo++;
                     attackAnimator.SetBool("RAttack3",false);
                     resetKnockback();
@@ -229,11 +271,13 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("RAttack4",true);
 
                 setKnockback(4f,0.5f);
+                dashWithAttack(2f,0f);
 
                 comboResetTimerActive = false;
 
                 if(currentStateInfo.IsName("MediumAttack4") && currentStateInfo.normalizedTime >= 1 ){
                     canAttack = true;
+                    stopPlayerMovement = false;
                     curCombo++;
                     attackAnimator.SetBool("RAttack4",false);
                     resetKnockback();
@@ -244,6 +288,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("RAttack5",true);
 
                 setKnockback(4f,0.5f);
+                dashWithAttack(2f,0f);
 
                 comboResetTimerActive = false;
 
@@ -270,11 +315,13 @@ public class PlayerAttack : MonoBehaviour
         {
 
             canAttack = false;
+            stopPlayerMovement = true;
             
             if(curCombo > 3 || curCombo == 0){
                 attackAnimator.SetBool("FAttack1",true);
 
                 setKnockback(1.5f,0f);
+                dashWithAttack(2f,0f);
 
                 if(!comboResetTimerActive){
                     comboResetTimer = coolDownTime;
@@ -284,6 +331,7 @@ public class PlayerAttack : MonoBehaviour
                 if(currentStateInfo.IsName("HeavyAttack1") && currentStateInfo.normalizedTime >= 1 ){
                     //Debug.Log("F attack combo 1 finished");
                     canAttack = true;
+                    stopPlayerMovement = false;
                     curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
                     attackAnimator.SetBool("FAttack1",false);
                     resetKnockback();
@@ -293,6 +341,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("FAttack2",true);
 
                 setKnockback(1.5f,0f);
+                dashWithAttack(2f,0f);
 
                 if(!comboResetTimerActive){
                     comboResetTimer = coolDownTime;
@@ -302,6 +351,7 @@ public class PlayerAttack : MonoBehaviour
                 if(currentStateInfo.IsName("HeavyAttack2") && currentStateInfo.normalizedTime >= 1 ){
                     //Debug.Log("F attack combo 2 finished");
                     canAttack = true;
+                    stopPlayerMovement = false;
                     curCombo++;
                     attackAnimator.SetBool("FAttack2",false);
                     resetKnockback();
@@ -311,6 +361,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("FAttack3",true);
 
                 setKnockback(0.5f,3f);
+                dashWithAttack(2f,0f);
 
                 if(!comboResetTimerActive){
                     comboResetTimer = coolDownTime;
@@ -320,6 +371,7 @@ public class PlayerAttack : MonoBehaviour
                 if(currentStateInfo.IsName("HeavyAttack3") && currentStateInfo.normalizedTime >= 1 ){
                     //Debug.Log("F attack combo 3 finished");
                     canAttack = true;
+                    stopPlayerMovement = false;
                     curCombo++;
                     attackAnimator.SetBool("FAttack3",false);
                     resetKnockback();
@@ -328,6 +380,7 @@ public class PlayerAttack : MonoBehaviour
                 attackAnimator.SetBool("FAttack4",true);
 
                 setKnockback(4f,0.5f);
+                dashWithAttack(2f,0f);
 
                 comboResetTimerActive = false;
 
@@ -361,11 +414,31 @@ public class PlayerAttack : MonoBehaviour
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
+        //sets aggro to false, change in future
+        if(gameObject.CompareTag("Player1"))
+        {
+            GameManager.Instance.P1Aggro = false;
+        }
+        else if(gameObject.CompareTag("Player2"))
+        {
+            GameManager.Instance.P2Aggro = false;
+        }
+        AudioManager.Instance.StateChange();
         attackPressed = attackType.attackE;
     }
 
     void OnAttackR(InputValue value)
     {
+        //sets aggro to true, change in future
+        if(gameObject.CompareTag("Player1"))
+        {
+            GameManager.Instance.P1Aggro = true;
+        }
+        else if(gameObject.CompareTag("Player2"))
+        {
+            GameManager.Instance.P2Aggro = true;
+        }
+        AudioManager.Instance.StateChange();
         attackPressed = attackType.attackR;
     }
 
@@ -397,6 +470,8 @@ public class PlayerAttack : MonoBehaviour
         curCombo = 0;
         currentAttackPressed = attackType.none;
         canAttack = true;
+        stopPlayerMovement = false;
+        stopPlayerYMovement = false;
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("EAttack1",false);
         attackAnimator.SetBool("EAttack2",false);
@@ -413,6 +488,10 @@ public class PlayerAttack : MonoBehaviour
     void setKnockback(float x , float y){
         knockbackX = x;
         knockbackY = y;
+    }
+
+    void dashWithAttack(float x, float y){
+        playerRigidbody.velocity = new Vector2(x * transform.localScale.x,y); // Code to jump on pressing space
     }
 
     // Coroutine that is currently unused
