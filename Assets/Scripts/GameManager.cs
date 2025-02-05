@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public Boolean stopP1Movement; 
     public Boolean stopP1YMovement; 
 
+    public Boolean canInputP1; 
+
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     public Boolean stopP2Movement; 
     public Boolean stopP2YMovement;
+
+    public Boolean canInputP2; 
     
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not

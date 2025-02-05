@@ -29,7 +29,7 @@ public class HitboxCollision : MonoBehaviour
     void Start()
     {
 
-        player = transform.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
+        player = transform.parent.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
 
         
         if(player.CompareTag("Player1"))
