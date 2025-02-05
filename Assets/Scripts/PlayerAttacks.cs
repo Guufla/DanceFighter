@@ -22,6 +22,7 @@ public class PlayerAttacks : MonoBehaviour
    Animator attackAnimator;
 
     [SerializeField] GameObject attackBoxObject;
+    [SerializeField] GameObject attackBoxCollider;
 
     AttackType attackPressed;
 
@@ -63,8 +64,16 @@ public class PlayerAttacks : MonoBehaviour
     Boolean stopPlayerYMovement;
 
     Rigidbody2D playerRigidbody;
-
-    [SerializeField] GameObject attackBoxCollider;
+    
+    void updateCanInput(){
+        if(transform.tag == "Player1"){
+            canInput = GameManager.Instance.canInputP1;
+        }
+        else{
+            canInput = GameManager.Instance.canInputP2;
+        }
+    }
+    
 
 
     // Start is called before the first frame update
@@ -149,7 +158,7 @@ public class PlayerAttacks : MonoBehaviour
     {
         currentStateInfo = attackAnimator.GetCurrentAnimatorStateInfo(0); // Gets the current state of the animator
 
-        
+        updateCanInput();
         // When you are able to attack it records the key you press
         // if(canAttack == true){
         //     currentAttackPressed = attackPressed;
