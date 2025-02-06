@@ -411,6 +411,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
+
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
@@ -426,6 +427,7 @@ public class PlayerAttack : MonoBehaviour
         AudioManager.Instance.StateChange();
         attackPressed = attackType.attackE;
     }
+
 
     void OnAttackR(InputValue value)
     {
