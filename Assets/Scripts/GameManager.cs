@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +27,10 @@ public class GameManager : MonoBehaviour
     public Slider p1offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
     public bool isoffensive1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
+
+    public bool p1Win = false;
+
+    public static int p1WinCounter = 0;
 
 
 
@@ -52,8 +58,12 @@ public class GameManager : MonoBehaviour
 
     public bool isoffensive2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
 
+    public bool p2Win = false;
 
-    //Offensive mode variables
+    public static int p2WinCounter = 0;
+
+
+    //Offensive mode variables and UI
     private float offensiveTimer1 = 0f;
     private float offensiveTimer2 = 0f;
     private float offensiveInterval = 1f; //every 1 second increase it by amount  
@@ -61,6 +71,9 @@ public class GameManager : MonoBehaviour
     public int offensiveAmount = 50; //amount to decrease every second by when in offensive mode
     public int offensiveamount2; // amount to increase by when in offensive mode and you hit someone
     public int offensiveamount1;
+    public TMP_Text winMessage;
+    public Button restartButton;
+    public Button quitButton;
 
 
 
@@ -108,7 +121,9 @@ public class GameManager : MonoBehaviour
         p2offensive.value = 0;
         p1offensive.maxValue = 1000;
         p2offensive.maxValue = 1000;
-        
+        winMessage.gameObject.SetActive(false);
+        quitButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
 
     }
 
@@ -144,7 +159,7 @@ public class GameManager : MonoBehaviour
         }
 
         // If the offensive bar is full then activate the offensive mode and reset the amount
-        if (p1offensive.value == 1000) 
+        if (p1offensive.value == 1000)
         {
             isoffensive1 = true;
             offensiveamount1 = 45;
@@ -153,6 +168,16 @@ public class GameManager : MonoBehaviour
         {
             isoffensive2 = true;
             offensiveamount2 = 45;
+        }
+        if (p1health <= 0)
+        {
+            Player2Win();
+            
+        }
+        if (p2health <= 0)
+        {
+            Player1Win();
+            
         }
     }
 
@@ -170,12 +195,12 @@ public class GameManager : MonoBehaviour
     private void IncreaseOffensiveSlider(Slider offensiveSlider)
     {
         // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
-        offensiveSlider.value = Mathf.Min(offensiveSlider.value + amount, offensiveSlider.maxValue);  
-    
+        offensiveSlider.value = Mathf.Min(offensiveSlider.value + amount, offensiveSlider.maxValue);
+
     }
     //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
-    public void Player1HitsPlayer2() 
-    {   
+    public void Player1HitsPlayer2()
+    {
         p2health -= 10;
         opponentHealth.value = p2health;
         if (!isoffensive1)
@@ -184,7 +209,7 @@ public class GameManager : MonoBehaviour
             p1offensive.value = Mathf.Min(p1offensive.value + amount, p1offensive.maxValue);
 
         }
-        
+
         //when p1 hits p2 add an extra boost to the offensive bar
         if (isoffensive1 && offensiveamount1 > 0)
         {
@@ -211,8 +236,8 @@ public class GameManager : MonoBehaviour
         {
             p2offensive.value = Mathf.Min(p2offensive.value + amount, p2offensive.maxValue);
         }
-        
-        if(isoffensive2 && offensiveamount2 > 0)
+
+        if (isoffensive2 && offensiveamount2 > 0)
         {
             p2offensive.value = Mathf.Min(p2offensive.value + offensiveamount2, p2offensive.maxValue);
             offensiveamount2 -= 15;
@@ -224,4 +249,90 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    public void Player1Win()
+    {
+        if (!p1Win)
+        {
+            // When p1 wins makes the bool true and add 1 to its round score and display text
+            p1Win = true;
+            p1WinCounter += 1;
+            winMessage.text = "Player 1 Wins!";
+            winMessage.gameObject.SetActive(true);
+            StartCoroutine(RestartMatch(3f)); 
+        }
+        if (p1WinCounter >= 2)
+        {
+            winMessage.text = "Player 1 Wins!";
+            winMessage.gameObject.SetActive(true);
+            quitButton.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
+        }
+    }
+
+    public void Player2Win()
+    {
+        if (!p2Win)
+        {
+            // When p2 wins makes the bool true and add 1 to its round score and display text
+            p2Win = true;
+            p2WinCounter += 1;
+            winMessage.text = "Player 2 Wins!";
+            winMessage.gameObject.SetActive(true);
+            StartCoroutine(RestartMatch(3f));
+        }
+        if (p2WinCounter >= 2)
+        {
+            winMessage.text = "Player 2 Wins!";
+            winMessage.gameObject.SetActive(true);
+            quitButton.gameObject.SetActive(true);
+            restartButton.gameObject.SetActive(true);
+        }
+    }
+
+    private IEnumerator RestartMatch(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime);
+
+        // Hide the win message
+        winMessage.gameObject.SetActive(false);
+
+        // Reset player health
+        p1health = 100;
+        p2health = 100;
+        playerHealth.value = p1health;
+        opponentHealth.value = p2health;
+
+        // Reset offensive sliders
+        p1offensive.value = 0;
+        p2offensive.value = 0;
+        isoffensive1 = false;
+        isoffensive2 = false;
+
+        // Reset win booleans
+        p1Win = false;
+        p2Win = false;
+
+        // Reposition players to their initial positions
+        player1.transform.position = new Vector2(-4, -3);
+        player2.transform.position = new Vector2(4, -3);
+    }
+
+    public void RestartGame()
+    {
+        // Reset win counters
+        p1WinCounter = 0;
+        p2WinCounter = 0;
+
+        // Hide buttons
+        quitButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+
+        // Reset the match
+        StartCoroutine(RestartMatch(2f));
+    }
+
+
+
 }
