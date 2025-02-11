@@ -30,6 +30,7 @@ public class HitboxCollision : MonoBehaviour
 
     float facingY;
 
+    
     private GameObject oppositePlayer;
     private Rigidbody2D oppositeRigidBody;
     public float oppositeHealth = 100;  // opponents health variable
@@ -110,6 +111,7 @@ public class HitboxCollision : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (GameManager.Instance.isCountingDown) return;
         if (other.CompareTag(oppositePlayer.tag))
         {
 

@@ -63,17 +63,32 @@ public class GameManager : MonoBehaviour
     public static int p2WinCounter = 0;
 
 
-    //Offensive mode variables and UI
+    [Header("Offensive mode")]
     private float offensiveTimer1 = 0f;
+
     private float offensiveTimer2 = 0f;
-    private float offensiveInterval = 1f; //every 1 second increase it by amount  
+
+    private float offensiveInterval = 1f;//every 1 second increase it by amount
+
     public int amount = 50; //amount to increase by
+
     public int offensiveAmount = 50; //amount to decrease every second by when in offensive mode
+
     public int offensiveamount2; // amount to increase by when in offensive mode and you hit someone
+
     public int offensiveamount1;
-    public TMP_Text winMessage;
-    public Button restartButton;
-    public Button quitButton;
+
+
+    [Header("UI")]
+    public TMP_Text winMessage; // Win message
+
+    public Button restartButton; // Restart button
+
+    public Button quitButton; // Quit button
+
+    public TMP_Text countdownText; // Countdown text
+
+    public bool isCountingDown; // Bool for when the game is counting down 
 
 
 
@@ -116,6 +131,7 @@ public class GameManager : MonoBehaviour
         playerHealth.maxValue = 100;
         playerHealth.value = p1health;
         opponentHealth.value = p2health;
+        
 
         p1offensive.value = 0;
         p2offensive.value = 0;
@@ -125,14 +141,17 @@ public class GameManager : MonoBehaviour
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
 
+        StartCoroutine(StartRoundCountdown(3)); // Start the countdown
+
     }
 
     void Update()
     {
-        offensiveTimer1 += Time.deltaTime; //Calulate the time that has passed
+        if (isCountingDown) return;
+        offensiveTimer1 += Time.deltaTime; // Calulate the time that has passed
         offensiveTimer2 += Time.deltaTime;
 
-        if (offensiveTimer1 >= offensiveInterval) //If the time that has passed is greater than the interval (1sec) then do the following
+        if (offensiveTimer1 >= offensiveInterval) // If the time that has passed is greater than the interval (1sec) then do the following
         {
             if (!isoffensive1)
             {
@@ -142,7 +161,7 @@ public class GameManager : MonoBehaviour
             {
                 DecreaseOffensiveSlider(p1offensive, ref isoffensive1);
             }
-            offensiveTimer1 = 0; //Reset the timer
+            offensiveTimer1 = 0; // Reset the timer
         }
 
         if (offensiveTimer2 >= offensiveInterval) // what was before but just for player 2
@@ -183,6 +202,7 @@ public class GameManager : MonoBehaviour
 
     private void DecreaseOffensiveSlider(Slider offensiveSlider, ref bool isoffensive)
     {
+        if (isCountingDown) return;
         //subtract the offensive amount from the bar value but dont go below 0
         offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveAmount, 0);
 
@@ -194,6 +214,7 @@ public class GameManager : MonoBehaviour
 
     private void IncreaseOffensiveSlider(Slider offensiveSlider)
     {
+        if (isCountingDown) return;
         // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
         offensiveSlider.value = Mathf.Min(offensiveSlider.value + amount, offensiveSlider.maxValue);
 
@@ -201,6 +222,7 @@ public class GameManager : MonoBehaviour
     //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
     public void Player1HitsPlayer2()
     {
+        if (isCountingDown) return;
         p2health -= 10;
         opponentHealth.value = p2health;
         if (!isoffensive1)
@@ -230,6 +252,7 @@ public class GameManager : MonoBehaviour
     //When player 2 hits player 1 subtract 10 from player 2's health and update the slider
     public void Player2HitsPlayer1()
     {
+        if (isCountingDown) return;
         p1health -= 10;
         playerHealth.value = p1health; //when p2 hits p1 add an extra boost to the offensive bar
         if (!isoffensive2)
@@ -261,7 +284,7 @@ public class GameManager : MonoBehaviour
             winMessage.gameObject.SetActive(true);
             StartCoroutine(RestartMatch(3f)); 
         }
-        if (p1WinCounter >= 2)
+        if (p1WinCounter >= 2) // When player 1 wins 2 rounds game is over 
         {
             winMessage.text = "Player 1 Wins!";
             winMessage.gameObject.SetActive(true);
@@ -281,7 +304,7 @@ public class GameManager : MonoBehaviour
             winMessage.gameObject.SetActive(true);
             StartCoroutine(RestartMatch(3f));
         }
-        if (p2WinCounter >= 2)
+        if (p2WinCounter >= 2) // When player 2 wins 2 rounds game is over 
         {
             winMessage.text = "Player 2 Wins!";
             winMessage.gameObject.SetActive(true);
@@ -290,7 +313,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator RestartMatch(float waitTime)
+    private IEnumerator RestartMatch(float waitTime) // Makes sure match doesnt restart automatically
     {
         yield return new WaitForSeconds(waitTime);
         yield return new WaitForSeconds(waitTime);
@@ -317,9 +340,11 @@ public class GameManager : MonoBehaviour
         // Reposition players to their initial positions
         player1.transform.position = new Vector2(-4, -3);
         player2.transform.position = new Vector2(4, -3);
+
+        StartCoroutine(StartRoundCountdown(3));
     }
 
-    public void RestartGame()
+    public void RestartGame() // When restarting the whole game set the win counters to 0
     {
         // Reset win counters
         p1WinCounter = 0;
@@ -333,6 +358,21 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RestartMatch(2f));
     }
 
+    private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
+    {
+        isCountingDown = true;
+        countdownText.gameObject.SetActive(true);
+        while (countdownTime > 0)
+        {
+            countdownText.text = countdownTime.ToString();
+            yield return new WaitForSeconds(1f);
+            countdownTime--;
+        }
+        countdownText.text = "GO!";
+        yield return new WaitForSeconds(1f);
+        countdownText.gameObject.SetActive(false);
+        isCountingDown = false;
+    }
 
 
 }
