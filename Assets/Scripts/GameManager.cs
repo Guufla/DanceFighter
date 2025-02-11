@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public Boolean canInputP1; 
 
+    public Boolean isHitBoxAnimatingP1; 
+
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public Boolean canInputP2; 
     
+    public Boolean isHitBoxAnimatingP2; 
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
 

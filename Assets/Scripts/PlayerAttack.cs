@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,6 +35,8 @@ public class PlayerAttack : MonoBehaviour
     public bool canAttack;
 
     public bool canInput;
+
+    public bool isAnimating;
 
     public bool canAirCombo;
 
@@ -141,9 +144,11 @@ public class PlayerAttack : MonoBehaviour
     void updateInput(){
         if(transform.tag == "Player1"){
             canInput = GameManager.Instance.canInputP1;
+            isAnimating = GameManager.Instance.isHitBoxAnimatingP1;
         }
         else{
             canInput = GameManager.Instance.canInputP2;
+            isAnimating = GameManager.Instance.isHitBoxAnimatingP2;
         }
     }
 
@@ -412,7 +417,7 @@ public class PlayerAttack : MonoBehaviour
             }
 
             // animation name would be something like LightAttack1 and refers to the animation itself
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
+            if(currentStateInfo.IsName(animationName) && isAnimating == false){
                 canAttack = true;
                 stopPlayerMovement = false;
                 stopPlayerYMovement = false;
@@ -442,7 +447,7 @@ public class PlayerAttack : MonoBehaviour
             }
             
 
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
+            if(currentStateInfo.IsName(animationName) && isAnimating == false ){
                 canAttack = true;
                 stopPlayerMovement = false;
                 stopPlayerYMovement = false;
@@ -467,14 +472,10 @@ public class PlayerAttack : MonoBehaviour
             //Since this is the third attack things are slightly different
             comboResetTimerActive = false; // No timer needed since we are now waiting on the animation to finish
         
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 0.2f){
-                
-                canInput = true;
-            }
+            
 
-            Debug.Log(currentStateInfo.normalizedTime);
 
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
+            if(currentStateInfo.IsName(animationName) && isAnimating == false ){
                 this.isAirAttacking = false;
                 resetAttacks(); // Reset attacks sets can attack to true
                 resetKnockback(); // Resets the knockback stats for this attack
@@ -491,12 +492,10 @@ public class PlayerAttack : MonoBehaviour
             setKnockback(knockBackX,knockBackY); // Sets knockback stats for this attack
             //dashWithAttack(dashX,dashY);
 
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 0.2f){
-                canInput = true;
-            }
+            
             Debug.Log(currentStateInfo.normalizedTime);
 
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 )
+            if(currentStateInfo.IsName(animationName) && isAnimating == false )
             {
                 canAttack = true;
                 stopPlayerMovement = false;
@@ -524,12 +523,10 @@ public class PlayerAttack : MonoBehaviour
             //Since this is the third attack things are slightly different
             comboResetTimerActive = false; // No timer needed since we are now waiting on the animation to finish
         
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 0.2f){
-                canInput = true;
-            }
+            
             Debug.Log(currentStateInfo.normalizedTime);
 
-            if(currentStateInfo.IsName(animationName) && currentStateInfo.normalizedTime >= 1 ){
+            if(currentStateInfo.IsName(animationName) && isAnimating == false ){
                 canAirCombo = false;
                 this.isAirAttacking = false;
                 resetAttacks(); // Reset attacks sets can attack to true
@@ -649,10 +646,9 @@ public class PlayerAttack : MonoBehaviour
     void resetAttacks(){
         curCombo = 0;
         currentAttackPressed = AttackType.none;
-        canAttack = true;
-        canInput = true;
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
+        canAttack = true;
         isAttacking = false;
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("EAttack1",false);

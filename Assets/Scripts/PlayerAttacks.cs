@@ -160,10 +160,10 @@ public class PlayerAttacks : MonoBehaviour
 
         updateCanInput();
         // When you are able to attack it records the key you press
-        // if(canAttack == true){
-        //     currentAttackPressed = attackPressed;
-        //     attackPressed = AttackType.none; // Resets the attack pressed for the next loop
-        // }
+        if(canAttack == true){
+            currentAttackPressed = attackPressed;
+            attackPressed = AttackType.none; // Resets the attack pressed for the next loop
+        }
 
         if(currentAttackPressed == AttackType.attackE){
             
