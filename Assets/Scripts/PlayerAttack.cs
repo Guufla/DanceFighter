@@ -418,7 +418,6 @@ public class PlayerAttack : MonoBehaviour
 
             // animation name would be something like LightAttack1 and refers to the animation itself
             if(currentStateInfo.IsName(animationName) && isAnimating == false){
-                canAttack = true;
                 stopPlayerMovement = false;
                 stopPlayerYMovement = false;
                 isAttacking = false;
@@ -427,6 +426,7 @@ public class PlayerAttack : MonoBehaviour
 
                 curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
                 attackAnimator.SetBool(animatorBool,false); // Sets the animation state back to Idle
+                canAttack = true;
                 resetKnockback(); // Resets the knockback stats for this attack
             }
         }
@@ -448,7 +448,7 @@ public class PlayerAttack : MonoBehaviour
             
 
             if(currentStateInfo.IsName(animationName) && isAnimating == false ){
-                canAttack = true;
+                
                 stopPlayerMovement = false;
                 stopPlayerYMovement = false;
                 isAttacking = false;
@@ -456,6 +456,7 @@ public class PlayerAttack : MonoBehaviour
 
                 curCombo++;
                 attackAnimator.SetBool(animatorBool,false); // Sets the animation state back to Idle
+                canAttack = true;
                 resetKnockback(); // Resets the knockback stats for this attack
             }
         }
@@ -473,8 +474,6 @@ public class PlayerAttack : MonoBehaviour
             comboResetTimerActive = false; // No timer needed since we are now waiting on the animation to finish
         
             
-
-
             if(currentStateInfo.IsName(animationName) && isAnimating == false ){
                 this.isAirAttacking = false;
                 resetAttacks(); // Reset attacks sets can attack to true
@@ -493,11 +492,10 @@ public class PlayerAttack : MonoBehaviour
             //dashWithAttack(dashX,dashY);
 
             
-            Debug.Log(currentStateInfo.normalizedTime);
 
             if(currentStateInfo.IsName(animationName) && isAnimating == false )
             {
-                canAttack = true;
+                
                 stopPlayerMovement = false;
                 stopPlayerYMovement = false;
                 this.isAirAttacking = false;
@@ -506,6 +504,7 @@ public class PlayerAttack : MonoBehaviour
 
                 attackAnimator.SetBool(animatorBool,false); 
                 curCombo++;
+                canAttack = true;
                 resetKnockback(); // Resets the knockback stats for this attack
             }
         }
@@ -536,18 +535,6 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    }
-
-    void resetAirAttacks()
-    {
-        attackAnimator.SetBool("AirUpTilt", false);
-        attackAnimator.SetBool("AirDownTilt", false);
-        attackAnimator.SetBool("AAttack1", false);
-        attackAnimator.SetBool("AAttack2", false);
-        attackAnimator.SetBool("AAttack3", false);
-        attackAnimator.SetBool("AAttack4", false);
-        canInput = true;
-        isAirAttacking = false;
     }
 
     void resetKnockback(){
@@ -648,7 +635,6 @@ public class PlayerAttack : MonoBehaviour
         currentAttackPressed = AttackType.none;
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
-        canAttack = true;
         isAttacking = false;
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("EAttack1",false);
@@ -666,7 +652,7 @@ public class PlayerAttack : MonoBehaviour
         attackAnimator.SetBool("FAttack3",false);
         attackAnimator.SetBool("FAttack4",false);
 
-        
+        canAttack = true;
     }
 
 
