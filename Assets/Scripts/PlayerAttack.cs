@@ -280,17 +280,47 @@ public class PlayerAttack : MonoBehaviour
                 
             // }
 
-            // if(attackAnimator.GetBool("UpTilt") || (holdingUp && !isTiltAttacking))
-            // {
-            //     stopMovement(true, true);
-            //     hitboxAnimation(4,"UpTilt","UpTilt", false, 1.5f,0f,0f,0f);
-            // }
-            // else if(attackAnimator.GetBool("DownTilt")  || (holdingDown && !isTiltAttacking))
-            // {
-            //     stopMovement(true, true);
-            //     hitboxAnimation(4,"DownTilt","DownTilt", false, 1.5f,0f,1f,0f);
-            // }
-            if(curCombo > 2 || curCombo == 0)
+            if(isAirAttacking == true || !isOnGround ){
+                if(isOnGround){
+                    if(isAnimating == false){
+                        stopPlayerMovement = false;
+                        stopPlayerYMovement = false;
+                        isAttacking = false;
+
+                        curCombo = 1; // For the sake of linking an attack that has a higher combo count than this one it has to set the combo back to 1
+                        resetAirAttacks();
+                        resetAttacks();
+                        resetKnockback(); // Resets the knockback stats for this attack
+                        canAttack = true;
+
+                        isAirAttacking = false;
+                    }
+                    resetAirAttacks();
+                }
+                else if(canAirCombo && curCombo > 3 ||canAirCombo && curCombo == 0)
+                {
+                    stopMovement(true, true);
+                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f);
+                }
+                else if(canAirCombo && curCombo == 1)
+                {
+                    stopMovement(true, true);
+                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f);
+                }
+                else if(canAirCombo && curCombo == 2)
+                {
+                    stopMovement(true, true);
+                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f);
+                }
+                else if(canAirCombo && curCombo == 3 )
+                {
+                    stopMovement(true, true);
+                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f);
+                }
+                
+            }
+
+            else if(curCombo > 2 || curCombo == 0)
             {
                 stopMovement(true, true);
                 hitboxAnimation(1,"EAttack1","LightAttack1", false, 1.5f,0f,2f,0f);
@@ -627,6 +657,23 @@ public class PlayerAttack : MonoBehaviour
                 comboResetTimerActive = false;
             }
         }
+    }
+
+    void resetAirAttacks(){
+        curCombo = 0;
+        currentAttackPressed = AttackType.none;
+        stopPlayerMovement = false;
+        stopPlayerYMovement = false;
+        isAttacking = false;
+        //attackBoxCollider.enabled = false;
+        attackAnimator.SetBool("AAttack1",false);
+        attackAnimator.SetBool("AAttack2",false);
+        attackAnimator.SetBool("AAttack3",false);
+        attackAnimator.SetBool("AAttack4",false);
+        attackAnimator.SetBool("AirDownTilt",false);
+        attackAnimator.SetBool("AirUpTilt",false);
+
+        canAttack = true;
     }
 
     // Resets attack state to idle
