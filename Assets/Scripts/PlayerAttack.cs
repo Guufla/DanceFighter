@@ -445,6 +445,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else{
             comboResetTimerActive = false;
+            // TestChange
         }
 
         // animation name would be something like LightAttack1 and refers to the animation itself
