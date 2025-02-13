@@ -16,7 +16,7 @@ public class HitboxAnimationMethods : MonoBehaviour
     {
         parentObject = transform.parent.gameObject;
         canInput = true;
-        isAnimating = true;
+        isAnimating = false;
     }
 
     void Update()
