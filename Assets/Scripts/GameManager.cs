@@ -90,6 +90,10 @@ public class GameManager : MonoBehaviour
 
     public bool isCountingDown; // Bool for when the game is counting down 
 
+    public TMP_Text timerText;
+
+    public float timerSeconds = 99f;
+
 
 
     // Used to make the game manager. Doesnt really need to be edited
@@ -360,6 +364,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
     {
+        timerSeconds = 99f;
         isCountingDown = true;
         countdownText.gameObject.SetActive(true);
         while (countdownTime > 0)
@@ -372,7 +377,27 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
         isCountingDown = false;
+        StartCoroutine(CountdownTimer());
     }
 
+    private IEnumerator CountdownTimer()
+    {
+        
+        while (timerSeconds > 0)
+        {
+            if (isCountingDown || p1Win || p2Win)
+            {
+                yield break; // Exit the coroutine if the game is counting down or if someone has won
+            }
 
+            timerText.text = timerSeconds.ToString("F0"); // Updates the text to display seconds value
+            yield return new WaitForSeconds(1f); // After 1 second subtract 1 from the timer
+            timerSeconds--;
+        }
+        timerText.text = "0";
+
+
+
+    }
+    
 }
