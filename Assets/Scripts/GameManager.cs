@@ -111,8 +111,6 @@ public class GameManager : MonoBehaviour
     
     public Boolean isHitBoxAnimatingP2; 
 
-    public bool player2IsOnGround; // Tells you if the player is on the ground or not
-
     public bool P2Aggro; // Tells if the player is in aggro mode
 
 

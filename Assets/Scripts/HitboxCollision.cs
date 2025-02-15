@@ -142,13 +142,13 @@ public class HitboxCollision : MonoBehaviour
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
             // Debug.Log("Hit");
-            hasCollided = true;
+            // hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             playerDef.TakeDamage(75, other);
         }
 
 
-        }
+        
         //if player 1 hits player 2 call the player 1 hits player 2 function from game manager
         if (player.CompareTag("Player1") && other.CompareTag("Player2")) 
         {
@@ -160,6 +160,4 @@ public class HitboxCollision : MonoBehaviour
             GameManager.Instance.Player2HitsPlayer1();
         }
     }
-
-
 }
