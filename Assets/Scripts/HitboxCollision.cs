@@ -12,8 +12,10 @@ public class HitboxCollision : MonoBehaviour
 
 
     // Variables
-    GameObject player;
-
+    
+    private GameObject player;
+    
+    PlayerDefense playerDef;
     float basicAttackKnockBackX;
 
     float basicAttackKnockBackY;
@@ -43,7 +45,8 @@ public class HitboxCollision : MonoBehaviour
     {
 
 
-        player = transform.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
+        player = transform.parent.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
+
 
         //healthbar.value = oppositeHealth; // Sets the value of the health bar to the player health
 
@@ -126,7 +129,6 @@ public class HitboxCollision : MonoBehaviour
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX, basicAttackKnockBackY * facingY);
 
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
-            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX, basicAttackKnockBackY * facingY);
 
             // When the player is hit they lose a certain amount of health 
             //oppositeHealth -= 10;
@@ -136,6 +138,14 @@ public class HitboxCollision : MonoBehaviour
             //Debug.Log("Player is dead");
             //}
             // We need to adjust this later to be more dynamic
+
+            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+
+            // Debug.Log("Hit");
+            hasCollided = true;
+            playerDef = oppositePlayer.GetComponent<PlayerDefense>();
+            playerDef.TakeDamage(75, other);
+        }
 
 
         }

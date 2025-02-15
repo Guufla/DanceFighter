@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,14 @@ public class GameManager : MonoBehaviour
     // This is used to represent how much knockback any given attack does. It will usually be zero but while doing an attack it will switch around depending on the setKnockback() function.
     public float P1AttackKnockBackX; // When the knockback is set on an attack its x float will be held here. 
 
-    public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
+    public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here.
+
+    public Boolean stopP1Movement; 
+    public Boolean stopP1YMovement; 
+
+    public Boolean canInputP1; 
+
+    public Boolean isHitBoxAnimatingP1; 
 
     public Slider playerHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
 
@@ -35,6 +43,8 @@ public class GameManager : MonoBehaviour
 
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
+
+    public bool P1Aggro; // Tells if the player is in aggro mode
 
 
     // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
@@ -93,7 +103,17 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
 
     public float timerSeconds = 99f;
+    
+    public Boolean stopP2Movement; 
+    public Boolean stopP2YMovement;
 
+    public Boolean canInputP2; 
+    
+    public Boolean isHitBoxAnimatingP2; 
+
+    public bool player2IsOnGround; // Tells you if the player is on the ground or not
+
+    public bool P2Aggro; // Tells if the player is in aggro mode
 
 
     // Used to make the game manager. Doesnt really need to be edited
@@ -113,13 +133,15 @@ public class GameManager : MonoBehaviour
     {
         if (_instance)
         {
+            Debug.LogError("GameManager is already in the scene");
             Destroy(gameObject);
         }
         else
         {
             _instance = this;
+            DontDestroyOnLoad(this); 
         }
-        DontDestroyOnLoad(this);
+        
     }
 
     void Start()
