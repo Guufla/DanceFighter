@@ -27,7 +27,7 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "501abade-058d-4b6e-89c1-79752e4c7d43",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -85,6 +85,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "b09ec976-0f7a-49d6-9d7c-63ff0c2df5db",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Parry",
+                    "type": "Button",
+                    "id": "77e0f879-9948-426a-a7b5-7b3f6b3758b4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -380,7 +396,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "AttackR",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -406,6 +422,18 @@
                     "action": "UpPressed",
                     "isComposite": false,
                     "isPartOfComposite": false
+                    
+                },
+                {
+                    "name": "",
+                    "id": "1130ccb6-eaf6-4788-9e27-88f310d8fc69",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Hold(duration=0.25,pressPoint=0.5)",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -415,6 +443,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DownPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+              },
+              {
+                    "name": "",
+                    "id": "e4e0b57b-45da-4ff8-86cb-d053ce66a821",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Tap(duration=0.15,pressPoint=0.1)",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

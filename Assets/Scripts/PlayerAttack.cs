@@ -461,7 +461,6 @@ public class PlayerAttack : MonoBehaviour
         setKnockback(0f,0f); // Reset knockback
     }
 
-
     
 
     void updateMovement()
@@ -617,6 +616,20 @@ public class PlayerAttack : MonoBehaviour
             attackPressed = AttackType.attackE;
             canInput = false;
         }
+        
+        
+        
+         //sets aggro to false, change in future
+        if(gameObject.CompareTag("Player1"))
+        {
+            GameManager.Instance.P1Aggro = false;
+        }
+        else if(gameObject.CompareTag("Player2"))
+        {
+            GameManager.Instance.P2Aggro = false;
+        }
+        AudioManager.Instance.StateChange();
+        attackPressed = attackType.attackE;
     }
 
     void OnAttackR(InputValue value)
@@ -633,6 +646,18 @@ public class PlayerAttack : MonoBehaviour
             attackPressed = AttackType.attackR;
             canInput = false;
         }
+        
+        //sets aggro to false, change in future
+        if(gameObject.CompareTag("Player1"))
+        {
+            GameManager.Instance.P1Aggro = true;
+        }
+        else if(gameObject.CompareTag("Player2"))
+        {
+            GameManager.Instance.P2Aggro = true;
+        }
+        AudioManager.Instance.StateChange();
+        attackPressed = attackType.attackR;
     }
 
     void OnAttackF(InputValue value)

@@ -7,6 +7,8 @@ public class HitboxCollision : MonoBehaviour
 
     // Variables
     private GameObject player;
+    
+    PlayerDefense playerDef;
 
     private float basicAttackKnockBackX;
 
@@ -92,6 +94,8 @@ public class HitboxCollision : MonoBehaviour
 
             // Debug.Log("Hit");
             hasCollided = true;
+            playerDef = oppositePlayer.GetComponent<PlayerDefense>();
+            playerDef.TakeDamage(75, other);
         }
 
 

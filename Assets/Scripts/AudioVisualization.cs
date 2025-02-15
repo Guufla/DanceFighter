@@ -10,16 +10,17 @@ public class AudioVisualization : MonoBehaviour
         Circle,
         Line
     }
-    
+
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject templateObject;
-    
+
     [SerializeField] private FFTWindow fftWindowToUse;
     [SerializeField] private VisualShape visualShape;
     [SerializeField] private float offset = 5;
     [SerializeField] private float scale = 1;
     [SerializeField] private float audioSampleScale = 1;
     [SerializeField] private int sampleSize = 256;
+    [SerializeField] private int renderingSize = 256;
 
     private List<GameObject> visualObjects = new List<GameObject>();
     private float[] spectrumData;
@@ -34,9 +35,20 @@ public class AudioVisualization : MonoBehaviour
         ToggleVisuals(false);
     }
 
-    private void Start()
+    // private void Start()
+    // {
+    //     SetAndScaleVisuals();
+    // }
+
+    private void Update()
     {
+        // first code to execute
+        CheckToReInit(); // check to reset things
+        UpdateSpectrumData(); // set data before using it
+
         SetAndScaleVisuals();
+
+        VisualizeScale();
     }
 
     private void SetAndScaleVisuals()
@@ -60,21 +72,21 @@ public class AudioVisualization : MonoBehaviour
             }
         }
     }
-    
+
     private void CircleVisual()
     {
         float radianStep = (2 * Mathf.PI) / sampleSize;
         float currRadian = 0;
-        
+
         for (int i = 0; i < sampleSize; ++i)
         {
             Vector3 circ = new Vector3(Mathf.Cos(currRadian), Mathf.Sin(currRadian), 0);
             Vector3 objPos = circ * offset + this.transform.position;
-            
+
             visualObjects[i].transform.position = objPos;
             visualObjects[i].transform.rotation = Quaternion.LookRotation(this.transform.position - objPos);
-            
-            
+
+
             currRadian += radianStep;
         }
     }
@@ -87,25 +99,9 @@ public class AudioVisualization : MonoBehaviour
         for (int i = 0; i < sampleSize; ++i)
         {
             visualObjects[i].transform.position = this.transform.position + new Vector3(distance, 0, 0);
-            
+
             distance += distanceStep;
         }
-    }
-
-    private void Update()
-    {
-        // first code to execute
-        CheckToInit();
-        UpdateSpectrumData();
-        
-        SetAndScaleVisuals();
-        
-        VisualizeScale();
-    }
-
-    private void UpdateSpectrumData()
-    {
-        audioSource.GetSpectrumData(spectrumData, 0, fftWindowToUse);
     }
 
     private void VisualizeScale()
@@ -117,40 +113,47 @@ public class AudioVisualization : MonoBehaviour
             visualObjects[i].transform.localScale = new Vector3(this.scale, this.scale + audioScale, 1);
         }
     }
+
+
+    private void UpdateSpectrumData()
+    {
+        audioSource.GetSpectrumData(spectrumData, 0, fftWindowToUse);
+    }
     
+
     private void Init()
     {
-        // keep sampleSize a power of 2 and between 64 and 8192 (requirement of GetSpectrumData)
+        // keep sampleSize a power of 2 and between 64 and 8192 (requirement of GetSpectrumData) (i did NOT make this equation lol)
         sampleSize = (int)Mathf.Clamp(Mathf.Pow(2, Mathf.Ceil(Mathf.Log(sampleSize) / Mathf.Log(2))), 64, 8192);
-        
+        renderingSize = Mathf.Clamp(renderingSize, 0, sampleSize);
+
         spectrumData = new float[sampleSize]; // allocate space for array
         
-        if (visualObjects.Count != sampleSize)
+        // delete old objects if they exist
+        for (int i = 0; i < visualObjects.Count; ++i)
         {
-            // delete old objects
-            for (int i = 0; i < visualObjects.Count; ++i)
-            {
-                Destroy(visualObjects[i]);
-            }
-            visualObjects.Clear();
-            
-            // make objects for each sample
-            for (int i = 0; i < sampleSize; ++i)
-            {
-                visualObjects.Add(GameObject.Instantiate(templateObject, this.transform));
-            }
+            Destroy(visualObjects[i]);
         }
+
+        visualObjects.Clear();
+
+        // make objects for each renderingSize
+        for (int i = 0; i < renderingSize; ++i)
+        {
+            visualObjects.Add(GameObject.Instantiate(templateObject, this.transform));
+        }
+        
         ToggleVisuals(true);
     }
 
-    private void CheckToInit()
+    private void CheckToReInit()
     {
-        if (visualObjects.Count != sampleSize)
+        if (visualObjects.Count != renderingSize)
         {
             Init();
         }
     }
-    
+
     private void ToggleVisuals(bool state)
     {
         for (int i = 0; i < sampleSize; ++i)
