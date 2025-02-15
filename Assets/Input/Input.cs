@@ -25,12 +25,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
     ""maps"": [
         {
             ""name"": ""Player"",
-            ""id"": ""d9a901d2-bac0-4bd8-bbb9-df103693c01c"",
+            ""id"": ""38013ba8-5e93-4dc0-a0ec-7d388421c9b5"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""6b7d6914-3818-4555-acc7-c8c451d1c3c2"",
+                    ""id"": ""dbd4bed0-e464-47fa-b0b7-17849d70493a"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -39,7 +39,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
-                    ""id"": ""b65a40cb-0327-4c45-9b56-0deb2f69611a"",
+                    ""id"": ""d99d2f85-b48c-4681-93bd-b5f40fd75948"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -48,8 +48,8 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
-                    ""id"": ""501abade-058d-4b6e-89c1-79752e4c7d43"",
-                    ""expectedControlType"": """",
+                    ""id"": ""b55cdd34-8ab7-4941-88e2-050cf10fec6a"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -57,25 +57,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""AttackE"",
                     ""type"": ""Button"",
-                    ""id"": ""ef9431e3-7afc-474e-a2fe-cd8420aca6b9"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AttackR"",
-                    ""type"": ""Button"",
-                    ""id"": ""9989dfb2-0b9e-4896-bfc7-b35e67e2c8f2"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""61085fe7-4a67-43b0-9290-6ba45007531a"",
+                    ""id"": ""3699d82d-c502-4fb4-8a9b-e5e81cd636a3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -84,7 +66,43 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""AttackF"",
                     ""type"": ""Button"",
-                    ""id"": ""b7d6a9a8-aad1-4eb6-8157-d917521a91e0"",
+                    ""id"": ""649bb7a1-915c-4987-9674-03e563834590"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackR"",
+                    ""type"": ""Button"",
+                    ""id"": ""398fff85-c384-47c0-ab0b-22c9a4286f68"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UpPressed"",
+                    ""type"": ""Value"",
+                    ""id"": ""8c8f06f3-4c92-4ab0-9388-8c53a08528fa"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DownPressed"",
+                    ""type"": ""Value"",
+                    ""id"": ""feff1614-28e4-4918-a192-12a33c36cce5"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ab17c43-7a36-4925-b7d1-61bac820ab54"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -93,7 +111,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Block"",
                     ""type"": ""Button"",
-                    ""id"": ""b09ec976-0f7a-49d6-9d7c-63ff0c2df5db"",
+                    ""id"": ""0d9f4aaa-1bf5-487a-b822-6be7dc1c3f73"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -102,7 +120,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Parry"",
                     ""type"": ""Button"",
-                    ""id"": ""77e0f879-9948-426a-a7b5-7b3f6b3758b4"",
+                    ""id"": ""7e93b4ea-ba86-48f9-b1f5-b4f9e754867c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -332,110 +350,88 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f1b55522-4bcc-47d4-b2d7-0670954a5f7e"",
+                    ""id"": ""c7be5220-89c3-451e-ae97-750ca66e299c"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""AttackE"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b3c4e21d-ff09-42a2-893d-34fc5c041417"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""AttackE"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c226223a-c283-4ef3-a566-60c78aa0bf7b"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b3dfe71c-a933-4f9a-b7a6-7a5c365a8786"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b34d74f6-c946-456e-aaf1-d85f388a101e"",
+                    ""id"": ""177b3c60-84ae-4a5c-a845-81a68b5fa288"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""AttackF"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""396e4057-4b40-4373-8b0d-a807ad4415a9"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""AttackF"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a2c46746-ffac-4996-882b-0f4bce97f510"",
+                    ""id"": ""f70628ac-8afc-4ef9-ac15-f87caf95aab7"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""AttackR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""65524fda-9f91-463a-8bbc-b4222bae5881"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""id"": ""1ab0336f-d321-4cd2-8632-33e475cdad75"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""AttackR"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""UpPressed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1130ccb6-eaf6-4788-9e27-88f310d8fc69"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": ""Hold(duration=0.25,pressPoint=0.5)"",
+                    ""id"": ""79d18046-4830-4a24-ba35-9a1696b0be02"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
+                    ""action"": ""DownPressed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02393cbc-2523-43b8-9315-69197cb365eb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b72523b5-8ca5-458a-803e-14d938c52631"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e4e0b57b-45da-4ff8-86cb-d053ce66a821"",
+                    ""id"": ""806f3b68-0685-4ee0-a5a9-9c3631e0609f"",
                     ""path"": ""<Keyboard>/w"",
-                    ""interactions"": ""Tap(duration=0.15,pressPoint=0.1)"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Parry"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -444,12 +440,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
         },
         {
             ""name"": ""UI"",
-            ""id"": ""13271cbe-90c4-46c8-8673-c1416a1fefc5"",
+            ""id"": ""a17e6c7c-e12f-44e4-af91-ba0bec486d5e"",
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""fd588deb-376e-49f0-a361-19af0684b243"",
+                    ""id"": ""2db3ca62-7bda-4c0c-8d79-92323dfd66e9"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -458,7 +454,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
-                    ""id"": ""536a5422-9ed9-4be6-a6f9-c8feaec34469"",
+                    ""id"": ""c0dab06a-b82d-4415-b278-4878bca77f9a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -467,7 +463,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
-                    ""id"": ""2a7a4396-3721-45b4-a7d6-5836c7f6dbc3"",
+                    ""id"": ""2d0065b6-ff3a-423b-a32e-02901681f904"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -476,7 +472,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Point"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""e8b2bd33-d210-4f81-88e4-46a8fd70445a"",
+                    ""id"": ""149d9ad1-a0c0-48a7-8330-ab8fed277c55"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -485,7 +481,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Click"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""85316bc7-e2e4-4811-a827-ea45a41e2935"",
+                    ""id"": ""f6609367-8412-47bd-9aec-649b3e67a1e8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -494,7 +490,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""ScrollWheel"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""24c6524c-5373-42d6-8972-e89dd6ee92e4"",
+                    ""id"": ""8d960269-acf3-4759-aa4d-6daf58cdf21d"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -503,7 +499,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""MiddleClick"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""74a06200-eb58-49f7-99ec-6d449fef9916"",
+                    ""id"": ""b11693ef-a870-4dd2-ba6b-9fbabecbc4fe"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -512,7 +508,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""RightClick"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""ec0bdef1-2526-4174-ad32-62c1a78593e5"",
+                    ""id"": ""97c952fd-5cec-430e-ba91-ef6904c2ce58"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -521,7 +517,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""TrackedDevicePosition"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""98d2023b-a5a2-4715-bcea-cad364b6dd95"",
+                    ""id"": ""1056a239-bcd7-414a-9229-f632f8c985f9"",
                     ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -530,7 +526,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""TrackedDeviceOrientation"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""6f54dca2-0d5e-421d-86c3-d29ff7095178"",
+                    ""id"": ""3680c65d-96af-465e-8440-3f449e31b647"",
                     ""expectedControlType"": ""Quaternion"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1028,9 +1024,11 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_AttackE = m_Player.FindAction("AttackE", throwIfNotFound: true);
-        m_Player_AttackR = m_Player.FindAction("AttackR", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_AttackF = m_Player.FindAction("AttackF", throwIfNotFound: true);
+        m_Player_AttackR = m_Player.FindAction("AttackR", throwIfNotFound: true);
+        m_Player_UpPressed = m_Player.FindAction("UpPressed", throwIfNotFound: true);
+        m_Player_DownPressed = m_Player.FindAction("DownPressed", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
         // UI
@@ -1116,9 +1114,11 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_AttackE;
-    private readonly InputAction m_Player_AttackR;
-    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_AttackF;
+    private readonly InputAction m_Player_AttackR;
+    private readonly InputAction m_Player_UpPressed;
+    private readonly InputAction m_Player_DownPressed;
+    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Parry;
     public struct PlayerActions
@@ -1129,9 +1129,11 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @AttackE => m_Wrapper.m_Player_AttackE;
-        public InputAction @AttackR => m_Wrapper.m_Player_AttackR;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @AttackF => m_Wrapper.m_Player_AttackF;
+        public InputAction @AttackR => m_Wrapper.m_Player_AttackR;
+        public InputAction @UpPressed => m_Wrapper.m_Player_UpPressed;
+        public InputAction @DownPressed => m_Wrapper.m_Player_DownPressed;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Parry => m_Wrapper.m_Player_Parry;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1155,15 +1157,21 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @AttackE.started += instance.OnAttackE;
             @AttackE.performed += instance.OnAttackE;
             @AttackE.canceled += instance.OnAttackE;
-            @AttackR.started += instance.OnAttackR;
-            @AttackR.performed += instance.OnAttackR;
-            @AttackR.canceled += instance.OnAttackR;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
             @AttackF.started += instance.OnAttackF;
             @AttackF.performed += instance.OnAttackF;
             @AttackF.canceled += instance.OnAttackF;
+            @AttackR.started += instance.OnAttackR;
+            @AttackR.performed += instance.OnAttackR;
+            @AttackR.canceled += instance.OnAttackR;
+            @UpPressed.started += instance.OnUpPressed;
+            @UpPressed.performed += instance.OnUpPressed;
+            @UpPressed.canceled += instance.OnUpPressed;
+            @DownPressed.started += instance.OnDownPressed;
+            @DownPressed.performed += instance.OnDownPressed;
+            @DownPressed.canceled += instance.OnDownPressed;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @Block.started += instance.OnBlock;
             @Block.performed += instance.OnBlock;
             @Block.canceled += instance.OnBlock;
@@ -1186,15 +1194,21 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @AttackE.started -= instance.OnAttackE;
             @AttackE.performed -= instance.OnAttackE;
             @AttackE.canceled -= instance.OnAttackE;
-            @AttackR.started -= instance.OnAttackR;
-            @AttackR.performed -= instance.OnAttackR;
-            @AttackR.canceled -= instance.OnAttackR;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
             @AttackF.started -= instance.OnAttackF;
             @AttackF.performed -= instance.OnAttackF;
             @AttackF.canceled -= instance.OnAttackF;
+            @AttackR.started -= instance.OnAttackR;
+            @AttackR.performed -= instance.OnAttackR;
+            @AttackR.canceled -= instance.OnAttackR;
+            @UpPressed.started -= instance.OnUpPressed;
+            @UpPressed.performed -= instance.OnUpPressed;
+            @UpPressed.canceled -= instance.OnUpPressed;
+            @DownPressed.started -= instance.OnDownPressed;
+            @DownPressed.performed -= instance.OnDownPressed;
+            @DownPressed.canceled -= instance.OnDownPressed;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @Block.started -= instance.OnBlock;
             @Block.performed -= instance.OnBlock;
             @Block.canceled -= instance.OnBlock;
@@ -1387,9 +1401,11 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnAttackE(InputAction.CallbackContext context);
-        void OnAttackR(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnAttackF(InputAction.CallbackContext context);
+        void OnAttackR(InputAction.CallbackContext context);
+        void OnUpPressed(InputAction.CallbackContext context);
+        void OnDownPressed(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
     }

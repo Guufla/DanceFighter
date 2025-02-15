@@ -629,7 +629,7 @@ public class PlayerAttack : MonoBehaviour
             GameManager.Instance.P2Aggro = false;
         }
         AudioManager.Instance.StateChange();
-        attackPressed = attackType.attackE;
+        attackPressed = AttackType.attackE;
     }
 
     void OnAttackR(InputValue value)
@@ -657,7 +657,7 @@ public class PlayerAttack : MonoBehaviour
             GameManager.Instance.P2Aggro = true;
         }
         AudioManager.Instance.StateChange();
-        attackPressed = attackType.attackR;
+        attackPressed = AttackType.attackR;
     }
 
     void OnAttackF(InputValue value)
