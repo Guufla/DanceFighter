@@ -31,7 +31,7 @@ public class HitboxCollision : MonoBehaviour
     void Start()
     {
 
-        player = transform.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
+        player = transform.parent.parent.gameObject; // Gets the player object (Can also get it from the game manager but i thought this was better)
 
         
         if(player.CompareTag("Player1"))
@@ -90,9 +90,9 @@ public class HitboxCollision : MonoBehaviour
             facingY = player.transform.localScale.y;
 
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
-            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY * facingY );
+            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
-            Debug.Log("Hit");
+            // Debug.Log("Hit");
             hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             playerDef.TakeDamage(75, other);
