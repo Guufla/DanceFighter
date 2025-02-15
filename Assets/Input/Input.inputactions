@@ -69,6 +69,22 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "UpPressed",
+                    "type": "Value",
+                    "id": "6d684459-02e0-4573-8608-9089a71ea387",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DownPressed",
+                    "type": "Value",
+                    "id": "f180c717-b4a4-4937-a4f4-7fac15905828",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                     "name": "Block",
                     "type": "Button",
                     "id": "b09ec976-0f7a-49d6-9d7c-63ff0c2df5db",
@@ -398,6 +414,18 @@
                 },
                 {
                     "name": "",
+                    "id": "973f1dcc-d931-4a5d-b126-7d83b0be95e5",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "UpPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                    
+                },
+                {
+                    "name": "",
                     "id": "1130ccb6-eaf6-4788-9e27-88f310d8fc69",
                     "path": "<Keyboard>/w",
                     "interactions": "Hold(duration=0.25,pressPoint=0.5)",
@@ -408,6 +436,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "669be532-c9cc-42e3-84d7-83b94533b81b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DownPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+              },
+              {
                     "name": "",
                     "id": "e4e0b57b-45da-4ff8-86cb-d053ce66a821",
                     "path": "<Keyboard>/w",
