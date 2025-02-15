@@ -76,14 +76,14 @@ public class HitboxCollision : MonoBehaviour
 
                 oppositePlayer = GameManager.Instance.player1;
             }
-
-            oppositeRigidBody = oppositePlayer.GetComponent<Rigidbody2D>();
-
-
-            facingX = 0;
-
-            facingY = 0;
         }
+
+     oppositeRigidBody = oppositePlayer.GetComponent<Rigidbody2D>();
+
+
+     facingX = 0;
+
+     facingY = 0;
     }
 
 
