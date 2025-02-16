@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class SuperBarController : MonoBehaviour
 {
     public Slider superbar; // slider 
-    public float chargeSpeed = 0.5f; // how fast it charges
+    public float chargeSpeed = 5.0f; // how fast it charges
+
     public float maxCharge = 10f; // charge value
     private float currentCharge = 0; // current charge
 
@@ -14,13 +15,13 @@ public class SuperBarController : MonoBehaviour
         if (superbar == null)
         {
             superbar = GetComponent<Slider>();
-
-            superbar.maxValue = maxCharge;
-            superbar.value = currentCharge;
         }
+
+        superbar.maxValue = maxCharge;
+        superbar.value = currentCharge;
     }
 
-    // Update is called once per frame
+    // update is called once per frame
     void Update()
     {
         if (currentCharge < maxCharge)

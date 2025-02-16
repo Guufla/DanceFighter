@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class SuperBarController : MonoBehaviour
+public class SuperBar : MonoBehaviour
 {
     public Slider superbar; // slider 
     public float chargeSpeed = 0.5f; // how fast it charges
