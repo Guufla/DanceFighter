@@ -622,14 +622,13 @@ public class PlayerAttack : MonoBehaviour
          //sets aggro to false, change in future
         if(gameObject.CompareTag("Player1"))
         {
-            GameManager.Instance.P1Aggro = false;
+            GameManager.Instance.p1Aggro = false;
         }
         else if(gameObject.CompareTag("Player2"))
         {
             GameManager.Instance.P2Aggro = false;
         }
         AudioManager.Instance.StateChange();
-        attackPressed = AttackType.attackE;
     }
 
     void OnAttackR(InputValue value)
@@ -650,14 +649,13 @@ public class PlayerAttack : MonoBehaviour
         //sets aggro to false, change in future
         if(gameObject.CompareTag("Player1"))
         {
-            GameManager.Instance.P1Aggro = true;
+            GameManager.Instance.p1Aggro = true;
         }
         else if(gameObject.CompareTag("Player2"))
         {
             GameManager.Instance.P2Aggro = true;
         }
         AudioManager.Instance.StateChange();
-        attackPressed = AttackType.attackR;
     }
 
     void OnAttackF(InputValue value)
@@ -674,6 +672,8 @@ public class PlayerAttack : MonoBehaviour
             attackPressed = AttackType.attackF;
             canInput = false;
         }
+
+        AudioManager.Instance.StateChange();
     }
 
     void OnUpPressed(InputValue value){
