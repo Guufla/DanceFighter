@@ -55,6 +55,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ab17c43-7a36-4925-b7d1-61bac820ab54"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""AttackE"",
                     ""type"": ""Button"",
                     ""id"": ""3699d82d-c502-4fb4-8a9b-e5e81cd636a3"",
@@ -98,15 +107,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""5ab17c43-7a36-4925-b7d1-61bac820ab54"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Block"",
@@ -398,7 +398,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""DownPressed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -409,7 +409,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -417,10 +417,10 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b72523b5-8ca5-458a-803e-14d938c52631"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -428,10 +428,10 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""806f3b68-0685-4ee0-a5a9-9c3631e0609f"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Parry"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1023,12 +1023,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_AttackE = m_Player.FindAction("AttackE", throwIfNotFound: true);
         m_Player_AttackF = m_Player.FindAction("AttackF", throwIfNotFound: true);
         m_Player_AttackR = m_Player.FindAction("AttackR", throwIfNotFound: true);
         m_Player_UpPressed = m_Player.FindAction("UpPressed", throwIfNotFound: true);
         m_Player_DownPressed = m_Player.FindAction("DownPressed", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
         // UI
@@ -1113,12 +1113,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_AttackE;
     private readonly InputAction m_Player_AttackF;
     private readonly InputAction m_Player_AttackR;
     private readonly InputAction m_Player_UpPressed;
     private readonly InputAction m_Player_DownPressed;
-    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Parry;
     public struct PlayerActions
@@ -1128,12 +1128,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @AttackE => m_Wrapper.m_Player_AttackE;
         public InputAction @AttackF => m_Wrapper.m_Player_AttackF;
         public InputAction @AttackR => m_Wrapper.m_Player_AttackR;
         public InputAction @UpPressed => m_Wrapper.m_Player_UpPressed;
         public InputAction @DownPressed => m_Wrapper.m_Player_DownPressed;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Parry => m_Wrapper.m_Player_Parry;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1154,6 +1154,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @AttackE.started += instance.OnAttackE;
             @AttackE.performed += instance.OnAttackE;
             @AttackE.canceled += instance.OnAttackE;
@@ -1169,9 +1172,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @DownPressed.started += instance.OnDownPressed;
             @DownPressed.performed += instance.OnDownPressed;
             @DownPressed.canceled += instance.OnDownPressed;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
             @Block.started += instance.OnBlock;
             @Block.performed += instance.OnBlock;
             @Block.canceled += instance.OnBlock;
@@ -1191,6 +1191,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @AttackE.started -= instance.OnAttackE;
             @AttackE.performed -= instance.OnAttackE;
             @AttackE.canceled -= instance.OnAttackE;
@@ -1206,9 +1209,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @DownPressed.started -= instance.OnDownPressed;
             @DownPressed.performed -= instance.OnDownPressed;
             @DownPressed.canceled -= instance.OnDownPressed;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
             @Block.started -= instance.OnBlock;
             @Block.performed -= instance.OnBlock;
             @Block.canceled -= instance.OnBlock;
@@ -1400,12 +1400,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnAttackE(InputAction.CallbackContext context);
         void OnAttackF(InputAction.CallbackContext context);
         void OnAttackR(InputAction.CallbackContext context);
         void OnUpPressed(InputAction.CallbackContext context);
         void OnDownPressed(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
     }

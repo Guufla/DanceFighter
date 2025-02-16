@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
 
     public Boolean isHitBoxAnimatingP1; 
 
-    public Slider playerHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
+    public Slider playerHealthBar; // This is a reference to the player health slider that lets us easily call it from different scripts
 
-    public int p1health = 100;
+    public int P1Health = 100;
 
-    public Slider p1offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
+    public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
-    public bool isoffensive1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
+    public bool isOffensiveP1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
 
     public bool p1Win = false;
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
-    public bool P1Aggro; // Tells if the player is in aggro mode
+    public bool p1Aggro; // Tells if the player is in aggro mode
 
 
     // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
@@ -57,20 +57,29 @@ public class GameManager : MonoBehaviour
 
     public float P2AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
 
+    public Boolean stopP2Movement; 
+    public Boolean stopP2YMovement;
+
+    public Boolean canInputP2; 
+    
+    public Boolean isHitBoxAnimatingP2; 
+
+    public bool P2Aggro; // Tells if the player is in aggro mode
+
     public Slider opponentHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
 
-    public int p2health = 100;
+    public int P2Health = 100;
 
 
-    public bool player2IsOnGround; // Tells you if the player is on the ground or not
+    public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
-    public Slider p2offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
-
-    public bool isoffensive2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
+    public bool isOffensiveP2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
 
     public bool p2Win = false;
 
     public static int p2WinCounter = 0;
+
+    public bool player2IsOnGround; // Tells you if the player is on the ground or not
 
 
     [Header("Offensive mode")]
@@ -80,13 +89,15 @@ public class GameManager : MonoBehaviour
 
     private float offensiveInterval = 1f;//every 1 second increase it by amount
 
-    public int amount = 50; //amount to increase by
+    public int offensiveIncrease = 50; //amount to increase by
 
-    public int offensiveAmount = 50; //amount to decrease every second by when in offensive mode
+    public int offensiveDecrease = 50; //amount to decrease every second by when in offensive mode
 
-    public int offensiveamount2; // amount to increase by when in offensive mode and you hit someone
+    public int offensiveValueP1;
 
-    public int offensiveamount1;
+    public int offensiveValueP2; // amount to increase by when in offensive mode and you hit someone
+
+    
 
 
     [Header("UI")]
@@ -104,14 +115,7 @@ public class GameManager : MonoBehaviour
 
     public float timerSeconds = 99f;
     
-    public Boolean stopP2Movement; 
-    public Boolean stopP2YMovement;
-
-    public Boolean canInputP2; 
     
-    public Boolean isHitBoxAnimatingP2; 
-
-    public bool P2Aggro; // Tells if the player is in aggro mode
 
 
     // Used to make the game manager. Doesnt really need to be edited
@@ -152,15 +156,15 @@ public class GameManager : MonoBehaviour
         // Max health is 100 for now
         // MAKE SURE TO SET MAX VALUES FIRST
         opponentHealth.maxValue = 100;
-        playerHealth.maxValue = 100;
-        playerHealth.value = p1health;
-        opponentHealth.value = p2health;
+        playerHealthBar.maxValue = 100;
+        playerHealthBar.value = P1Health;
+        opponentHealth.value = P2Health;
         
 
-        p1offensive.value = 0;
-        p2offensive.value = 0;
-        p1offensive.maxValue = 1000;
-        p2offensive.maxValue = 1000;
+        p1OffensiveBar.value = 0;
+        p2Offensive.value = 0;
+        p1OffensiveBar.maxValue = 1000;
+        p2Offensive.maxValue = 1000;
         winMessage.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
@@ -177,47 +181,47 @@ public class GameManager : MonoBehaviour
 
         if (offensiveTimer1 >= offensiveInterval) // If the time that has passed is greater than the interval (1sec) then do the following
         {
-            if (!isoffensive1)
+            if (!isOffensiveP1)
             {
-                IncreaseOffensiveSlider(p1offensive);
+                IncreaseOffensiveSlider(p1OffensiveBar);
             }
             else
             {
-                DecreaseOffensiveSlider(p1offensive, ref isoffensive1);
+                DecreaseOffensiveSlider(p1OffensiveBar, ref isOffensiveP1);
             }
             offensiveTimer1 = 0; // Reset the timer
         }
 
         if (offensiveTimer2 >= offensiveInterval) // what was before but just for player 2
         {
-            if (!isoffensive2)
+            if (!isOffensiveP2)
             {
-                IncreaseOffensiveSlider(p2offensive);
+                IncreaseOffensiveSlider(p2Offensive);
             }
             else
             {
-                DecreaseOffensiveSlider(p2offensive, ref isoffensive2);
+                DecreaseOffensiveSlider(p2Offensive, ref isOffensiveP2);
             }
             offensiveTimer2 = 0;
         }
 
         // If the offensive bar is full then activate the offensive mode and reset the amount
-        if (p1offensive.value == 1000)
+        if (p1OffensiveBar.value == 1000)
         {
-            isoffensive1 = true;
-            offensiveamount1 = 45;
+            isOffensiveP1 = true;
+            offensiveValueP1 = 45;
         }
-        if (p2offensive.value == 1000)
+        if (p2Offensive.value == 1000)
         {
-            isoffensive2 = true;
-            offensiveamount2 = 45;
+            isOffensiveP2 = true;
+            offensiveValueP2 = 45;
         }
-        if (p1health <= 0)
+        if (P1Health <= 0)
         {
             Player2Win();
             
         }
-        if (p2health <= 0)
+        if (P2Health <= 0)
         {
             Player1Win();
             
@@ -228,7 +232,7 @@ public class GameManager : MonoBehaviour
     {
         if (isCountingDown) return;
         //subtract the offensive amount from the bar value but dont go below 0
-        offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveAmount, 0);
+        offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveDecrease, 0);
 
         if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
         {
@@ -240,36 +244,36 @@ public class GameManager : MonoBehaviour
     {
         if (isCountingDown) return;
         // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
-        offensiveSlider.value = Mathf.Min(offensiveSlider.value + amount, offensiveSlider.maxValue);
+        offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncrease, offensiveSlider.maxValue);
 
     }
     //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
     public void Player1HitsPlayer2()
     {
         if (isCountingDown) return;
-        p2health -= 10;
-        opponentHealth.value = p2health;
-        if (!isoffensive1)
+        P2Health -= 10;
+        opponentHealth.value = P2Health;
+        if (!isOffensiveP1)
         {
             // add 50 to the offensive bar but dont go over the max value which is 1000
-            p1offensive.value = Mathf.Min(p1offensive.value + amount, p1offensive.maxValue);
+            p1OffensiveBar.value = Mathf.Min(p1OffensiveBar.value + offensiveIncrease, p1OffensiveBar.maxValue);
 
         }
 
         //when p1 hits p2 add an extra boost to the offensive bar
-        if (isoffensive1 && offensiveamount1 > 0)
+        if (isOffensiveP1 && offensiveValueP1 > 0)
         {
             // if you hit player while in offensive mode add 45 to the bar value but dont go over the max value which is 1000
-            p1offensive.value = Mathf.Min(p1offensive.value + offensiveamount1, p1offensive.maxValue);
+            p1OffensiveBar.value = Mathf.Min(p1OffensiveBar.value + offensiveValueP1, p1OffensiveBar.maxValue);
             // minus the value by 15 so they cant have infinite offensive mode
-            offensiveamount1 -= 15;
+            offensiveValueP1 -= 15;
 
         }
 
-        if (isoffensive2)
+        if (isOffensiveP2)
         {
             //if player 2 if in offensive mode and you hit them decrease the offensive bar by 50 but dont go below 0
-            p2offensive.value = Mathf.Max(p2offensive.value - amount, 0);
+            p2Offensive.value = Mathf.Max(p2Offensive.value - offensiveIncrease, 0);
 
         }
     }
@@ -277,22 +281,22 @@ public class GameManager : MonoBehaviour
     public void Player2HitsPlayer1()
     {
         if (isCountingDown) return;
-        p1health -= 10;
-        playerHealth.value = p1health; //when p2 hits p1 add an extra boost to the offensive bar
-        if (!isoffensive2)
+        P1Health -= 10;
+        playerHealthBar.value = P1Health; //when p2 hits p1 add an extra boost to the offensive bar
+        if (!isOffensiveP2)
         {
-            p2offensive.value = Mathf.Min(p2offensive.value + amount, p2offensive.maxValue);
+            p2Offensive.value = Mathf.Min(p2Offensive.value + offensiveIncrease, p2Offensive.maxValue);
         }
 
-        if (isoffensive2 && offensiveamount2 > 0)
+        if (isOffensiveP2 && offensiveValueP2 > 0)
         {
-            p2offensive.value = Mathf.Min(p2offensive.value + offensiveamount2, p2offensive.maxValue);
-            offensiveamount2 -= 15;
+            p2Offensive.value = Mathf.Min(p2Offensive.value + offensiveValueP2, p2Offensive.maxValue);
+            offensiveValueP2 -= 15;
 
         }
-        if (isoffensive1)
+        if (isOffensiveP1)
         {
-            p1offensive.value = Mathf.Max(p1offensive.value - amount, 0);
+            p1OffensiveBar.value = Mathf.Max(p1OffensiveBar.value - offensiveIncrease, 0);
         }
 
     }
@@ -346,16 +350,16 @@ public class GameManager : MonoBehaviour
         winMessage.gameObject.SetActive(false);
 
         // Reset player health
-        p1health = 100;
-        p2health = 100;
-        playerHealth.value = p1health;
-        opponentHealth.value = p2health;
+        P1Health = 100;
+        P2Health = 100;
+        playerHealthBar.value = P1Health;
+        opponentHealth.value = P2Health;
 
         // Reset offensive sliders
-        p1offensive.value = 0;
-        p2offensive.value = 0;
-        isoffensive1 = false;
-        isoffensive2 = false;
+        p1OffensiveBar.value = 0;
+        p2Offensive.value = 0;
+        isOffensiveP1 = false;
+        isOffensiveP2 = false;
 
         // Reset win booleans
         p1Win = false;

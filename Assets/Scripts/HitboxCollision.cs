@@ -58,27 +58,34 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackY = 0;
 
 
-            player = transform.parent.gameObject;
+            player = transform.parent.parent.gameObject;
+
+            basicAttackKnockBackX = GameManager.Instance.P1AttackKnockBackX;
+
+            basicAttackKnockBackY = GameManager.Instance.P1AttackKnockBackY;
+
+
+            oppositePlayer = GameManager.Instance.player2;
 
 
             // Makes sure the opposite player variable is correct
-            if (player.CompareTag("Player1"))
-            {
-                basicAttackKnockBackX = GameManager.Instance.P1AttackKnockBackX;
+            
+        }
 
-                basicAttackKnockBackY = GameManager.Instance.P1AttackKnockBackY;
+        else if (player.CompareTag("Player2"))
+        {
+            // Takes the attack knockback variable that is set in the player attack script and creates variables for them to be used later 
+            basicAttackKnockBackX = 0;
+            basicAttackKnockBackY = 0;
 
 
-                oppositePlayer = GameManager.Instance.player2;
-            }
-            else if (player.CompareTag("Player2"))
-            {
-                basicAttackKnockBackX = GameManager.Instance.P2AttackKnockBackX;
+            player = transform.parent.parent.gameObject;
 
-                basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
+            basicAttackKnockBackX = GameManager.Instance.P2AttackKnockBackX;
 
-                oppositePlayer = GameManager.Instance.player1;
-            }
+            basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
+
+            oppositePlayer = GameManager.Instance.player1;
         }
 
      oppositeRigidBody = oppositePlayer.GetComponent<Rigidbody2D>();
@@ -139,9 +146,9 @@ public class HitboxCollision : MonoBehaviour
             //}
             // We need to adjust this later to be more dynamic
 
-            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+            oppositeRigidBody.velocity = new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
-            // Debug.Log("Hit");
+            Debug.Log("Hit");
             // hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             playerDef.TakeDamage(75, other);
