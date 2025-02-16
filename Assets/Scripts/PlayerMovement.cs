@@ -72,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void movement(){
+
+
+        // VERY IMPORTANT
+        // ADD HITSTUN OR CHANGE HOW MOVEMENT WORKS SO THAT KNOCKBACK IS POSSIBLE
+        
         Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
         playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
     }

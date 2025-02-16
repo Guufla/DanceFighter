@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3990408532264361902}
   - component: {fileID: 4158604098374033737}
   - component: {fileID: 6741939442822036433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FeetCollider
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4245803458246722636}
   - component: {fileID: 1408449875225785419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCollider
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5921898602542477589}
   - component: {fileID: 8470193853014631330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 4648547337577633860}
   m_Layer: 6
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61080f9c503881649a189a2dd7ad4a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oppositeHealth: 100
 --- !u!1 &7630277335479505994
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +528,7 @@ GameObject:
   - component: {fileID: 196041515240170557}
   - component: {fileID: 7189778161493699850}
   - component: {fileID: 5070127393232396767}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player1
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -782,7 +783,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7630277335479505994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfb3ea3317a29ef4eac30b540a1bd66b, type: 3}
   m_Name: 

@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 3784168036813561533}
   - component: {fileID: 1739237997117820016}
   m_Layer: 5
-  m_Name: Offensivemode2
+  m_Name: OffensiveBarOpponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1849,7 +1849,7 @@ GameObject:
   - component: {fileID: 4656082006716402463}
   - component: {fileID: 1913107917901904948}
   m_Layer: 5
-  m_Name: Offensivemode1
+  m_Name: OffensiveBarPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

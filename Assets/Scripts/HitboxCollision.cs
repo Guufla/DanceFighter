@@ -145,8 +145,9 @@ public class HitboxCollision : MonoBehaviour
             //Debug.Log("Player is dead");
             //}
             // We need to adjust this later to be more dynamic
+            
 
-            oppositeRigidBody.velocity = new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
             Debug.Log("Hit");
             // hasCollided = true;
