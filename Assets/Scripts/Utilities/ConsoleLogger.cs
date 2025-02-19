@@ -1,19 +1,35 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-// call Logger.Log("message");
-public class ConsoleLogger : PersistentSingleton<ConsoleLogger>
+/// <summary>
+/// Essentially its Debug.Log, but it's easy to turn on and off any logs we want to
+/// </summary>
+public class ConsoleLogger : PersistentStaticInstance<ConsoleLogger>
 {
-    protected void Awake()
-    {
-        base.Awake();
-    }
-    
     [SerializeField] private bool logToConsole = true;
     [SerializeField] private bool logWarnings = true;
     [SerializeField] private bool logErrors = true;
 
-    public static void Log(string message, bool isWarning = false, bool isError = false)
+    // unordered unique set of objects that have called ConsoleLogger.Log in its lifetime
+    // eventually use this to customize which classes you want to hear logs from (might need custom interactable UI for this)
+    //private static HashSet<object> objectsUsingLogger = new HashSet<object>();
+    
+    public static void Log(/*object sender,*/ string message, bool isWarning = false, bool isError = false)
     {
+        if (Instance == null)
+        {
+            Debug.LogWarning("No console logger found!");
+            if (isWarning)
+                Debug.LogWarning(message);
+            else if (isError)
+                Debug.LogError(message);
+            else
+                Debug.Log(message);
+            return;
+        }
+        
+        //objectsUsingLogger.Add(sender);
+        
         if (!Instance.logToConsole)
         {
             return;
