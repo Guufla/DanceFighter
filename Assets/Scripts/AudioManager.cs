@@ -54,12 +54,12 @@ public class AudioManager : MonoBehaviour
     //to be called in one of the player's scripts when their aggro state changes
     public void StateChange()
     {
-        if(GameManager.Instance.P1Aggro && GameManager.Instance.P2Aggro)
+        if(GameManager.Instance.p1Aggro && GameManager.Instance.P2Aggro)
         {
             //both players aggro music
             newClip = bothAggroClip;
         }
-        else if (GameManager.Instance.P1Aggro || GameManager.Instance.P2Aggro)
+        else if (GameManager.Instance.p1Aggro || GameManager.Instance.P2Aggro)
         {
             //one player aggro music
             newClip = oneAggroClip;

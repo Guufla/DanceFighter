@@ -17,22 +17,48 @@ public class PlayerMovement : MonoBehaviour
 
     Boolean groundCheck;
 
+    Boolean stopMovement;
+
+    Boolean stopYMovement;
+
+    float setGravityScale;
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
+        setGravityScale = playerRigidbody.gravityScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        setGroundCheck();
-        movement();
+        getGroundCheck();
+        getMovementInfo();
+        if(stopMovement == false){
+            movement();
+        }
+        if(stopYMovement){
+            playerRigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        }
+        else{
+            playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
 
     }
+    void getMovementInfo(){
+        if(transform.tag == "Player1"){
+            stopMovement = GameManager.Instance.stopP1Movement;
+            stopYMovement = GameManager.Instance.stopP1YMovement;
+        }
+        else{
+            stopMovement = GameManager.Instance.stopP2Movement;
+            stopYMovement = GameManager.Instance.stopP2YMovement;
+        }
+    }
 
-    void setGroundCheck(){
+    void getGroundCheck(){
         if(transform.tag == "Player1"){
             groundCheck = GameManager.Instance.player1IsOnGround;
         }
@@ -46,7 +72,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void movement(){
-        Vector2 playerVelocity = new Vector2(moveInput.x *  movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
+
+
+        // VERY IMPORTANT
+        // ADD HITSTUN OR CHANGE HOW MOVEMENT WORKS SO THAT KNOCKBACK IS POSSIBLE
+        
+        Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
         playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
     }
     void OnJump(InputValue value){
