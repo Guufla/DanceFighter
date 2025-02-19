@@ -9,12 +9,12 @@ enum DefenseState: int { none,block, parry, guardBreak }
 public class PlayerDefense : MonoBehaviour
 {
     CapsuleCollider2D playerCollider;
+    GameObject player;
     
     CapsuleCollider2D attackBoxCollider;
     
     public Vector3 blockCOlliderSizeMultiplier = new Vector3(1.5f, 1.5f, 1.3f); 
     private Vector3 originalColliderSize;
-    
     Input inputActions; 
     
     DefenseState defenseType;
@@ -62,6 +62,18 @@ public class PlayerDefense : MonoBehaviour
     private void OnDisable()
     {
         inputActions.Disable();
+    }
+    
+    void getPlayerBlocking()
+    {
+        if(transform.tag == "Player1")
+        {
+            player = GameManager.Instance.player1;
+        }
+        else if(transform.tag == "Player2")
+        {
+            player = GameManager.Instance.player2;
+        }
     }
     
     private void OnBlockStarted(InputAction.CallbackContext context)
@@ -155,6 +167,25 @@ public class PlayerDefense : MonoBehaviour
                 // Apply block damage reduction
                 float reducedDamage = damage * blockDamageReduction;
                 guardMeter -= reducedDamage;
+                
+                getPlayerBlocking();
+                
+                Debug.Log("Player " + player.tag);
+                
+                if(player == GameManager.Instance.player1)
+                {
+                    GameManager.Instance.P1Health -= ((int)reducedDamage * 1/4);
+                    Debug.Log("Player 1 Health: " + GameManager.Instance.P1Health);
+                    GameManager.Instance.playerHealthBar.value = GameManager.Instance.P1Health;
+                }
+                else if(player == GameManager.Instance.player2)
+                {
+                    
+                    GameManager.Instance.P2Health -= ((int)reducedDamage * 1/4);
+                    GameManager.Instance.opponentHealth.value = GameManager.Instance.P2Health;
+                    Debug.Log("Player 2 Health: " + GameManager.Instance.P2Health);
+                }
+                
                 Debug.Log("Guard Meter: " + guardMeter);
                 
                 if(guardMeter <= 0 && !isGuardBroken) 
@@ -171,6 +202,7 @@ public class PlayerDefense : MonoBehaviour
             }else if(isParrying)
             {
                 Debug.Log("Parried");
+                CancelBlock();
             }else{
                 guardMeter -= damage;
                 // Normal damage logic here

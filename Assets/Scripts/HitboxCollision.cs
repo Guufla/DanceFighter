@@ -115,14 +115,16 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
         }
 
-
     }
 
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GameManager.Instance.isCountingDown) return;
-        if (other.CompareTag(oppositePlayer.tag))
+        
+        
+        
+        if (other.CompareTag(oppositePlayer.tag)) 
         {
 
             facingX = player.transform.localScale.x;
@@ -150,22 +152,29 @@ public class HitboxCollision : MonoBehaviour
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
             Debug.Log("Hit");
-            // hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
-            playerDef.TakeDamage(75, other);
-        }
-
-
+            
+            
+            if(playerDef.isBlocking){ //if
+                playerDef.TakeDamage(50, other);
+                return;
+            }
         
-        //if player 1 hits player 2 call the player 1 hits player 2 function from game manager
-        if (player.CompareTag("Player1") && other.CompareTag("Player2")) 
-        {
+        }
+        
+
+    if (player.CompareTag("Player1") && other.CompareTag("Player2")) 
+    {
             GameManager.Instance.Player1HitsPlayer2();
-        }
-        //if player 2 hits player 1 call the player 2 hits player 1 function from game manager
-        if (player.CompareTag("Player2") && other.CompareTag("Player1"))
-        {
+            //Debug.Log("Player 1 hits Player 2");
+        
+    }
+//if player 2 hits player 1 call the player 2 hits player 1 function from game manager
+    if (player.CompareTag("Player2") && other.CompareTag("Player1"))
+    {
             GameManager.Instance.Player2HitsPlayer1();
-        }
+            Debug.Log("Player 2 hits Player 1");
+    }
+    
     }
 }
