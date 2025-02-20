@@ -106,7 +106,7 @@ namespace Utilities
         /// <summary>
         /// Effectively "deletes" object pool and cannot be used.
         /// </summary>
-        public void ReleasePool()
+        public ObjectPooler ReleasePool()
         {
             foreach (GameObject obj in allInstances)
             {
@@ -117,6 +117,7 @@ namespace Utilities
             
             properlyDestroyed = true;
             Destroy(this);
+            return null;
         }
 
         /// <summary>
@@ -155,15 +156,15 @@ namespace Utilities
             
             foreach (GameObject obj in objectsToReturn)
             {
-                if (obj == null)
-                {
-                    ConsoleLogger.Log("Attempt to return null object", false, true);
-                    return;
-                }
+                // if (obj == null)
+                // {
+                //     ConsoleLogger.Log("Attempt to return null object", false, true);
+                //     continue;
+                // }
                 if (!allInstances.Contains(obj))
                 {
                     ConsoleLogger.Log("Error when trying to return object " + obj + ". Object is not in all instances reference!", false, true);
-                    return;
+                    continue;
                 }
 
                 DefualtObjectBehavior(obj);
