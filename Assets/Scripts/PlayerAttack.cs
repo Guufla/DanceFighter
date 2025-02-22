@@ -16,7 +16,7 @@ enum Direction : int{
 
 public class PlayerAttack : MonoBehaviour
 {
-    Animator attackAnimator;
+    public Animator attackAnimator;
 
     [SerializeField]GameObject attackBoxObject;
 
