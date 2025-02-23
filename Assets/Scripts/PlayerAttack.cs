@@ -428,7 +428,7 @@ public class PlayerAttack : MonoBehaviour
                 
             }
             
-            if(curCombo > 3 || curCombo == 0)
+            else if(curCombo > 3 || curCombo == 0)
             {
                 stopMovement(true, false);
                 hitboxAnimation(1,"FAttack1","HeavyAttack1", false, 1.5f,0f,2f,0f);
