@@ -37,7 +37,9 @@ public class HitboxCollision : MonoBehaviour
     private Rigidbody2D oppositeRigidBody;
 
 
-
+    private bool hasCollided = false;
+    private PlayerAttack playerAttack;
+    //private int lastAnimationState;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +60,7 @@ public class HitboxCollision : MonoBehaviour
 
 
             player = transform.parent.parent.gameObject;
+            
 
             basicAttackKnockBackX = GameManager.Instance.P1AttackKnockBackX;
 
@@ -86,6 +89,8 @@ public class HitboxCollision : MonoBehaviour
 
             oppositePlayer = GameManager.Instance.player1;
         }
+        
+        playerAttack = player.GetComponent<PlayerAttack>();
 
      oppositeRigidBody = oppositePlayer.GetComponent<Rigidbody2D>();
 
@@ -113,15 +118,47 @@ public class HitboxCollision : MonoBehaviour
 
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
         }
+        
+        if(!playerAttack.isAttacking && hasCollided) hasCollided = false;
 
-
+    }
+    
+    private bool IsAnyAttackAnimationActive()
+    {
+        return playerAttack.attackAnimator.GetBool("EAttack1") ||
+               playerAttack.attackAnimator.GetBool("EAttack2") ||
+               playerAttack.attackAnimator.GetBool("EAttack3") ||
+               playerAttack.attackAnimator.GetBool("RAttack1") ||
+               playerAttack.attackAnimator.GetBool("RAttack2") ||
+               playerAttack.attackAnimator.GetBool("RAttack3") ||
+               playerAttack.attackAnimator.GetBool("RAttack4") ||
+               playerAttack.attackAnimator.GetBool("RAttack5") ||
+               playerAttack.attackAnimator.GetBool("FAttack1") ||
+               playerAttack.attackAnimator.GetBool("FAttack2") ||
+               playerAttack.attackAnimator.GetBool("FAttack3") ||
+               playerAttack.attackAnimator.GetBool("FAttack4") ||
+               playerAttack.attackAnimator.GetBool("AAttack1") ||
+               playerAttack.attackAnimator.GetBool("AAttack2") ||
+               playerAttack.attackAnimator.GetBool("AAttack3") ||
+               playerAttack.attackAnimator.GetBool("AAttack4") ||
+               playerAttack.attackAnimator.GetBool("AirDownTilt") ||
+               playerAttack.attackAnimator.GetBool("AirUpTilt") ||
+               playerAttack.attackAnimator.GetBool("UpTilt") ||
+               playerAttack.attackAnimator.GetBool("DownTilt");
     }
 
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GameManager.Instance.isCountingDown) return;
-        if (other.CompareTag(oppositePlayer.tag))
+        
+        if(!playerAttack.isAttacking) return;
+        
+        if(hasCollided) return;
+        
+        if (!IsAnyAttackAnimationActive()) return;
+        
+        if (other.CompareTag(oppositePlayer.tag)) 
         {
 
             facingX = player.transform.localScale.x;
@@ -137,22 +174,29 @@ public class HitboxCollision : MonoBehaviour
             oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
 
             Debug.Log("Hit");
-            // hasCollided = true;
+            hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
-            //playerDef.TakeDamage(75, other);
-        }
-
-
+            
+            if(playerDef.isBlocking){
+                playerDef.TakeDamage(50, other);
+                return;
+            }
         
-        //if player 1 hits player 2 call the player 1 hits player 2 function from game manager
+        }
+        
+
         if (player.CompareTag("Player1") && other.CompareTag("Player2")) 
         {
-            GameManager.Instance.Player1HitsPlayer2();
+                GameManager.Instance.Player1HitsPlayer2();
+                //Debug.Log("Player 1 hits Player 2");
+            
         }
-        //if player 2 hits player 1 call the player 2 hits player 1 function from game manager
+    
         if (player.CompareTag("Player2") && other.CompareTag("Player1"))
         {
-            GameManager.Instance.Player2HitsPlayer1();
+                GameManager.Instance.Player2HitsPlayer1();
+                //Debug.Log("Player 2 hits Player 1");
         }
+    
     }
 }

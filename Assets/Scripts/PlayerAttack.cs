@@ -15,7 +15,7 @@ enum AttackType : int{
 
 public class PlayerAttack : MonoBehaviour
 {
-    Animator attackAnimator; // Holds the hitbox animator reference
+    public Animator attackAnimator;
 
     [SerializeField] GameObject attackBoxObject; // Holds the gameobject for the hitbox collider
     [SerializeField] GameObject attackBoxCollider; // Holds the gameobject that has the collider for the hitbox

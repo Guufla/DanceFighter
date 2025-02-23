@@ -114,7 +114,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""id"": ""0d9f4aaa-1bf5-487a-b822-6be7dc1c3f73"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -123,7 +123,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""id"": ""7e93b4ea-ba86-48f9-b1f5-b4f9e754867c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(pressPoint=0.2,behavior=2)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -418,7 +418,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""b72523b5-8ca5-458a-803e-14d938c52631"",
                     ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Block"",
