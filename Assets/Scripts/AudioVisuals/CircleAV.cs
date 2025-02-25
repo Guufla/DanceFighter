@@ -1,20 +1,20 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
+using Utilities;
 
 namespace AudioVisuals
 {
-    public class BasicAudioVisual : AudioVisual
+    public class CircleAV : DebugAudioVisual
     {
+        // TODO: How to set properties in inspector
+
         [SerializeField] private float offset;
         [SerializeField] private bool lookAtPivot;
-        [SerializeField] private int debug_targetSize;
 
-        private int debug_lastTargetSize;
-        
-
-        private void Update()
+        protected override void Update()
         {
-            Debug();
+            base.Update();
             MakeCircle(offset, lookAtPivot);
         }
 
@@ -26,15 +26,6 @@ namespace AudioVisuals
             {
                 obj.SetActive(true);
             }
-        }
-
-        private void Debug()
-        {
-            if (debug_lastTargetSize != debug_targetSize)
-            {
-                this.TargetRenderSize = debug_targetSize;
-            }
-            debug_lastTargetSize = debug_targetSize;
         }
     }
 }

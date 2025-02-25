@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/CircleAV.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/CircleAV.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/DebugAudioVisual.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/alex-scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/alex-scene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/BasicAudioVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/BasicAudioVisual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisualization.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisualization.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisualizerManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisualizerManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/BasicAudioVisual.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/BasicAudioVisual.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/DebugAudioVisual.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/ObjectPooler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/ObjectPooler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +102,11 @@
       <updated>1739973354583</updated>
       <workItem from="1739973357625" duration="2851000" />
       <workItem from="1740026534246" duration="3410000" />
+      <workItem from="1740083234740" duration="5787000" />
+      <workItem from="1740089214243" duration="506000" />
+      <workItem from="1740272901186" duration="7342000" />
+      <workItem from="1740341909493" duration="2279000" />
+      <workItem from="1740366736277" duration="1909000" />
     </task>
     <servers />
   </component>

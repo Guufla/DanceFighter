@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Utilities;
 
 namespace AudioVisuals
 {
+    public interface IAudioVisual
+    {
+        public int TargetRenderSize { get; set; }
+    }
+    
     /// <summary>
     /// Base Audio Visualization class to be inherited and used by other classes. Idea is you can customize, stack, and do whatever you want
     /// to this from within the engine and inspector to create cool effects.
     /// </summary>
-    public abstract class AudioVisual : MonoBehaviour
+    public abstract class AudioVisual : MonoBehaviour, IAudioVisual
     {
         /*
          * Shapes:
@@ -17,6 +21,7 @@ namespace AudioVisuals
          *      - Line
          *      - StaticWave
          *      - OscillatingWave
+         *      - Random Noise Movement
          *
          * Effects:
          *      - ScaleSingleAxis
@@ -24,11 +29,11 @@ namespace AudioVisuals
          *      - ColorGradient
          *      - Transparency
          *
-         * Code Changes:
-         *      - Make every shape and effect function be able to mix with each other
+         * Code Idea/Goal:
+         *      Make every shape and effect function be able to mix with each other (additive style).
          *
-         * Optimizations:
-         *      Swapped "objectPooler != null" checks to "objectPooler is not null" checks:
+         * Notes:
+         *      - Swapped "objectPooler != null" checks to "objectPooler is not null" checks:
          *          https://stackoverflow.com/questions/75013054/is-it-cost-expensive-to-use-if-gameobject-null
          */
         
@@ -38,8 +43,8 @@ namespace AudioVisuals
         [SerializeField] protected GameObject visualObjectPrefab;
         [SerializeField] protected Transform[] presetTransforms;
         [SerializeField] protected Transform pivotTransform;
+        [SerializeField] protected float specDataCutoff; // defines what percent of the spec data to cut off from the right
 
-        // both the rendering size and object pool target size if it exists
         public int TargetRenderSize
         {
             get => _targetRenderSize;
@@ -48,31 +53,52 @@ namespace AudioVisuals
                 if (objectPooler is not null)
                     objectPooler.TargetSize = value;
                 _targetRenderSize = value;
-                
-                HandleSpectrumDataResizing();
             }
         }
         
         [SerializeField] private FFTWindow fftWindowToUse;
-        [SerializeField] private bool compressSpecDataToRenderSize = false; // compress the larger spec data array into a smaller one with averages
-        [SerializeField] private float specDataCutoff = 0.5f; // defines what percent of the spec data to cut off starting from the right
 
         protected List<GameObject> visualObjs = new List<GameObject>();
         protected float[] usableSpectrumData;
+        protected Utilities.ObjectPooler objectPooler = null;
         
-        private Utilities.ObjectPooler objectPooler = null;
         private int _targetRenderSize;
         private int sampleSize;
         private float[] spectrumData;
         
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             RemoveObjectPool();
         }
 
-        private void Update()
+        // must call base.Update() if you are overriding this in child class
+        protected virtual void Update()
         {
             UpdateSpectrumData();
+        }
+
+        public string GetDebugInfo()
+        {
+            string output = "";
+            output += $"Target Render Size: {TargetRenderSize}\n";
+            output += $"Sample Size: {sampleSize}\n";
+            output += $"Spectrum Data Length: {spectrumData.Length}\n";
+            output += $"Usable Spectrum Data Length: {usableSpectrumData.Length}\n";
+            output += $"Visible Objects Count: {visualObjs.Count}\n";
+            if (objectPooler is not null)
+            {
+                output += $"Object Pool Size: {objectPooler.TargetSize}\n";
+                output += $"Object Pool Resize Rate: {objectPooler.ResizeRate}\n";
+                output += $"Object Pool Resize Threshold: {objectPooler.ResizeThreshold}\n";
+            }
+            else
+            {
+                output += $"Object Pool is null\n";
+            }
+            output += $"Spectrum Data Cutoff %: {specDataCutoff * 100}\n";
+            output += $"FFTWindow being used: {fftWindowToUse}\n";
+            output += $"Is Preset Shape: {isPresetShape}\n";
+            return output;
         }
 
         /// <summary>
@@ -107,7 +133,7 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeLine()
+        protected virtual void MakeLine(float perObjectOffset, float diagonalAngleFromPivot, bool lookTowardsPivot)
         {
             
         }
@@ -130,41 +156,79 @@ namespace AudioVisuals
         /* idea for preset transforms:
             function takes in parent object, then maps each child transform to a list and then can do things to those objects
      */
-        
-        private void UpdateSpectrumData()                   // TODO: Find way to cut down spec data from the right side, then be able to scale that new array down by averaging it out across a smaller array
+
+        // TODO: profile this!
+        private void UpdateSpectrumData()
         {
-            audioSource.GetSpectrumData(spectrumData, 0, fftWindowToUse);
+            TargetRenderSize = Mathf.Clamp(TargetRenderSize, 0, 8192);
             
-            int usableSize = (int)(sampleSize * (1 - specDataCutoff));
-            usableSpectrumData = new float[usableSize];
-            
-            if (compressSpecDataToRenderSize)
-            {
-                float[] temp = new float[TargetRenderSize];
-                
-            }
-        }
-        
-        // called only in TargetRenderSize set expression
-        private void HandleSpectrumDataResizing()
-        {
             // keep sampleSize as a power of 2 and between 64 and 8192 (requirement of GetSpectrumData)
             sampleSize = (int)Mathf.Clamp(Mathf.Pow(2, Mathf.Ceil(Mathf.Log(TargetRenderSize) / Mathf.Log(2))), 64, 8192);
             
-            // skip setting property TargetRenderSize since it's set expression is calling this function!
-            _targetRenderSize = Mathf.Clamp(TargetRenderSize, 0, sampleSize);
-            
-            spectrumData = new float[sampleSize];
-        }
-        
-        private void HandleObjects()
-        {
-            if (isPresetShape)
+            specDataCutoff = Mathf.Clamp01(specDataCutoff);
+            int usableSize = (int)(sampleSize * (1 - specDataCutoff));
+
+            if (TargetRenderSize > usableSize)
             {
-                ConsoleLogger.Log("HandleObjectPool was called on visual with isPresetShape == true", true);
-                return;
+                sampleSize *= 2; // next power of 2 up
+
+                if (sampleSize > 8192) // if we are already at max sampleSize (8192)
+                {
+                    // brute force attempt to bring down the cutoff percent until usable size is within target size
+                    while (TargetRenderSize > usableSize)
+                    {
+                        specDataCutoff -= 0.01f; // bring down cutoff by 1% each step (arbitrary number)
+                        specDataCutoff = Mathf.Clamp01(specDataCutoff);
+                        usableSize = (int)(sampleSize * (1 - specDataCutoff));
+                    }
+                }
             }
             
+            // init arrays
+            spectrumData = new float[sampleSize];
+            usableSpectrumData = new float[usableSize];
+            // built in Unity call to get 'spectrum data'
+            audioSource.GetSpectrumData(spectrumData, 0, fftWindowToUse);
+            // copy spec data
+            for (int i = 0; i < usableSize; ++i)
+            {
+                usableSpectrumData[i] = spectrumData[i];
+            }
+
+            AverageUsableSpectrum();
+        }
+
+        // takes usable spectrum and brings it down to TargetSize size, averaging values between
+        private void AverageUsableSpectrum()
+        {
+            int usableSize = usableSpectrumData.Length;
+            float[] temp = new float[usableSize];
+            for (int i = 0; i < usableSize; ++i)
+            {
+                temp[i] = usableSpectrumData[i];
+            }
+
+            usableSpectrumData = new float[TargetRenderSize];
+
+            // solve average value for each new index of usableSpectrumData
+            for (int i = 0; i < TargetRenderSize; ++i)
+            {
+                // traverse each subset of values in temp array to be averaged out
+                float avg = 0;
+                int cnt = 0;
+                int start = i * TargetRenderSize;
+                for (int j = start; j < (start + TargetRenderSize) && j < usableSize; ++j)
+                {
+                    cnt++;
+                    avg += temp[j];
+                }
+                avg /= cnt;
+                usableSpectrumData[i] = avg;
+            }
+        }
+
+        private void HandleObjects()
+        {
             if (objectPooler is null)
             {
                 objectPooler = Utilities.ObjectPooler.ConstructObjectPool
@@ -187,6 +251,10 @@ namespace AudioVisuals
             else if (objectsDiff > 0)
             {
                 objectPooler.ReturnObjects(visualObjs, Mathf.Abs(objectsDiff));
+            }
+            foreach (GameObject go in visualObjs)
+            {
+                go.transform.parent = pivotTransform;
             }
         }
 

@@ -5,18 +5,26 @@ using UnityEngine;
 
 namespace Utilities
 {
+
+    public interface IObjectPooler
+    {
+        public int TargetSize { get; set; }
+        public int ResizeThreshold { get; set; }
+        public float ResizeRate { get; set; }
+        public GameObject ObjectToPool { get; set; }
+    }
+    
     /// <summary>
     /// Creation: Calling Utilities.ObjectPooler.ConstructObjectPool() creates new instance of class and returns a reference to monobehavior.
     /// Borrowing: Call BorrowObjects() to get list of objects.
     /// Returning: Call
     /// Deletion: Either destroy the monobehavior with Destroy(), or call ReleasePool() on the reference to this class.
     /// </summary>
-    public class ObjectPooler : MonoBehaviour
+    public class ObjectPooler : MonoBehaviour, IObjectPooler
     {
         // reference to all alive pools
         public static List<ObjectPooler> AllPools { get; private set; }
-            
-        public Stack<GameObject> Pool {get; private set;}
+ 
         public int TargetSize
         {
             get => this._targetSize;
@@ -24,7 +32,7 @@ namespace Utilities
             {
                 this._targetSize = Mathf.Clamp(value, 0, int.MaxValue);
                 HandleObjectPool();
-            } 
+            }
         }
         public int ResizeThreshold
         {
@@ -62,10 +70,11 @@ namespace Utilities
         
         // internal fields that are used in the properties above
         private GameObject _objectToPool;
-        private int _resizeThreshold; // upper and lower threshold of pool where we should start creating/destroying objects
+        private int _resizeThreshold; 
         private int _targetSize;
         private float _resizeRate;
-        
+
+        private Stack<GameObject> pool;
         private List<GameObject> allInstances = new List<GameObject>(); // references to all instanced game objects that originated in the pool
         private UnityEngine.Coroutine balancingCoroutine; // routine that references any ongoing balancing process
         private List<GameObject> addToPoolBuffer = new List<GameObject>(); // buffer (idea is to reduce memory overhead) (static array might be better here)
@@ -94,7 +103,7 @@ namespace Utilities
             pooler.TargetSize = size;
             pooler.ResizeThreshold = resizeThreshold;
             pooler.ResizeRate = resizeRate;
-            pooler.Pool = new Stack<GameObject>();
+            pooler.pool = new Stack<GameObject>();
             pooler.NewObjectsToPool(pooler.TargetSize);
             
             pooler.pastInitStage = true;
@@ -194,7 +203,7 @@ namespace Utilities
         {
             bool increase = false;
 
-            while ((increase = Pool.Count < (this.TargetSize - this.ResizeThreshold)) || Pool.Count > (this.TargetSize + this.ResizeThreshold))
+            while ((increase = pool.Count < (this.TargetSize - this.ResizeThreshold)) || pool.Count > (this.TargetSize + this.ResizeThreshold))
             {
                 if (increase)
                 {
@@ -263,6 +272,7 @@ namespace Utilities
         // TODO: public function that takes in a delegate and runs it on instancing objects
         private void DefualtObjectBehavior(GameObject obj)
         {
+            obj.transform.parent = this.transform;
             obj.SetActive(false);
         }
         
@@ -272,7 +282,7 @@ namespace Utilities
             
             foreach (GameObject obj in objectsToAdd)
             {
-                Pool.Push(obj);
+                pool.Push(obj);
             }
             objectsToAdd.Clear();
         }
@@ -281,9 +291,9 @@ namespace Utilities
         {
             ConsoleLogger.Log("<color=red>Popping</color> " + (amount - counter) + " objects to pool...");
             
-            while (counter < amount && Pool.Count > 0)
+            while (counter < amount && pool.Count > 0)
             {
-                objectsToRemove.Add(Pool.Pop());
+                objectsToRemove.Add(pool.Pop());
                 counter++;
             }
         }
