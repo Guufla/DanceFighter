@@ -54,7 +54,7 @@ public class PlayerDirections : MonoBehaviour
         }
 
 
-        if(isOnGround && curTrans.position.x < opPlayerTrans.position.x ){
+        if(isOnGround && curTrans.position.x < opPlayerTrans.position.x ){ 
             transform.localScale = new Vector2(1f,1f);
         }
         else if(isOnGround && curTrans.position.x > opPlayerTrans.position.x ){
