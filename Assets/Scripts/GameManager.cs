@@ -114,7 +114,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
 
     public float timerSeconds = 99f;
-    
+
+    public bool roundOver = false;
+
+    public bool gameOver = false;
     
 
 
@@ -242,9 +245,14 @@ public class GameManager : MonoBehaviour
 
     private void IncreaseOffensiveSlider(Slider offensiveSlider)
     {
-        if (isCountingDown) return;
-        // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
-        offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncrease, offensiveSlider.maxValue);
+        if (!roundOver && !gameOver)
+        {
+            if (isCountingDown) return;
+            // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
+            offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncrease, offensiveSlider.maxValue);
+
+        }
+        
 
     }
     //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
@@ -306,18 +314,24 @@ public class GameManager : MonoBehaviour
         if (!p1Win)
         {
             // When p1 wins makes the bool true and add 1 to its round score and display text
+            roundOver = true;
             p1Win = true;
             p1WinCounter += 1;
             winMessage.text = "Player 1 Wins!";
             winMessage.gameObject.SetActive(true);
-            StartCoroutine(RestartMatch(3f)); 
-        }
-        if (p1WinCounter >= 2) // When player 1 wins 2 rounds game is over 
-        {
-            winMessage.text = "Player 1 Wins!";
-            winMessage.gameObject.SetActive(true);
-            quitButton.gameObject.SetActive(true);
-            restartButton.gameObject.SetActive(true);
+
+            if (p1WinCounter >= 2) // When player 1 wins 2 rounds game is over 
+            {
+                gameOver = true;
+                winMessage.text = "Player 1 Wins";
+                winMessage.gameObject.SetActive(true);
+                quitButton.gameObject.SetActive(true);
+                restartButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                StartCoroutine(RestartMatch(3f));
+            }
         }
     }
 
@@ -326,18 +340,24 @@ public class GameManager : MonoBehaviour
         if (!p2Win)
         {
             // When p2 wins makes the bool true and add 1 to its round score and display text
+            roundOver = true;
             p2Win = true;
             p2WinCounter += 1;
             winMessage.text = "Player 2 Wins!";
             winMessage.gameObject.SetActive(true);
-            StartCoroutine(RestartMatch(3f));
-        }
-        if (p2WinCounter >= 2) // When player 2 wins 2 rounds game is over 
-        {
-            winMessage.text = "Player 2 Wins!";
-            winMessage.gameObject.SetActive(true);
-            quitButton.gameObject.SetActive(true);
-            restartButton.gameObject.SetActive(true);
+
+            if (p2WinCounter >= 2) // When player 2 wins 2 rounds game is over 
+            {
+                gameOver = true;
+                winMessage.text = "Player 2 Wins";
+                winMessage.gameObject.SetActive(true);
+                quitButton.gameObject.SetActive(true);
+                restartButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                StartCoroutine(RestartMatch(3f));
+            }
         }
     }
 
@@ -348,6 +368,11 @@ public class GameManager : MonoBehaviour
 
         // Hide the win message
         winMessage.gameObject.SetActive(false);
+
+        // Reset Timer
+        timerSeconds = 99f;
+        countdownText.text = "99";
+
 
         // Reset player health
         P1Health = 100;
@@ -364,12 +389,20 @@ public class GameManager : MonoBehaviour
         // Reset win booleans
         p1Win = false;
         p2Win = false;
+        roundOver = false;
+        gameOver = false;
 
         // Reposition players to their initial positions
         player1.transform.position = new Vector2(-4, -3);
         player2.transform.position = new Vector2(4, -3);
 
         StartCoroutine(StartRoundCountdown(3));
+
+
+
+
+
+
     }
 
     public void RestartGame() // When restarting the whole game set the win counters to 0
@@ -388,7 +421,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
     {
-        timerSeconds = 99f;
+        
         isCountingDown = true;
         countdownText.gameObject.SetActive(true);
         while (countdownTime > 0)
@@ -406,7 +439,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CountdownTimer()
     {
-        
+        countdownText.text = "99";
         while (timerSeconds > 0)
         {
             if (isCountingDown || p1Win || p2Win)
@@ -419,9 +452,27 @@ public class GameManager : MonoBehaviour
             timerSeconds--;
         }
         timerText.text = "0";
+        if (timerSeconds <= 0)
+        {
+            if (P1Health > P2Health)
+            {
+                Player1Win();
+            }
+            else if (P2Health > P1Health)
+            {
+                Player2Win();
 
+            }
+            else
+            {
+                winMessage.text = "Draw";
+                winMessage.gameObject.SetActive(true);
+                StartCoroutine(RestartMatch(2f));
 
-
+            }
+        
+        
+        }
     }
     
 }
