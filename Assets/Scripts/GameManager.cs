@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Offensive mode")]
+
+    public float maxOffensiveBarValue;
+
     private float offensiveTimer1 = 0f;
 
     private float offensiveTimer2 = 0f;
@@ -158,16 +161,16 @@ public class GameManager : MonoBehaviour
         // Sets the health bar values to the player health variables
         // Max health is 100 for now
         // MAKE SURE TO SET MAX VALUES FIRST
-        opponentHealth.maxValue = 100;
-        playerHealthBar.maxValue = 100;
+        opponentHealth.maxValue = P2Health;
+        playerHealthBar.maxValue = P1Health;
         playerHealthBar.value = P1Health;
         opponentHealth.value = P2Health;
         
 
         p1OffensiveBar.value = 0;
         p2Offensive.value = 0;
-        p1OffensiveBar.maxValue = 1000;
-        p2Offensive.maxValue = 1000;
+        p1OffensiveBar.maxValue = maxOffensiveBarValue;
+        p2Offensive.maxValue = maxOffensiveBarValue;
         winMessage.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
@@ -209,12 +212,12 @@ public class GameManager : MonoBehaviour
         }
 
         // If the offensive bar is full then activate the offensive mode and reset the amount
-        if (p1OffensiveBar.value == 1000)
+        if (p1OffensiveBar.value == maxOffensiveBarValue)
         {
             isOffensiveP1 = true;
             offensiveValueP1 = 45;
         }
-        if (p2Offensive.value == 1000)
+        if (p2Offensive.value == maxOffensiveBarValue)
         {
             isOffensiveP2 = true;
             offensiveValueP2 = 45;
