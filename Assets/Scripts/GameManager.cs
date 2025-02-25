@@ -34,10 +34,6 @@ public class GameManager : MonoBehaviour
 
     public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
-    public bool isOffensiveP1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
-
-    public bool p1Win = false;
-
     public static int p1WinCounter = 0;
 
 
@@ -70,12 +66,7 @@ public class GameManager : MonoBehaviour
 
     public int P2Health = 100;
 
-
     public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
-
-    public bool isOffensiveP2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
-
-    public bool p2Win = false;
 
     public static int p2WinCounter = 0;
 
@@ -100,28 +91,42 @@ public class GameManager : MonoBehaviour
 
     public int offensiveValueP2; // amount to increase by when in offensive mode and you hit someone
 
-    
+    public bool isOffensiveP2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
+
+    public bool isOffensiveP1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
 
 
-    [Header("UI")]
+    [Header("Text")]
+
     public TMP_Text winMessage; // Win message
+
+    public TMP_Text countdownText; // Countdown text
+
+    public TMP_Text timerText; // Timer for round text 
+
+    public float timerSeconds = 99f;
+
+
+
+    [Header("Buttons")]
 
     public Button restartButton; // Restart button
 
     public Button quitButton; // Quit button
 
-    public TMP_Text countdownText; // Countdown text
+
+    [Header("Bools")]
 
     public bool isCountingDown; // Bool for when the game is counting down 
-
-    public TMP_Text timerText;
-
-    public float timerSeconds = 99f;
 
     public bool roundOver = false;
 
     public bool gameOver = false;
-    
+
+    public bool p1Win = false;
+
+    public bool p2Win = false;
+
 
 
     // Used to make the game manager. Doesnt really need to be edited
@@ -236,14 +241,18 @@ public class GameManager : MonoBehaviour
 
     private void DecreaseOffensiveSlider(Slider offensiveSlider, ref bool isoffensive)
     {
-        if (isCountingDown) return;
-        //subtract the offensive amount from the bar value but dont go below 0
-        offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveDecrease, 0);
-
-        if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
+        if (!roundOver && !gameOver)
         {
-            isoffensive = false;
+            if (isCountingDown) return;
+            //subtract the offensive amount from the bar value but dont go below 0
+            offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveDecrease, 0);
+
+            if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
+            {
+                isoffensive = false;
+            }
         }
+            
     }
 
     private void IncreaseOffensiveSlider(Slider offensiveSlider)

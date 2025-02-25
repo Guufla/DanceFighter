@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: playerHealthBar
       value: 
       objectReference: {fileID: 880613659}
+    - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
+      propertyPath: maxOffensiveBarValue
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -443,8 +447,36 @@ PrefabInstance:
       value: -121
       objectReference: {fileID: 0}
     - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -57
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 3266173934839026661, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -584,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113493919489437153, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 59
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6863579420462646451, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
