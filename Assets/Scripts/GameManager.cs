@@ -26,8 +26,10 @@ public class GameManager : MonoBehaviour
 
     public Boolean canInputP1; 
 
+
     public Boolean isHitBoxAnimatingP1; 
 
+    
     public Slider playerHealthBar; // This is a reference to the player health slider that lets us easily call it from different scripts
 
     public int P1Health = 100;
@@ -40,7 +42,10 @@ public class GameManager : MonoBehaviour
 
     public static int p1WinCounter = 0;
 
+    // Hitstun Variables
+    public Boolean P1IsHitStunned;
 
+    public float P1HitstunTime;
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
@@ -64,12 +69,9 @@ public class GameManager : MonoBehaviour
     
     public Boolean isHitBoxAnimatingP2; 
 
-    public bool P2Aggro; // Tells if the player is in aggro mode
-
     public Slider opponentHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
 
     public int P2Health = 100;
-
 
     public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
@@ -79,8 +81,14 @@ public class GameManager : MonoBehaviour
 
     public static int p2WinCounter = 0;
 
+    // Hitstun Variables
+    public Boolean P2IsHitStunned;
+
+    public float P2HitstunTime;
+
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
 
+     public bool P2Aggro; // Tells if the player is in aggro mode
 
     [Header("Offensive mode")]
 
