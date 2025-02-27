@@ -127,6 +127,11 @@ public class GameManager : MonoBehaviour
     private Coroutine knockbackCoroutineP1; // Coroutine for knockback timer
     private Coroutine knockbackCoroutineP2;
 
+    // Array to hold the knockback frozen state for each script and each player
+    // First is player, next is script
+    // true means frozen
+    private bool[][] knockbackFrozen = new bool[2][];
+
 
     // Used to make the game manager. Doesnt really need to be edited
     public static GameManager Instance
@@ -178,6 +183,9 @@ public class GameManager : MonoBehaviour
         winMessage.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
+
+        knockbackFrozen[0] = new bool[2];
+        knockbackFrozen[1] = new bool[2];
 
         StartCoroutine(StartRoundCountdown(3)); // Start the countdown
 
@@ -296,7 +304,7 @@ public class GameManager : MonoBehaviour
         }
 
         //stops other players movement for knockback
-        stopP2Movement = true;
+        UpdateStopMovement(2, true, 1);
         stopP2YMovement = true;
 
         //if timer is already running the stop it
@@ -334,7 +342,7 @@ public class GameManager : MonoBehaviour
         }
 
         //stops other players movement for knockback
-        stopP1Movement = true;
+        UpdateStopMovement(1, true, 1);
         stopP1YMovement = true;
 
         if(knockbackCoroutineP2 != null)
@@ -527,16 +535,53 @@ public class GameManager : MonoBehaviour
 
         if(player == 1)
         {
-            stopP1Movement = false;
+            UpdateStopMovement(1, false, 1);
             stopP1YMovement = false;
         }
         else if(player == 2)
         {
-            stopP2Movement = false;
+            UpdateStopMovement(2, false, 1);
             stopP2YMovement = false;
         }
 
         Debug.Log("Knockback timer finished for player " + player);
     }
-    
+
+    //script int is used to identify which script is calling the function
+    // 0:PlayerAttack 1:GameManager
+    public void UpdateStopMovement(int player, bool stopMovement, int script)
+    {
+        player--; // Convert to 0-based index
+
+        knockbackFrozen[player][script] = stopMovement;
+
+        //if freezing, freeze
+        if(stopMovement)
+        {
+            if(player == 0)
+            {
+                stopP1Movement = true;
+                stopP1YMovement = true;
+            }
+            else if(player == 1)
+            {
+                stopP2Movement = true;
+                stopP2YMovement = true;
+            }
+        }
+        else if(player == 0) //potentially unfreezing, if all are false
+        {
+            if(knockbackFrozen[0][0] == false && knockbackFrozen[0][1] == false)
+            {
+                stopP1Movement = false;
+            }
+        }
+        else if(player == 1)
+        {
+            if(knockbackFrozen[1][0] == false && knockbackFrozen[1][1] == false)
+            {
+                stopP2Movement = false;
+            }
+        }
+    }
 }
