@@ -66,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
 
     Boolean stopPlayerYMovement; // used for when we want to stop any Y movement
 
-    public Boolean isComboBuffered;
+    public Boolean isComboBuffered; // Used to tell if the player should be allowed to enter new inputs 
 
     Rigidbody2D playerRigidbody; // Reference to the player's rigid body
 
@@ -101,7 +101,6 @@ public class PlayerAttack : MonoBehaviour
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
 
-        comboBufferTime = 0;
         isComboBuffered = false;
         
         playerRigidbody = transform.GetComponent<Rigidbody2D>();
@@ -200,7 +199,7 @@ public class PlayerAttack : MonoBehaviour
         updateInput(); // Updates the caninput variable in this function with the game manager variable
 
         // When you are able to attack it records the key you press
-        if(canAttack == true)
+        if(canAttack == true && !isComboBuffered)
         {
             // You arent able to record your next attack input if the current attack pressed is any key
             if(currentAttackPressed != AttackType.none)
@@ -760,10 +759,10 @@ public class PlayerAttack : MonoBehaviour
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
-        if(isComboBuffered) return;
+        //if(isComboBuffered) return;
         
         // When holding up you perform an uptilt
-        else if(canInput && holdingUp){
+        if(canInput && holdingUp){
             attackPressed = AttackType.upTiltE;
             canInput = false; // After input is recorded set this to false
         }
@@ -794,10 +793,10 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackR(InputValue value)
     {
-        if(isComboBuffered) return;
+        //if(isComboBuffered) return;
 
         // When holding up you perform an uptilt
-        else if(canInput && holdingUp){
+        if(canInput && holdingUp){
             attackPressed = AttackType.upTiltR;
             canInput = false; // After input is recorded set this to false
         }
@@ -826,10 +825,10 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackF(InputValue value)
     {
-        if(isComboBuffered) return;
+        //if(isComboBuffered) return;
 
         // When holding up you perform an uptilt
-        else if(canInput && holdingUp){
+        if(canInput && holdingUp){
             attackPressed = AttackType.upTiltF;
             canInput = false; // After input is recorded set this to false
         }
