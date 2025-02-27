@@ -188,11 +188,12 @@ namespace AudioVisuals
                 Vector3 objPos = pivotTransform.position + circleAndOffset;
 
                 visualObjs[i].transform.position = objPos;
+                visualObjs[i].SetActive(true);
 
                 if (lookTowardsPivot)
                 {
-                    Vector3 dir = visualObjs[i].transform.position - pivotTransform.position;
-                    visualObjs[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, -dir);
+                    Vector3 objectToPivotDir =  pivotTransform.position - visualObjs[i].transform.position;
+                    visualObjs[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, objectToPivotDir);
                     
                     // cool effect if you rotate the spotlights forward to be facing towards/away from the screen in 2D
                 }
@@ -201,9 +202,27 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeLine(float perObjectOffset, float diagonalAngleFromPivot, bool lookTowardsPivot)
+        protected virtual void MakeLine(Vector3 lineDirFromPivot, float perObjectOffset, bool lookTowardsPivot)
         {
+            HandleObjects();
             
+            Vector3 dir = (lineDirFromPivot - pivotTransform.position).normalized;
+            Vector3 scaledDir = dir * perObjectOffset; // essentially the step between two objects in direction 'dir'
+            float totalDist = perObjectOffset * Mathf.Clamp((visualObjs.Count - 1), 0, Int32.MaxValue);
+            Vector3 incrementPos = totalDist * 0.5f * dir; // initialized to starting position
+            for (int i = 0; i < visualObjs.Count; ++i)
+            {
+                visualObjs[i].transform.position = incrementPos;
+                visualObjs[i].SetActive(true);
+                
+                if (lookTowardsPivot)
+                {
+                    Vector3 objectToPivotDir =  pivotTransform.position - visualObjs[i].transform.position;
+                    visualObjs[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, objectToPivotDir);
+                }
+                
+                incrementPos += -scaledDir; // increment step
+            }
         }
 
         protected virtual void MakeWave()

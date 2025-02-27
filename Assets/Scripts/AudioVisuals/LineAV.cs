@@ -5,15 +5,16 @@ using Utilities;
 
 namespace AudioVisuals
 {
-    public class CircleAV : DebugAV
+    public class LineAV : DebugAV
     {
-        [SerializeField] private float offset;
+        [SerializeField] private float perObjectOffset;
         [SerializeField] private bool lookAtPivot;
+        [SerializeField] private Transform lineDirFromPivot;
 
         protected override void Update()
         {
             base.Update();
-            MakeCircle(offset, lookAtPivot);
+            MakeLine(lineDirFromPivot.position, perObjectOffset, lookAtPivot);
         }
     }
 }
