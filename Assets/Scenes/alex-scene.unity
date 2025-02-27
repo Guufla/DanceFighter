@@ -1399,6 +1399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpotlightPivot
       objectReference: {fileID: 0}
+    - target: {fileID: 4478777249903340228, guid: 70ddef0a4a6a77343864d40d2e842923, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5300844341950318050, guid: 70ddef0a4a6a77343864d40d2e842923, type: 3}
       propertyPath: m_Mesh
       value: 
