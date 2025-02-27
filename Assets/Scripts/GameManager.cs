@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -129,7 +130,16 @@ public class GameManager : MonoBehaviour
     public bool roundOver = false;
 
     public bool gameOver = false;
-    
+
+    //Variables for this script
+    private Coroutine knockbackCoroutineP1; // Coroutine for knockback timer
+    private Coroutine knockbackCoroutineP2;
+
+    // Array to hold the knockback frozen state for each script and each player
+    // First is player, next is script
+    // true means frozen
+    private bool[][] knockbackFrozen = new bool[2][];
+    private bool[][] knockbackFrozenY = new bool[2][];
 
 
     // Used to make the game manager. Doesnt really need to be edited
@@ -182,6 +192,11 @@ public class GameManager : MonoBehaviour
         winMessage.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
+
+        knockbackFrozen[0] = new bool[2];
+        knockbackFrozen[1] = new bool[2];
+        knockbackFrozenY[0] = new bool[2];
+        knockbackFrozenY[1] = new bool[2];
 
         StartCoroutine(StartRoundCountdown(3)); // Start the countdown
 
@@ -270,6 +285,9 @@ public class GameManager : MonoBehaviour
     public void Player1HitsPlayer2()
     {
         if (isCountingDown) return;
+
+        Debug.Log("Player 1 hits Player 2");
+
         P2Health -= 10;
         opponentHealth.value = P2Health;
         if (!isOffensiveP1)
@@ -295,11 +313,27 @@ public class GameManager : MonoBehaviour
             p2Offensive.value = Mathf.Max(p2Offensive.value - offensiveIncrease, 0);
 
         }
+
+        //stops other players movement for knockback
+        UpdateStopMovement(2, true, 1);
+        UpdateStopMovementY(2, true, 1);
+
+        //if timer is already running the stop it
+        if(knockbackCoroutineP1 != null)
+        {
+            StopCoroutine(knockbackCoroutineP1);
+        }
+
+        //start the knockback timer
+        knockbackCoroutineP1 = StartCoroutine(KnockbackTimer(2));
     }
     //When player 2 hits player 1 subtract 10 from player 2's health and update the slider
     public void Player2HitsPlayer1()
     {
         if (isCountingDown) return;
+
+        Debug.Log("Player 2 hits Player 1");
+
         P1Health -= 10;
         playerHealthBar.value = P1Health; //when p2 hits p1 add an extra boost to the offensive bar
         if (!isOffensiveP2)
@@ -318,6 +352,17 @@ public class GameManager : MonoBehaviour
             p1OffensiveBar.value = Mathf.Max(p1OffensiveBar.value - offensiveIncrease, 0);
         }
 
+        //stops other players movement for knockback
+        UpdateStopMovement(1, true, 1);
+        UpdateStopMovementY(1, true, 1);
+
+        if(knockbackCoroutineP2 != null)
+        {
+            StopCoroutine(knockbackCoroutineP2);
+        }
+
+        //start the knockback timer
+        knockbackCoroutineP2 = StartCoroutine(KnockbackTimer(1));
     }
 
     public void Player1Win()
@@ -485,5 +530,102 @@ public class GameManager : MonoBehaviour
         
         }
     }
-    
+
+    //unfreezes the player after being hit
+    private IEnumerator KnockbackTimer(int player)
+    {
+        Debug.Log("Knockback timer started for player " + player);
+        //yield return new WaitForSeconds(1f); // Wait for 0.5 seconds
+
+        //testing for player2
+        for(int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            Debug.Log("stopP2Movement: " + stopP2Movement);
+        }
+
+        if(player == 1)
+        {
+            UpdateStopMovement(1, false, 1);
+            UpdateStopMovementY(1, false, 1);
+        }
+        else if(player == 2)
+        {
+            UpdateStopMovement(2, false, 1);
+            UpdateStopMovementY(2, false, 1);
+        }
+
+        Debug.Log("Knockback timer finished for player " + player);
+    }
+
+    //script int is used to identify which script is calling the function
+    // 0:PlayerAttack 1:GameManager
+    public void UpdateStopMovement(int player, bool stopMovement, int script)
+    {
+        player--; // Convert to 0-based index
+
+        knockbackFrozen[player][script] = stopMovement;
+
+        //if freezing, freeze
+        if(stopMovement)
+        {
+            if(player == 0)
+            {
+                stopP1Movement = true;
+            }
+            else if(player == 1)
+            {
+                stopP2Movement = true;
+            }
+        }
+        else if(player == 0) //potentially unfreezing, if all are false
+        {
+            if(knockbackFrozen[0][0] == false && knockbackFrozen[0][1] == false)
+            {
+                stopP1Movement = false;
+            }
+        }
+        else if(player == 1)
+        {
+            if(knockbackFrozen[1][0] == false && knockbackFrozen[1][1] == false)
+            {
+                stopP2Movement = false;
+            }
+        }
+    }
+
+    //same but for y movement
+    public void UpdateStopMovementY(int player, bool stopMovement, int script)
+    {
+        player--; // Convert to 0-based index
+
+        knockbackFrozenY[player][script] = stopMovement;
+
+        //if freezing, freeze
+        if(stopMovement)
+        {
+            if(player == 0)
+            {
+                stopP1YMovement = true;
+            }
+            else if(player == 1)
+            {
+                stopP2YMovement = true;
+            }
+        }
+        else if(player == 0) //potentially unfreezing, if all are false
+        {
+            if(knockbackFrozenY[0][0] == false && knockbackFrozenY[0][1] == false)
+            {
+                stopP1YMovement = false;
+            }
+        }
+        else if(player == 1)
+        {
+            if(knockbackFrozenY[1][0] == false && knockbackFrozenY[1][1] == false)
+            {
+                stopP2YMovement = false;
+            }
+        }
+    }
 }
