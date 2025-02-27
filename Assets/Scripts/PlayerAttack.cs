@@ -19,6 +19,8 @@ public class PlayerAttack : MonoBehaviour
     
     [SerializeField] GameObject playerSprite;
 
+    [SerializeField]GameObject attackBoxCollider;
+
     [SerializeField]GameObject attackBoxObject;
 
     AttackType attackPressed; // Records the attack being pressed by the player

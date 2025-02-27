@@ -237,4 +237,12 @@ public class HitboxCollision : MonoBehaviour
             Debug.LogError("oppositePlayerAnimator is null in ResetIsHit");
         }
     }
+
+    private IEnumerator Knockback()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Debug.Log("Hit");
+        oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+    }
 }
