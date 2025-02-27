@@ -17,6 +17,8 @@ enum Direction : int{
 public class PlayerAttack : MonoBehaviour
 {
     public Animator attackAnimator;
+    
+    [SerializeField] GameObject playerSprite;
 
     [SerializeField]GameObject attackBoxObject;
 
@@ -80,7 +82,7 @@ public class PlayerAttack : MonoBehaviour
         
 
         // Would need to change the code surrounding this if I want to use multiple hitboxes
-        attackAnimator = attackBoxObject.GetComponent<Animator>(); // Reference to the attack hitbox animator
+        attackAnimator = playerSprite.GetComponent<Animator>(); // Reference to the attack hitbox animator
 
 
         canAttack = true; // Determines if the player can attack or not
@@ -314,7 +316,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 hitboxAnimation(2,"RAttack4","MediumAttack4",false, 1.5f,0f,2f,0f);
             }
-             else if(curCombo == 4) {
+            else if(curCombo == 4) {
                 hitboxAnimation(3,"RAttack5","MediumAttack5",false, 1.5f,0f,2f,0f);
             }
 
@@ -361,6 +363,7 @@ public class PlayerAttack : MonoBehaviour
             stopPlayerMovement = false;
             stopPlayerYMovement = false;
             isAttacking = false;
+            attackAnimator.SetBool("isAttacking",false); // Sets the attacking bool in the animator to false
             this.isAirAttacking = false;
 
             if(isAirAttacking){
@@ -379,6 +382,7 @@ public class PlayerAttack : MonoBehaviour
             stopPlayerMovement = false;
             stopPlayerYMovement = false;
             isAttacking = false;
+            attackAnimator.SetBool("isAttacking",false); // Sets the attacking bool in the animator to false
             this.isAirAttacking = false;
 
             if(isAirAttacking)
@@ -407,6 +411,7 @@ public class PlayerAttack : MonoBehaviour
             this.isAirAttacking = false;
             isTiltAttacking = false;
             isAttacking = false;
+            attackAnimator.SetBool("isAttacking",false); // Sets the attacking bool in the animator to false
 
             attackAnimator.SetBool(animatorBool,false); 
             curCombo++;
@@ -428,6 +433,7 @@ public class PlayerAttack : MonoBehaviour
         this.isAirAttacking = isAirAttacking;
 
         isAttacking = true;
+        attackAnimator.SetBool("isAttacking",true); // Sets the attacking bool in the animator to true
 
         // Animator bool example: "EAttack1"
         attackAnimator.SetBool(animatorBool,true); // Sets the first combo attack in motion
@@ -446,9 +452,11 @@ public class PlayerAttack : MonoBehaviour
         else{
             comboResetTimerActive = false;
         }
+        //Debug.Log("Current State Info: " + currentStateInfo.IsName(animationName));
+        //Debug.Log("Is Animating: " + isAnimating);
 
         // animation name would be something like LightAttack1 and refers to the animation itself
-        if(currentStateInfo.IsName(animationName) && isAnimating == false){
+        if(currentStateInfo.IsName(animationName)){
             completeAnimation(version, animatorBool, animationName, isAirAttacking);
         }
     }
@@ -549,6 +557,7 @@ public class PlayerAttack : MonoBehaviour
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
         isAttacking = false;
+        attackAnimator.SetBool("isAttacking", false);
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("AAttack1",false);
         attackAnimator.SetBool("AAttack2",false);
@@ -568,6 +577,7 @@ public class PlayerAttack : MonoBehaviour
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
         isAttacking = false;
+        attackAnimator.SetBool("isAttacking", false);
         currentAttackPressed = AttackType.none;
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("EAttack1",false);
