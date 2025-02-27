@@ -5,10 +5,8 @@ using Utilities;
 
 namespace AudioVisuals
 {
-    public class CircleAV : DebugAudioVisual
+    public class CircleAV : DebugAV
     {
-        // TODO: How to set properties in inspector
-
         [SerializeField] private float offset;
         [SerializeField] private bool lookAtPivot;
 

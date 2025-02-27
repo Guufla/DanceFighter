@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Scriptables;
 using UnityEngine;
 using Utilities;
 
@@ -13,7 +15,7 @@ namespace AudioVisuals
     /// Base Audio Visualization class to be inherited and used by other classes. Idea is you can customize, stack, and do whatever you want
     /// to this from within the engine and inspector to create cool effects.
     /// </summary>
-    public abstract class AudioVisual : MonoBehaviour, IAudioVisual
+    public abstract class AudioVisual : MonoBehaviour, IAudioVisual, IObjectPooler
     {
         /*
          * Shapes:
@@ -37,14 +39,7 @@ namespace AudioVisuals
          *          https://stackoverflow.com/questions/75013054/is-it-cost-expensive-to-use-if-gameobject-null
          */
         
-        public AudioSource audioSource;
-
-        [SerializeField] protected bool isPresetShape;
-        [SerializeField] protected GameObject visualObjectPrefab;
-        [SerializeField] protected Transform[] presetTransforms;
-        [SerializeField] protected Transform pivotTransform;
-        [SerializeField] protected float specDataCutoff; // defines what percent of the spec data to cut off from the right
-
+        
         public int TargetRenderSize
         {
             get => _targetRenderSize;
@@ -55,13 +50,77 @@ namespace AudioVisuals
                 _targetRenderSize = value;
             }
         }
-        
-        [SerializeField] private FFTWindow fftWindowToUse;
+
+        public int TargetSize
+        {
+            get
+            {
+                return objectPooler is not null ? objectPooler.TargetSize : -1;
+            }
+            set
+            {
+                ConsoleLogger.Log("Don't set TargetSize here. Set TargetRenderSize instead.", true);
+            }
+        }
+        public int ResizeThreshold
+        {
+            get
+            {
+                return objectPooler is not null ? objectPooler.ResizeThreshold : -1;
+            }
+            set
+            {
+                if (objectPooler is not null)
+                {
+                    objectPooler.ResizeThreshold = value;
+                }
+            }
+        }
+        public float ResizeRate
+        {
+            get
+            {
+                return objectPooler is not null ? objectPooler.ResizeRate : -1;
+            }
+            set
+            {
+                if (objectPooler is not null)
+                {
+                    objectPooler.ResizeRate = value;
+                }
+            }
+        }
+
+        public GameObject ObjectToPool
+        {
+            get { return objectPooler is not null ? objectPooler.ObjectToPool : visualObjectPrefab; }
+            set
+            {
+                if (objectPooler is not null)
+                {
+                    objectPooler.ObjectToPool = value;
+                }
+
+                visualObjectPrefab = value;
+            }
+        }
+
+        [SerializeField] protected Transform[] presetTransforms;
+        [SerializeField] protected Transform pivotTransform;
+
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioVisualProperties_ScriptableObject audioVisualPropertiesRef;
+        [SerializeField] private bool isPresetShape;
+        [Range(0.0F, 1.0F)] [SerializeField]
+        private float specDataCutoff; // defines what percent of the spec data to cut off from the right
+        [SerializeField] private FFTWindow fftWindowToUse; // This enum values rank in ascending order of precision for spec data processing (Triangle seems fine).
+        [SerializeField] private bool doPropertyValueRecheck = true; // mostly for rapid testing in editor. Set false to save operations.
 
         protected List<GameObject> visualObjs = new List<GameObject>();
         protected float[] usableSpectrumData;
-        protected Utilities.ObjectPooler objectPooler = null;
-        
+
+        private Utilities.ObjectPooler objectPooler = null;
+        private GameObject visualObjectPrefab;
         private int _targetRenderSize;
         private int sampleSize;
         private float[] spectrumData;
@@ -71,9 +130,18 @@ namespace AudioVisuals
             RemoveObjectPool();
         }
 
+        private void Start()
+        {
+            SetPropertyValues();
+        }
+
         // must call base.Update() if you are overriding this in child class
         protected virtual void Update()
         {
+            if (doPropertyValueRecheck)
+            {
+                SetPropertyValues();
+            }
             UpdateSpectrumData();
         }
 
@@ -95,7 +163,7 @@ namespace AudioVisuals
             {
                 output += $"Object Pool is null\n";
             }
-            output += $"Spectrum Data Cutoff %: {specDataCutoff * 100}\n";
+            output += $"Spectrum Data Cutoff: {specDataCutoff * 100}%\n";
             output += $"FFTWindow being used: {fftWindowToUse}\n";
             output += $"Is Preset Shape: {isPresetShape}\n";
             return output;
@@ -236,8 +304,8 @@ namespace AudioVisuals
                     this.gameObject, 
                     visualObjectPrefab,
                     TargetRenderSize,
-                    Utilities.ObjectPooler.DefualtResizeRate,
-                    Utilities.ObjectPooler.DefualtResizeThreshold
+                    ResizeRate,
+                    ResizeThreshold
                 );
                 
                 TargetRenderSize = TargetRenderSize; // invokes the set (and get) expressions to properly set objectPooler.TargetSize
@@ -256,6 +324,17 @@ namespace AudioVisuals
             {
                 go.transform.parent = pivotTransform;
             }
+        }
+
+        // sets property values that are in implemented interfaces in the scriptable object ref
+        // would be nice to be able to "enumerate" through these values and assign automatically like that...
+        private void SetPropertyValues()
+        {
+            TargetRenderSize = audioVisualPropertiesRef.TargetRenderSize;
+            // skip target size since that is handled in TargetRenderSize
+            ResizeThreshold = audioVisualPropertiesRef.ResizeThreshold;
+            ResizeRate = audioVisualPropertiesRef.ResizeRate;
+            ObjectToPool = audioVisualPropertiesRef.ObjectToPool;
         }
 
         private void RemoveObjectPool()

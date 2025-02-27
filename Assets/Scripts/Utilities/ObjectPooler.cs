@@ -57,16 +57,12 @@ namespace Utilities
             set
             {
                 this._objectToPool = value;
-                ConsoleLogger.Log("Object To Pool was set to " + this._objectToPool);
             } 
         }
         
         // arbitrary constants so game doesn't die or try to divide by 0.
         public const float MIN_RATE = 0.01f;
         public const float MAX_RATE = 100f;
-
-        public static float DefualtResizeRate = 2;
-        public static int DefualtResizeThreshold = 25;
         
         // internal fields that are used in the properties above
         private GameObject _objectToPool;
