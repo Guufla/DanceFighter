@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59cfb7dcebbf441dbf1de889ebb73b72, type: 3}
-  m_Name: Default
+  m_Name: DefaultSprite
   m_EditorClassIdentifier: 
   <TargetRenderSize>k__BackingField: 32
   <TargetSize>k__BackingField: -1
   <ResizeThreshold>k__BackingField: 1
   <ResizeRate>k__BackingField: 0.09
-  <ObjectToPool>k__BackingField: {fileID: 4478777249903340228, guid: 70ddef0a4a6a77343864d40d2e842923, type: 3}
+  <ObjectToPool>k__BackingField: {fileID: 8616559400497920875, guid: 27c875b43da7b424ab05e9c3a75fcd39, type: 3}

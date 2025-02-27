@@ -117,13 +117,14 @@ namespace AudioVisuals
         [SerializeField] private bool doPropertyValueRecheck = true; // mostly for rapid testing in editor. Set false to save operations.
 
         protected List<GameObject> visualObjs = new List<GameObject>();
-        protected float[] usableSpectrumData;
+        protected float[] usableSpectrumData; // the spec data that will actually be used in the visuals
 
         private Utilities.ObjectPooler objectPooler = null;
         private GameObject visualObjectPrefab;
         private int _targetRenderSize;
         private int sampleSize;
         private float[] spectrumData;
+        private List<List<Color>> colorsToBlendPerObject = new List<List<Color>>();
         
         protected virtual void OnDestroy()
         {
@@ -169,12 +170,10 @@ namespace AudioVisuals
             return output;
         }
 
-        /// <summary>
-        /// Method <c>MakeCircle</c> locates each gameobject in visual objects to be in a circle shape
-        /// around pivotTransform.
-        /// </summary>
-        /// // TODO: Add actions that you can pass in to be able to run in the loop per object!
-        protected virtual void MakeCircle(float offsetFromPivot, bool lookTowardsPivot, bool zeroOutPos = true) 
+
+        // TODO: Add actions that you can pass in to be able to run in the loop per object!
+        // TODO: Add support for multiplicative steps (like how we have additive already).
+        protected virtual void MakeCircle(float offsetFromPivot, bool lookTowardsPivot, bool isAdditive = false) 
         {
             HandleObjects();
             
@@ -187,11 +186,7 @@ namespace AudioVisuals
                 Vector3 circleAndOffset = circle * offsetFromPivot;
                 Vector3 objPos = pivotTransform.position + circleAndOffset;
 
-                if (zeroOutPos)
-                {
-                    visualObjs[i].transform.position = Vector2.zero;
-                }
-                visualObjs[i].transform.position += objPos;
+                HandleAdditivePosition(visualObjs[i].transform, objPos, isAdditive); // zero out if this is not an "additive" step
                 visualObjs[i].SetActive(true);
 
                 if (lookTowardsPivot)
@@ -206,7 +201,7 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeLine(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, bool zeroOutPos = true)
+        protected virtual void MakeLine(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, bool isAdditive = false)
         {
             HandleObjects();
             
@@ -216,11 +211,7 @@ namespace AudioVisuals
             Vector3 incrementPos = totalDist * 0.5f * dir; // initialized to starting position
             for (int i = 0; i < visualObjs.Count; ++i)
             {
-                if (zeroOutPos)
-                {
-                    visualObjs[i].transform.position = Vector2.zero;
-                }
-                visualObjs[i].transform.position += incrementPos;
+                HandleAdditivePosition(visualObjs[i].transform, incrementPos, isAdditive); // zero out if this is not an "additive" step
                 visualObjs[i].SetActive(true);
                 
                 if (lookTowardsPivot)
@@ -233,7 +224,7 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeWave(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, float radianOffset, bool zeroOutPos = true)
+        protected virtual void MakeWave(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, float radianOffset, bool isAdditive = false)
         {
             HandleObjects();
             
@@ -248,11 +239,7 @@ namespace AudioVisuals
             {
                 Vector3 pos = incrementPos + new Vector3(-incrementPos.y, incrementPos.x, incrementPos.z) * Mathf.Sin(currRadian);
 
-                if (zeroOutPos)
-                {
-                    visualObjs[i].transform.position = Vector2.zero;
-                }
-                visualObjs[i].transform.position += pos;
+                HandleAdditivePosition(visualObjs[i].transform, pos, isAdditive);
                 visualObjs[i].SetActive(true);
                 
                 if (lookTowardsPivot)
@@ -276,6 +263,117 @@ namespace AudioVisuals
             }
             
             
+        }
+
+        protected virtual void AddLocalScale(Vector3 scale, bool isAdditive = false)
+        {
+            
+        }
+
+        // just returns a color between two colors based on "percent".
+        protected void ColorGradient(Color color1, Color color2)
+        {
+            float[] normalizedSpecData = GetNormalizedSpecData();
+
+            for (int i = 0; i < normalizedSpecData.Length; ++i)
+            {
+                Color c = Color.Lerp(color1, color2, normalizedSpecData[i]);
+                colorsToBlendPerObject[i].Add(c);
+            }
+        }
+
+        // must be called to actually apply colors to the objects
+        protected void HandleAllColors()
+        {
+            List<Color> colors = Blend(colorsToBlendPerObject);
+            for (int i = 0; i < visualObjs.Count; ++i)
+            {
+                SpriteRenderer sr = visualObjs[i].GetComponent<SpriteRenderer>();
+                sr.material.color = colors[i];
+            }
+
+            InitializeColorsList(true);
+        }
+        
+        private List<Color> Blend(List<List<Color>> colors)
+        {
+            if (colors.Count != visualObjs.Count)
+            {
+                ConsoleLogger.Log("Mismatch between visualObjs and colors size!", false, true);
+                return null;
+            }
+            
+            List<Color> completeColors = new List<Color>();
+            foreach (List<Color> c in colors)
+            {
+                float r = 0;
+                float g = 0;
+                float b = 0;
+                float a = 0;
+
+                for (int i = 0; i < c.Count; ++i)
+                {
+                    r += c[i].r;
+                    g += c[i].g;
+                    b += c[i].b;
+                    a += c[i].a;
+                }
+
+                if (c.Count != 0)
+                {
+                    r /= c.Count;
+                    g /= c.Count;
+                    b /= c.Count;
+                    a /= c.Count;
+                }
+
+                completeColors.Add(new Color(r, g, b, a));
+            }
+            
+            return completeColors;
+        }
+
+        /// <summary>
+        /// Handle additive step for positions (typically shapes).
+        /// This is a simple function, so its more of a way to remember to do this step.
+        /// </summary>
+        private void HandleAdditivePosition(Transform transform, Vector3 pos, bool isAdditive)
+        {
+            if (isAdditive)
+            {
+                transform.position += pos;
+            }
+            else
+            {
+                transform.position = pos;
+            }
+        }
+
+        /// <summary>
+        /// Handle additive step for float values.
+        /// This is a simple function, so its more of a way to remember to do this step.
+        /// </summary>
+        private void HandleAdditiveFloat(ref float val, float delta, bool isAdditive)
+        {
+            if (isAdditive)
+            {
+                val += delta;
+            }
+            else
+            {
+                val = delta;
+            }
+        }
+        
+        private void HandleAverageFloat(ref float val, float[] newVals)
+        {
+            float avg = val;
+            foreach (float f in newVals)
+            {
+                avg += f;
+            }
+            avg /= newVals.Length + 1;
+            val = avg;
         }
     
         /* idea for preset transforms:
@@ -350,6 +448,21 @@ namespace AudioVisuals
                 avg /= cnt;
                 usableSpectrumData[i] = avg;
             }
+
+            InitializeColorsList();
+        }
+
+        private void InitializeColorsList(bool reset = false)
+        {
+            if (!reset && colorsToBlendPerObject.Count == usableSpectrumData.Length)
+                return;
+            
+            colorsToBlendPerObject.Clear();
+            for (int i = 0; i < usableSpectrumData.Length; ++i)
+            {
+                
+                colorsToBlendPerObject.Add(new List<Color>());
+            }
         }
 
         private void HandleObjects()
@@ -381,6 +494,25 @@ namespace AudioVisuals
             {
                 go.transform.parent = pivotTransform;
             }
+        }
+
+        private float[] GetNormalizedSpecData()
+        {
+            float min = 0;
+            float max = -1;
+            foreach (float f in usableSpectrumData)
+            {
+                if (f > max)
+                    max = f;
+            }
+            
+            float mag = max - min;
+            float[] normalizedSpecData = new float[usableSpectrumData.Length];
+            for (int i = 0; i < usableSpectrumData.Length; ++i)
+            {
+                normalizedSpecData[i] = usableSpectrumData[i] / mag;
+            }
+            return normalizedSpecData;
         }
 
         // sets property values that are in implemented interfaces in the scriptable object ref

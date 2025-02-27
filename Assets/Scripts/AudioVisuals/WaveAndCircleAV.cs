@@ -32,7 +32,7 @@ namespace AudioVisuals
             }
             MakeWave(lineDirFromPivot.position, perObjectOffset, lookAtPivot, radOffset);
             
-            MakeCircle(pivotOffset, lookAtPivot, false);
+            MakeCircle(pivotOffset, lookAtPivot, true);
         }
     }
 }
