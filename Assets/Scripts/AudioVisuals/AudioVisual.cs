@@ -174,7 +174,7 @@ namespace AudioVisuals
         /// around pivotTransform.
         /// </summary>
         /// // TODO: Add actions that you can pass in to be able to run in the loop per object!
-        protected virtual void MakeCircle(float offsetFromPivot, bool lookTowardsPivot) 
+        protected virtual void MakeCircle(float offsetFromPivot, bool lookTowardsPivot, bool zeroOutPos = true) 
         {
             HandleObjects();
             
@@ -187,7 +187,11 @@ namespace AudioVisuals
                 Vector3 circleAndOffset = circle * offsetFromPivot;
                 Vector3 objPos = pivotTransform.position + circleAndOffset;
 
-                visualObjs[i].transform.position = objPos;
+                if (zeroOutPos)
+                {
+                    visualObjs[i].transform.position = Vector2.zero;
+                }
+                visualObjs[i].transform.position += objPos;
                 visualObjs[i].SetActive(true);
 
                 if (lookTowardsPivot)
@@ -202,7 +206,7 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeLine(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot)
+        protected virtual void MakeLine(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, bool zeroOutPos = true)
         {
             HandleObjects();
             
@@ -212,7 +216,11 @@ namespace AudioVisuals
             Vector3 incrementPos = totalDist * 0.5f * dir; // initialized to starting position
             for (int i = 0; i < visualObjs.Count; ++i)
             {
-                visualObjs[i].transform.position = incrementPos;
+                if (zeroOutPos)
+                {
+                    visualObjs[i].transform.position = Vector2.zero;
+                }
+                visualObjs[i].transform.position += incrementPos;
                 visualObjs[i].SetActive(true);
                 
                 if (lookTowardsPivot)
@@ -225,7 +233,7 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeWave(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, float radianOffset)
+        protected virtual void MakeWave(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, float radianOffset, bool zeroOutPos = true)
         {
             HandleObjects();
             
@@ -238,10 +246,13 @@ namespace AudioVisuals
             Vector3 incrementPos = totalDist * 0.5f * dir; // initialized to starting position
             for (int i = 0; i < visualObjs.Count; ++i)
             {
-                Vector3 pos = incrementPos + new Vector3(-incrementPos.y, incrementPos.x, 0) * Mathf.Sin(currRadian);
-                
-                
-                visualObjs[i].transform.position = pos;
+                Vector3 pos = incrementPos + new Vector3(-incrementPos.y, incrementPos.x, incrementPos.z) * Mathf.Sin(currRadian);
+
+                if (zeroOutPos)
+                {
+                    visualObjs[i].transform.position = Vector2.zero;
+                }
+                visualObjs[i].transform.position += pos;
                 visualObjs[i].SetActive(true);
                 
                 if (lookTowardsPivot)
