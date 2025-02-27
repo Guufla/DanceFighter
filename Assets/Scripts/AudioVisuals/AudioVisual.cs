@@ -202,11 +202,11 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeLine(Vector3 lineDirFromPivot, float perObjectOffset, bool lookTowardsPivot)
+        protected virtual void MakeLine(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot)
         {
             HandleObjects();
             
-            Vector3 dir = (lineDirFromPivot - pivotTransform.position).normalized;
+            Vector3 dir = (dirFromPivot - pivotTransform.position).normalized;
             Vector3 scaledDir = dir * perObjectOffset; // essentially the step between two objects in direction 'dir'
             float totalDist = perObjectOffset * Mathf.Clamp((visualObjs.Count - 1), 0, Int32.MaxValue);
             Vector3 incrementPos = totalDist * 0.5f * dir; // initialized to starting position
@@ -225,13 +225,40 @@ namespace AudioVisuals
             }
         }
 
-        protected virtual void MakeWave()
+        protected virtual void MakeWave(Vector3 dirFromPivot, float perObjectOffset, bool lookTowardsPivot, float radianOffset)
         {
-        
+            HandleObjects();
+            
+            float radianStep = (2 * Mathf.PI) / visualObjs.Count;
+            float currRadian = radianOffset;
+            
+            Vector3 dir = (dirFromPivot - pivotTransform.position).normalized;
+            Vector3 scaledDir = dir * perObjectOffset; // essentially the step between two objects in direction 'dir'
+            float totalDist = perObjectOffset * Mathf.Clamp((visualObjs.Count - 1), 0, Int32.MaxValue);
+            Vector3 incrementPos = totalDist * 0.5f * dir; // initialized to starting position
+            for (int i = 0; i < visualObjs.Count; ++i)
+            {
+                Vector3 pos = incrementPos + new Vector3(-incrementPos.y, incrementPos.x, 0) * Mathf.Sin(currRadian);
+                
+                
+                visualObjs[i].transform.position = pos;
+                visualObjs[i].SetActive(true);
+                
+                if (lookTowardsPivot)
+                {
+                    Vector3 objectToPivotDir =  pivotTransform.position - visualObjs[i].transform.position;
+                    visualObjs[i].transform.rotation = Quaternion.FromToRotation(Vector3.up, objectToPivotDir);
+                }
+                
+                incrementPos += -scaledDir; // increment step
+                currRadian += radianStep;
+            }
         }
 
         protected virtual void MakePreset()
         {
+            isPresetShape = true;
+            
             foreach (Transform t in presetTransforms)
             {
                 visualObjs.Add(t.gameObject);
