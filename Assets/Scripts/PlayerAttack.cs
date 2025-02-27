@@ -61,9 +61,13 @@ public class PlayerAttack : MonoBehaviour
 
     float curAirCombo; // Keeps track of the combo number when in the air (It has to be seperate from the ground)
 
+    public float comboBufferTime;
+
     Boolean stopPlayerMovement; // For when an attack stops the player from making any more movements
 
     Boolean stopPlayerYMovement; // used for when we want to stop any Y movement
+
+    public Boolean isComboBuffered; // Used to tell if the player should be allowed to enter new inputs 
 
     Rigidbody2D playerRigidbody; // Reference to the player's rigid body
 
@@ -99,10 +103,13 @@ public class PlayerAttack : MonoBehaviour
 
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
+
+        isComboBuffered = false;
         
         playerRigidbody = transform.GetComponent<Rigidbody2D>();
 
     }
+
 
     // Update is called once per frame
     void Update()
@@ -118,8 +125,8 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    
 
+    
 
     void attackColliderUpdate(){
 
@@ -148,11 +155,13 @@ public class PlayerAttack : MonoBehaviour
             curAirCombo = 0;
             canAirCombo = true;
             resetAirAttacks();
+            canAttack = true;
         }
 
         if(isOnGround && canAirCombo == false){
             canAirCombo = true;
             resetAirAttacks();
+            canAttack = true;
         }
     } 
 
@@ -178,6 +187,7 @@ public class PlayerAttack : MonoBehaviour
         curAirCombo = 0;
         isAttacking = false;
         resetAirAttacks();
+        canAttack = true;
     }
     
 
@@ -192,7 +202,7 @@ public class PlayerAttack : MonoBehaviour
         updateInput(); // Updates the caninput variable in this function with the game manager variable
 
         // When you are able to attack it records the key you press
-        if(canAttack == true)
+        if(canAttack == true && !isComboBuffered)
         {
             // You arent able to record your next attack input if the current attack pressed is any key
             if(currentAttackPressed != AttackType.none)
@@ -531,6 +541,8 @@ public class PlayerAttack : MonoBehaviour
             resetAttacks(); // Reset attacks sets can attack to true
             currentAttackPressed = AttackType.none; // The current attack being done is set to none
             resetKnockback(); // Resets the knockback stats for this attack
+            isComboBuffered = true; // Sets the buffer to true
+            StartCoroutine(comboBuffer());
         }
 
         // Refers to any tilt attacks
@@ -559,6 +571,8 @@ public class PlayerAttack : MonoBehaviour
             resetAirAttacks();
             currentAttackPressed = AttackType.none;
             resetKnockback(); // Resets the knockback stats for this attack
+            isComboBuffered = true; // Sets the buffer to true
+            StartCoroutine(comboBuffer());
         }
     }
 
@@ -730,7 +744,7 @@ public class PlayerAttack : MonoBehaviour
         attackAnimator.SetBool("FAttack2",false);
         attackAnimator.SetBool("FAttack3",false);
         attackAnimator.SetBool("FAttack4",false);
-        canAttack = true;
+    
     }
 
 
@@ -751,6 +765,8 @@ public class PlayerAttack : MonoBehaviour
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
+        //if(isComboBuffered) return;
+        
         // When holding up you perform an uptilt
         if(canInput && holdingUp){
             attackPressed = AttackType.upTiltE;
@@ -783,6 +799,8 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackR(InputValue value)
     {
+        //if(isComboBuffered) return;
+
         // When holding up you perform an uptilt
         if(canInput && holdingUp){
             attackPressed = AttackType.upTiltR;
@@ -813,6 +831,8 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackF(InputValue value)
     {
+        //if(isComboBuffered) return;
+
         // When holding up you perform an uptilt
         if(canInput && holdingUp){
             attackPressed = AttackType.upTiltF;
@@ -867,5 +887,14 @@ public class PlayerAttack : MonoBehaviour
         {
             holdingDown = false;
         }
+    }
+
+
+    private IEnumerator comboBuffer(){
+        yield return new WaitForSeconds(comboBufferTime);
+
+        canAttack = true;
+        isComboBuffered = false;
+        
     }
 }
