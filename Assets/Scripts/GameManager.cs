@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
     // First is player, next is script
     // true means frozen
     private bool[][] knockbackFrozen = new bool[2][];
+    private bool[][] knockbackFrozenY = new bool[2][];
 
 
     // Used to make the game manager. Doesnt really need to be edited
@@ -186,6 +187,8 @@ public class GameManager : MonoBehaviour
 
         knockbackFrozen[0] = new bool[2];
         knockbackFrozen[1] = new bool[2];
+        knockbackFrozenY[0] = new bool[2];
+        knockbackFrozenY[1] = new bool[2];
 
         StartCoroutine(StartRoundCountdown(3)); // Start the countdown
 
@@ -305,7 +308,7 @@ public class GameManager : MonoBehaviour
 
         //stops other players movement for knockback
         UpdateStopMovement(2, true, 1);
-        stopP2YMovement = true;
+        UpdateStopMovementY(2, true, 1);
 
         //if timer is already running the stop it
         if(knockbackCoroutineP1 != null)
@@ -343,7 +346,7 @@ public class GameManager : MonoBehaviour
 
         //stops other players movement for knockback
         UpdateStopMovement(1, true, 1);
-        stopP1YMovement = true;
+        UpdateStopMovementY(1, true, 1);
 
         if(knockbackCoroutineP2 != null)
         {
@@ -536,12 +539,12 @@ public class GameManager : MonoBehaviour
         if(player == 1)
         {
             UpdateStopMovement(1, false, 1);
-            stopP1YMovement = false;
+            UpdateStopMovementY(1, false, 1);
         }
         else if(player == 2)
         {
             UpdateStopMovement(2, false, 1);
-            stopP2YMovement = false;
+            UpdateStopMovementY(2, false, 1);
         }
 
         Debug.Log("Knockback timer finished for player " + player);
@@ -561,12 +564,10 @@ public class GameManager : MonoBehaviour
             if(player == 0)
             {
                 stopP1Movement = true;
-                stopP1YMovement = true;
             }
             else if(player == 1)
             {
                 stopP2Movement = true;
-                stopP2YMovement = true;
             }
         }
         else if(player == 0) //potentially unfreezing, if all are false
@@ -581,6 +582,41 @@ public class GameManager : MonoBehaviour
             if(knockbackFrozen[1][0] == false && knockbackFrozen[1][1] == false)
             {
                 stopP2Movement = false;
+            }
+        }
+    }
+
+    //same but for y movement
+    public void UpdateStopMovementY(int player, bool stopMovement, int script)
+    {
+        player--; // Convert to 0-based index
+
+        knockbackFrozenY[player][script] = stopMovement;
+
+        //if freezing, freeze
+        if(stopMovement)
+        {
+            if(player == 0)
+            {
+                stopP1YMovement = true;
+            }
+            else if(player == 1)
+            {
+                stopP2YMovement = true;
+            }
+        }
+        else if(player == 0) //potentially unfreezing, if all are false
+        {
+            if(knockbackFrozenY[0][0] == false && knockbackFrozenY[0][1] == false)
+            {
+                stopP1YMovement = false;
+            }
+        }
+        else if(player == 1)
+        {
+            if(knockbackFrozenY[1][0] == false && knockbackFrozenY[1][1] == false)
+            {
+                stopP2YMovement = false;
             }
         }
     }

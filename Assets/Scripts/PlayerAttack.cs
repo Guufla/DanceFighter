@@ -610,11 +610,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if(transform.tag == "Player1"){
             GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-            GameManager.Instance.stopP1YMovement = stopPlayerYMovement;
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
         else{
             GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-            GameManager.Instance.stopP2YMovement = stopPlayerYMovement;
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
     }
 
