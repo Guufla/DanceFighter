@@ -234,7 +234,7 @@ public class HitboxCollision : MonoBehaviour
 
         Debug.Log("Hit");
         oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
-
+    }
     
     private void ResetIsHit()
     {
