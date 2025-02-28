@@ -593,11 +593,11 @@ public class PlayerAttack : MonoBehaviour
             // The last part of each combo does not need a combo reset timer
             comboResetTimerActive = false;
         }
-        //Debug.Log("Current State Info: " + currentStateInfo.IsName(animationName));
-        //Debug.Log("Is Animating: " + isAnimating);
+        Debug.Log("Current State Info: " + currentStateInfo.IsName(animationName));
+        Debug.Log("Is Animating: " + isAnimating);
 
         // animation name would be something like LightAttack1 and refers to the animation itself
-        if(currentStateInfo.IsName(animationName) && isAnimating == false)
+        if(currentStateInfo.IsName(animationName))
         {
             // Function for when the hitbox animation is complete
             completeAnimation(version, animatorBool, animationName, isAirAttacking);
