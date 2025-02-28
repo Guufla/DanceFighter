@@ -106,7 +106,23 @@ public class GameManager : MonoBehaviour
 
     public float timerSeconds = 99f;
 
+    [Header("Winboxes")]
 
+    public Image emptyBox1P1;
+
+    public Image emptyBox2P1;
+
+    public Image winBox1P1;
+
+    public Image winBox2P1;
+
+    public Image emptyBox1P2;
+
+    public Image emptyBox2P2;
+
+    public Image winBox1P2;
+
+    public Image winBox2P2;
 
     [Header("Buttons")]
 
@@ -179,6 +195,14 @@ public class GameManager : MonoBehaviour
         winMessage.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
+        emptyBox1P1.gameObject.SetActive(true);
+        emptyBox2P1.gameObject.SetActive(true);
+        winBox1P1.gameObject.SetActive(false);
+        winBox2P1.gameObject.SetActive(false);
+        emptyBox1P2.gameObject.SetActive(true);
+        emptyBox2P2.gameObject.SetActive(true);
+        winBox1P2.gameObject.SetActive(false);
+        winBox2P2.gameObject.SetActive(false);
 
         StartCoroutine(StartRoundCountdown(3)); // Start the countdown
 
@@ -331,10 +355,12 @@ public class GameManager : MonoBehaviour
             p1WinCounter += 1;
             winMessage.text = "Player 1 Wins!";
             winMessage.gameObject.SetActive(true);
+            winBox1P1.gameObject.SetActive(true);
 
             if (p1WinCounter >= 2) // When player 1 wins 2 rounds game is over 
             {
                 gameOver = true;
+                winBox2P1.gameObject.SetActive(true);
                 winMessage.text = "Player 1 Wins";
                 winMessage.gameObject.SetActive(true);
                 quitButton.gameObject.SetActive(true);
@@ -357,10 +383,12 @@ public class GameManager : MonoBehaviour
             p2WinCounter += 1;
             winMessage.text = "Player 2 Wins!";
             winMessage.gameObject.SetActive(true);
+            winBox1P2.gameObject.SetActive(true);
 
             if (p2WinCounter >= 2) // When player 2 wins 2 rounds game is over 
             {
                 gameOver = true;
+                winBox2P2.gameObject.SetActive(true);
                 winMessage.text = "Player 2 Wins";
                 winMessage.gameObject.SetActive(true);
                 quitButton.gameObject.SetActive(true);
@@ -423,9 +451,17 @@ public class GameManager : MonoBehaviour
         p1WinCounter = 0;
         p2WinCounter = 0;
 
-        // Hide buttons
+        // Hide buttons and winboxes
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
+        emptyBox1P1.gameObject.SetActive(true);
+        emptyBox2P1.gameObject.SetActive(true);
+        winBox1P1.gameObject.SetActive(false);
+        winBox2P1.gameObject.SetActive(false);
+        emptyBox1P2.gameObject.SetActive(true);
+        emptyBox2P2.gameObject.SetActive(true);
+        winBox1P2.gameObject.SetActive(false);
+        winBox2P2.gameObject.SetActive(false);
 
         // Reset the match
         StartCoroutine(RestartMatch(2f));
