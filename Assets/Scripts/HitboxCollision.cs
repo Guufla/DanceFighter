@@ -152,13 +152,29 @@ public class HitboxCollision : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (GameManager.Instance.isCountingDown) return;
+        if (GameManager.Instance.isCountingDown)
+        {
+            //Debug.Log("Game is counting down, no hitbox collision");
+            return;
+        }
         
-        if(!playerAttack.isAttacking) return;
+        if(!playerAttack.isAttacking)
+        {
+            //Debug.Log("Player is not attacking, no hitbox collision");
+            return;
+        }
         
-        if(hasCollided) return;
+        if(hasCollided)
+        {
+            //Debug.Log("Hitbox has already collided, no hitbox collision");
+            return;
+        }
         
-        if (!IsAnyAttackAnimationActive()) return;
+        if (!IsAnyAttackAnimationActive())
+        {
+            //Debug.Log("No attack animation is active, no hitbox collision");
+            return;
+        }
         
         if (other.CompareTag(oppositePlayer.tag)) 
         {
@@ -173,9 +189,8 @@ public class HitboxCollision : MonoBehaviour
             // Needs to be more complex so that depending on where its hit from there will be a different knockback and stun
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
             
-            oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+            StartCoroutine(Knockback());
 
-            Debug.Log("Hit");
             hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             
@@ -208,8 +223,18 @@ public class HitboxCollision : MonoBehaviour
                 GameManager.Instance.Player2HitsPlayer1();
                 //Debug.Log("Player 2 hits Player 1");
         }
+
+        
     
     }
+
+    private IEnumerator Knockback()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Debug.Log("Hit");
+        oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+
     
     private void ResetIsHit()
     {
