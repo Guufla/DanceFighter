@@ -123,7 +123,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""id"": ""7e93b4ea-ba86-48f9-b1f5-b4f9e754867c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press(pressPoint=0.2,behavior=2)"",
+                    ""interactions"": ""Tap(duration=0.3,pressPoint=0.3)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -354,7 +354,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""AttackE"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -365,7 +365,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""AttackF"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -376,7 +376,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""AttackR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
