@@ -278,7 +278,7 @@ public class GameManager : MonoBehaviour
     {
         if (isCountingDown) return;
 
-        Debug.Log("Player 1 hits Player 2");
+        //Debug.Log("Player 1 hits Player 2");
 
         P2Health -= 10;
         opponentHealth.value = P2Health;
@@ -324,7 +324,7 @@ public class GameManager : MonoBehaviour
     {
         if (isCountingDown) return;
 
-        Debug.Log("Player 2 hits Player 1");
+        //Debug.Log("Player 2 hits Player 1");
 
         P1Health -= 10;
         playerHealthBar.value = P1Health; //when p2 hits p1 add an extra boost to the offensive bar
@@ -526,14 +526,14 @@ public class GameManager : MonoBehaviour
     //unfreezes the player after being hit
     private IEnumerator KnockbackTimer(int player)
     {
-        Debug.Log("Knockback timer started for player " + player);
+        //Debug.Log("Knockback timer started for player " + player);
         //yield return new WaitForSeconds(1f); // Wait for 0.5 seconds
 
         //testing for player2
         for(int i = 0; i < 10; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            Debug.Log("stopP2Movement: " + stopP2Movement);
+            //Debug.Log("stopP2Movement: " + stopP2Movement);
         }
 
         if(player == 1)
@@ -547,7 +547,7 @@ public class GameManager : MonoBehaviour
             UpdateStopMovementY(2, false, 1);
         }
 
-        Debug.Log("Knockback timer finished for player " + player);
+        //Debug.Log("Knockback timer finished for player " + player);
     }
 
     //script int is used to identify which script is calling the function
