@@ -20,8 +20,6 @@ public class HitboxCollision : MonoBehaviour
 
     float basicAttackKnockBackY;
 
-
-
     //public float playerHealth = 100;
 
     //public Slider healthbar;
@@ -34,14 +32,13 @@ public class HitboxCollision : MonoBehaviour
 
     
     private GameObject oppositePlayer;
+    private Animator oppositePlayerAnimator;
     private Rigidbody2D oppositeRigidBody;
 
 
     private bool hasCollided = false;
+    private float hitState = 0f;
     private PlayerAttack playerAttack;
-    //private int lastAnimationState;
-
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -69,7 +66,7 @@ public class HitboxCollision : MonoBehaviour
 
             oppositePlayer = GameManager.Instance.player2;
 
-
+            oppositePlayerAnimator = oppositePlayer.GetComponentInChildren<Animator>();
             // Makes sure the opposite player variable is correct
             
         }
@@ -88,6 +85,8 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
 
             oppositePlayer = GameManager.Instance.player1;
+            
+            oppositePlayerAnimator = oppositePlayer.GetComponentInChildren<Animator>();
         }
         
         playerAttack = player.GetComponent<PlayerAttack>();
@@ -119,32 +118,35 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
         }
         
-        if(!playerAttack.isAttacking && hasCollided) hasCollided = false;
+        if(!playerAttack.isAttacking && hasCollided)
+        {
+            hasCollided = false;
+        }
 
     }
     
     private bool IsAnyAttackAnimationActive()
     {
         return playerAttack.attackAnimator.GetBool("EAttack1") ||
-               playerAttack.attackAnimator.GetBool("EAttack2") ||
-               playerAttack.attackAnimator.GetBool("EAttack3") ||
-               playerAttack.attackAnimator.GetBool("RAttack1") ||
-               playerAttack.attackAnimator.GetBool("RAttack2") ||
-               playerAttack.attackAnimator.GetBool("RAttack3") ||
-               playerAttack.attackAnimator.GetBool("RAttack4") ||
-               playerAttack.attackAnimator.GetBool("RAttack5") ||
-               playerAttack.attackAnimator.GetBool("FAttack1") ||
-               playerAttack.attackAnimator.GetBool("FAttack2") ||
-               playerAttack.attackAnimator.GetBool("FAttack3") ||
-               playerAttack.attackAnimator.GetBool("FAttack4") ||
-               playerAttack.attackAnimator.GetBool("AAttack1") ||
-               playerAttack.attackAnimator.GetBool("AAttack2") ||
-               playerAttack.attackAnimator.GetBool("AAttack3") ||
-               playerAttack.attackAnimator.GetBool("AAttack4") ||
-               playerAttack.attackAnimator.GetBool("AirDownTilt") ||
-               playerAttack.attackAnimator.GetBool("AirUpTilt") ||
-               playerAttack.attackAnimator.GetBool("UpTilt") ||
-               playerAttack.attackAnimator.GetBool("DownTilt");
+            playerAttack.attackAnimator.GetBool("EAttack2") ||
+            playerAttack.attackAnimator.GetBool("EAttack3") ||
+            playerAttack.attackAnimator.GetBool("RAttack1") ||
+            playerAttack.attackAnimator.GetBool("RAttack2") ||
+            playerAttack.attackAnimator.GetBool("RAttack3") ||
+            playerAttack.attackAnimator.GetBool("RAttack4") ||
+            playerAttack.attackAnimator.GetBool("RAttack5") ||
+            playerAttack.attackAnimator.GetBool("FAttack1") ||
+            playerAttack.attackAnimator.GetBool("FAttack2") ||
+            playerAttack.attackAnimator.GetBool("FAttack3") ||
+            playerAttack.attackAnimator.GetBool("FAttack4") ||
+            playerAttack.attackAnimator.GetBool("AAttack1") ||
+            playerAttack.attackAnimator.GetBool("AAttack2") ||
+            playerAttack.attackAnimator.GetBool("AAttack3") ||
+            playerAttack.attackAnimator.GetBool("AAttack4") ||
+            playerAttack.attackAnimator.GetBool("AirDownTilt") ||
+            playerAttack.attackAnimator.GetBool("AirUpTilt") ||
+            playerAttack.attackAnimator.GetBool("UpTilt") ||
+            playerAttack.attackAnimator.GetBool("DownTilt");
     }
 
     // Update is called once per frame
@@ -177,13 +179,22 @@ public class HitboxCollision : MonoBehaviour
             hasCollided = true;
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             
-            if(playerDef.isBlocking){
+            if(playerDef.playerAnimator.GetBool("isBlocking") || playerDef.playerAnimator.GetBool("isParrying")){
                 playerDef.TakeDamage(50, other);
                 return;
             }
         
-        }
-        
+            oppositePlayerAnimator.SetBool("isHit", true); // Sets the isHit variable in the opposite player's animator to true
+            if(hitState == 0f){ 
+                hitState = 1f;
+            }
+            else{
+                hitState = 0f;
+            }
+            oppositePlayerAnimator.SetFloat("HitStates", hitState);
+            Invoke("ResetIsHit", 0.5f); // Resets the isHit variable in the opposite player's animator to false after 0.5 seconds
+    }
+    
 
         if (player.CompareTag("Player1") && other.CompareTag("Player2")) 
         {
@@ -198,5 +209,17 @@ public class HitboxCollision : MonoBehaviour
                 //Debug.Log("Player 2 hits Player 1");
         }
     
+    }
+    
+    private void ResetIsHit()
+    {
+        if (oppositePlayerAnimator != null)
+        {
+            oppositePlayerAnimator.SetBool("isHit", false);
+        }
+        else
+        {
+            Debug.LogError("oppositePlayerAnimator is null in ResetIsHit");
+        }
     }
 }
