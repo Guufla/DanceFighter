@@ -10,142 +10,75 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-
-
     [Header("Player1")]
-
-    public GameObject player1; // This is a game object reference to player 1 that lets us easily call it from different scripts
-
-    // This is used to represent how much knockback any given attack does. It will usually be zero but while doing an attack it will switch around depending on the setKnockback() function.
-    public float P1AttackKnockBackX; // When the knockback is set on an attack its x float will be held here. 
-
-    public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here.
-
-    public Boolean stopP1Movement; 
-    public Boolean stopP1YMovement; 
-
-    public Boolean canInputP1; 
-
-    public Boolean isHitBoxAnimatingP1; 
-
-    public Slider playerHealthBar; // This is a reference to the player health slider that lets us easily call it from different scripts
-
+    public GameObject player1;
+    public float P1AttackKnockBackX;
+    public float P1AttackKnockBackY;
+    public Boolean stopP1Movement;
+    public Boolean stopP1YMovement;
+    public Boolean canInputP1;
+    public Boolean isHitBoxAnimatingP1;
+    public Slider playerHealthBar;
     public int P1Health = 100;
-
-    public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
-
+    public Slider p1OffensiveBar;
     public static int p1WinCounter = 0;
+    public bool player1IsOnGround;
+    public bool p1Aggro;
 
-
-
-    public bool player1IsOnGround; // Tells you if the player is on the ground or not
-
-    public bool p1Aggro; // Tells if the player is in aggro mode
-
-
-    // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
     [Header("Player2")]
-
-    public GameObject player2; // This is a game object reference to player 2 that lets us easily call it from different scripts
-
-    // This is used to represent how much knockback any given attack does. It will usually be zero but while doing an attack it will switch around depending on the setKnockback() function.
-    public float P2AttackKnockBackX; // When the knockback is set on an attack its x float will be held here. 
-
-    public float P2AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
-
-    public Boolean stopP2Movement; 
+    public GameObject player2;
+    public float P2AttackKnockBackX;
+    public float P2AttackKnockBackY;
+    public Boolean stopP2Movement;
     public Boolean stopP2YMovement;
-
-    public Boolean canInputP2; 
-    
-    public Boolean isHitBoxAnimatingP2; 
-
-    public bool P2Aggro; // Tells if the player is in aggro mode
-
-    public Slider opponentHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
-
+    public Boolean canInputP2;
+    public Boolean isHitBoxAnimatingP2;
+    public bool P2Aggro;
+    public Slider opponentHealth;
     public int P2Health = 100;
-
-    public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
-
+    public Slider p2Offensive;
     public static int p2WinCounter = 0;
-
-    public bool player2IsOnGround; // Tells you if the player is on the ground or not
-
+    public bool player2IsOnGround;
 
     [Header("Offensive mode")]
-
     public float maxOffensiveBarValue;
-
     private float offensiveTimer1 = 0f;
-
     private float offensiveTimer2 = 0f;
-
-    private float offensiveInterval = 1f;//every 1 second increase it by amount
-
-    public int offensiveIncrease = 50; //amount to increase by
-
-    public int offensiveDecrease = 50; //amount to decrease every second by when in offensive mode
-
+    private float offensiveInterval = 1f;
+    public int offensiveIncrease = 50;
+    public int offensiveDecrease = 50;
     public int offensiveValueP1;
-
-    public int offensiveValueP2; // amount to increase by when in offensive mode and you hit someone
-
-    public bool isOffensiveP2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
-
-    public bool isOffensiveP1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
-
+    public int offensiveValueP2;
+    public bool isOffensiveP2 = false;
+    public bool isOffensiveP1 = false;
 
     [Header("Text")]
-
-    public TMP_Text winMessage; // Win message
-
-    public TMP_Text countdownText; // Countdown text
-
-    public TMP_Text timerText; // Timer for round text 
-
+    public TMP_Text winMessage;
+    public TMP_Text countdownText;
+    public TMP_Text timerText;
     public float timerSeconds = 99f;
 
     [Header("Winboxes")]
-
     public Image emptyBox1P1;
-
     public Image emptyBox2P1;
-
     public Image winBox1P1;
-
     public Image winBox2P1;
-
     public Image emptyBox1P2;
-
     public Image emptyBox2P2;
-
     public Image winBox1P2;
-
     public Image winBox2P2;
 
     [Header("Buttons")]
-
-    public Button restartButton; // Restart button
-
-    public Button quitButton; // Quit button
-
+    public Button restartButton;
+    public Button quitButton;
 
     [Header("Bools")]
-
-    public bool isCountingDown; // Bool for when the game is counting down 
-
+    public bool isCountingDown;
     public bool roundOver = false;
-
     public bool gameOver = false;
-
     public bool p1Win = false;
-
     public bool p2Win = false;
 
-
-
-    // Used to make the game manager. Doesnt really need to be edited
     public static GameManager Instance
     {
         get
@@ -156,8 +89,8 @@ public class GameManager : MonoBehaviour
             }
             return _instance;
         }
-
     }
+
     private void Awake()
     {
         if (_instance)
@@ -168,26 +101,18 @@ public class GameManager : MonoBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this); 
+            DontDestroyOnLoad(this);
         }
-        
     }
 
     void Start()
     {
-        // Sets the ground variables to false by default
         player1IsOnGround = false;
         player2IsOnGround = false;
-
-        // Sets the health bar values to the player health variables
-        // Max health is 100 for now
-        // MAKE SURE TO SET MAX VALUES FIRST
         opponentHealth.maxValue = P2Health;
         playerHealthBar.maxValue = P1Health;
         playerHealthBar.value = P1Health;
         opponentHealth.value = P2Health;
-        
-
         p1OffensiveBar.value = 0;
         p2Offensive.value = 0;
         p1OffensiveBar.maxValue = maxOffensiveBarValue;
@@ -204,17 +129,16 @@ public class GameManager : MonoBehaviour
         winBox1P2.gameObject.SetActive(false);
         winBox2P2.gameObject.SetActive(false);
 
-        StartCoroutine(StartRoundCountdown(3)); // Start the countdown
-
+        StartCoroutine(StartRoundCountdown(3));
     }
 
     void Update()
     {
         if (isCountingDown) return;
-        offensiveTimer1 += Time.deltaTime; // Calulate the time that has passed
+        offensiveTimer1 += Time.deltaTime;
         offensiveTimer2 += Time.deltaTime;
 
-        if (offensiveTimer1 >= offensiveInterval) // If the time that has passed is greater than the interval (1sec) then do the following
+        if (offensiveTimer1 >= offensiveInterval)
         {
             if (!isOffensiveP1)
             {
@@ -224,10 +148,10 @@ public class GameManager : MonoBehaviour
             {
                 DecreaseOffensiveSlider(p1OffensiveBar, ref isOffensiveP1);
             }
-            offensiveTimer1 = 0; // Reset the timer
+            offensiveTimer1 = 0;
         }
 
-        if (offensiveTimer2 >= offensiveInterval) // what was before but just for player 2
+        if (offensiveTimer2 >= offensiveInterval)
         {
             if (!isOffensiveP2)
             {
@@ -240,7 +164,6 @@ public class GameManager : MonoBehaviour
             offensiveTimer2 = 0;
         }
 
-        // If the offensive bar is full then activate the offensive mode and reset the amount
         if (p1OffensiveBar.value == maxOffensiveBarValue)
         {
             isOffensiveP1 = true;
@@ -254,12 +177,10 @@ public class GameManager : MonoBehaviour
         if (P1Health <= 0)
         {
             Player2Win();
-            
         }
         if (P2Health <= 0)
         {
             Player1Win();
-            
         }
     }
 
@@ -268,15 +189,13 @@ public class GameManager : MonoBehaviour
         if (!roundOver && !gameOver)
         {
             if (isCountingDown) return;
-            //subtract the offensive amount from the bar value but dont go below 0
             offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveDecrease, 0);
 
-            if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
+            if (offensiveSlider.value == 0)
             {
                 isoffensive = false;
             }
         }
-            
     }
 
     private void IncreaseOffensiveSlider(Slider offensiveSlider)
@@ -284,14 +203,10 @@ public class GameManager : MonoBehaviour
         if (!roundOver && !gameOver)
         {
             if (isCountingDown) return;
-            // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
             offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncrease, offensiveSlider.maxValue);
-
         }
-        
-
     }
-    //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
+
     public void Player1HitsPlayer2()
     {
         if (isCountingDown) return;
@@ -299,34 +214,26 @@ public class GameManager : MonoBehaviour
         opponentHealth.value = P2Health;
         if (!isOffensiveP1)
         {
-            // add 50 to the offensive bar but dont go over the max value which is 1000
             p1OffensiveBar.value = Mathf.Min(p1OffensiveBar.value + offensiveIncrease, p1OffensiveBar.maxValue);
-
         }
 
-        //when p1 hits p2 add an extra boost to the offensive bar
         if (isOffensiveP1 && offensiveValueP1 > 0)
         {
-            // if you hit player while in offensive mode add 45 to the bar value but dont go over the max value which is 1000
             p1OffensiveBar.value = Mathf.Min(p1OffensiveBar.value + offensiveValueP1, p1OffensiveBar.maxValue);
-            // minus the value by 15 so they cant have infinite offensive mode
             offensiveValueP1 -= 15;
-
         }
 
         if (isOffensiveP2)
         {
-            //if player 2 if in offensive mode and you hit them decrease the offensive bar by 50 but dont go below 0
             p2Offensive.value = Mathf.Max(p2Offensive.value - offensiveIncrease, 0);
-
         }
     }
-    //When player 2 hits player 1 subtract 10 from player 2's health and update the slider
+
     public void Player2HitsPlayer1()
     {
         if (isCountingDown) return;
         P1Health -= 10;
-        playerHealthBar.value = P1Health; //when p2 hits p1 add an extra boost to the offensive bar
+        playerHealthBar.value = P1Health;
         if (!isOffensiveP2)
         {
             p2Offensive.value = Mathf.Min(p2Offensive.value + offensiveIncrease, p2Offensive.maxValue);
@@ -336,20 +243,17 @@ public class GameManager : MonoBehaviour
         {
             p2Offensive.value = Mathf.Min(p2Offensive.value + offensiveValueP2, p2Offensive.maxValue);
             offensiveValueP2 -= 15;
-
         }
         if (isOffensiveP1)
         {
             p1OffensiveBar.value = Mathf.Max(p1OffensiveBar.value - offensiveIncrease, 0);
         }
-
     }
 
     public void Player1Win()
     {
         if (!p1Win)
         {
-            // When p1 wins makes the bool true and add 1 to its round score and display text
             roundOver = true;
             p1Win = true;
             p1WinCounter += 1;
@@ -357,7 +261,7 @@ public class GameManager : MonoBehaviour
             winMessage.gameObject.SetActive(true);
             winBox1P1.gameObject.SetActive(true);
 
-            if (p1WinCounter >= 2) // When player 1 wins 2 rounds game is over 
+            if (p1WinCounter >= 2)
             {
                 gameOver = true;
                 winBox2P1.gameObject.SetActive(true);
@@ -377,7 +281,6 @@ public class GameManager : MonoBehaviour
     {
         if (!p2Win)
         {
-            // When p2 wins makes the bool true and add 1 to its round score and display text
             roundOver = true;
             p2Win = true;
             p2WinCounter += 1;
@@ -385,7 +288,7 @@ public class GameManager : MonoBehaviour
             winMessage.gameObject.SetActive(true);
             winBox1P2.gameObject.SetActive(true);
 
-            if (p2WinCounter >= 2) // When player 2 wins 2 rounds game is over 
+            if (p2WinCounter >= 2)
             {
                 gameOver = true;
                 winBox2P2.gameObject.SetActive(true);
@@ -401,57 +304,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator RestartMatch(float waitTime) // Makes sure match doesnt restart automatically
+    private IEnumerator RestartMatch(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         yield return new WaitForSeconds(waitTime);
 
-        // Hide the win message
         winMessage.gameObject.SetActive(false);
-
-        // Reset Timer
         timerSeconds = 99f;
         countdownText.text = "99";
-
-
-        // Reset player health
         P1Health = 100;
         P2Health = 100;
         playerHealthBar.value = P1Health;
         opponentHealth.value = P2Health;
-
-        // Reset offensive sliders
         p1OffensiveBar.value = 0;
         p2Offensive.value = 0;
         isOffensiveP1 = false;
         isOffensiveP2 = false;
-
-        // Reset win booleans
         p1Win = false;
         p2Win = false;
         roundOver = false;
         gameOver = false;
-
-        // Reposition players to their initial positions
         player1.transform.position = new Vector2(-4, -3);
         player2.transform.position = new Vector2(4, -3);
-
         StartCoroutine(StartRoundCountdown(3));
-
-
-
-
-
-
     }
 
-    public void RestartGame() // When restarting the whole game set the win counters to 0
+    public void RestartGame()
     {
-        // Reset win counters
         p1WinCounter = 0;
         p2WinCounter = 0;
-
-        // Hide buttons and winboxes
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         emptyBox1P1.gameObject.SetActive(true);
@@ -462,14 +343,11 @@ public class GameManager : MonoBehaviour
         emptyBox2P2.gameObject.SetActive(true);
         winBox1P2.gameObject.SetActive(false);
         winBox2P2.gameObject.SetActive(false);
-
-        // Reset the match
         StartCoroutine(RestartMatch(2f));
     }
 
-    private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
+    private IEnumerator StartRoundCountdown(int countdownTime)
     {
-        
         isCountingDown = true;
         countdownText.gameObject.SetActive(true);
         while (countdownTime > 0)
@@ -492,11 +370,11 @@ public class GameManager : MonoBehaviour
         {
             if (isCountingDown || p1Win || p2Win)
             {
-                yield break; // Exit the coroutine if the game is counting down or if someone has won
+                yield break;
             }
 
-            timerText.text = timerSeconds.ToString("F0"); // Updates the text to display seconds value
-            yield return new WaitForSeconds(1f); // After 1 second subtract 1 from the timer
+            timerText.text = timerSeconds.ToString("F0");
+            yield return new WaitForSeconds(1f);
             timerSeconds--;
         }
         timerText.text = "0";
@@ -509,18 +387,13 @@ public class GameManager : MonoBehaviour
             else if (P2Health > P1Health)
             {
                 Player2Win();
-
             }
             else
             {
                 winMessage.text = "Draw";
                 winMessage.gameObject.SetActive(true);
                 StartCoroutine(RestartMatch(2f));
-
             }
-        
-        
         }
     }
-    
 }
