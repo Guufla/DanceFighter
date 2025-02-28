@@ -733,8 +733,21 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+<<<<<<< Updated upstream
       propertyPath: m_AnchoredPosition.x
       value: -4
+=======
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 2882813693602555619, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -878,7 +891,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113493919489437153, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< Updated upstream
       value: 18
+=======
+      value: 27
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 6863579420462646451, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
