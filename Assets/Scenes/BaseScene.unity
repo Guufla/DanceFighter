@@ -680,6 +680,10 @@ PrefabInstance:
       propertyPath: playerSprite
       value: 
       objectReference: {fileID: 305538560}
+    - target: {fileID: 2011613372581413899, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
+      propertyPath: movementSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2063069317390190093, guid: 8e4f2a69fa584c749a824527795a203a, type: 3}
       propertyPath: m_Enabled
       value: 0
