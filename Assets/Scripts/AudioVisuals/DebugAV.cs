@@ -7,12 +7,13 @@ namespace AudioVisuals
 {
     public class DebugAV : AudioVisual
     {
-        [SerializeField] private TMP_Text text;
+        [SerializeField] private TMP_Text text = null;
 
         protected override void Update()
         {
             base.Update();
-            text.text = GetDebugInfo();
+            if (text is not null)
+                text.text = GetDebugInfo();
         }
     }
 }

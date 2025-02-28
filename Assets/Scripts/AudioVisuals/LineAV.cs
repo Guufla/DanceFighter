@@ -9,7 +9,7 @@ namespace AudioVisuals
     {
         [SerializeField] private float perObjectOffset;
         [SerializeField] private bool lookAtPivot;
-        [SerializeField] private Transform lineDirFromPivot;
+        [SerializeField] protected Transform lineDirFromPivot;
 
         protected override void Update()
         {

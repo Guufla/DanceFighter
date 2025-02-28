@@ -5,7 +5,7 @@ using Utilities;
 
 namespace AudioVisuals
 {
-    public class WaveAndCircleAV : DebugAV
+    public class WaveCircle : DebugAV
     {
         [SerializeField] private float perObjectOffset;
         [SerializeField] private float pivotOffset;

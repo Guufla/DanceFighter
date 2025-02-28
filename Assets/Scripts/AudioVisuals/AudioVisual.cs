@@ -18,18 +18,11 @@ namespace AudioVisuals
     public abstract class AudioVisual : MonoBehaviour, IAudioVisual, IObjectPooler
     {
         /*
-         * Shapes:
-         *      - Circle
-         *      - Line
-         *      - StaticWave
-         *      - OscillatingWave
+         * Shape Ideas:
          *      - Random Noise Movement
          *
          * Effects:
-         *      - ScaleSingleAxis
-         *      - ScaleMultiAxes
-         *      - ColorGradient
-         *      - Transparency
+         *      
          *
          * Code Idea/Goal:
          *      Make every shape and effect function be able to mix with each other (additive style).
@@ -115,15 +108,16 @@ namespace AudioVisuals
         private float specDataCutoff; // defines what percent of the spec data to cut off from the right
         [SerializeField] private FFTWindow fftWindowToUse; // This enum values rank in ascending order of precision for spec data processing (Triangle seems fine).
         [SerializeField] private bool doPropertyValueRecheck = true; // mostly for rapid testing in editor. Set false to save operations.
-
+        [Range(64, 8192)] [SerializeField]
+        private int sampleSize;
+        
         protected List<GameObject> visualObjs = new List<GameObject>();
-        protected float[] usableSpectrumData; // the spec data that will actually be used in the visuals
+        protected float[] usableSpecData; // the spec data that will actually be used in the visuals
 
         private Utilities.ObjectPooler objectPooler = null;
         private GameObject visualObjectPrefab;
         private int _targetRenderSize;
-        private int sampleSize;
-        private float[] spectrumData;
+        private float[] specData;
         private List<List<Color>> colorsToBlendPerObject = new List<List<Color>>();
         
         protected virtual void OnDestroy()
@@ -151,8 +145,8 @@ namespace AudioVisuals
             string output = "";
             output += $"Target Render Size: {TargetRenderSize}\n";
             output += $"Sample Size: {sampleSize}\n";
-            output += $"Spectrum Data Length: {spectrumData.Length}\n";
-            output += $"Usable Spectrum Data Length: {usableSpectrumData.Length}\n";
+            output += $"Spectrum Data Length: {specData.Length}\n";
+            output += $"Usable Spectrum Data Length: {usableSpecData.Length}\n";
             output += $"Visible Objects Count: {visualObjs.Count}\n";
             if (objectPooler is not null)
             {
@@ -264,20 +258,44 @@ namespace AudioVisuals
             
             
         }
+        
+        
 
-        protected virtual void AddLocalScale(Vector3 scale, bool isAdditive = false)
+        protected virtual void LocalScale(Vector3 scaledAxes, bool isNormalized, bool isAdditive = false)
         {
+            float[] tempData;
+            if (isNormalized)
+            {
+                tempData = GetNormalizedSpecData();
+            }
+            else
+            {
+                tempData = usableSpecData;
+            }
             
+            for (int i = 0; i < visualObjs.Count; ++i)
+            {
+                Vector3 scale = tempData[i] * scaledAxes;
+                HandleAdditiveScale(visualObjs[i].transform, scale, isAdditive);
+            }
+        }
+
+        protected virtual void LineUpObjects(Vector3 dirFromPivot, bool isAdditive = false)
+        {
+            Transform reference = visualObjs[0].transform;
+            float offset = reference.localScale.x;
+            MakeLine(dirFromPivot, offset, false, isAdditive);
         }
 
         // just returns a color between two colors based on "percent".
-        protected void ColorGradient(Color color1, Color color2)
+        protected void ColorGradient(Color color0, Color color1)
         {
             float[] normalizedSpecData = GetNormalizedSpecData();
 
             for (int i = 0; i < normalizedSpecData.Length; ++i)
             {
-                Color c = Color.Lerp(color1, color2, normalizedSpecData[i]);
+                Color c = Color.Lerp(color0, color1, normalizedSpecData[i]);
+                ConsoleLogger.Log($"({c.r} , {c.g}, {c.b}, {c.a})");
                 colorsToBlendPerObject[i].Add(c);
             }
         }
@@ -294,6 +312,8 @@ namespace AudioVisuals
 
             InitializeColorsList(true);
         }
+        
+        #region Effect Combination Handlers
         
         private List<Color> Blend(List<List<Color>> colors)
         {
@@ -332,11 +352,7 @@ namespace AudioVisuals
             
             return completeColors;
         }
-
-        /// <summary>
-        /// Handle additive step for positions (typically shapes).
-        /// This is a simple function, so its more of a way to remember to do this step.
-        /// </summary>
+        
         private void HandleAdditivePosition(Transform transform, Vector3 pos, bool isAdditive)
         {
             if (isAdditive)
@@ -349,10 +365,18 @@ namespace AudioVisuals
             }
         }
 
-        /// <summary>
-        /// Handle additive step for float values.
-        /// This is a simple function, so its more of a way to remember to do this step.
-        /// </summary>
+        private void HandleAdditiveScale(Transform transform, Vector3 scale, bool isAdditive)
+        {
+            if (isAdditive)
+            {
+                transform.localScale += scale;
+            }
+            else
+            {
+                transform.localScale = scale;
+            }
+        }
+        
         private void HandleAdditiveFloat(ref float val, float delta, bool isAdditive)
         {
             if (isAdditive)
@@ -375,6 +399,9 @@ namespace AudioVisuals
             avg /= newVals.Length + 1;
             val = avg;
         }
+        
+        
+        #endregion
     
         /* idea for preset transforms:
             function takes in parent object, then maps each child transform to a list and then can do things to those objects
@@ -384,18 +411,76 @@ namespace AudioVisuals
         private void UpdateSpectrumData()
         {
             TargetRenderSize = Mathf.Clamp(TargetRenderSize, 0, 8192);
-            
             // keep sampleSize as a power of 2 and between 64 and 8192 (requirement of GetSpectrumData)
-            sampleSize = (int)Mathf.Clamp(Mathf.Pow(2, Mathf.Ceil(Mathf.Log(TargetRenderSize) / Mathf.Log(2))), 64, 8192);
-            
+            sampleSize = (int)Mathf.Clamp(Mathf.Pow(2, Mathf.Ceil(Mathf.Log(sampleSize) / Mathf.Log(2))), 64, 8192);
             specDataCutoff = Mathf.Clamp01(specDataCutoff);
-            int usableSize = (int)(sampleSize * (1 - specDataCutoff));
+            
+            
+            int usableSize = TargetRenderSize; // should be the visual object count or TargetRenderSize (same)
+            int subsetStep = 0;
+            int remainder = 0;
+            
+            SetSampleSubsetStep(ref subsetStep, ref remainder, usableSize);
+            ConsoleLogger.Log($"subsetStep = {subsetStep}, remainder = {remainder}");
+            
+            // init arrays
+            specData = new float[sampleSize];
+            usableSpecData = new float[usableSize];
+            // built in Unity call to get 'spectrum data'
+            audioSource.GetSpectrumData(specData, 0, fftWindowToUse);
+            
+            // set values of usableSpecData
+            // int len = sampleSize;
+            // int c = 0;
+            // if (remainder != 0)
+            //     len -= remainder;
+            // for (int i = 0; i < len; i += subsetStep)
+            // {
+            //     float thisStepAvg = 0;
+            //     for (int j = i; j < i + subsetStep; ++j)
+            //     {
+            //         thisStepAvg += specData[j];
+            //     }
+            //     thisStepAvg /= subsetStep;
+            //     usableSpecData[c] = thisStepAvg;
+            //     c++;
+            //     
+            //     //ConsoleLogger.Log($"subsetStep = {subsetStep}, thisStepAvg = {thisStepAvg}");
+            // }
+            //
+            // if (remainder != 0)
+            // {
+            //     float thisStepAvg = 0;
+            //     for (int i = len - 1; i < sampleSize; ++i)
+            //     {
+            //         thisStepAvg += specData[i];
+            //     }
+            //     thisStepAvg /= remainder;
+            //     usableSpecData[c] = thisStepAvg;
+            //     
+            //     //ConsoleLogger.Log($"remainderStep = {remainder}, thisStepAvg = {thisStepAvg}");
+            // }
+            
+            // temporary
+            for (int i = 0; i < usableSpecData.Length; ++i)
+            {
+                usableSpecData[i] = specData[i];
+            }
+            
+            
+            InitializeColorsList();
+        }
 
-            if (TargetRenderSize > usableSize)
+        private void SetSampleSubsetStep(ref int subsetStep, ref int remainderStep, int usableSize)
+        {
+            int sampleSizeWithCutoff = (int)(sampleSize * (1 - specDataCutoff));
+            subsetStep = sampleSizeWithCutoff / usableSize;
+
+            if (usableSize > sampleSizeWithCutoff)
             {
                 sampleSize *= 2; // next power of 2 up
 
-                if (sampleSize > 8192) // if we are already at max sampleSize (8192)
+                if (sampleSize > 8192) // if we are already at max sampleSize (8192), we need to forcibly change the cutoff
                 {
                     // brute force attempt to bring down the cutoff percent until usable size is within target size
                     while (TargetRenderSize > usableSize)
@@ -405,60 +490,21 @@ namespace AudioVisuals
                         usableSize = (int)(sampleSize * (1 - specDataCutoff));
                     }
                 }
-            }
-            
-            // init arrays
-            spectrumData = new float[sampleSize];
-            usableSpectrumData = new float[usableSize];
-            // built in Unity call to get 'spectrum data'
-            audioSource.GetSpectrumData(spectrumData, 0, fftWindowToUse);
-            // copy spec data
-            for (int i = 0; i < usableSize; ++i)
-            {
-                usableSpectrumData[i] = spectrumData[i];
+
+                SetSampleSubsetStep(ref subsetStep, ref remainderStep, usableSize);
+                return; // IMPORTANT so we don't do the last line below
             }
 
-            AverageUsableSpectrum();
-        }
-
-        // takes usable spectrum and brings it down to TargetSize size, averaging values between
-        private void AverageUsableSpectrum()
-        {
-            int usableSize = usableSpectrumData.Length;
-            float[] temp = new float[usableSize];
-            for (int i = 0; i < usableSize; ++i)
-            {
-                temp[i] = usableSpectrumData[i];
-            }
-
-            usableSpectrumData = new float[TargetRenderSize];
-
-            // solve average value for each new index of usableSpectrumData
-            for (int i = 0; i < TargetRenderSize; ++i)
-            {
-                // traverse each subset of values in temp array to be averaged out
-                float avg = 0;
-                int cnt = 0;
-                int start = i * TargetRenderSize;
-                for (int j = start; j < (start + TargetRenderSize) && j < usableSize; ++j)
-                {
-                    cnt++;
-                    avg += temp[j];
-                }
-                avg /= cnt;
-                usableSpectrumData[i] = avg;
-            }
-
-            InitializeColorsList();
+            remainderStep = sampleSizeWithCutoff - (subsetStep * usableSize);
         }
 
         private void InitializeColorsList(bool reset = false)
         {
-            if (!reset && colorsToBlendPerObject.Count == usableSpectrumData.Length)
+            if (!reset && colorsToBlendPerObject.Count == usableSpecData.Length)
                 return;
             
             colorsToBlendPerObject.Clear();
-            for (int i = 0; i < usableSpectrumData.Length; ++i)
+            for (int i = 0; i < usableSpecData.Length; ++i)
             {
                 
                 colorsToBlendPerObject.Add(new List<Color>());
@@ -500,18 +546,23 @@ namespace AudioVisuals
         {
             float min = 0;
             float max = -1;
-            foreach (float f in usableSpectrumData)
+            for (int i = 0; i < usableSpecData.Length; ++i)
             {
-                if (f > max)
-                    max = f;
+                //ConsoleLogger.Log($"spectrumData[{i}] == {specData[i]}");
+                //ConsoleLogger.Log($"usableSpectrumData[{i}] == {usableSpecData[i]}");
+                if (usableSpecData[i] > max)
+                    max = usableSpecData[i];
             }
             
-            float mag = max - min;
-            float[] normalizedSpecData = new float[usableSpectrumData.Length];
-            for (int i = 0; i < usableSpectrumData.Length; ++i)
+            float[] normalizedSpecData = new float[usableSpecData.Length];
+            for (int i = 0; i < usableSpecData.Length; ++i)
             {
-                normalizedSpecData[i] = usableSpectrumData[i] / mag;
+                float vali = (usableSpecData[i] - min) / (max - min);
+
+                normalizedSpecData[i] = vali;
+                ConsoleLogger.Log($"normalizedSpecData[{i}] == {normalizedSpecData[i]}"); // test normalization
             }
+            normalizedSpecData[usableSpecData.Length - 1] = usableSpecData[usableSpecData.Length - 1];// bandaid fix
             return normalizedSpecData;
         }
 
