@@ -8,9 +8,9 @@ public class HitboxAnimationMethods : MonoBehaviour
 
     bool canInput; 
 
-    bool isAnimating; 
+    public bool isAnimating; 
 
-    GameObject parentObject;
+    public GameObject parentObject;
 
     void Start()
     {
@@ -32,19 +32,19 @@ public class HitboxAnimationMethods : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void allowInput(){
+    public void allowInput(){
         canInput = true;
     }
-    void stopInput(){
+    public void stopInput(){
         // Both input and animating should be set at the beginning
         canInput = false;
         isAnimating = true;
     }
 
-    void animationEnd(){
+    public void animationEnd(){
         isAnimating = false;
     }
-    void stopAttack(){
+    public void stopAttack(){
         isAnimating = true;
     }
 }
