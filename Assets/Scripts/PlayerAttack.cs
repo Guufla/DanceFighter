@@ -19,7 +19,6 @@ public class PlayerAttack : MonoBehaviour
     
     [SerializeField] GameObject playerSprite;
 
-    [SerializeField]GameObject attackBoxObject;
     [SerializeField] GameObject attackBoxCollider; // Holds the gameobject that has the collider for the hitbox
 
     AttackType attackPressed; // Records the attack being pressed by the player
@@ -58,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
 
     float knockbackY; // Knockback float for the y axis
 
-    float curCombo; // Keeps track of the combo number
+    public float curCombo; // Keeps track of the combo number
 
     float curAirCombo; // Keeps track of the combo number when in the air (It has to be seperate from the ground)
 
@@ -492,11 +491,13 @@ public class PlayerAttack : MonoBehaviour
             this.isAirAttacking = false;
 
             // Air attacking variable below is different than the one above
-            if(isAirAttacking){
+            if(isAirAttacking)
+            {
                 // Set the air combo to 1 to account for the player going above the max combo count
                 curAirCombo = 1; 
             }
-            else{
+            else
+            {
                 // Set the combo to 1 to account for the player going above the max combo count
                 curCombo = 1; 
             }
@@ -525,7 +526,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 curAirCombo++; 
             }
-            else{
+            else
+            {
                 curCombo++;
             }
             
@@ -547,7 +549,8 @@ public class PlayerAttack : MonoBehaviour
         }
 
         // Refers to any tilt attacks
-        else if(version == 4){
+        else if(version == 4)
+        {
             // Re-enables player movement
             stopPlayerMovement = false;
             stopPlayerYMovement = false;
@@ -565,7 +568,8 @@ public class PlayerAttack : MonoBehaviour
             resetKnockback(); // Resets the knockback stats 
         }
         // Refers to the final attack in an air combo
-        else if(version == 5){
+        else if(version == 5)
+        {
             canAirCombo = false;
             this.isAirAttacking = false;
             resetAttacks(); // Reset attacks sets can attack to true
@@ -590,13 +594,14 @@ public class PlayerAttack : MonoBehaviour
         setKnockback(knockBackX,knockBackY); // Sets knockback stats for this attack
         
         // As long as one dash variable isnt 0 the dash function is called
-        if(dashX != 0 || dashY != 0){
+        if(dashX != 0 || dashY != 0)
+        {
             dashWithAttack(dashX,dashY); // dashes the player on the x and y axis
         }
 
         // Timer so if the player doesnt press anything it resets the combo
         if(!comboResetTimerActive && version != 3 && version != 5)
-        { 
+        {
             comboResetTimer = coolDownTime;
             comboResetTimerActive = true;
         }
@@ -609,7 +614,7 @@ public class PlayerAttack : MonoBehaviour
         //Debug.Log("Is Animating: " + isAnimating);
 
         // animation name would be something like LightAttack1 and refers to the animation itself
-        if(currentStateInfo.IsName(animationName)){
+        if(currentStateInfo.IsName(animationName) && !isAnimating){
             completeAnimation(version, animatorBool, animationName, isAirAttacking);
         }
     }
@@ -627,7 +632,8 @@ public class PlayerAttack : MonoBehaviour
     // Updates the stop movement variables in the game manager
     void updateMovement()
     {
-        if(transform.tag == "Player1"){
+        if(transform.tag == "Player1")
+        {
             GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
             GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
@@ -659,11 +665,14 @@ public class PlayerAttack : MonoBehaviour
     // This code is meant to act as a combo reset, when the player is on the 1st attack and doesnt press anything within a certain time then the combo resets to 0 and all animation booleans are set to false
     void resetTimerCheck()
     { 
-        if(comboResetTimerActive){
-            if(comboResetTimer > 0){
+        if(comboResetTimerActive)
+        {
+            if(comboResetTimer > 0)
+            {
                 comboResetTimer -= Time.deltaTime;
             }
-            else{
+            else
+            {
                 resetAttacks();
                 comboResetTimerActive = false;
             }
