@@ -16,8 +16,9 @@ enum AttackType : int{
 public class PlayerAttack : MonoBehaviour
 {
     public Animator attackAnimator;
+    
+    [SerializeField] GameObject playerSprite;
 
-    [SerializeField] GameObject attackBoxObject; // Holds the gameobject for the hitbox collider
     [SerializeField] GameObject attackBoxCollider; // Holds the gameobject that has the collider for the hitbox
 
     AttackType attackPressed; // Records the attack being pressed by the player
@@ -56,13 +57,17 @@ public class PlayerAttack : MonoBehaviour
 
     float knockbackY; // Knockback float for the y axis
 
-    float curCombo; // Keeps track of the combo number
+    public float curCombo; // Keeps track of the combo number
 
     float curAirCombo; // Keeps track of the combo number when in the air (It has to be seperate from the ground)
+
+    public float comboBufferTime;
 
     Boolean stopPlayerMovement; // For when an attack stops the player from making any more movements
 
     Boolean stopPlayerYMovement; // used for when we want to stop any Y movement
+
+    public Boolean isComboBuffered; // Used to tell if the player should be allowed to enter new inputs 
 
     Rigidbody2D playerRigidbody; // Reference to the player's rigid body
 
@@ -76,7 +81,9 @@ public class PlayerAttack : MonoBehaviour
         holdingDown = false;
         isOnGround = false;
         
-        attackAnimator = attackBoxObject.GetComponent<Animator>();
+
+        // Would need to change the code surrounding this if I want to use multiple hitboxes
+        attackAnimator = playerSprite.GetComponent<Animator>(); // Reference to the attack hitbox animator
 
 
         canAttack = true; 
@@ -96,10 +103,13 @@ public class PlayerAttack : MonoBehaviour
 
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
+
+        isComboBuffered = false;
         
         playerRigidbody = transform.GetComponent<Rigidbody2D>();
 
     }
+
 
     // Update is called once per frame
     void Update()
@@ -115,8 +125,8 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-    
 
+    
 
     void attackColliderUpdate(){
 
@@ -145,11 +155,13 @@ public class PlayerAttack : MonoBehaviour
             curAirCombo = 0;
             canAirCombo = true;
             resetAirAttacks();
+            canAttack = true;
         }
 
         if(isOnGround && canAirCombo == false){
             canAirCombo = true;
             resetAirAttacks();
+            canAttack = true;
         }
     } 
 
@@ -175,6 +187,7 @@ public class PlayerAttack : MonoBehaviour
         curAirCombo = 0;
         isAttacking = false;
         resetAirAttacks();
+        canAttack = true;
     }
     
 
@@ -189,7 +202,7 @@ public class PlayerAttack : MonoBehaviour
         updateInput(); // Updates the caninput variable in this function with the game manager variable
 
         // When you are able to attack it records the key you press
-        if(canAttack == true)
+        if(canAttack == true && !isComboBuffered)
         {
             // You arent able to record your next attack input if the current attack pressed is any key
             if(currentAttackPressed != AttackType.none)
@@ -316,7 +329,7 @@ public class PlayerAttack : MonoBehaviour
             else if(curCombo == 2)
             {
                 stopMovement(true, true);
-                hitboxAnimation(3,"EAttack3","LightAttack3", false, 1.5f,0f,2.5f,0f);
+                hitboxAnimation(3,"EAttack3","LightAttack3", false, 1.5f,1.5f,2.5f,0f);
             }
 
 
@@ -383,9 +396,7 @@ public class PlayerAttack : MonoBehaviour
                 stopMovement(true,false);
                 hitboxAnimation(2,"RAttack4","MediumAttack4",false, 1.5f,0f,2f,0f);
             }
-             else if(curCombo == 4) 
-            {
-                stopMovement(true,false);
+            else if(curCombo == 4) {
                 hitboxAnimation(3,"RAttack5","MediumAttack5",false, 1.5f,0f,2f,0f);
             }
 
@@ -476,14 +487,17 @@ public class PlayerAttack : MonoBehaviour
             
             // The player is no longer attacking (Covers both ground and air just in case)
             isAttacking = false;
+            attackAnimator.SetBool("isAttacking",false); // Sets the attacking bool in the animator to false
             this.isAirAttacking = false;
 
             // Air attacking variable below is different than the one above
-            if(isAirAttacking){
+            if(isAirAttacking)
+            {
                 // Set the air combo to 1 to account for the player going above the max combo count
                 curAirCombo = 1; 
             }
-            else{
+            else
+            {
                 // Set the combo to 1 to account for the player going above the max combo count
                 curCombo = 1; 
             }
@@ -504,6 +518,7 @@ public class PlayerAttack : MonoBehaviour
 
             // The player is no longer attacking
             isAttacking = false;
+            attackAnimator.SetBool("isAttacking",false); // Sets the attacking bool in the animator to false
             this.isAirAttacking = false;
 
             // When air attacking increase air combo count and when ground attacking increase regular combo count
@@ -511,7 +526,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 curAirCombo++; 
             }
-            else{
+            else
+            {
                 curCombo++;
             }
             
@@ -528,10 +544,13 @@ public class PlayerAttack : MonoBehaviour
             resetAttacks(); // Reset attacks sets can attack to true
             currentAttackPressed = AttackType.none; // The current attack being done is set to none
             resetKnockback(); // Resets the knockback stats for this attack
+            isComboBuffered = true; // Sets the buffer to true
+            StartCoroutine(comboBuffer());
         }
 
         // Refers to any tilt attacks
-        else if(version == 4){
+        else if(version == 4)
+        {
             // Re-enables player movement
             stopPlayerMovement = false;
             stopPlayerYMovement = false;
@@ -540,6 +559,7 @@ public class PlayerAttack : MonoBehaviour
             this.isAirAttacking = false;
             isTiltAttacking = false;
             isAttacking = false;
+            attackAnimator.SetBool("isAttacking",false); // Sets the attacking bool in the animator to false
 
             attackAnimator.SetBool(animatorBool,false); // Sets the animation state back to Idle
             curCombo++; // Increases the combo
@@ -548,22 +568,25 @@ public class PlayerAttack : MonoBehaviour
             resetKnockback(); // Resets the knockback stats 
         }
         // Refers to the final attack in an air combo
-        else if(version == 5){
+        else if(version == 5)
+        {
             canAirCombo = false;
             this.isAirAttacking = false;
             resetAttacks(); // Reset attacks sets can attack to true
             resetAirAttacks();
             currentAttackPressed = AttackType.none;
             resetKnockback(); // Resets the knockback stats for this attack
+            isComboBuffered = true; // Sets the buffer to true
+            StartCoroutine(comboBuffer());
         }
     }
 
     // IMPORTANT: Need to add a variable for damage dealt, this will change depending on the attack
     void hitboxAnimation(int version, String animatorBool, String animationName, Boolean isAirAttacking, float knockBackX, float knockBackY, float dashX, float dashY){
-        
-        this.isAirAttacking = isAirAttacking; // Determines if the player is attacking in the air (honestly idk if this is necassary but I keep it anyways)
+        this.isAirAttacking = isAirAttacking;
 
-        isAttacking = true; // The player is attacking
+        isAttacking = true;
+        attackAnimator.SetBool("isAttacking",true); // Sets the attacking bool in the animator to true
 
         // Animator bool example: "EAttack1"
         attackAnimator.SetBool(animatorBool,true); // Sets the corrisponding boolean to true
@@ -571,13 +594,14 @@ public class PlayerAttack : MonoBehaviour
         setKnockback(knockBackX,knockBackY); // Sets knockback stats for this attack
         
         // As long as one dash variable isnt 0 the dash function is called
-        if(dashX != 0 || dashY != 0){
+        if(dashX != 0 || dashY != 0)
+        {
             dashWithAttack(dashX,dashY); // dashes the player on the x and y axis
         }
 
         // Timer so if the player doesnt press anything it resets the combo
         if(!comboResetTimerActive && version != 3 && version != 5)
-        { 
+        {
             comboResetTimer = coolDownTime;
             comboResetTimerActive = true;
         }
@@ -586,11 +610,11 @@ public class PlayerAttack : MonoBehaviour
             // The last part of each combo does not need a combo reset timer
             comboResetTimerActive = false;
         }
+        //Debug.Log("Current State Info: " + currentStateInfo.IsName(animationName));
+        //Debug.Log("Is Animating: " + isAnimating);
 
         // animation name would be something like LightAttack1 and refers to the animation itself
-        if(currentStateInfo.IsName(animationName) && isAnimating == false)
-        {
-            // Function for when the hitbox animation is complete
+        if(currentStateInfo.IsName(animationName) && !isAnimating){
             completeAnimation(version, animatorBool, animationName, isAirAttacking);
         }
     }
@@ -608,13 +632,14 @@ public class PlayerAttack : MonoBehaviour
     // Updates the stop movement variables in the game manager
     void updateMovement()
     {
-        if(transform.tag == "Player1"){
-            GameManager.Instance.stopP1Movement = stopPlayerMovement;
-            GameManager.Instance.stopP1YMovement = stopPlayerYMovement;
+        if(transform.tag == "Player1")
+        {
+            GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
         else{
-            GameManager.Instance.stopP2Movement = stopPlayerMovement;
-            GameManager.Instance.stopP2YMovement = stopPlayerYMovement;
+            GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
     }
 
@@ -640,11 +665,14 @@ public class PlayerAttack : MonoBehaviour
     // This code is meant to act as a combo reset, when the player is on the 1st attack and doesnt press anything within a certain time then the combo resets to 0 and all animation booleans are set to false
     void resetTimerCheck()
     { 
-        if(comboResetTimerActive){
-            if(comboResetTimer > 0){
+        if(comboResetTimerActive)
+        {
+            if(comboResetTimer > 0)
+            {
                 comboResetTimer -= Time.deltaTime;
             }
-            else{
+            else
+            {
                 resetAttacks();
                 comboResetTimerActive = false;
             }
@@ -689,6 +717,7 @@ public class PlayerAttack : MonoBehaviour
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
         isAttacking = false;
+        attackAnimator.SetBool("isAttacking", false);
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("AAttack1",false);
         attackAnimator.SetBool("AAttack2",false);
@@ -708,6 +737,7 @@ public class PlayerAttack : MonoBehaviour
         stopPlayerMovement = false;
         stopPlayerYMovement = false;
         isAttacking = false;
+        attackAnimator.SetBool("isAttacking", false);
         currentAttackPressed = AttackType.none;
         //attackBoxCollider.enabled = false;
         attackAnimator.SetBool("EAttack1",false);
@@ -724,7 +754,7 @@ public class PlayerAttack : MonoBehaviour
         attackAnimator.SetBool("FAttack2",false);
         attackAnimator.SetBool("FAttack3",false);
         attackAnimator.SetBool("FAttack4",false);
-        canAttack = true;
+    
     }
 
 
@@ -745,6 +775,8 @@ public class PlayerAttack : MonoBehaviour
     // Create more In the input manager with a different letter to indicate the different buttons used
     void OnAttackE(InputValue value)
     {
+        //if(isComboBuffered) return;
+        
         // When holding up you perform an uptilt
         if(canInput && holdingUp){
             attackPressed = AttackType.upTiltE;
@@ -777,6 +809,8 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackR(InputValue value)
     {
+        //if(isComboBuffered) return;
+
         // When holding up you perform an uptilt
         if(canInput && holdingUp){
             attackPressed = AttackType.upTiltR;
@@ -807,6 +841,8 @@ public class PlayerAttack : MonoBehaviour
 
     void OnAttackF(InputValue value)
     {
+        //if(isComboBuffered) return;
+
         // When holding up you perform an uptilt
         if(canInput && holdingUp){
             attackPressed = AttackType.upTiltF;
@@ -861,5 +897,14 @@ public class PlayerAttack : MonoBehaviour
         {
             holdingDown = false;
         }
+    }
+
+
+    private IEnumerator comboBuffer(){
+        yield return new WaitForSeconds(comboBufferTime);
+
+        canAttack = true;
+        isComboBuffered = false;
+        
     }
 }
