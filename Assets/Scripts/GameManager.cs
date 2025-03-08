@@ -35,10 +35,6 @@ public class GameManager : MonoBehaviour
 
     public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
-    public bool isOffensiveP1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
-
-    public bool p1Win = false;
-
     public static int p1WinCounter = 0;
 
 
@@ -71,12 +67,7 @@ public class GameManager : MonoBehaviour
 
     public int P2Health = 100;
 
-
     public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
-
-    public bool isOffensiveP2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
-
-    public bool p2Win = false;
 
     public static int p2WinCounter = 0;
 
@@ -101,28 +92,57 @@ public class GameManager : MonoBehaviour
 
     public int offensiveValueP2; // amount to increase by when in offensive mode and you hit someone
 
-    
+    public bool isOffensiveP2 = false; // This is a bool that tells us if player 2 is in an offensive state or not
+
+    public bool isOffensiveP1 = false; // This is a bool that tells us if player 1 is in an offensive state or not
 
 
-    [Header("UI")]
+    [Header("Text")]
+
     public TMP_Text winMessage; // Win message
+
+    public TMP_Text countdownText; // Countdown text
+
+    public TMP_Text timerText; // Timer for round text 
+
+    public float timerSeconds = 99f;
+
+    [Header("Winboxes")]
+
+    public Image emptyBox1P1;
+
+    public Image emptyBox2P1;
+
+    public Image winBox1P1;
+
+    public Image winBox2P1;
+
+    public Image emptyBox1P2;
+
+    public Image emptyBox2P2;
+
+    public Image winBox1P2;
+
+    public Image winBox2P2;
+
+    [Header("Buttons")]
 
     public Button restartButton; // Restart button
 
     public Button quitButton; // Quit button
 
-    public TMP_Text countdownText; // Countdown text
+
+    [Header("Bools")]
 
     public bool isCountingDown; // Bool for when the game is counting down 
-
-    public TMP_Text timerText;
-
-    public float timerSeconds = 99f;
 
     public bool roundOver = false;
 
     public bool gameOver = false;
 
+    public bool p1Win = false;
+
+    public bool p2Win = false;
     //Variables for this script
     private Coroutine knockbackCoroutineP1; // Coroutine for knockback timer
     private Coroutine knockbackCoroutineP2;
@@ -184,6 +204,14 @@ public class GameManager : MonoBehaviour
         winMessage.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
+        emptyBox1P1.gameObject.SetActive(true);
+        emptyBox2P1.gameObject.SetActive(true);
+        winBox1P1.gameObject.SetActive(false);
+        winBox2P1.gameObject.SetActive(false);
+        emptyBox1P2.gameObject.SetActive(true);
+        emptyBox2P2.gameObject.SetActive(true);
+        winBox1P2.gameObject.SetActive(false);
+        winBox2P2.gameObject.SetActive(false);
 
         knockbackFrozen[0] = new bool[2];
         knockbackFrozen[1] = new bool[2];
@@ -251,14 +279,18 @@ public class GameManager : MonoBehaviour
 
     private void DecreaseOffensiveSlider(Slider offensiveSlider, ref bool isoffensive)
     {
-        if (isCountingDown) return;
-        //subtract the offensive amount from the bar value but dont go below 0
-        offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveDecrease, 0);
-
-        if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
+        if (!roundOver && !gameOver)
         {
-            isoffensive = false;
+            if (isCountingDown) return;
+            //subtract the offensive amount from the bar value but dont go below 0
+            offensiveSlider.value = Mathf.Max(offensiveSlider.value - offensiveDecrease, 0);
+
+            if (offensiveSlider.value == 0) // once offensive bar is empty turn off offensive mode
+            {
+                isoffensive = false;
+            }
         }
+            
     }
 
     private void IncreaseOffensiveSlider(Slider offensiveSlider)
@@ -367,10 +399,12 @@ public class GameManager : MonoBehaviour
             p1WinCounter += 1;
             winMessage.text = "Player 1 Wins!";
             winMessage.gameObject.SetActive(true);
+            winBox1P1.gameObject.SetActive(true);
 
             if (p1WinCounter >= 2) // When player 1 wins 2 rounds game is over 
             {
                 gameOver = true;
+                winBox2P1.gameObject.SetActive(true);
                 winMessage.text = "Player 1 Wins";
                 winMessage.gameObject.SetActive(true);
                 quitButton.gameObject.SetActive(true);
@@ -393,10 +427,12 @@ public class GameManager : MonoBehaviour
             p2WinCounter += 1;
             winMessage.text = "Player 2 Wins!";
             winMessage.gameObject.SetActive(true);
+            winBox1P2.gameObject.SetActive(true);
 
             if (p2WinCounter >= 2) // When player 2 wins 2 rounds game is over 
             {
                 gameOver = true;
+                winBox2P2.gameObject.SetActive(true);
                 winMessage.text = "Player 2 Wins";
                 winMessage.gameObject.SetActive(true);
                 quitButton.gameObject.SetActive(true);
@@ -459,9 +495,17 @@ public class GameManager : MonoBehaviour
         p1WinCounter = 0;
         p2WinCounter = 0;
 
-        // Hide buttons
+        // Hide buttons and winboxes
         quitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
+        emptyBox1P1.gameObject.SetActive(true);
+        emptyBox2P1.gameObject.SetActive(true);
+        winBox1P1.gameObject.SetActive(false);
+        winBox2P1.gameObject.SetActive(false);
+        emptyBox1P2.gameObject.SetActive(true);
+        emptyBox2P2.gameObject.SetActive(true);
+        winBox1P2.gameObject.SetActive(false);
+        winBox2P2.gameObject.SetActive(false);
 
         // Reset the match
         StartCoroutine(RestartMatch(2f));
