@@ -165,8 +165,10 @@ public class PlayerDefense : MonoBehaviour
     
     public void TakeDamage(float damage, Collider2D attackCollider)
     {
+        Debug.Log("Take Damage");
         if(attackBoxCollider.bounds.Intersects(attackCollider.bounds))
         {
+            Debug.Log("Intersects");
             if(playerAnimator.GetBool("isBlocking"))
             {
                 Debug.Log("Blocked");
@@ -210,6 +212,7 @@ public class PlayerDefense : MonoBehaviour
                 Debug.Log("Parried");
                 CancelBlock();
             }else{
+                Debug.Log("Blocked With No Damage?");
                 guardMeter -= damage;
                 //meant to do more here but forgot what
             }

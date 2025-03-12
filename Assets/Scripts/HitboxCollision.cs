@@ -195,6 +195,7 @@ public class HitboxCollision : MonoBehaviour
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             
             if(playerDef.playerAnimator.GetBool("isBlocking") || playerDef.playerAnimator.GetBool("isParrying")){
+                Debug.Log("Block or Parry");
                 playerDef.TakeDamage(50, other);
                 return;
             }
