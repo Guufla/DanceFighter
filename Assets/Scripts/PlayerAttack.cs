@@ -635,12 +635,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if(transform.tag == "Player1")
         {
-            GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            // DISABLED due to errors
+            //GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
+            //GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
         else{
-            GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            //GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
+            //GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
     }
 
@@ -892,21 +893,21 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (context.canceled)
         {
-            Debug.Log("Down");
+            Debug.Log("NO UP");
             holdingUp = false;
         }
     }
 
-     void DownPressed(InputValue value){
-        float inputValue = value.Get<float>();
-
+    public void DownPressed(CallbackContext context){
         // If the input isnt 0 then the player is holding Down
-        if (inputValue > 0)
+        if (context.started)
         {
+            Debug.Log("DOWN");
             holdingDown = true;
         }
-        else
+        else if (context.canceled)
         {
+            Debug.Log("NO DOWN");
             holdingDown = false;
         }
     }
