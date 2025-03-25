@@ -139,7 +139,7 @@ namespace AudioVisuals
             }
             UpdateSpectrumData();
         }
-
+        
         public string GetDebugInfo()
         {
             string output = "";
@@ -163,7 +163,9 @@ namespace AudioVisuals
             output += $"Is Preset Shape: {isPresetShape}\n";
             return output;
         }
+        
 
+        #region Primitive Behaviors
 
         // TODO: Add actions that you can pass in to be able to run in the loop per object!
         // TODO: Add support for multiplicative steps (like how we have additive already).
@@ -258,8 +260,6 @@ namespace AudioVisuals
             
             
         }
-        
-        
 
         protected virtual void LocalScale(Vector3 scaledAxes, bool isNormalized, bool isAdditive = false)
         {
@@ -312,6 +312,9 @@ namespace AudioVisuals
 
             InitializeColorsList(true);
         }
+        
+        #endregion
+        
         
         #region Effect Combination Handlers
         
@@ -403,6 +406,8 @@ namespace AudioVisuals
         
         #endregion
     
+        
+        
         /* idea for preset transforms:
             function takes in parent object, then maps each child transform to a list and then can do things to those objects
      */
