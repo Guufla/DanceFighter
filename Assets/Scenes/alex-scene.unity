@@ -797,9 +797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59e000ccca6481c9f210495448f9243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logToConsole: 1
-  logWarnings: 1
-  logErrors: 1
+  logToConsole: 0
+  logWarnings: 0
+  logErrors: 0
 --- !u!4 &1309011880
 Transform:
   m_ObjectHideFlags: 0
