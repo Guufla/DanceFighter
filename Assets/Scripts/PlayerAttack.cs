@@ -73,6 +73,8 @@ public class PlayerAttack : MonoBehaviour
     Rigidbody2D playerRigidbody; // Reference to the player's rigid body
 
 
+    [SerializeField] private int playerIndex = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +126,9 @@ public class PlayerAttack : MonoBehaviour
 
         
 
+    }
+    public int GetPlayerIndex(){
+        return playerIndex;
     }
 
 
@@ -819,7 +824,6 @@ public class PlayerAttack : MonoBehaviour
         //if(isComboBuffered) return;
         if(context.started)
         {
-
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
                 attackPressed = AttackType.upTiltR;
