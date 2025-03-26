@@ -582,6 +582,7 @@ public class GameManager : MonoBehaviour
 
         if(player == 1)
         {
+            // Had to disable these they were causing major problems for some reason
             UpdateStopMovement(1, false, 1);
             UpdateStopMovementY(1, false, 1);
         }
