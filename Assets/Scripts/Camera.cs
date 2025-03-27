@@ -26,11 +26,21 @@ public class Camera : MonoBehaviour
 
     [SerializeField]float cameraAdditionAdjustment = 2f;
 
+    [SerializeField]float cameraScaleFactor = 1.5f;
+
     float maxCameraFov = 120f;
 
-    CinemachineVirtualCamera cameraBrain;
+    [SerializeField]GameObject mainCameraObject;
 
-    float baseFOV;
+    //[SerializeField]GameObject camera2;
+
+    //[SerializeField]GameObject camera3;
+
+    CinemachineBrain cameraBrain;
+
+    CinemachineVirtualCamera virtualCamera;
+
+    float baseOrtho;
 
     bool playersFar;
 
@@ -51,11 +61,12 @@ public class Camera : MonoBehaviour
         player2x = player2.transform.position.x;
         player2y = player2.transform.position.y;
 
-        // playersFar = false;
+        virtualCamera = mainCameraObject.GetComponent<CinemachineVirtualCamera>();
+        
 
-        // cameraBrain = GameObject.Find("DefaultCamera").GetComponent<CinemachineVirtualCamera>();
+        playersFar = false;
 
-        // baseFOV = cameraBrain.m_Lens.FieldOfView;
+        baseOrtho = virtualCamera.m_Lens.OrthographicSize;
 
     }
 
@@ -72,9 +83,7 @@ public class Camera : MonoBehaviour
 
         distanceBetweenPlayers();
         
-        //cameraChanges();
-        
-        //Debug.Log(playersFar);
+        cameraChanges();
 
         transform.position = cameraPointPosition;
     }
@@ -100,16 +109,17 @@ public class Camera : MonoBehaviour
     // For now this works but change at a later date
     void cameraChanges(){
         if(distance > maxPlayerDistance){
+            playersFar = true;
             changeCameraOrtho();
         }
         else{
-            cameraBrain.m_Lens.FieldOfView = baseFOV;
-
+            virtualCamera.m_Lens.OrthographicSize = baseOrtho;
+            playersFar = false;
         }
 
     }
 
     void changeCameraOrtho(){
-        cameraBrain.m_Lens.FieldOfView = baseFOV + (distance - maxPlayerDistance)*1.5f;
+        virtualCamera.m_Lens.OrthographicSize = baseOrtho + (distance - maxPlayerDistance)*cameraScaleFactor;
     }
 }
