@@ -1200,7 +1200,7 @@ MonoBehaviour:
   distance: 0
   maxPlayerDistance: 12
   cameraAdditionAdjustment: 2
-  cameraScaleFactor: 1.46
+  cameraScaleFactor: 0.71
   mainCameraObject: {fileID: 141776600}
 --- !u!212 &1718763840
 SpriteRenderer:
