@@ -23,8 +23,8 @@ public class PlayerDefense : MonoBehaviour
     DefenseState defenseType;
 
     [Header("Block/Parry")]
-    private float blockDamageReduction = 0.5f;
-    private float parryTimeWindow = 0.2f;
+    private float blockDamageReduction = 0.3f;
+    private float parryTimeWindow = 0.5f;
     
     [Header("Guard Meter System")]
     private float maxGuardMeter = 100f;
@@ -41,11 +41,13 @@ public class PlayerDefense : MonoBehaviour
             playerCollider = playerColliderTransform.GetComponent<CapsuleCollider2D>();
         }
     
+        /*
         Transform attackBoxColliderTransform = transform.Find("AttackHitbox"); // Replace "AttackBoxCollider" with the actual name of the child
         if (attackBoxColliderTransform != null)
         {
             attackBoxCollider = attackBoxColliderTransform.GetComponentInChildren<CapsuleCollider2D>();
         }
+        */
         inputActions = new Input();
         guardMeter = maxGuardMeter;
         
@@ -93,6 +95,7 @@ public class PlayerDefense : MonoBehaviour
                 //playerAnimator.SetBool("isBlocking", true);
                 defenseType = DefenseState.block;
                 Debug.Log("Block Started");
+                //playerAnimator.SetBool("isBlocking", true);
             }
             
             if(playerCollider != null)
@@ -141,6 +144,7 @@ public class PlayerDefense : MonoBehaviour
         {
             if(context.duration <= parryTimeWindow)
             {
+                playerAnimator.SetBool("isBlocking", false);
                 playerAnimator.SetBool("isParrying", true);
                 defenseType = DefenseState.parry;
                 Debug.Log("Parry Performed");
@@ -163,11 +167,21 @@ public class PlayerDefense : MonoBehaviour
         
     }
     
-    public void TakeDamage(float damage, Collider2D attackCollider)
+    public void TakeDamage(float damage, Collider2D attackCollider, Collider2D attackBoxCollider, bool isBlocking, bool isParrying)
     {
         if(attackBoxCollider.bounds.Intersects(attackCollider.bounds))
         {
-            if(playerAnimator.GetBool("isBlocking"))
+            //Debug.Log(playerAnimator.GetBool("isBlocking"));
+            //Debug.Log(playerAnimator.GetBool("isParrying"));
+            
+            if(isBlocking == false && isParrying == true){
+                Debug.Log("Parried");
+                playerAnimator.SetBool("ParryingWhenAttacked", false);
+                CancelBlock();
+                return;
+            }
+        
+            if(playerAnimator.GetBool("isBlocking") && playerAnimator.GetBool("isParrying") == false)
             {
                 Debug.Log("Blocked");
                 // Apply block damage reduction
@@ -206,9 +220,6 @@ public class PlayerDefense : MonoBehaviour
                     //stop blocking even if w is held
                     StartCoroutine(GuardRegen()); 
                 }
-            }else if(playerAnimator.GetBool("isParrying")) {
-                Debug.Log("Parried");
-                CancelBlock();
             }else{
                 guardMeter -= damage;
                 //meant to do more here but forgot what
