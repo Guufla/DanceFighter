@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 // Enum that holds which attack is inputted by the player
 enum AttackType : int{
@@ -72,6 +73,8 @@ public class PlayerAttack : MonoBehaviour
     Rigidbody2D playerRigidbody; // Reference to the player's rigid body
 
 
+    [SerializeField] private int playerIndex = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +126,9 @@ public class PlayerAttack : MonoBehaviour
 
         
 
+    }
+    public int GetPlayerIndex(){
+        return playerIndex;
     }
 
 
@@ -632,15 +638,16 @@ public class PlayerAttack : MonoBehaviour
     // Updates the stop movement variables in the game manager
     void updateMovement()
     {
-        // if(transform.tag == "Player1")
-        // {
-        //     GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-        //     GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
-        // }
-        // else{
-        //     GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-        //     GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
-        // }
+        if(transform.tag == "Player1")
+        {
+            // DISABLED due to errors
+            //GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
+            //GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+        }
+        else{
+            //GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
+            //GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+        }
     }
 
     // updates the knockback variables in the game manager
@@ -773,128 +780,138 @@ public class PlayerAttack : MonoBehaviour
 
 
     // Create more In the input manager with a different letter to indicate the different buttons used
-    void OnAttackE(InputValue value)
+    public void AttackE(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        
-        // When holding up you perform an uptilt
-        if(canInput && holdingUp){
-            attackPressed = AttackType.upTiltE;
-            canInput = false; // After input is recorded set this to false
-        }
-        // When holding down you perform an downtilt
-        else if(canInput && holdingDown){
-            attackPressed = AttackType.downTiltE;
-            canInput = false; // After input is recorded set this to false
-        }
-        // Regular attack
-        else if(canInput){
-            attackPressed = AttackType.attackE;
-            canInput = false; // After input is recorded set this to false
-        }
-        
-        
-        
-         //sets aggro to false, change in future
-        if(gameObject.CompareTag("Player1"))
+        if(context.started)
         {
-            GameManager.Instance.p1Aggro = false;
+            // When holding up you perform an uptilt
+            if(canInput && holdingUp){
+                attackPressed = AttackType.upTiltE;
+                canInput = false; // After input is recorded set this to false
+            }
+            // When holding down you perform an downtilt
+            else if(canInput && holdingDown){
+                attackPressed = AttackType.downTiltE;
+                canInput = false; // After input is recorded set this to false
+            }
+            // Regular attack
+            else if(canInput){
+                attackPressed = AttackType.attackE;
+                canInput = false; // After input is recorded set this to false
+            }
+
+
+
+             //sets aggro to false, change in future
+            if(gameObject.CompareTag("Player1"))
+            {
+                GameManager.Instance.p1Aggro = false;
+            }
+            else if(gameObject.CompareTag("Player2"))
+            {
+                GameManager.Instance.P2Aggro = false;
+            }
+            AudioManager.Instance.StateChange();
         }
-        else if(gameObject.CompareTag("Player2"))
-        {
-            GameManager.Instance.P2Aggro = false;
-        }
-        AudioManager.Instance.StateChange();
+        
+        
+        
     }
 
-    void OnAttackR(InputValue value)
+    public void AttackR(CallbackContext context)
     {
         //if(isComboBuffered) return;
-
-        // When holding up you perform an uptilt
-        if(canInput && holdingUp){
-            attackPressed = AttackType.upTiltR;
-            canInput = false; // After input is recorded set this to false
-        }
-        // When holding down you perform an downtilt
-        else if(canInput && holdingDown){
-            attackPressed = AttackType.downTiltR;
-            canInput = false; // After input is recorded set this to false
-        }
-         // Regular attack
-        else if(canInput){
-            attackPressed = AttackType.attackR;
-            canInput = false; // After input is recorded set this to false
-        } 
-        
-        //sets aggro to false, change in future
-        if(gameObject.CompareTag("Player1"))
+        if(context.started)
         {
-            GameManager.Instance.p1Aggro = true;
+            // When holding up you perform an uptilt
+            if(canInput && holdingUp){
+                attackPressed = AttackType.upTiltR;
+                canInput = false; // After input is recorded set this to false
+            }
+            // When holding down you perform an downtilt
+            else if(canInput && holdingDown){
+                attackPressed = AttackType.downTiltR;
+                canInput = false; // After input is recorded set this to false
+            }
+            // Regular attack
+            else if(canInput){
+                attackPressed = AttackType.attackR;
+                canInput = false; // After input is recorded set this to false
+            } 
+            
+            //sets aggro to false, change in future
+            if(gameObject.CompareTag("Player1"))
+            {
+                GameManager.Instance.p1Aggro = true;
+            }
+            else if(gameObject.CompareTag("Player2"))
+            {
+                GameManager.Instance.P2Aggro = true;
+            }
+            AudioManager.Instance.StateChange();
         }
-        else if(gameObject.CompareTag("Player2"))
-        {
-            GameManager.Instance.P2Aggro = true;
-        }
-        AudioManager.Instance.StateChange();
     }
 
-    void OnAttackF(InputValue value)
+    public void AttackF(CallbackContext context)
     {
         //if(isComboBuffered) return;
-
-        // When holding up you perform an uptilt
-        if(canInput && holdingUp){
-            attackPressed = AttackType.upTiltF;
-            canInput = false; // After input is recorded set this to false
-        }
-        // When holding down you perform an downtilt
-        else if(canInput && holdingDown){
-            attackPressed = AttackType.downTiltF;
-            canInput = false; // After input is recorded set this to false
-        }
-         // Regular attack
-        else if(canInput){
-            attackPressed = AttackType.attackF;
-            canInput = false; // After input is recorded set this to false
-        }
-
-        //sets aggro to false, change in future
-        if(gameObject.CompareTag("Player1"))
+        if(context.started)
         {
-            GameManager.Instance.p1Aggro = true;
+            // When holding up you perform an uptilt
+            if(canInput && holdingUp){
+                attackPressed = AttackType.upTiltF;
+                canInput = false; // After input is recorded set this to false
+            }
+            // When holding down you perform an downtilt
+            else if(canInput && holdingDown){
+                attackPressed = AttackType.downTiltF;
+                canInput = false; // After input is recorded set this to false
+            }
+            // Regular attack
+            else if(canInput){
+                attackPressed = AttackType.attackF;
+                canInput = false; // After input is recorded set this to false
+            }
+
+            //sets aggro to false, change in future
+            if(gameObject.CompareTag("Player1"))
+            {
+                GameManager.Instance.p1Aggro = true;
+            }
+            else if(gameObject.CompareTag("Player2"))
+            {
+                GameManager.Instance.P2Aggro = true;
+            }
+            AudioManager.Instance.StateChange();
         }
-        else if(gameObject.CompareTag("Player2"))
-        {
-            GameManager.Instance.P2Aggro = true;
-        }
-        AudioManager.Instance.StateChange();
     }
 
-    void OnUpPressed(InputValue value){
-        float inputValue = value.Get<float>();
+    public void UpPressed(CallbackContext context){
 
         // If the input isnt 0 then the player is holding Up
-        if (inputValue > 0)
+        if (context.started)
         {
+            Debug.Log("UP");
             holdingUp = true;
         }
-        else
+        else if (context.canceled)
         {
+            Debug.Log("NO UP");
             holdingUp = false;
         }
     }
 
-     void OnDownPressed(InputValue value){
-        float inputValue = value.Get<float>();
-
+    public void DownPressed(CallbackContext context){
         // If the input isnt 0 then the player is holding Down
-        if (inputValue > 0)
+        if (context.started)
         {
+            Debug.Log("DOWN");
             holdingDown = true;
         }
-        else
+        else if (context.canceled)
         {
+            Debug.Log("NO DOWN");
             holdingDown = false;
         }
     }

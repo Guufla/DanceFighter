@@ -30,13 +30,14 @@ public class PlayerMovement : MonoBehaviour
     private float initialYPos;
     private float highestYPos;
 
+    [SerializeField] private int playerIndex = 0;
+
     void Awake()
     {
-        inputActions = new Input();
-        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // Reads the input value of the player which is -1,0,1 for left, no input, right
-        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        inputActions.Player.Jump.performed += OnJump;
-        inputActions.Enable();
+        // inputActions = new Input();
+        // inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // Reads the input value of the player which is -1,0,1 for left, no input, right
+        // inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        // inputActions.Enable();
     }
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,22 @@ public class PlayerMovement : MonoBehaviour
         setGravityScale = playerRigidbody.gravityScale;
         playerAnimator = playerSprite.GetComponent<Animator>();
         playerDirections = playerSprite.transform.parent.GetComponent<PlayerDirections>();
+    }
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            moveInput = context.ReadValue<Vector2>();
+        }
+        else if(context.canceled)
+        {
+            moveInput = Vector2.zero;
+        }
+        
+    }
+
+    public int GetPlayerIndex(){
+        return playerIndex;
     }
 
     // Update is called once per frame
@@ -140,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             }
         } 
     }
-    void OnJump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && groundCheck)
         {
