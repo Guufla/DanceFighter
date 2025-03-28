@@ -17,8 +17,8 @@ Shader "Unlit/SimpleLight"
         Pass
         {
             
-            //Blend SrcAlpha OneMinusSrcAlpha
-            Blend DstColor Zero
+            Blend SrcAlpha OneMinusSrcAlpha
+            //Blend DstColor Zero
             ZWrite Off 
             
             
