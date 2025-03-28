@@ -152,6 +152,7 @@ public class HitboxCollision : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (GameManager.Instance.isCountingDown)
         {
             //Debug.Log("Game is counting down, no hitbox collision");
@@ -192,13 +193,25 @@ public class HitboxCollision : MonoBehaviour
             StartCoroutine(Knockback());
 
             hasCollided = true;
-            playerDef = oppositePlayer.GetComponent<PlayerDefense>();
+            //Debug.Log(isParrying);
             
-            if(playerDef.playerAnimator.GetBool("isBlocking") || playerDef.playerAnimator.GetBool("isParrying")){
-                playerDef.TakeDamage(50, other);
+            playerDef = oppositePlayer.GetComponent<PlayerDefense>();
+        bool isParrying = playerDef.playerAnimator.GetBool("isParrying");
+        Debug.Log(isParrying);
+            if(playerDef.playerAnimator.GetBool("isBlocking") || isParrying){
+                Debug.Log("is this not appearing?");
+            
+                //Debug.Log(isParrying);
+                /*
+                if(isParrying == true){
+                    playerDef.playerAnimator.SetBool("ParryingWhenAttacked", true);
+                }*/
+            
+                playerDef.TakeDamage(50, other, GetComponent<Collider2D>(), playerDef.playerAnimator.GetBool("isBlocking"), isParrying);
                 return;
             }
         
+            
             oppositePlayerAnimator.SetBool("isHit", true); // Sets the isHit variable in the opposite player's animator to true
             if(hitState == 0f){ 
                 hitState = 1f;

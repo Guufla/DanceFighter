@@ -9,14 +9,22 @@ public class HitboxAnimationMethods : MonoBehaviour
     bool canInput; 
 
     public bool isAnimating; 
+    
+    private bool isNextAttackQueued;
 
-    public GameObject parentObject;
+    [SerializeField] private GameObject parentObject;
+
+    private Animator animator;
+    
+    private PlayerAttack playerAttack;
 
     void Start()
     {
         parentObject = transform.parent.gameObject;
         canInput = true;
         isAnimating = false;
+        animator = this.GetComponent<Animator>();
+        playerAttack = parentObject.GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -46,5 +54,29 @@ public class HitboxAnimationMethods : MonoBehaviour
     }
     public void stopAttack(){
         isAnimating = true;
+    }
+    
+    public void QueueNextAttack(){
+        isNextAttackQueued = true;
+    }
+    
+    private void TransitionToNextState()
+    {
+        Debug.Log(animator == null);
+        Debug.Log(isNextAttackQueued);
+    
+        //Debug.Log(animator != null && isNextAttackQueued);
+        
+        if(animator != null && isNextAttackQueued){
+            animator.SetTrigger("NextState");
+            
+            if(playerAttack != null){
+                playerAttack.completeAnimation(1, "RAttack1", "MediumAttack1", false);
+            }
+            
+            isNextAttackQueued = false;
+        }else{
+            Debug.Log("Animator is null");
+        }
     }
 }

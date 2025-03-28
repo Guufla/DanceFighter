@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     
     Animator playerAnimator;
     PlayerDirections playerDirections;
+    PlayerAttack playerAttack;
     
     [SerializeField] private GameObject playerSprite;
     private float initialYPos;
@@ -45,7 +46,8 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         setGravityScale = playerRigidbody.gravityScale;
         playerAnimator = playerSprite.GetComponent<Animator>();
-        playerDirections = playerSprite.transform.parent.GetComponent<PlayerDirections>();
+        playerDirections = GetComponent<PlayerDirections>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -69,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
     {
         getGroundCheck();
         getMovementInfo();
+        isHit();
+        handleJumping();
         if(stopMovement == false){
             movement();
         }
@@ -104,13 +108,46 @@ public class PlayerMovement : MonoBehaviour
             highestYPos = transform.position.y;
         }
     }
+    
+    void isHit()
+    {
+        if(playerAnimator.GetBool("isHit") == false)
+        {
+            playerAnimator.SetLayerWeight(1, 0f);
+        }else{
+            playerAnimator.SetLayerWeight(1, 1f);
+        }
+    }
+    
+    void handleJumping()
+{
+    // Check if the player is on the ground or performing an air attack
+    if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
+    {
+        playerAnimator.SetBool("isJumping", false);
+        // Debug.Log(playerAttack.isAirAttacking);
+    }
+    else
+    {
+        // Check if the player is in the air and not performing an air attack
+        if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+        {
+            highestYPos = transform.position.y;
+            playerAnimator.SetBool("isJumping", true);
+        }
+    }
+}
 
     void movement(){
         // VERY IMPORTANT
         // ADD HITSTUN OR CHANGE HOW MOVEMENT WORKS SO THAT KNOCKBACK IS POSSIBLE
         
+        
         //manipulates the layer weight based on if an animation is playing or not
-        if(playerAnimator.GetFloat("WalkDirection") == 0 && playerAnimator.GetFloat("JumpParameter") == 0 && playerAnimator.GetBool("isHit") == false)
+        if(playerAnimator.GetFloat("WalkDirection") == 0 && 
+        playerAnimator.GetBool("isJumping") == false && 
+        playerAnimator.GetBool("isBlocking") == false &&
+        playerAnimator.GetBool("isParrying") == false)
         {
             playerAnimator.SetLayerWeight(1, 0f);
         }else {
@@ -138,24 +175,7 @@ public class PlayerMovement : MonoBehaviour
                 playerAnimator.SetFloat("WalkDirection", 0);
             }
         }
-        
-        
-        if(transform.position.y == initialYPos){ //if the player is on the ground
-            playerAnimator.SetBool("isJumping",false);
-            playerAnimator.SetFloat("JumpParameter", 0);
-        }
-        else{
             
-            if(transform.position.y > highestYPos){
-                highestYPos = transform.position.y;
-                playerAnimator.SetBool("isJumping",true);
-                playerAnimator.SetFloat("JumpParameter", 1); //is jumping
-            }else if(transform.position.y < highestYPos)
-            {
-                playerAnimator.SetBool("isJumping",false);
-                playerAnimator.SetFloat("JumpParameter", -1); //is falling
-            }
-        } 
     }
     public void Jump(InputAction.CallbackContext context)
     {
