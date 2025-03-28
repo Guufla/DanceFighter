@@ -797,7 +797,7 @@ Transform:
   m_GameObject: {fileID: 639599291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0022965223, y: 2.6273599, z: -10.045571}
+  m_LocalPosition: {x: 0, y: 0, z: -10.045571}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -813,7 +813,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1104,8 +1104,8 @@ Transform:
   m_GameObject: {fileID: 1539472596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1887, y: -4.9748, z: 0}
-  m_LocalScale: {x: 55.885098, y: 1.5967274, z: 1}
+  m_LocalPosition: {x: -1.2513, y: -10.6988, z: 0}
+  m_LocalScale: {x: 72.54167, y: 13.827435, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1716680713}
@@ -1197,7 +1197,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1463,7 +1463,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1840,11 +1840,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 22.765347, y: 10.338316}
-      - {x: -19.962376, y: 11.938725}
-      - {x: -20.216278, y: -1.3402812}
-      - {x: -20.235931, y: -11.2889595}
-      - {x: 22.737448, y: -11.300846}
+    - - {x: 21.591286, y: 5.055047}
+      - {x: -17.02723, y: 7.6338387}
+      - {x: -16.606365, y: -1.6684554}
+      - {x: -16.64349, y: -16.798931}
+      - {x: 22.209146, y: -17.112152}
       - {x: 22.704082, y: -2.9192235}
   m_UseDelaunayMesh: 0
 --- !u!4 &2061953622
@@ -1982,7 +1982,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
