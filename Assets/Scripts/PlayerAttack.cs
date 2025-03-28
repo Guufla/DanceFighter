@@ -632,15 +632,15 @@ public class PlayerAttack : MonoBehaviour
     // Updates the stop movement variables in the game manager
     void updateMovement()
     {
-        if(transform.tag == "Player1")
-        {
-            GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
-        }
-        else{
-            GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
-        }
+        // if(transform.tag == "Player1")
+        // {
+        //     GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
+        //     GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+        // }
+        // else{
+        //     GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
+        //     GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+        // }
     }
 
     // updates the knockback variables in the game manager
