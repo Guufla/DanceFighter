@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SimpleLight
+  m_Name: SimpleLight 2
   m_Shader: {fileID: 4800000, guid: 65f1b78ebdd71c04e85a882a12b59eb3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -85,6 +85,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _colorA: {r: 0.035848916, g: 1, b: 0.043410912, a: 0.05882353}
-    - _colorB: {r: 1, g: 0, b: 0.8078432, a: 0.05882353}
+    - _colorA: {r: 1, g: 0.9859624, b: 0.035294116, a: 0.05882353}
+    - _colorB: {r: 0.94716984, g: 0.5772374, b: 0.8760848, a: 0.05882353}
   m_BuildTextureStacks: []
