@@ -84,6 +84,7 @@ MonoBehaviour:
   specDataCutoff: 0
   fftWindowToUse: 1
   doPropertyValueRecheck: 1
+  sampleSize: 64
   text: {fileID: 0}
   perObjectOffset: 1
   lookAtPivot: 0
