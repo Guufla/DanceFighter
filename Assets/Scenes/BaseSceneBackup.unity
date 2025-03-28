@@ -420,7 +420,7 @@ PrefabInstance:
     - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
       propertyPath: winBox2P1
       value: 
-      objectReference: {fileID: 1829625898}
+      objectReference: {fileID: 841989645}
     - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
       propertyPath: winBox2P2
       value: 
@@ -583,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &841989644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1045,7 +1045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1184050644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1450,7 +1450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1829625897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1666,7 +1666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1955007941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2279,6 +2279,10 @@ PrefabInstance:
     - target: {fileID: 1771120630651768936, guid: dd04d5a1d98221848a8b5a7ef5ccf9cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888755259205159806, guid: dd04d5a1d98221848a8b5a7ef5ccf9cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.002303943
       objectReference: {fileID: 0}
     - target: {fileID: 6237132971308676860, guid: dd04d5a1d98221848a8b5a7ef5ccf9cc, type: 3}
       propertyPath: m_Name
