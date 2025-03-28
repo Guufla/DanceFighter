@@ -649,13 +649,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if(transform.tag == "Player1")
         {
-            // DISABLED due to errors
-            //GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-            //GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            
+            GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
         else{
-            //GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-            //GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
         }
     }
 
