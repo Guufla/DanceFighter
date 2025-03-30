@@ -589,5 +589,7 @@ namespace AudioVisuals
                 objectPooler = objectPooler.ReleasePool();
             }
         }
+
+        
     }
 }

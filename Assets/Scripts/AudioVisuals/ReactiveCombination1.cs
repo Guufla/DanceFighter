@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Utilities;
 
 namespace AudioVisuals
 {
-    public class ReactiveCombination1 : DebugAV
+    public class ReactiveCombination1 : DebugAV, IColorApply
     {
         [SerializeField] private float perObjectOffset;
         [SerializeField] private bool lookAtPivot;
@@ -30,6 +31,14 @@ namespace AudioVisuals
             LineUpObjects(lineDirFromPivot.position, true);
             ColorGradient(color0, color1);
             HandleAllColors();
+        }
+
+        public void Apply(List<Color> colors)
+        {
+            if (colors.Count < 2)
+                return;
+            color0 = colors[0];
+            color1 = colors[1];
         }
     }
 }
