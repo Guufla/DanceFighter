@@ -246,7 +246,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     // In the air
                     stopMovement(false, false); // Dont stop movement for this
-                    hitboxAnimation(4,"AirUpTilt","airUpTilt", true, 1.5f,0f,0f,0f);
+                    hitboxAnimation(4,"AirUpTilt","airUpTilt", true, 1.5f,0f,0f,0f,1f);
                 }
                 
             }
@@ -254,7 +254,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 // On the ground
                 stopMovement(true, true); // Stops movement for this
-                hitboxAnimation(4,"UpTilt","UpTilt", false, 1.5f,0f,0f,0f);
+                hitboxAnimation(4,"UpTilt","UpTilt", false, 1.5f,0f,0f,0f,1f);
             }
 
             updateKnockback(); // Knockback update
@@ -277,7 +277,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     // In the air
                     stopMovement(false, false); // Dont freeze movement
-                    hitboxAnimation(4,"AirDownTilt","airDownTilt", true, 1.5f,0f,0f,0f);
+                    hitboxAnimation(4,"AirDownTilt","airDownTilt", true, 1.5f,0f,0f,0f,1f);
                 }
                 
             }
@@ -285,7 +285,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 // On the ground
                 stopMovement(true, true); // Dont freeze movement
-                hitboxAnimation(4,"DownTilt","DownTilt", false, 1.5f,0f,0f,0f);
+                hitboxAnimation(4,"DownTilt","DownTilt", false, 1.5f,0f,0f,0f,1f);
             }
 
             updateKnockback(); // Updates knockback
@@ -307,22 +307,22 @@ public class PlayerAttack : MonoBehaviour
                 else if(canAirCombo && curAirCombo > 3 ||canAirCombo && curAirCombo == 0)
                 {
                     stopMovement(true, true); 
-                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 1)
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 2)
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 3 )
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 
             }
@@ -332,17 +332,17 @@ public class PlayerAttack : MonoBehaviour
             else if(curCombo > 2 || curCombo == 0)
             {
                 stopMovement(true, true);
-                hitboxAnimation(1,"EAttack1","LightAttack1", false, 1.5f,0f,2f,0f);
+                hitboxAnimation(1,"EAttack1","LightAttack1", false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 1)
             {
                 stopMovement(true, true);
-                hitboxAnimation(2,"EAttack2","LightAttack2", false, 1.5f,0f,2f,0f);
+                hitboxAnimation(2,"EAttack2","LightAttack2", false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 2)
             {
                 stopMovement(true, true);
-                hitboxAnimation(3,"EAttack3","LightAttack3", false, 1.5f,1.5f,2.5f,0f);
+                hitboxAnimation(3,"EAttack3","LightAttack3", false, 1.5f,1.5f,2.5f,0f,1f);
             }
 
 
@@ -367,22 +367,22 @@ public class PlayerAttack : MonoBehaviour
                 else if(canAirCombo && curAirCombo > 3 ||canAirCombo && curAirCombo == 0)
                 {
                     stopMovement(true, true); 
-                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 1)
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 2)
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 3 )
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 
             }
@@ -392,25 +392,25 @@ public class PlayerAttack : MonoBehaviour
             else if(curCombo > 4 || curCombo == 0)
             {
                 stopMovement(true,false);
-                hitboxAnimation(1,"RAttack1","MediumAttack1",false, 1.5f,0f,2f,0f);
+                hitboxAnimation(1,"RAttack1","MediumAttack1",false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 1)
             {
                 stopMovement(true,false);
-                hitboxAnimation(2,"RAttack2","MediumAttack2",false, 1.5f,0f,2f,0f);
+                hitboxAnimation(2,"RAttack2","MediumAttack2",false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 2)
             {
                 stopMovement(true,false);
-                hitboxAnimation(2,"RAttack3","MediumAttack3",false, 1.5f,0f,2f,0f);
+                hitboxAnimation(2,"RAttack3","MediumAttack3",false, 1.5f,0f,2f,0f,1f);
             } 
             else if(curCombo == 3) 
             {
                 stopMovement(true,false);
-                hitboxAnimation(2,"RAttack4","MediumAttack4",false, 1.5f,0f,2f,0f);
+                hitboxAnimation(2,"RAttack4","MediumAttack4",false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 4) {
-                hitboxAnimation(3,"RAttack5","MediumAttack5",false, 1.5f,0f,2f,0f);
+                hitboxAnimation(3,"RAttack5","MediumAttack5",false, 1.5f,0f,2f,0f,1f);
             }
 
             updateKnockback(); // Updates knockback
@@ -432,22 +432,22 @@ public class PlayerAttack : MonoBehaviour
                 else if(canAirCombo && curAirCombo > 3 ||canAirCombo && curAirCombo == 0)
                 {
                     stopMovement(true, true); 
-                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(1,"AAttack1","airCombo1", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 1)
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(2,"AAttack2","airCombo2", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 2)
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(2,"AAttack3","airCombo3", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 else if(canAirCombo && curAirCombo == 3 )
                 {
                     stopMovement(true, true);
-                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f);
+                    hitboxAnimation(5,"AAttack4","airCombo4", true, 1.5f,0f,1.7f,0f,1f);
                 }
                 
             }
@@ -455,21 +455,21 @@ public class PlayerAttack : MonoBehaviour
             else if(curCombo > 3 || curCombo == 0)
             {
                 stopMovement(true, false);
-                hitboxAnimation(1,"FAttack1","HeavyAttack1", false, 1.5f,0f,2f,0f);
+                hitboxAnimation(1,"FAttack1","HeavyAttack1", false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 1)
             {
                 stopMovement(true, false);
-                hitboxAnimation(2,"FAttack2","HeavyAttack2", false, 1.5f,0f,2f,0f);
+                hitboxAnimation(2,"FAttack2","HeavyAttack2", false, 1.5f,0f,2f,0f,1f);
             }
             else if(curCombo == 2)
             {
                 stopMovement(true,false);
-                hitboxAnimation(2,"FAttack3","HeavyAttack3", false, 1.5f,0f,2f,0f);
+                hitboxAnimation(2,"FAttack3","HeavyAttack3", false, 1.5f,0f,2f,0f,1f);
             } else if(curCombo == 3) 
             {
                 stopMovement(true,false);
-                hitboxAnimation(3,"FAttack4","HeavyAttack4", false, 1.5f,0f,2f,0f);
+                hitboxAnimation(3,"FAttack4","HeavyAttack4", false, 1.5f,0f,2f,0f,1f);
             }
 
             updateKnockback();
@@ -492,7 +492,7 @@ public class PlayerAttack : MonoBehaviour
     
 
     // IMPORTANT: Need to add a variable for damage dealt, this will change depending on the attack
-    void hitboxAnimation(int version, String animatorBool, String animationName, Boolean isAirAttacking, float knockBackX, float knockBackY, float dashX, float dashY){
+    void hitboxAnimation(int version, String animatorBool, String animationName, Boolean isAirAttacking, float knockBackX, float knockBackY, float dashX, float dashY, float hitstunSetTime){
         
         this.isAirAttacking = isAirAttacking;
 

@@ -39,6 +39,12 @@ public class HitboxCollision : MonoBehaviour
     private bool hasCollided = false;
     private float hitState = 0f;
     private PlayerAttack playerAttack;
+
+    private bool isHitLagged;
+    [SerializeField] float hitLagTime; 
+
+
+
     void Start()
     {
 
@@ -101,7 +107,6 @@ public class HitboxCollision : MonoBehaviour
 
 
     void Update()
-
     {
         if (player.CompareTag("Player1"))
         {
@@ -123,6 +128,9 @@ public class HitboxCollision : MonoBehaviour
             hasCollided = false;
         }
 
+
+        GameManager.Instance.isHitLagged = isHitLagged;
+        GameManager.Instance.hitLagTime = hitLagTime;
     }
     
     private bool IsAnyAttackAnimationActive()
@@ -179,6 +187,7 @@ public class HitboxCollision : MonoBehaviour
         
         if (other.CompareTag(oppositePlayer.tag)) 
         {
+            isHitLagged = true;
 
             facingX = player.transform.localScale.x;
 
@@ -196,8 +205,8 @@ public class HitboxCollision : MonoBehaviour
             //Debug.Log(isParrying);
             
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
-        bool isParrying = playerDef.playerAnimator.GetBool("isParrying");
-        Debug.Log(isParrying);
+            bool isParrying = playerDef.playerAnimator.GetBool("isParrying");
+            Debug.Log(isParrying);
             if(playerDef.playerAnimator.GetBool("isBlocking") || isParrying){
                 Debug.Log("is this not appearing?");
             
