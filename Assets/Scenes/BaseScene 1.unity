@@ -613,6 +613,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 880613665}
     - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
+      propertyPath: hitLagTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
       propertyPath: quitButton
       value: 
       objectReference: {fileID: 388470069}
