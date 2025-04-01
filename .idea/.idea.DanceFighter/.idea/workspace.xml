@@ -5,28 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Idle.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Idle.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneVisuals.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneVisuals.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Red_Mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Red_Mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 0.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 0.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 1.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 2.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 2.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 3.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 3.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 4.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/SimpleLight 4.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/SimpleLight.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SimpleLight.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ReactiveCombination1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ReactiveCombination1.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +108,7 @@
       <workItem from="1743136858128" duration="6545000" />
       <workItem from="1743286331610" duration="6658000" />
       <workItem from="1743301189600" duration="6371000" />
+      <workItem from="1743395089339" duration="322000" />
     </task>
     <servers />
   </component>

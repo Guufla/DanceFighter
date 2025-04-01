@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 8470193853014631330}
   - component: {fileID: 5614021470481900832}
   - component: {fileID: 4024758080798977560}
+  - component: {fileID: 1043822662081231978}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -271,7 +272,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -167637646, guid: 4a7b9fd93e83388439bcaff00d0566dc, type: 3}
-  m_Color: {r: 0, g: 0.19999999, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.4113207, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -303,6 +304,20 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4024758080798977560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5809001673095037276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91958cb533ae4d84995a54ec9e62991b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimating: 0
+  parentObject: {fileID: 0}
+--- !u!114 &1043822662081231978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,7 +491,7 @@ GameObject:
   - component: {fileID: 7947010529996269334}
   - component: {fileID: 5436857512694761653}
   - component: {fileID: 4648547337577633860}
-  - component: {fileID: 5343966946350014248}
+  - component: {fileID: 6552966351884939138}
   m_Layer: 6
   m_Name: Fist Collider
   m_TagString: Player1
@@ -546,7 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61080f9c503881649a189a2dd7ad4a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &5343966946350014248
+--- !u!95 &6552966351884939138
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
