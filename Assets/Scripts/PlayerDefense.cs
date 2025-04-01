@@ -11,6 +11,9 @@ public class PlayerDefense : MonoBehaviour
     CapsuleCollider2D playerCollider;
     GameObject player;
     
+    [SerializeField] private GameObject playerSprite;
+    
+    public Animator playerAnimator;
     CapsuleCollider2D attackBoxCollider;
     
     public Vector3 blockCOlliderSizeMultiplier = new Vector3(1.5f, 1.5f, 1.3f); 
@@ -20,25 +23,34 @@ public class PlayerDefense : MonoBehaviour
     DefenseState defenseType;
 
     [Header("Block/Parry")]
-    public bool isBlocking;
-    public bool isParrying;
-    public float blockDamageReduction = 0.5f;
-    public float parryTimeWindow = 0.2f;
-    //private float parryTimer = 0;
-    //private bool parryWindowActive = false;
+    private float blockDamageReduction = 0.3f;
+    private float parryTimeWindow = 0.5f;
     
     [Header("Guard Meter System")]
-    public float maxGuardMeter = 100f;
-    public float guardMeter;
-    public float guardRegenRate = 10f;
-    private bool isGuardBroken = false;
-    
+    private float maxGuardMeter = 100f;
+    private float guardMeter;
+    private float guardRegenRate = 20f;   
+
+    [SerializeField] private int playerIndex = 0;
+
     private void Awake()
     {
+        playerAnimator = playerSprite.GetComponent<Animator>();
         defenseType = DefenseState.none;
+        
+        Transform playerColliderTransform = transform.Find("PlayerCollider"); // Replace "PlayerCollider" with the actual name of the child
+        if (playerColliderTransform != null)
+        {
+            playerCollider = playerColliderTransform.GetComponent<CapsuleCollider2D>();
+        }
     
-        playerCollider = GetComponentInChildren<CapsuleCollider2D>();
-        attackBoxCollider = GetComponentInChildren<CapsuleCollider2D>();
+        /*
+        Transform attackBoxColliderTransform = transform.Find("AttackHitbox"); // Replace "AttackBoxCollider" with the actual name of the child
+        if (attackBoxColliderTransform != null)
+        {
+            attackBoxCollider = attackBoxColliderTransform.GetComponentInChildren<CapsuleCollider2D>();
+        }
+        */
         inputActions = new Input();
         guardMeter = maxGuardMeter;
         
@@ -46,6 +58,11 @@ public class PlayerDefense : MonoBehaviour
         {
             originalColliderSize = playerCollider.transform.localScale;
         }
+    }
+
+    public int GetPlayerIndex()
+    {
+        return playerIndex;
     }
     
     private void OnEnable() 
@@ -76,16 +93,17 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
-    private void OnBlockStarted(InputAction.CallbackContext context)
+    public void OnBlockStarted(InputAction.CallbackContext context)
     {
         
-        if(!isGuardBroken)
+        if(!playerAnimator.GetBool("isGuardBroken"))
         {
             if (context.interaction is HoldInteraction)
             {
-                isBlocking = true;
+                //playerAnimator.SetBool("isBlocking", true);
                 defenseType = DefenseState.block;
                 Debug.Log("Block Started");
+                //playerAnimator.SetBool("isBlocking", true);
             }
             
             if(playerCollider != null)
@@ -93,23 +111,22 @@ public class PlayerDefense : MonoBehaviour
                 playerCollider.transform.localScale = Vector3.Scale(originalColliderSize, blockCOlliderSizeMultiplier);
             }
         }
-            
     }
     
-    private void OnBlockPerformed(InputAction.CallbackContext context)
+    public void OnBlockPerformed(InputAction.CallbackContext context)
     {
-        if(!isGuardBroken)
+        if(!playerAnimator.GetBool("isGuardBroken"))
         {
             if (context.interaction is HoldInteraction)
             {
-                isBlocking = true;
+                playerAnimator.SetBool("isBlocking", true);
                 defenseType = DefenseState.block;
                 Debug.Log("Block Performed");
             }
         }
     }
     
-    private void OnBlockCanceled(InputAction.CallbackContext context)
+    public void OnBlockCanceled(InputAction.CallbackContext context)
     {
         if (context.interaction is HoldInteraction)
         {
@@ -119,7 +136,7 @@ public class PlayerDefense : MonoBehaviour
     
     private void CancelBlock()
     {
-        isBlocking = false;
+        playerAnimator.SetBool("isBlocking", false);
         defenseType = DefenseState.none;
         Debug.Log("Block Canceled");
 
@@ -129,13 +146,14 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
-    private void OnParryPerformed(InputAction.CallbackContext context)
+    public void OnParryPerformed(InputAction.CallbackContext context)
     {
         if (context.interaction is TapInteraction)
         {
             if(context.duration <= parryTimeWindow)
             {
-                isParrying = true;
+                playerAnimator.SetBool("isBlocking", false);
+                playerAnimator.SetBool("isParrying", true);
                 defenseType = DefenseState.parry;
                 Debug.Log("Parry Performed");
                 Invoke(nameof(ResetParry), parryTimeWindow); // Reset parry state after time window
@@ -147,7 +165,8 @@ public class PlayerDefense : MonoBehaviour
     
     void ResetParry()
     {
-        isParrying = false;
+        playerAnimator.SetBool("isParrying", false);
+        playerAnimator.SetBool("isBlocking", false);
         defenseType = DefenseState.none;
     }
     
@@ -156,12 +175,21 @@ public class PlayerDefense : MonoBehaviour
         
     }
     
-    public void TakeDamage(float damage, Collider2D attackCollider)
+    public void TakeDamage(float damage, Collider2D attackCollider, Collider2D attackBoxCollider, bool isBlocking, bool isParrying)
     {
-    
         if(attackBoxCollider.bounds.Intersects(attackCollider.bounds))
         {
-            if(isBlocking)
+            //Debug.Log(playerAnimator.GetBool("isBlocking"));
+            //Debug.Log(playerAnimator.GetBool("isParrying"));
+            
+            if(isBlocking == false && isParrying == true){
+                Debug.Log("Parried");
+                playerAnimator.SetBool("ParryingWhenAttacked", false);
+                CancelBlock();
+                return;
+            }
+        
+            if(playerAnimator.GetBool("isBlocking") && playerAnimator.GetBool("isParrying") == false)
             {
                 Debug.Log("Blocked");
                 // Apply block damage reduction
@@ -188,9 +216,10 @@ public class PlayerDefense : MonoBehaviour
                 
                 Debug.Log("Guard Meter: " + guardMeter);
                 
-                if(guardMeter <= 0 && !isGuardBroken) 
+                if(guardMeter <= 0 && !playerAnimator.GetBool("isGuardBroken")) 
                 {
-                    isGuardBroken = true;
+                    playerAnimator.SetBool("isBlocking", false);
+                    playerAnimator.SetBool("isGuardBroken", true);
                     defenseType = DefenseState.guardBreak;
                     Debug.Log("Guard Broken");
                     
@@ -199,25 +228,21 @@ public class PlayerDefense : MonoBehaviour
                     //stop blocking even if w is held
                     StartCoroutine(GuardRegen()); 
                 }
-            }else if(isParrying)
-            {
-                Debug.Log("Parried");
-                CancelBlock();
             }else{
                 guardMeter -= damage;
-                // Normal damage logic here
+                //meant to do more here but forgot what
             }
         }
     
         IEnumerator GuardRegen()
         {
-            while(isGuardBroken)
+            while(playerAnimator.GetBool("isGuardBroken"))
             {
                 guardMeter += guardRegenRate * Time.deltaTime; //regen rate
                 if(guardMeter >= maxGuardMeter)
                 {
                     guardMeter = maxGuardMeter;
-                    isGuardBroken = false;
+                    playerAnimator.SetBool("isGuardBroken", false);
                     defenseType = DefenseState.none;
                     Debug.Log("Guard Recovered");
                 }

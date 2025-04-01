@@ -8,15 +8,23 @@ public class HitboxAnimationMethods : MonoBehaviour
 
     bool canInput; 
 
-    bool isAnimating; 
+    public bool isAnimating; 
+    
+    private bool isNextAttackQueued;
 
-    GameObject parentObject;
+    [SerializeField] private GameObject parentObject;
+
+    private Animator animator;
+    
+    private PlayerAttack playerAttack;
 
     void Start()
     {
         parentObject = transform.parent.gameObject;
         canInput = true;
         isAnimating = false;
+        animator = this.GetComponent<Animator>();
+        playerAttack = parentObject.GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -32,19 +40,43 @@ public class HitboxAnimationMethods : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void allowInput(){
+    public void allowInput(){
         canInput = true;
     }
-    void stopInput(){
+    public void stopInput(){
         // Both input and animating should be set at the beginning
         canInput = false;
         isAnimating = true;
     }
 
-    void animationEnd(){
+    public void animationEnd(){
         isAnimating = false;
     }
-    void stopAttack(){
+    public void stopAttack(){
         isAnimating = true;
+    }
+    
+    public void QueueNextAttack(){
+        isNextAttackQueued = true;
+    }
+    
+    private void TransitionToNextState()
+    {
+        Debug.Log(animator == null);
+        Debug.Log(isNextAttackQueued);
+    
+        //Debug.Log(animator != null && isNextAttackQueued);
+        
+        if(animator != null && isNextAttackQueued){
+            animator.SetTrigger("NextState");
+            
+            if(playerAttack != null){
+                playerAttack.completeAnimation(1, "RAttack1", "MediumAttack1", false);
+            }
+            
+            isNextAttackQueued = false;
+        }else{
+            Debug.Log("Animator is null");
+        }
     }
 }

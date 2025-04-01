@@ -11,7 +11,8 @@ public class PlayerDirections : MonoBehaviour
 
     Transform opPlayerTrans; // opposite player position
 
-
+    public bool isFacingRight;
+    public bool isFacingLeft;
 
     string currentPlayer;
 
@@ -37,6 +38,9 @@ public class PlayerDirections : MonoBehaviour
 
         curTrans = GetComponent<Transform>();
         opPlayerTrans = oppositePlayer.GetComponent<Transform>();
+        
+        isFacingLeft = false;
+        isFacingRight = false;
     }
 
     // Update is called once per frame
@@ -56,9 +60,13 @@ public class PlayerDirections : MonoBehaviour
 
         if(isOnGround && curTrans.position.x < opPlayerTrans.position.x ){ 
             transform.localScale = new Vector2(1f,1f);
+            isFacingRight = true;
+            isFacingLeft = false;
         }
         else if(isOnGround && curTrans.position.x > opPlayerTrans.position.x ){
             transform.localScale = new Vector2(-1f,1f);
+            isFacingRight = false;
+            isFacingLeft = true;
         }
     }
 }

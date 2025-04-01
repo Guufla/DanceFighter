@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Vector2 moveInput; 
-
+    Vector2 moveInput;     
+    Input inputActions;
     [SerializeField] float movementSpeed = 3f;
 
     [SerializeField] float jumpStrength = 4f;
@@ -22,13 +22,48 @@ public class PlayerMovement : MonoBehaviour
     Boolean stopYMovement;
 
     float setGravityScale;
+    
+    Animator playerAnimator;
+    PlayerDirections playerDirections;
+    PlayerAttack playerAttack;
+    
+    [SerializeField] private GameObject playerSprite;
+    private float initialYPos;
+    private float highestYPos;
 
+    [SerializeField] private int playerIndex = 0;
 
+    void Awake()
+    {
+        // inputActions = new Input();
+        // inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // Reads the input value of the player which is -1,0,1 for left, no input, right
+        // inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        // inputActions.Enable();
+    }
     // Start is called before the first frame update
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         setGravityScale = playerRigidbody.gravityScale;
+        playerAnimator = playerSprite.GetComponent<Animator>();
+        playerDirections = GetComponent<PlayerDirections>();
+        playerAttack = GetComponent<PlayerAttack>();
+    }
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            moveInput = context.ReadValue<Vector2>();
+        }
+        else if(context.canceled)
+        {
+            moveInput = Vector2.zero;
+        }
+        
+    }
+
+    public int GetPlayerIndex(){
+        return playerIndex;
     }
 
     // Update is called once per frame
@@ -36,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
     {
         getGroundCheck();
         getMovementInfo();
+        isHit();
+        handleJumping();
         if(stopMovement == false){
             movement();
         }
@@ -65,25 +102,86 @@ public class PlayerMovement : MonoBehaviour
         else{
             groundCheck = GameManager.Instance.player2IsOnGround;
         }
+        
+        if(groundCheck){ //gets the initial and highest y position of the player every time the player is on the ground
+            initialYPos = transform.position.y;
+            highestYPos = transform.position.y;
+        }
     }
-
-    void OnMove(InputValue value){
-        moveInput = value.Get<Vector2>(); // Gets the players movement input
+    
+    void isHit()
+    {
+        if(playerAnimator.GetBool("isHit") == false)
+        {
+            playerAnimator.SetLayerWeight(1, 0f);
+        }else{
+            playerAnimator.SetLayerWeight(1, 1f);
+        }
     }
+    
+    void handleJumping()
+{
+    // Check if the player is on the ground or performing an air attack
+    if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
+    {
+        playerAnimator.SetBool("isJumping", false);
+        // Debug.Log(playerAttack.isAirAttacking);
+    }
+    else
+    {
+        // Check if the player is in the air and not performing an air attack
+        if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+        {
+            highestYPos = transform.position.y;
+            playerAnimator.SetBool("isJumping", true);
+        }
+    }
+}
 
     void movement(){
-
-
         // VERY IMPORTANT
         // ADD HITSTUN OR CHANGE HOW MOVEMENT WORKS SO THAT KNOCKBACK IS POSSIBLE
         
-        Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
-        playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
-    }
-    void OnJump(InputValue value){
-        if(value.isPressed && groundCheck){
-            playerRigidbody.velocity += new Vector2(0f,jumpStrength); // Code to jump on pressing space
+        
+        //manipulates the layer weight based on if an animation is playing or not
+        if(playerAnimator.GetFloat("WalkDirection") == 0 && 
+        playerAnimator.GetBool("isJumping") == false && 
+        playerAnimator.GetBool("isBlocking") == false &&
+        playerAnimator.GetBool("isParrying") == false)
+        {
+            playerAnimator.SetLayerWeight(1, 0f);
+        }else {
+            playerAnimator.SetLayerWeight(1, 1f);
         }
         
+        Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
+        playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
+        
+        if(playerDirections.isFacingRight){
+            if(moveInput.x != 0){ // If the player is moving
+            playerAnimator.SetBool("isMoving",true);
+            playerAnimator.SetFloat("WalkDirection", moveInput.x); //decides the direction of the player
+            } else{
+                playerAnimator.SetBool("isMoving",false);
+                playerAnimator.SetFloat("WalkDirection", 0);
+            }
+        }else if(playerDirections.isFacingLeft){
+            if(moveInput.x != 0){
+                float actualMoveInput = -moveInput.x; //flips the input so that the player moves in the correct direction
+                playerAnimator.SetBool("isMoving",true);
+                playerAnimator.SetFloat("WalkDirection", actualMoveInput);
+            } else{
+                playerAnimator.SetBool("isMoving",false);
+                playerAnimator.SetFloat("WalkDirection", 0);
+            }
+        }
+            
+    }
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed && groundCheck)
+        {
+            playerRigidbody.velocity += new Vector2(0f, jumpStrength); // Code to jump on pressing space
+        }
     }
 }
