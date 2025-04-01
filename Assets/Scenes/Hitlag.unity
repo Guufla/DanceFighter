@@ -956,6 +956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61080f9c503881649a189a2dd7ad4a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitLagTime: 1
 --- !u!70 &648827554
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1304,6 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61080f9c503881649a189a2dd7ad4a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitLagTime: 1
 --- !u!70 &993491591
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2040,6 +2042,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.06252424
       objectReference: {fileID: 0}
+    - target: {fileID: 4648547337577633860, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: hitLagTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5070127393232396767, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2082,6 +2088,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6489328126292381477, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617280697475862057, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: hitLagTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6636173567549524694, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
