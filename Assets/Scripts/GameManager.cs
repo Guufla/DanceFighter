@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-
-    public bool isHitLagged;
     public float hitLagTime; 
     public bool isWaiting;
 
@@ -242,8 +240,6 @@ public class GameManager : MonoBehaviour
 
         p2HitstunTime = 0; // 
 
-        isHitLagged = false;
-        hitLagTime = 0; 
         isWaiting = false;
 
         knockbackFrozen[0] = new bool[2];
@@ -261,7 +257,6 @@ public class GameManager : MonoBehaviour
         offensiveTimer1 += Time.deltaTime; // Calulate the time that has passed
         offensiveTimer2 += Time.deltaTime;
 
-        hitLagCheck();
 
         if (offensiveTimer1 >= offensiveInterval) // If the time that has passed is greater than the interval (1sec) then do the following
         {
@@ -311,11 +306,10 @@ public class GameManager : MonoBehaviour
             
         }
     }
-    private void hitLagCheck(){
-        if(isHitLagged && !isWaiting){
+    public void hitLagCheck(){
+        if(!isWaiting){
             Time.timeScale = 0f;
             StartCoroutine(Wait(hitLagTime));
-            
         }
     }
 
@@ -323,7 +317,6 @@ public class GameManager : MonoBehaviour
         isWaiting = true;
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1f;
-        isHitLagged = false;
         isWaiting = false;
     }
 

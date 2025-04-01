@@ -40,8 +40,6 @@ public class HitboxCollision : MonoBehaviour
     private float hitState = 0f;
     private PlayerAttack playerAttack;
 
-    private bool isHitLagged;
-    [SerializeField] float hitLagTime; 
 
 
 
@@ -129,8 +127,6 @@ public class HitboxCollision : MonoBehaviour
         }
 
 
-        GameManager.Instance.isHitLagged = isHitLagged;
-        GameManager.Instance.hitLagTime = hitLagTime;
     }
     
     private bool IsAnyAttackAnimationActive()
@@ -187,8 +183,7 @@ public class HitboxCollision : MonoBehaviour
         
         if (other.CompareTag(oppositePlayer.tag)) 
         {
-            isHitLagged = true;
-
+            GameManager.Instance.hitLagCheck();
             facingX = player.transform.localScale.x;
 
             facingY = player.transform.localScale.y;
