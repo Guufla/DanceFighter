@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7734515863965736316}
   - component: {fileID: 4547084231478467168}
-  - component: {fileID: 193016956093657138}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -50,36 +49,6 @@ MonoBehaviour:
   bothAggroClip: {fileID: 8300000, guid: e1059a073162caa4da295cc8442efffd, type: 3}
   oneAggroClip: {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
   noAggroClip: {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
---- !u!114 &193016956093657138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584731484714653122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: a9f9b2787b4e1744a804fb708f7c3086, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &8288976927463921218
 GameObject:
   m_ObjectHideFlags: 0

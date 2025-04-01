@@ -68,10 +68,8 @@
                 float foundAlpha = 0;
                 for (int k = 0; k < _samples; ++k)
                 {
-                    //angle += 1.0/(float(_samples)/2.0) * UNITY_PI;
                     angle += _samples / 2 * UNITY_PI;
                     float2 testPoint = i.uv + float2(cos(angle) * radius * 0.13, sin(angle) * radius);
-                    //testPoint = i.uv + float2(0, sin(angle)*radius);
                     float sampledAlpha = tex2D(_MainTex, testPoint).a;
                     foundAlpha = max(sampledAlpha, foundAlpha);
                 }
@@ -83,6 +81,8 @@
 
                 
 
+
+                
 
                 return col;
             }
