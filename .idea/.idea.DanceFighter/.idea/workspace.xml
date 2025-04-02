@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneVisuals.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneVisuals.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MaterialManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MaterialManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GameManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GameManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player1_Outline.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Player1_Outline.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
     </list>
@@ -41,6 +45,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Dance Fighter.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\GitHub\DanceFighter\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.48f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\jacri\Documents\GitHub\DanceFighter -debugCodeOptimization" />
@@ -109,6 +121,7 @@
       <workItem from="1743286331610" duration="6658000" />
       <workItem from="1743301189600" duration="6371000" />
       <workItem from="1743395089339" duration="322000" />
+      <workItem from="1743548672760" duration="4068000" />
     </task>
     <servers />
   </component>

@@ -351,7 +351,7 @@ public class GameManager : MonoBehaviour
     //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
     public void Player1HitsPlayer2()
     {
-        if (isCountingDown) return;
+        if (isCountingDown) return; 
 
         //Debug.Log("Player 1 hits Player 2");
 
@@ -393,6 +393,9 @@ public class GameManager : MonoBehaviour
 
         //start the knockback timer
         knockbackCoroutineP1 = StartCoroutine(KnockbackTimer(2));
+        
+        // hit effect
+        EffectManager.Instance.OnPlayerHit(EffectManager.Instance.p2);
     }
     //When player 2 hits player 1 subtract 10 from player 2's health and update the slider
     public void Player2HitsPlayer1()
@@ -430,6 +433,9 @@ public class GameManager : MonoBehaviour
 
         //start the knockback timer
         knockbackCoroutineP2 = StartCoroutine(KnockbackTimer(1));
+        
+        // hit effect
+        EffectManager.Instance.OnPlayerHit(EffectManager.Instance.p1);
     }
 
     public void Player1Win()
