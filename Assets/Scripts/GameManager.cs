@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
+    public float hitLagTime; 
+    public bool isWaiting;
 
 
     [Header("Player1")]
@@ -43,6 +45,14 @@ public class GameManager : MonoBehaviour
 
     public bool p1Aggro; // Tells if the player is in aggro mode
 
+    public bool isP1Hitstun; // 
+
+    public float p1HitstunSetTime; //
+
+    public float p1HitstunTime; // 
+
+    
+
 
     // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
     [Header("Player2")]
@@ -73,6 +83,11 @@ public class GameManager : MonoBehaviour
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
 
+    public bool isP2Hitstun; // 
+    
+    public float p2HitstunSetTime; //
+
+    public float p2HitstunTime; // 
 
     [Header("Offensive mode")]
 
@@ -213,6 +228,20 @@ public class GameManager : MonoBehaviour
         winBox1P2.gameObject.SetActive(false);
         winBox2P2.gameObject.SetActive(false);
 
+        isP1Hitstun = false; // 
+
+        p1HitstunSetTime = 0; // 
+
+        p1HitstunTime = 0; // 
+
+        isP2Hitstun = false; // 
+
+        p2HitstunSetTime = 0; // 
+
+        p2HitstunTime = 0; // 
+
+        isWaiting = false;
+
         knockbackFrozen[0] = new bool[2];
         knockbackFrozen[1] = new bool[2];
         knockbackFrozenY[0] = new bool[2];
@@ -227,6 +256,7 @@ public class GameManager : MonoBehaviour
         if (isCountingDown) return;
         offensiveTimer1 += Time.deltaTime; // Calulate the time that has passed
         offensiveTimer2 += Time.deltaTime;
+
 
         if (offensiveTimer1 >= offensiveInterval) // If the time that has passed is greater than the interval (1sec) then do the following
         {
@@ -275,6 +305,19 @@ public class GameManager : MonoBehaviour
             Player1Win();
             
         }
+    }
+    public void hitLagCheck(){
+        if(!isWaiting){
+            Time.timeScale = 0f;
+            StartCoroutine(Wait(hitLagTime));
+        }
+    }
+
+    IEnumerator Wait(float duration){
+        isWaiting = true;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
+        isWaiting = false;
     }
 
     private void DecreaseOffensiveSlider(Slider offensiveSlider, ref bool isoffensive)

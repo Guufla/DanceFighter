@@ -39,6 +39,10 @@ public class HitboxCollision : MonoBehaviour
     private bool hasCollided = false;
     private float hitState = 0f;
     private PlayerAttack playerAttack;
+
+
+
+
     void Start()
     {
 
@@ -101,7 +105,6 @@ public class HitboxCollision : MonoBehaviour
 
 
     void Update()
-
     {
         if (player.CompareTag("Player1"))
         {
@@ -122,6 +125,7 @@ public class HitboxCollision : MonoBehaviour
         {
             hasCollided = false;
         }
+
 
     }
     
@@ -179,7 +183,7 @@ public class HitboxCollision : MonoBehaviour
         
         if (other.CompareTag(oppositePlayer.tag)) 
         {
-
+            GameManager.Instance.hitLagCheck();
             facingX = player.transform.localScale.x;
 
             facingY = player.transform.localScale.y;
@@ -196,8 +200,8 @@ public class HitboxCollision : MonoBehaviour
             //Debug.Log(isParrying);
             
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
-        bool isParrying = playerDef.playerAnimator.GetBool("isParrying");
-        Debug.Log(isParrying);
+            bool isParrying = playerDef.playerAnimator.GetBool("isParrying");
+            Debug.Log(isParrying);
             if(playerDef.playerAnimator.GetBool("isBlocking") || isParrying){
                 Debug.Log("is this not appearing?");
             
