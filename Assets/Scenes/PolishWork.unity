@@ -525,57 +525,6 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 3898636764967316156, guid: ccb33d982cda9904daf19158a2b25ffe, type: 3}
   m_PrefabInstance: {fileID: 132225970}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &326505223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 326505225}
-  - component: {fileID: 326505224}
-  m_Layer: 0
-  m_Name: MaterialManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &326505224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326505223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16937bacda0444ada95fa9a775df9644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleShaderEffect: 0
-  targetShader: {fileID: 4800000, guid: 33a1847c85442b54fb65cba3b806f168, type: 3}
-  player1Material: {fileID: 2100000, guid: 4bec4b5dbb620aa48949c279446a5ad5, type: 2}
-  player2Material: {fileID: 2100000, guid: 1f36cabbf6e19b445b98525a31f3b756, type: 2}
-  player1Transform: {fileID: 925624592}
-  player2Transform: {fileID: 2033069083}
-  effectRate: 1
---- !u!4 &326505225
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326505223}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6558168, y: -1.969544, z: 0.9675498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &340892567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,10 +722,14 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 299951864}
-    - target: {fileID: 7438893480763728236, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: defaultScale.y
-      value: 4.84
-      objectReference: {fileID: 0}
+    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
+      propertyPath: player1Transform
+      value: 
+      objectReference: {fileID: 925624592}
+    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
+      propertyPath: player2Transform
+      value: 
+      objectReference: {fileID: 2033069083}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1685,7 +1638,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1926801246698073372}
-  - {fileID: 326505225}
   - {fileID: 2036644110}
   - {fileID: 552088909}
   - {fileID: 340892567}
