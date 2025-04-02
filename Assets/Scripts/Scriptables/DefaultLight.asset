@@ -16,4 +16,4 @@ MonoBehaviour:
   <TargetSize>k__BackingField: -1
   <ResizeThreshold>k__BackingField: 1
   <ResizeRate>k__BackingField: 0.09
-  <ObjectToPool>k__BackingField: {fileID: 4478777249903340228, guid: 70ddef0a4a6a77343864d40d2e842923, type: 3}
+  <ObjectToPool>k__BackingField: {fileID: 0}
