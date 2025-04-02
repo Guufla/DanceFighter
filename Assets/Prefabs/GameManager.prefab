@@ -45,14 +45,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
-  player1MaxHP: 10
-  player1HP: 0
   P1AttackKnockBackX: 0
   P1AttackKnockBackY: 0
+  stopP1Movement: 0
+  stopP1YMovement: 0
+  canInputP1: 0
+  isHitBoxAnimatingP1: 0
+  playerHealthBar: {fileID: 0}
+  P1Health: 100
+  p1OffensiveBar: {fileID: 0}
   player1IsOnGround: 0
+  p1Aggro: 0
   player2: {fileID: 0}
-  player2MaxHP: 10
-  player2HP: 0
   P2AttackKnockBackX: 0
   P2AttackKnockBackY: 0
+  stopP2Movement: 0
+  stopP2YMovement: 0
+  canInputP2: 0
+  isHitBoxAnimatingP2: 0
+  P2Aggro: 0
+  opponentHealth: {fileID: 0}
+  P2Health: 100
+  p2Offensive: {fileID: 0}
   player2IsOnGround: 0
+  maxOffensiveBarValue: 1000
+  offensiveIncrease: 50
+  offensiveDecrease: 50
+  offensiveValueP1: 0
+  offensiveValueP2: 0
+  isOffensiveP2: 0
+  isOffensiveP1: 0
+  winMessage: {fileID: 0}
+  countdownText: {fileID: 0}
+  timerText: {fileID: 0}
+  timerSeconds: 99
+  emptyBox1P1: {fileID: 0}
+  emptyBox2P1: {fileID: 0}
+  winBox1P1: {fileID: 0}
+  winBox2P1: {fileID: 0}
+  emptyBox1P2: {fileID: 0}
+  emptyBox2P2: {fileID: 0}
+  winBox1P2: {fileID: 0}
+  winBox2P2: {fileID: 0}
+  restartButton: {fileID: 0}
+  quitButton: {fileID: 0}
+  isCountingDown: 0
+  roundOver: 0
+  gameOver: 0
+  p1Win: 0
+  p2Win: 0
