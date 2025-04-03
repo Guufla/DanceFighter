@@ -20,6 +20,8 @@ public class HitboxCollision : MonoBehaviour
 
     float basicAttackKnockBackY;
 
+    float damageTaken;
+
     //public float playerHealth = 100;
 
     //public Slider healthbar;
@@ -112,6 +114,8 @@ public class HitboxCollision : MonoBehaviour
 
             basicAttackKnockBackY = GameManager.Instance.P1AttackKnockBackY;
 
+            damageTaken = GameManager.Instance.p2AttackDamage;
+
             
         }
         else if (player.CompareTag("Player2"))
@@ -119,6 +123,8 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackX = GameManager.Instance.P2AttackKnockBackX;
 
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
+
+            damageTaken = GameManager.Instance.p1AttackDamage;
         }
         
         if(!playerAttack.isAttacking && hasCollided)
@@ -210,8 +216,8 @@ public class HitboxCollision : MonoBehaviour
                 if(isParrying == true){
                     playerDef.playerAnimator.SetBool("ParryingWhenAttacked", true);
                 }*/
-            
-                playerDef.TakeDamage(50, other, GetComponent<Collider2D>(), playerDef.playerAnimator.GetBool("isBlocking"), isParrying);
+
+                playerDef.TakeDamage(damageTaken, other, GetComponent<Collider2D>(), playerDef.playerAnimator.GetBool("isBlocking"), isParrying);
                 return;
             }
         
