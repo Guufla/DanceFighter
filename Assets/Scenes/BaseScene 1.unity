@@ -1533,12 +1533,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 21.591286, y: 5.055047}
-      - {x: -17.02723, y: 7.6338387}
+    - - {x: 22.829056, y: 6.082244}
+      - {x: -16.770428, y: 5.8362427}
       - {x: -16.606365, y: -1.6684554}
       - {x: -16.64349, y: -16.798931}
       - {x: 22.209146, y: -17.112152}
-      - {x: 22.704082, y: -2.9192235}
+      - {x: 21.968353, y: -0.22154593}
   m_UseDelaunayMesh: 0
 --- !u!4 &2061953622
 Transform:
@@ -1663,6 +1663,42 @@ PrefabInstance:
     - target: {fileID: 1577864448065103500, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA1DashX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA2DashX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA3DashX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA1Damage
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA2Damage
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA3Damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA1KnockbackX
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA2KnockbackX
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA3KnockbackX
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
