@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public Slider playerHealthBar; // This is a reference to the player health slider that lets us easily call it from different scripts
 
-    public int P1Health = 100;
+    public float P1Health = 1000;
 
     public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     public float p1HitstunSetTime; //
 
     public float p1HitstunTime; // 
+
+    public float p1AttackDamage;
 
     
 
@@ -75,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     public Slider opponentHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
 
-    public int P2Health = 100;
+    public float P2Health = 1000;
 
     public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
@@ -88,6 +90,8 @@ public class GameManager : MonoBehaviour
     public float p2HitstunSetTime; //
 
     public float p2HitstunTime; // 
+
+    public float p2AttackDamage;
 
     [Header("Offensive mode")]
 
@@ -355,7 +359,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Player 1 hits Player 2");
 
-        P2Health -= 10;
+        P2Health -= p1AttackDamage;
         opponentHealth.value = P2Health;
         if (!isOffensiveP1)
         {
@@ -404,7 +408,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Player 2 hits Player 1");
 
-        P1Health -= 10;
+        P1Health -= p2AttackDamage;
         playerHealthBar.value = P1Health; //when p2 hits p1 add an extra boost to the offensive bar
         if (!isOffensiveP2)
         {
