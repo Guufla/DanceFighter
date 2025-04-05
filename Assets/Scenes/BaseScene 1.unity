@@ -645,6 +645,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 999890141}
     - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
+      propertyPath: dashStrength
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
       propertyPath: countdownText
       value: 
       objectReference: {fileID: 1301758034}
@@ -1420,7 +1424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2011613372581413899, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: dashStrength
-      value: 30
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4077496784279841329, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1670,7 +1674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2788458673006316364, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: dashStrength
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: LA1DashX
