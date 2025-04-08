@@ -172,7 +172,12 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetLayerWeight(1, 1f);
         }
         
+        //velocity calculations
         Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
+        if((gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP1) || (gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP2))
+        {
+            playerVelocity.x *= 1.5f;
+        }
         playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
         
         if(playerDirections.isFacingRight){

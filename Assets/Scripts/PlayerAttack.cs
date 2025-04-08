@@ -660,11 +660,7 @@ public class PlayerAttack : MonoBehaviour
 
         //Damage calculation
         currentDamage = damage;
-        if(gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP1)
-        {
-            currentDamage *= 1.5f;
-        }
-        else if(gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP2)
+        if((gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP1) || (gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP2))
         {
             currentDamage *= 1.5f;
         }
