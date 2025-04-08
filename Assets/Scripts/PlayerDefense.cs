@@ -8,7 +8,7 @@ enum DefenseState: int { none,block, parry, guardBreak }
 
 public class PlayerDefense : MonoBehaviour
 {
-    CapsuleCollider2D playerCollider;
+    BoxCollider2D playerCollider;
     GameObject player;
     
     [SerializeField] private GameObject playerSprite;
@@ -41,7 +41,7 @@ public class PlayerDefense : MonoBehaviour
         Transform playerColliderTransform = transform.Find("PlayerCollider"); // Replace "PlayerCollider" with the actual name of the child
         if (playerColliderTransform != null)
         {
-            playerCollider = playerColliderTransform.GetComponent<CapsuleCollider2D>();
+            playerCollider = playerColliderTransform.GetComponent<BoxCollider2D>();
         }
     
         /*

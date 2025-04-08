@@ -78,6 +78,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private int playerIndex = 0;
 
+    Boolean disablePlayerInput;
+
 
     [Header("Light attack variables (3 hit combo)")]
 
@@ -259,6 +261,8 @@ public class PlayerAttack : MonoBehaviour
         stopPlayerYMovement = false;
 
         isComboBuffered = false;
+
+        disablePlayerInput = false;
         
         playerRigidbody = transform.GetComponent<Rigidbody2D>();
 
@@ -270,7 +274,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         attackColliderUpdate(); // Update function for the attack collider
-        groundCheck(); // Used to check if the player is on the ground
+        gameManagerUpdate(); // Used to check if the player is on the ground
         updateAirCombo(); // Used for reseting the aircombo when the player hits the ground
         attacks(); // Update function for the attack system
         //resetTimerCheck(); // Update function for resetting the combo timer
@@ -302,7 +306,8 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Checks if the player is on the ground and stores it in that variable within the game manager
-    void groundCheck(){
+    void gameManagerUpdate(){
+        disablePlayerInput = GameManager.Instance.disablePlayerInputs;
         if(transform.tag == "Player1"){
             isOnGround = GameManager.Instance.player1IsOnGround;
         }
@@ -942,7 +947,7 @@ void resetTimerCheck()
     // Small helper function for dashing
     void dashWithAttack(float x, float y)
     {
-        playerRigidbody.AddForce(new Vector2(x ,y), ForceMode2D.Force);
+        playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Force);
         // playerRigidbody.velocity = new Vector2(x * transform.localScale.x,y); 
     }
 
@@ -951,7 +956,7 @@ void resetTimerCheck()
     public void AttackE(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started)
+        if(context.started && !disablePlayerInput)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -990,7 +995,7 @@ void resetTimerCheck()
     public void AttackR(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started)
+        if(context.started && !disablePlayerInput)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1030,7 +1035,7 @@ void resetTimerCheck()
     public void AttackF(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started)
+        if(context.started && !disablePlayerInput)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1064,7 +1069,7 @@ void resetTimerCheck()
     public void UpPressed(CallbackContext context){
 
         // If the input isnt 0 then the player is holding Up
-        if (context.started)
+        if (context.started && !disablePlayerInput)
         {
             Debug.Log("UP");
             holdingUp = true;
@@ -1078,7 +1083,7 @@ void resetTimerCheck()
 
     public void DownPressed(CallbackContext context){
         // If the input isnt 0 then the player is holding Down
-        if (context.started)
+        if (context.started && !disablePlayerInput)
         {
             Debug.Log("DOWN");
             holdingDown = true;

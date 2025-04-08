@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     Boolean dashBufferIndicator;
 
+    Boolean disablePlayerInput;
+
     float setGravityScale;
     
     Animator playerAnimator;
@@ -57,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         dashOption = true;
         dashBufferIndicator = false;
+        disablePlayerInput = false;
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -83,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         isHit();
         handleJumping();
         dashCheck();
-        if(stopMovement == false && isDashing == false){
+        if(stopMovement == false && isDashing == false && disablePlayerInput == false){
             movement();
         }
         if(stopYMovement){
@@ -95,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
     void getMovementInfo(){
+        disablePlayerInput = GameManager.Instance.disablePlayerInputs;
+
         if(transform.tag == "Player1"){
             stopMovement = GameManager.Instance.stopP1Movement;
             stopYMovement = GameManager.Instance.stopP1YMovement;

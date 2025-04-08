@@ -15,6 +15,14 @@ public class GameManager : MonoBehaviour
     public float dashStrength; 
     public bool isWaiting;
 
+    public int curPlayerCount;
+
+    public bool lockGameTillEnoughPlayers;
+
+    public bool isGameStarted;
+
+    public bool disablePlayerInputs;
+
 
     [Header("Player1")]
 
@@ -119,6 +127,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Text")]
 
+    public Image controllerConnectScreen;
+
+    public TMP_Text player1Joined;
+
+    public TMP_Text player2Joined;
+
     public TMP_Text winMessage; // Win message
 
     public TMP_Text countdownText; // Countdown text
@@ -144,6 +158,7 @@ public class GameManager : MonoBehaviour
     public Image winBox1P2;
 
     public Image winBox2P2;
+
 
     [Header("Buttons")]
 
@@ -208,6 +223,10 @@ public class GameManager : MonoBehaviour
         player1IsOnGround = false;
         player2IsOnGround = false;
 
+        disablePlayerInputs = true;
+
+        curPlayerCount = 0;
+
         // Sets the health bar values to the player health variables
         // Max health is 100 for now
         // MAKE SURE TO SET MAX VALUES FIRST
@@ -233,6 +252,12 @@ public class GameManager : MonoBehaviour
         winBox1P2.gameObject.SetActive(false);
         winBox2P2.gameObject.SetActive(false);
 
+        countdownText.gameObject.SetActive(false);
+
+        controllerConnectScreen.gameObject.SetActive(true);
+        player1Joined.gameObject.SetActive(false);
+        player2Joined.gameObject.SetActive(false);
+
         isP1Hitstun = false; // 
 
         p1HitstunSetTime = 0; // 
@@ -247,18 +272,45 @@ public class GameManager : MonoBehaviour
 
         isWaiting = false;
 
+        isGameStarted = false;
+
         knockbackFrozen[0] = new bool[2];
         knockbackFrozen[1] = new bool[2];
         knockbackFrozenY[0] = new bool[2];
         knockbackFrozenY[1] = new bool[2];
 
-        StartCoroutine(StartRoundCountdown(3)); // Start the countdown
+        if(lockGameTillEnoughPlayers){
+            disablePlayerInputs = true;
+            controllerConnectScreen.gameObject.SetActive(true);
+        }
 
     }
 
     void Update()
     {
-        if (isCountingDown) return;
+        if(!isGameStarted && controllerConnectScreen.gameObject.activeSelf)
+        {
+            if(curPlayerCount == 0){
+                player1Joined.gameObject.SetActive(false);
+                player2Joined.gameObject.SetActive(false);
+            }
+
+            else if(curPlayerCount == 1){
+                player1Joined.gameObject.SetActive(true);
+            }
+            
+            else if(curPlayerCount == 2 && !isCountingDown)
+            {
+                player1Joined.gameObject.SetActive(true);
+                player2Joined.gameObject.SetActive(true);
+
+                disablePlayerInputs = true;
+
+                StartCoroutine(bufferForControllerScreen(1f));
+            }
+        }
+
+        if (isCountingDown || !isGameStarted) return;
         offensiveTimer1 += Time.deltaTime; // Calulate the time that has passed
         offensiveTimer2 += Time.deltaTime;
 
@@ -513,8 +565,8 @@ public class GameManager : MonoBehaviour
 
 
         // Reset player health
-        P1Health = 100;
-        P2Health = 100;
+        P1Health = playerHealthBar.maxValue;
+        P2Health = playerHealthBar.maxValue;
         playerHealthBar.value = P1Health;
         opponentHealth.value = P2Health;
 
@@ -533,6 +585,7 @@ public class GameManager : MonoBehaviour
         // Reposition players to their initial positions
         player1.transform.position = new Vector2(-4, -3);
         player2.transform.position = new Vector2(4, -3);
+
 
         StartCoroutine(StartRoundCountdown(3));
 
@@ -562,7 +615,18 @@ public class GameManager : MonoBehaviour
         winBox2P2.gameObject.SetActive(false);
 
         // Reset the match
-        StartCoroutine(RestartMatch(2f));
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
+    private IEnumerator bufferForControllerScreen(float bufferTime){
+        yield return new WaitForSeconds(bufferTime);
+
+        player1Joined.gameObject.SetActive(false);
+        player2Joined.gameObject.SetActive(false);
+        controllerConnectScreen.gameObject.SetActive(false);
+
+        countdownText.gameObject.SetActive(true);
+        StartCoroutine(StartRoundCountdown(3)); // Start the countdown
     }
 
     private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
@@ -576,11 +640,15 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             countdownTime--;
         }
+        disablePlayerInputs = false;
         countdownText.text = "GO!";
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
         isCountingDown = false;
-        StartCoroutine(CountdownTimer());
+        if(!isGameStarted){
+            StartCoroutine(CountdownTimer());
+        }
+        isGameStarted = true;
     }
 
     private IEnumerator CountdownTimer()
@@ -718,5 +786,14 @@ public class GameManager : MonoBehaviour
                 stopP2YMovement = false;
             }
         }
+    }
+
+    public void playerJoined()
+    {
+        curPlayerCount++;
+    }
+    public void playerLeft()
+    {
+        curPlayerCount--;
     }
 }
