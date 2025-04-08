@@ -42,6 +42,8 @@ public class HitboxCollision : MonoBehaviour
     private float hitState = 0f;
     private PlayerAttack playerAttack;
 
+    [SerializeField] GameObject hitEffect;
+
 
 
 
@@ -189,6 +191,9 @@ public class HitboxCollision : MonoBehaviour
         
         if (other.CompareTag(oppositePlayer.tag)) 
         {
+            Vector3 position = new Vector3(oppositePlayer.transform.position.x,transform.position.y,transform.position.z);
+            Instantiate(hitEffect,position,Quaternion.identity);
+
             GameManager.Instance.hitLagCheck();
             facingX = player.transform.localScale.x;
 
