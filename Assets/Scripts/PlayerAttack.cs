@@ -658,7 +658,16 @@ public class PlayerAttack : MonoBehaviour
         // Animator bool example: "EAttack1"
         attackAnimator.SetBool(animatorBool,true); // Sets the corrisponding boolean to true
 
+        //Damage calculation
         currentDamage = damage;
+        if(gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP1)
+        {
+            currentDamage *= 1.5f;
+        }
+        else if(gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP2)
+        {
+            currentDamage *= 1.5f;
+        }
 
         setKnockback(knockBackX,knockBackY); // Sets knockback stats for this attack
 
