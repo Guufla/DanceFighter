@@ -283,6 +283,12 @@ public class GameManager : MonoBehaviour
             disablePlayerInputs = true;
             controllerConnectScreen.gameObject.SetActive(true);
         }
+        else{
+            controllerConnectScreen.gameObject.SetActive(false);
+            disablePlayerInputs = true;
+            countdownText.gameObject.SetActive(true);
+            StartCoroutine(StartRoundCountdown(3)); // Start the countdown
+        }
 
     }
 
@@ -303,8 +309,6 @@ public class GameManager : MonoBehaviour
             {
                 player1Joined.gameObject.SetActive(true);
                 player2Joined.gameObject.SetActive(true);
-
-                disablePlayerInputs = true;
 
                 StartCoroutine(bufferForControllerScreen(1f));
             }
