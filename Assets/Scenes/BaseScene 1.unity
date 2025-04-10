@@ -1437,15 +1437,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA1DashX
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA2DashX
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA3DashX
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA1Damage
@@ -1470,6 +1470,14 @@ PrefabInstance:
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA3KnockbackX
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408449875225785419, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Size.y
+      value: 2.1478512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408449875225785419, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.0812134
       objectReference: {fileID: 0}
     - target: {fileID: 2011613372581413899, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: dashStrength
@@ -1521,16 +1529,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_Size.x
-      value: 1.2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_Size.y
-      value: 1.34
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2069334426, guid: e4e1eb0fbc8698b40958d9049b3df1ca, type: 3}
+      objectReference: {fileID: 1809219300, guid: 4a7b9fd93e83388439bcaff00d0566dc, type: 3}
     - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_SortingOrder
       value: 6
@@ -1538,6 +1546,18 @@ PrefabInstance:
     - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146117446554766435, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.7373714
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146117446554766435, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.70000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146117446554766435, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.22631434
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1747,15 +1767,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: LA1DashX
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: LA2DashX
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: LA3DashX
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: LA1Damage
@@ -1792,7 +1812,7 @@ PrefabInstance:
     - target: {fileID: 2958579564826557497, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2069334426, guid: e4e1eb0fbc8698b40958d9049b3df1ca, type: 3}
+      objectReference: {fileID: 1809219300, guid: 4a7b9fd93e83388439bcaff00d0566dc, type: 3}
     - target: {fileID: 2958579564826557497, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
