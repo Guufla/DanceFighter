@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2242e7c12b8f2474a8201f2d24ff4eef
+guid: 3568d8d6cd46b7349a9170076f73f06f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,169 +97,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MediumAttack4_0
+      name: DownTiltJump_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 74
-        height: 109
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 11
+        y: 15
+        width: 149
+        height: 153
+      alignment: 9
+      pivot: {x: 0.49854687, y: 0.028299507}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51c1fee0bdaa6294bb9ee6ff0e15a351
-      internalID: -555458235
+      spriteID: f9017d3fe2aff4f4f9a56dda612ef6c1
+      internalID: -58041128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MediumAttack4_1
+      name: DownTiltJump_1
       rect:
         serializedVersion: 2
-        x: 140
-        y: 0
-        width: 69
-        height: 106
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 160
+        y: 15
+        width: 148.53334
+        height: 153
+      alignment: 9
+      pivot: {x: 0.4985423, y: 0.02405457}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c1b9c87a797ca348b4607a1e17f7baf
-      internalID: -557411492
+      spriteID: 2e6bccf3e743b8b45b1a9e7a9bb2ee52
+      internalID: -1606385484
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MediumAttack4_2
+      name: DownTiltJump_2
       rect:
         serializedVersion: 2
-        x: 263
-        y: 0
-        width: 70
-        height: 103
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 308
+        y: 15
+        width: 148.53334
+        height: 153
+      alignment: 9
+      pivot: {x: 0.49858454, y: 0.030232262}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56f055c550075714392c722a82626791
-      internalID: 262528435
+      spriteID: 57c092ef234ac344b8868ff9c4ee1eb8
+      internalID: -1006438096
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MediumAttack4_3
+      name: DownTiltJump_3
       rect:
         serializedVersion: 2
-        x: 390
-        y: 0
-        width: 106
-        height: 105
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 456
+        y: 15
+        width: 148
+        height: 153
+      alignment: 9
+      pivot: {x: 0.50000036, y: 0.033637002}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8c13496d830ca6428c57fbe05496e56
-      internalID: 1467706088
+      spriteID: 4f268936b5f87ad4b923b9bfbf46b749
+      internalID: 652332275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MediumAttack4_4
+      name: DownTiltJump_4
       rect:
         serializedVersion: 2
-        x: 519
-        y: 0
-        width: 119
-        height: 103
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 604
+        y: 15
+        width: 148.53334
+        height: 153
+      alignment: 9
+      pivot: {x: 0.49441925, y: 0.03973148}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cf2da7c5d08a5240a2ca71a6d9cc85a
-      internalID: -1547643020
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MediumAttack4_5
-      rect:
-        serializedVersion: 2
-        x: 646
-        y: 0
-        width: 122
-        height: 102
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9380c10da7d2ea649a29d522af572c60
-      internalID: -875447672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MediumAttack4_6
-      rect:
-        serializedVersion: 2
-        x: 777
-        y: 0
-        width: 109
-        height: 105
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd8400ccae7f43e478b57d141319bd21
-      internalID: 2093166913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MediumAttack4_7
-      rect:
-        serializedVersion: 2
-        x: 904
-        y: 0
-        width: 74
-        height: 109
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7fd968cee9caf60409ac5d5779a750a9
-      internalID: -81277030
+      spriteID: 64a0ee8c845bebc4597d29c3065d24c2
+      internalID: -1300175809
       vertices: []
       indices: 
       edges: []
@@ -275,14 +212,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MediumAttack4_0: -555458235
-      MediumAttack4_1: -557411492
-      MediumAttack4_2: 262528435
-      MediumAttack4_3: 1467706088
-      MediumAttack4_4: -1547643020
-      MediumAttack4_5: -875447672
-      MediumAttack4_6: 2093166913
-      MediumAttack4_7: -81277030
+      DownTiltJump_0: -58041128
+      DownTiltJump_1: -1606385484
+      DownTiltJump_10: 815764238
+      DownTiltJump_11: -155724861
+      DownTiltJump_12: -1387295492
+      DownTiltJump_13: 1630900632
+      DownTiltJump_14: -1117090918
+      DownTiltJump_2: -1006438096
+      DownTiltJump_3: 652332275
+      DownTiltJump_4: -1300175809
+      DownTiltJump_5: 2111114852
+      DownTiltJump_6: -971601974
+      DownTiltJump_7: -535844607
+      DownTiltJump_8: 462801844
+      DownTiltJump_9: 274085811
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

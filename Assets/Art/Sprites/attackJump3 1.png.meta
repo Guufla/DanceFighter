@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7a63296b9331b964a9ebed4c3c269191
+guid: bf473ffd961a2d74e97da87b10d08099
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,169 +97,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HeavyAttack1_0
+      name: attackJump3 1_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 0
-        width: 73
-        height: 109
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 11
+        y: 16
+        width: 149.8
+        height: 152
+      alignment: 9
+      pivot: {x: 0.4973109, y: 0.030918323}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4159803f550d0d942a6fecffcd738b57
-      internalID: 291186543
+      spriteID: d19226f2bcb1eb747bb02d7a31fd5dbe
+      internalID: -2120188534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack1_1
+      name: attackJump3 1_1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 0
-        width: 56
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 160
+        y: 16
+        width: 150
+        height: 152
+      alignment: 9
+      pivot: {x: 0.50192636, y: 0.03896913}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d945be8d0d42264da69c48bee434351
-      internalID: 1587117378
+      spriteID: 13d2e418015f989479491b7d7f726f8a
+      internalID: -1054183055
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack1_2
+      name: attackJump3 1_2
       rect:
         serializedVersion: 2
-        x: 265
-        y: 0
-        width: 54
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 310
+        y: 16
+        width: 150
+        height: 152
+      alignment: 9
+      pivot: {x: 0.49643838, y: 0.05448078}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50bf8d1b5f1c189409e5e053570b8bb2
-      internalID: -1328811567
+      spriteID: 5baa191029315d746b4c4ffcac436ad5
+      internalID: -253817737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack1_3
+      name: attackJump3 1_3
       rect:
         serializedVersion: 2
-        x: 399
-        y: 0
-        width: 54
-        height: 111
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 458
+        y: 16
+        width: 149.8
+        height: 152
+      alignment: 9
+      pivot: {x: 0.4965646, y: 0.044016976}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48af96deee891fe4e9d2047d19d24b91
-      internalID: 853293837
+      spriteID: 7835b40a044557a40a5c2ad31e9ad5fb
+      internalID: -1489388270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack1_4
+      name: attackJump3 1_4
       rect:
         serializedVersion: 2
-        x: 522
-        y: 0
-        width: 103
-        height: 112
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 607
+        y: 16
+        width: 149.8
+        height: 152
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.04987867}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f91a48c1b92bc44a83668d7f5b0e464
-      internalID: 707101422
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack1_5
-      rect:
-        serializedVersion: 2
-        x: 652
-        y: 0
-        width: 116
-        height: 111
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 17547ad9f143e7a4a9817ae0a3a0e0f4
-      internalID: -1355453542
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack1_6
-      rect:
-        serializedVersion: 2
-        x: 783
-        y: 0
-        width: 103
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1921e083c12e86d46870fe352bcac7d3
-      internalID: 879456893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack1_7
-      rect:
-        serializedVersion: 2
-        x: 913
-        y: 0
-        width: 73
-        height: 109
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 121d62e8151191949be6c30f2afd2cb3
-      internalID: -223650477
+      spriteID: d063fc9698730c2408bd2906fcdc91d0
+      internalID: -614195217
       vertices: []
       indices: 
       edges: []
@@ -275,14 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HeavyAttack1_0: 291186543
-      HeavyAttack1_1: 1587117378
-      HeavyAttack1_2: -1328811567
-      HeavyAttack1_3: 853293837
-      HeavyAttack1_4: 707101422
-      HeavyAttack1_5: -1355453542
-      HeavyAttack1_6: 879456893
-      HeavyAttack1_7: -223650477
+      attackJump3 1_0: -2120188534
+      attackJump3 1_1: -1054183055
+      attackJump3 1_2: -253817737
+      attackJump3 1_3: -1489388270
+      attackJump3 1_4: -614195217
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

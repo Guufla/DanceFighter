@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3bc371801b229fa4b8a3bcabede3fcd7
+guid: 515a382a31bd300489a119ecd3dd0b9b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,169 +97,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HeavyAttack3_0
+      name: attackJump1 1_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 0
-        width: 73
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 12
+        y: 16
+        width: 150
+        height: 152
+      alignment: 9
+      pivot: {x: 0.5432503, y: 0.027031459}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5426bdfa4b49f0347b8d4e071946c1d5
-      internalID: 1051350751
+      spriteID: 09d2e19e7087ae045acde4cf42e54816
+      internalID: 2024334546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack3_1
+      name: attackJump1 1_1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 0
-        width: 64
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 162
+        y: 16
+        width: 150
+        height: 152
+      alignment: 9
+      pivot: {x: 0.49856365, y: 0.02693086}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ba771414e41a66419e2727e88b0c348
-      internalID: 635716068
+      spriteID: f2367cfd039e9014bae565a05f5d8490
+      internalID: 428160281
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack3_2
+      name: attackJump1 1_2
       rect:
         serializedVersion: 2
-        x: 261
-        y: 0
-        width: 64
-        height: 113
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 312
+        y: 16
+        width: 150
+        height: 152
+      alignment: 9
+      pivot: {x: 0.4999998, y: 0.028632328}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fda4310ff4570854b812cd3e82e1fe4b
-      internalID: 1115624339
+      spriteID: e387b30eef72c3b4e96e88e57aa6b1e4
+      internalID: -1908616311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HeavyAttack3_3
+      name: attackJump1 1_3
       rect:
         serializedVersion: 2
-        x: 387
-        y: 0
-        width: 79
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 460
+        y: 16
+        width: 152
+        height: 152
+      alignment: 9
+      pivot: {x: 0.49764282, y: 0.02946432}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5bdd0acad43bf342bdd2fefbf891e90
-      internalID: -628823060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack3_4
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 256
-        height: 105
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7305751345c4fd34b8b26c24c1cde2c3
-      internalID: 220323236
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack3_5
-      rect:
-        serializedVersion: 2
-        x: 771
-        y: 0
-        width: 120
-        height: 94
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f3e56e0758b8bb0468a20b341880e2f1
-      internalID: -1731870887
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack3_6
-      rect:
-        serializedVersion: 2
-        x: 908
-        y: 0
-        width: 96
-        height: 104
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77f26ece49ac6d747be13b4291e7af70
-      internalID: 771181389
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HeavyAttack3_7
-      rect:
-        serializedVersion: 2
-        x: 1038
-        y: 0
-        width: 73
-        height: 110
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f7bb3cfb2743881479989460c2dc40a3
-      internalID: 2106150398
+      spriteID: 4986acaa241fc8043af7de265b474b55
+      internalID: 1815992572
       vertices: []
       indices: 
       edges: []
@@ -275,14 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HeavyAttack3_0: 1051350751
-      HeavyAttack3_1: 635716068
-      HeavyAttack3_2: 1115624339
-      HeavyAttack3_3: -628823060
-      HeavyAttack3_4: 220323236
-      HeavyAttack3_5: -1731870887
-      HeavyAttack3_6: 771181389
-      HeavyAttack3_7: 2106150398
+      attackJump1 1_0: 2024334546
+      attackJump1 1_1: 428160281
+      attackJump1 1_2: -1908616311
+      attackJump1 1_3: 1815992572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

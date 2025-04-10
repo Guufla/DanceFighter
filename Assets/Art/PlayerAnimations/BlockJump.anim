@@ -21,15 +21,15 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1692130081, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
+      value: {fileID: -1834381634, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
     - time: 0.033333335
-      value: {fileID: -1181730142, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
+      value: {fileID: -1493951543, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
     - time: 0.06666667
-      value: {fileID: -186399795, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
+      value: {fileID: -1174096857, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
     - time: 0.1
-      value: {fileID: -488043203, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
+      value: {fileID: -926681748, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
     - time: 0.13333334
-      value: {fileID: -1186649098, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
+      value: {fileID: -1236014684, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -52,11 +52,11 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1692130081, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
-    - {fileID: -1181730142, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
-    - {fileID: -186399795, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
-    - {fileID: -488043203, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
-    - {fileID: -1186649098, guid: 05dd25d5683e0f049867e86deda3a858, type: 3}
+    - {fileID: -1834381634, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
+    - {fileID: -1493951543, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
+    - {fileID: -1174096857, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
+    - {fileID: -926681748, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
+    - {fileID: -1236014684, guid: e8098e8fdbee3cb49a6db51806bf412f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
