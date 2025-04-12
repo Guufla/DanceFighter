@@ -512,8 +512,8 @@ public class GameManager : MonoBehaviour
 
 
         // Reset player health
-        P1Health = 100;
-        P2Health = 100;
+        P1Health = 1000;
+        P2Health = 1000;
         playerHealthBar.value = P1Health;
         opponentHealth.value = P2Health;
 
