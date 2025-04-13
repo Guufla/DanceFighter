@@ -1,15 +1,11 @@
-﻿Shader "Custom/PlayerEffect"
+﻿Shader "Custom/SpriteOutline"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
         _samples ("Samples", Float) = 32.0
         _outline_size ("Outline Size", Float) = 1.0
-        _outline_color ("Outline Color", Color) = (0, 0, 0, 1)
-        _effect_color ("Effect Color", Color) = (0, 0, 0, 1)
-        [HideInInspector] _input_vector ("Input Vector", Vector) = (0, 0, 0, 0) // x, y, z (if needed) are for the vector (w is not used)
-        [HideInInspector] _input_scale01 ("Input Scale 01", Float) = 0.0
-        _dist_max ("Distance Max", Float) = 1.0
+        [HDR] _outline_color ("Outline Color", Color) = (0, 0, 0, 1)
     }
 
     SubShader
@@ -38,12 +34,8 @@
             float4 _MainTex_ST;
 
             float4 _outline_color;
-            float4 _effect_color;
             float _samples;
             float _outline_size;
-            vector _input_vector;
-            float _input_scale01;
-            float _dist_max;
 
             struct appdata
             {
@@ -72,11 +64,6 @@
 
             fixed4 frag(v2f i) : SV_TARGET
             {
-                // distance from input vector
-                float dist = abs(length(i.worldPosition - _input_vector.xyz)); // do we need abs here?
-                dist /= _dist_max; // normalize
-                dist = clamp(dist, 0, 1);
-                
                 // base outline
                 float radius = _outline_size * 0.001;
                 float angle = 0;
@@ -90,16 +77,10 @@
                 }
 
                 // apply colors
-                _input_scale01 = clamp(_input_scale01, 0, 1);
-                _effect_color = _effect_color*_input_scale01 + _outline_color*(1 - _input_scale01);
-                float4 finalOutlineColor = lerp(_effect_color, _outline_color, dist);
-                float4 outColor = lerp(0, finalOutlineColor, foundAlpha);
+                float4 outColor = lerp(0, _outline_color, foundAlpha);
                 float4 texColor = tex2D(_MainTex, i.uv) * i.color;
                 outColor = lerp(outColor, texColor, texColor.a);
-
                 
-                
-
                 return outColor;
             }
             ENDCG

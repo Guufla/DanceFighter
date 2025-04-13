@@ -82,7 +82,7 @@ Material:
     - _dist_max: 3.95
     - _dist_scale: 5.2
     - _input_scale01: 0
-    - _outline_size: 26.8
+    - _outline_size: 34.05
     - _samples: 7
     - _width: 6.16
     m_Colors:
@@ -90,6 +90,6 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _color: {r: 0, g: 0, b: 0, a: 1}
     - _effect_color: {r: 1, g: 0, b: 0, a: 1}
-    - _input_vector: {r: 20.004137, g: -2.6549134, b: 0, a: 0}
-    - _outline_color: {r: 0, g: 1, b: 0, a: 1}
+    - _input_vector: {r: 12.429771, g: -2.6549137, b: 0, a: 0}
+    - _outline_color: {r: 0, g: 1.4980392, b: 0, a: 1}
   m_BuildTextureStacks: []
