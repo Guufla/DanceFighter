@@ -145,8 +145,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1894238, y: 1.076116}
-  m_Size: {x: 1.0910163, y: 2.158046}
+  m_Offset: {x: -0.1894238, y: 1.0812134}
+  m_Size: {x: 1.0910163, y: 2.1478512}
   m_Direction: 0
 --- !u!61 &3562766726852532382
 BoxCollider2D:
@@ -270,16 +270,16 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -167637646, guid: 4a7b9fd93e83388439bcaff00d0566dc, type: 3}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 1809219300, guid: 4a7b9fd93e83388439bcaff00d0566dc, type: 3}
   m_Color: {r: 0, g: 0.4113207, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1.4, y: 1.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &5614021470481900832
@@ -695,7 +695,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7, y: 0.2}
+  m_Offset: {x: -0.70000005, y: 0.22631434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -706,7 +706,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 0.79}
+  m_Size: {x: 1.25, y: 0.7373714}
   m_EdgeRadius: 0
 --- !u!70 &1505504995165765936
 CapsuleCollider2D:
@@ -875,17 +875,17 @@ MonoBehaviour:
   playerIndex: 0
   LA1KnockbackX: 1.5
   LA1KnockbackY: 0
-  LA1DashX: 7
+  LA1DashX: 5
   LA1DashY: 0
   LA1Damage: 100
   LA2KnockbackX: 1.5
   LA2KnockbackY: 0
-  LA2DashX: 7
+  LA2DashX: 5
   LA2DashY: 0
   LA2Damage: 100
   LA3KnockbackX: 1.5
   LA3KnockbackY: 0
-  LA3DashX: 7
+  LA3DashX: 5
   LA3DashY: 0
   LA3Damage: 100
   MA1KnockbackX: 0

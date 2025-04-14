@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6cb8ac9bdc8f24cb1997679b78bdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitLagTime: 0.1
+  dashStrength: 6
+  isWaiting: 0
+  curPlayerCount: 0
+  lockGameTillEnoughPlayers: 0
+  isGameStarted: 0
+  disablePlayerInputs: 0
   player1: {fileID: 0}
   P1AttackKnockBackX: 0
   P1AttackKnockBackY: 0
@@ -52,10 +59,14 @@ MonoBehaviour:
   canInputP1: 0
   isHitBoxAnimatingP1: 0
   playerHealthBar: {fileID: 0}
-  P1Health: 100
+  P1Health: 1000
   p1OffensiveBar: {fileID: 0}
   player1IsOnGround: 0
   p1Aggro: 0
+  isP1Hitstun: 0
+  p1HitstunSetTime: 0
+  p1HitstunTime: 0
+  p1AttackDamage: 0
   player2: {fileID: 0}
   P2AttackKnockBackX: 0
   P2AttackKnockBackY: 0
@@ -65,9 +76,13 @@ MonoBehaviour:
   isHitBoxAnimatingP2: 0
   P2Aggro: 0
   opponentHealth: {fileID: 0}
-  P2Health: 100
+  P2Health: 1000
   p2Offensive: {fileID: 0}
   player2IsOnGround: 0
+  isP2Hitstun: 0
+  p2HitstunSetTime: 0
+  p2HitstunTime: 0
+  p2AttackDamage: 0
   maxOffensiveBarValue: 1000
   offensiveIncrease: 50
   offensiveDecrease: 50
@@ -75,6 +90,9 @@ MonoBehaviour:
   offensiveValueP2: 0
   isOffensiveP2: 0
   isOffensiveP1: 0
+  controllerConnectScreen: {fileID: 0}
+  player1Joined: {fileID: 0}
+  player2Joined: {fileID: 0}
   winMessage: {fileID: 0}
   countdownText: {fileID: 0}
   timerText: {fileID: 0}
