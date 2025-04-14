@@ -658,7 +658,18 @@ public class PlayerAttack : MonoBehaviour
         // Animator bool example: "EAttack1"
         attackAnimator.SetBool(animatorBool,true); // Sets the corrisponding boolean to true
 
+        //Damage calculation
         currentDamage = damage;
+        if((gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP1) || (gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP2))
+        {
+            //If the player is offensive, increase damage by 50%
+            currentDamage *= 1.5f;
+        }
+        if((gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP2) || (gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP1))
+        {
+            //If the other player is offensive, increase damage by 20%
+            currentDamage *= 1.2f;
+        }
 
         setKnockback(knockBackX,knockBackY); // Sets knockback stats for this attack
 
