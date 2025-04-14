@@ -77,6 +77,7 @@
                 }
 
                 // apply colors
+                //foundAlpha = floor(foundAlpha);
                 float4 outColor = lerp(0, _outline_color, foundAlpha);
                 float4 texColor = tex2D(_MainTex, i.uv) * i.color;
                 outColor = lerp(outColor, texColor, texColor.a);
