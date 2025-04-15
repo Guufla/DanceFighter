@@ -923,6 +923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1967420243765398884, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1980297513509695400, guid: aa9767108e8b3e6439b66fe52e9a7737, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1527,6 +1531,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 7630277335479505994, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_Size.x
       value: 1.4
@@ -1760,6 +1768,10 @@ PrefabInstance:
     - target: {fileID: 1577864448065103500, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577864448065103500, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2788458673006316364, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: dashStrength
