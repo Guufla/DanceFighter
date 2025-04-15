@@ -327,6 +327,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.StateChange();
                 DecreaseOffensiveSlider(p1OffensiveBar, ref isOffensiveP1);
             }
             offensiveTimer1 = 0; // Reset the timer
@@ -340,6 +341,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.StateChange();
                 DecreaseOffensiveSlider(p2Offensive, ref isOffensiveP2);
             }
             offensiveTimer2 = 0;
