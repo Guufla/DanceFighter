@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Healthbar/Realhealthempty.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Healthbar/Realhealthempty.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Healthbar/Realhealthfill.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Healthbar/Realhealthfill.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +129,8 @@
       <workItem from="1744635662470" duration="444000" />
       <workItem from="1744636660518" duration="1033000" />
       <workItem from="1744678569312" duration="44000" />
-      <workItem from="1744682705671" duration="4903000" />
+      <workItem from="1744682705671" duration="5668000" />
+      <workItem from="1744735351830" duration="1751000" />
     </task>
     <servers />
   </component>
