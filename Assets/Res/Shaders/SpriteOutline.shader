@@ -49,7 +49,6 @@
                 float4 position : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 fixed4 color : COLOR;
-                float3 worldPosition : TEXCOORD1;
             };
 
             v2f vert(appdata v)
@@ -58,7 +57,6 @@
                 o.position = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.color = v.color;
-                o.worldPosition = mul(unity_ObjectToWorld, v.vertex).xyz; // object space to world space conversion
                 return o;
             }
 
@@ -80,6 +78,7 @@
                 //foundAlpha = floor(foundAlpha);
                 float4 outColor = lerp(0, _outline_color, foundAlpha);
                 float4 texColor = tex2D(_MainTex, i.uv) * i.color;
+                texColor = float4(texColor.rgb, texColor.a);
                 outColor = lerp(outColor, texColor, texColor.a);
                 
                 return outColor;

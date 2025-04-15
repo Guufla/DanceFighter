@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/GlitchAndVector.shader.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/GlitchAndVector.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/PlayerEffect.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +34,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;alex-branch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;polish-work&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -123,6 +123,10 @@
       <workItem from="1743701344312" duration="291000" />
       <workItem from="1743707290328" duration="752000" />
       <workItem from="1744353520028" duration="2000" />
+      <workItem from="1744635662470" duration="444000" />
+      <workItem from="1744636660518" duration="1033000" />
+      <workItem from="1744678569312" duration="44000" />
+      <workItem from="1744682705671" duration="4903000" />
     </task>
     <servers />
   </component>
