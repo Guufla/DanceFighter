@@ -88,6 +88,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float LA1DashX;
     [SerializeField] float LA1DashY;
     [SerializeField] float LA1Damage;
+    [SerializeField] bool LA1StopMovingAll;
+    [SerializeField] bool LA1StopMovingY;
 
     [Header("")]
 
@@ -96,6 +98,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float LA2DashX;
     [SerializeField] float LA2DashY;
     [SerializeField] float LA2Damage;
+    [SerializeField] bool LA2StopMovingAll;
+    [SerializeField] bool LA2StopMovingY;
 
     [Header("")]
 
@@ -104,6 +108,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float LA3DashX;
     [SerializeField] float LA3DashY;
     [SerializeField] float LA3Damage;
+    [SerializeField] bool LA3StopMovingAll;
+    [SerializeField] bool LA3StopMovingY;
 
     [Header("Medium attack variables (5 hit combo)")]
 
@@ -112,6 +118,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float MA1DashX;
     [SerializeField] float MA1DashY;
     [SerializeField] float MA1Damage;
+    [SerializeField] bool MA1StopMovingAll;
+    [SerializeField] bool MA1StopMovingY;
 
     [Header("")]
     [SerializeField] float MA2KnockbackX;
@@ -119,6 +127,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float MA2DashX;
     [SerializeField] float MA2DashY;
     [SerializeField] float MA2Damage;
+    [SerializeField] bool MA2StopMovingAll;
+    [SerializeField] bool MA2StopMovingY;
 
     [Header("")]
     [SerializeField] float MA3KnockbackX;
@@ -126,6 +136,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float MA3DashX;
     [SerializeField] float MA3DashY;
     [SerializeField] float MA3Damage;
+    [SerializeField] bool MA3StopMovingAll;
+    [SerializeField] bool MA3StopMovingY;
 
     [Header("")]
     [SerializeField] float MA4KnockbackX;
@@ -133,6 +145,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float MA4DashX;
     [SerializeField] float MA4DashY;
     [SerializeField] float MA4Damage;
+    [SerializeField] bool MA4StopMovingAll;
+    [SerializeField] bool MA4StopMovingY;
 
     [Header("")]
     [SerializeField] float MA5KnockbackX;
@@ -140,6 +154,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float MA5DashX;
     [SerializeField] float MA5DashY;
     [SerializeField] float MA5Damage;
+    [SerializeField] bool MA5StopMovingAll;
+    [SerializeField] bool MA5StopMovingY;
 
 
     [Header("Heavy attack variables (4 hit combo)")]
@@ -149,6 +165,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float HA1DashX;
     [SerializeField] float HA1DashY;
     [SerializeField] float HA1Damage;
+    [SerializeField] bool HA1StopMovingAll;
+    [SerializeField] bool HA1StopMovingY;
 
     [Header("")]
     [SerializeField] float HA2KnockbackX;
@@ -156,6 +174,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float HA2DashX;
     [SerializeField] float HA2DashY;
     [SerializeField] float HA2Damage;
+    [SerializeField] bool HA2StopMovingAll;
+    [SerializeField] bool HA2StopMovingY;
 
     [Header("")]
     [SerializeField] float HA3KnockbackX;
@@ -163,6 +183,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float HA3DashX;
     [SerializeField] float HA3DashY;
     [SerializeField] float HA3Damage;
+    [SerializeField] bool HA3StopMovingAll;
+    [SerializeField] bool HA3StopMovingY;
 
     [Header("")]
     [SerializeField] float HA4KnockbackX;
@@ -170,6 +192,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float HA4DashX;
     [SerializeField] float HA4DashY;
     [SerializeField] float HA4Damage;
+    [SerializeField] bool HA4StopMovingAll;
+    [SerializeField] bool HA4StopMovingY;
 
 
     [Header("Up Tilt (On the ground)")]
@@ -178,6 +202,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float UTDashX;
     [SerializeField] float UTDashY;
     [SerializeField] float UTDamage;
+    [SerializeField] bool UTStopMovingAll;
+    [SerializeField] bool UTStopMovingY;
 
     [Header("In air Up Tilt ")]
     [SerializeField] float AUTKnockbackX;
@@ -185,6 +211,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float AUTDashX;
     [SerializeField] float AUTDashY;
     [SerializeField] float AUTDamage;
+    [SerializeField] bool AUTStopMovingAll;
+    [SerializeField] bool AUTStopMovingY;
 
     [Header("Down Tilt (On the ground)")]
     [SerializeField] float DTKnockbackX;
@@ -192,6 +220,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float DTDashX;
     [SerializeField] float DTDashY;
     [SerializeField] float DTDamage;
+    [SerializeField] bool DTStopMovingAll;
+    [SerializeField] bool DTStopMovingY;
 
     [Header("In air Down Tilt ")]
     [SerializeField] float ADTKnockbackX;
@@ -199,6 +229,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float ADTDashX;
     [SerializeField] float ADTDashY;
     [SerializeField] float ADTDamage;
+    [SerializeField] bool ADTStopMovingAll;
+    [SerializeField] bool ADTStopMovingY;
 
     [Header("Air Combo (4 hit combo)")]
     [SerializeField] float A1KnockbackX;
@@ -206,6 +238,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float A1DashX;
     [SerializeField] float A1DashY;
     [SerializeField] float A1Damage;
+    [SerializeField] bool A1StopMovingAll;
+    [SerializeField] bool A1StopMovingY;
 
     [Header("")]
     [SerializeField] float A2KnockbackX;
@@ -213,6 +247,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float A2DashX;
     [SerializeField] float A2DashY;
     [SerializeField] float A2Damage;
+    [SerializeField] bool A2StopMovingAll;
+    [SerializeField] bool A2StopMovingY;
 
     [Header("")]
     [SerializeField] float A3KnockbackX;
@@ -220,6 +256,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float A3DashX;
     [SerializeField] float A3DashY;
     [SerializeField] float A3Damage;
+    [SerializeField] bool A3StopMovingAll;
+    [SerializeField] bool A3StopMovingY;
 
     [Header("")]
     [SerializeField] float A4KnockbackX;
@@ -227,6 +265,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float A4DashX;
     [SerializeField] float A4DashY;
     [SerializeField] float A4Damage;
+    [SerializeField] bool A4StopMovingAll;
+    [SerializeField] bool A4StopMovingY;
 
 
     // Start is called before the first frame update
@@ -400,7 +440,7 @@ public class PlayerAttack : MonoBehaviour
                 else
                 {
                     // In the air
-                    stopMovement(false, false); // Dont stop movement for this
+                    stopMovement(AUTStopMovingAll, AUTStopMovingY); // Dont stop movement for this
                     hitboxAnimation(4,"AirUpTilt","airUpTilt", true, AUTKnockbackX,AUTKnockbackY,AUTDashX,AUTDashY,AUTDamage);
                     
                 }
@@ -409,7 +449,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 // On the ground
-                stopMovement(true, true); // Stops movement for this
+                stopMovement(UTStopMovingAll, UTStopMovingY); // Stops movement for this
                 hitboxAnimation(4,"UpTilt","UpTilt", false, UTKnockbackX,UTKnockbackY,UTDashX,UTDashY,UTDamage);
             }
 
@@ -432,7 +472,7 @@ public class PlayerAttack : MonoBehaviour
                 else
                 {
                     // In the air
-                    stopMovement(false, false); // Dont freeze movement
+                    stopMovement(ADTStopMovingAll, ADTStopMovingY); // Dont freeze movement
                     hitboxAnimation(4,"AirDownTilt","airDownTilt", true, ADTKnockbackX,ADTKnockbackY,ADTDashX,ADTDashY,ADTDamage);
                 }
                 
@@ -440,7 +480,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 // On the ground
-                stopMovement(true, true); // Dont freeze movement
+                stopMovement(DTStopMovingAll, DTStopMovingY); // Dont freeze movement
                 hitboxAnimation(4,"DownTilt","DownTilt", false, DTKnockbackX,DTKnockbackY,UTDashX,DTDashY,DTDamage);
             }
 
@@ -462,22 +502,22 @@ public class PlayerAttack : MonoBehaviour
 
                 else if(canAirCombo && curAirCombo > 3 ||canAirCombo && curAirCombo == 0)
                 {
-                    stopMovement(true, true); 
+                    stopMovement(A1StopMovingAll, A1StopMovingY); 
                     hitboxAnimation(1,"AAttack1","airCombo1", true, A1KnockbackX,A1KnockbackY,A1DashX,A1DashY,A1Damage);
                 }
                 else if(canAirCombo && curAirCombo == 1)
                 {
-                    stopMovement(true, true);
+                    stopMovement(A2StopMovingAll, A2StopMovingY);
                     hitboxAnimation(2,"AAttack2","airCombo2", true, A2KnockbackX,A2KnockbackY,A2DashX,A2DashY,A2Damage);
                 }
                 else if(canAirCombo && curAirCombo == 2)
                 {
-                    stopMovement(true, true);
+                    stopMovement(A3StopMovingAll, A3StopMovingY);
                     hitboxAnimation(2,"AAttack3","airCombo3", true, A3KnockbackX,A3KnockbackY,A3DashX,A3DashY,A3Damage);
                 }
                 else if(canAirCombo && curAirCombo == 3 )
                 {
-                    stopMovement(true, true);
+                    stopMovement(A4StopMovingAll, A4StopMovingY);
                     hitboxAnimation(5,"AAttack4","airCombo4", true, A4KnockbackX,A4KnockbackY,A4DashX,A4DashY,A4Damage);
                 }
                 
@@ -487,17 +527,17 @@ public class PlayerAttack : MonoBehaviour
 
             else if(curCombo > 2 || curCombo == 0)
             {
-                stopMovement(true, true);
+                stopMovement(LA1StopMovingAll, LA1StopMovingY);
                 hitboxAnimation(1,"EAttack1","LightAttack1", false, LA1KnockbackX,LA1KnockbackY,LA1DashX,LA1DashY,LA1Damage);
             }
             else if(curCombo == 1)
             {
-                stopMovement(true, true);
+                stopMovement(LA2StopMovingAll, LA2StopMovingY);
                 hitboxAnimation(2,"EAttack2","LightAttack2", false, LA2KnockbackX,LA2KnockbackY,LA2DashX,LA2DashY,LA2Damage);
             }
             else if(curCombo == 2)
             {
-                stopMovement(true, true);
+                stopMovement(LA3StopMovingAll, LA3StopMovingY);
                 hitboxAnimation(3,"EAttack3","LightAttack3", false, LA3KnockbackX,LA3KnockbackY,LA3DashX,LA3DashY,LA3Damage);
             }
 
@@ -522,22 +562,22 @@ public class PlayerAttack : MonoBehaviour
 
                 else if(canAirCombo && curAirCombo > 3 ||canAirCombo && curAirCombo == 0)
                 {
-                    stopMovement(true, true); 
+                    stopMovement(A1StopMovingAll, A1StopMovingY); 
                     hitboxAnimation(1,"AAttack1","airCombo1", true, A1KnockbackX,A1KnockbackY,A1DashX,A1DashY,A1Damage);
                 }
                 else if(canAirCombo && curAirCombo == 1)
                 {
-                    stopMovement(true, true);
+                    stopMovement(A2StopMovingAll, A2StopMovingY);
                     hitboxAnimation(2,"AAttack2","airCombo2", true, A2KnockbackX,A2KnockbackY,A2DashX,A2DashY,A2Damage);
                 }
                 else if(canAirCombo && curAirCombo == 2)
                 {
-                    stopMovement(true, true);
+                    stopMovement(A3StopMovingAll, A3StopMovingY);
                     hitboxAnimation(2,"AAttack3","airCombo3", true, A3KnockbackX,A3KnockbackY,A3DashX,A3DashY,A3Damage);
                 }
                 else if(canAirCombo && curAirCombo == 3 )
                 {
-                    stopMovement(true, true);
+                    stopMovement(A4StopMovingAll, A4StopMovingY);
                     hitboxAnimation(5,"AAttack4","airCombo4", true, A4KnockbackX,A4KnockbackY,A4DashX,A4DashY,A4Damage);
                 }
                 
@@ -547,25 +587,26 @@ public class PlayerAttack : MonoBehaviour
 
             else if(curCombo > 4 || curCombo == 0)
             {
-                stopMovement(true,false);
+                stopMovement(MA1StopMovingAll,MA1StopMovingY);
                 hitboxAnimation(1,"RAttack1","MediumAttack1",false, MA1KnockbackX,MA1KnockbackY,MA1DashX,MA1DashY,MA1Damage);
             }
             else if(curCombo == 1)
             {
-                stopMovement(true,false);
+                stopMovement(MA2StopMovingAll,MA2StopMovingY);
                 hitboxAnimation(2,"RAttack2","MediumAttack2",false, MA2KnockbackX,MA2KnockbackY,MA2DashX,MA2DashY,MA2Damage);
             }
             else if(curCombo == 2)
             {
-                stopMovement(true,false);
+                stopMovement(MA3StopMovingAll,MA3StopMovingY);
                 hitboxAnimation(2,"RAttack3","MediumAttack3",false, MA3KnockbackX,MA3KnockbackY,MA3DashX,MA3DashY,MA3Damage);
             } 
             else if(curCombo == 3) 
             {
-                stopMovement(true,false);
+                stopMovement(MA4StopMovingAll,MA4StopMovingY);
                 hitboxAnimation(2,"RAttack4","MediumAttack4",false, MA4KnockbackX,MA4KnockbackY,MA4DashX,MA4DashY,MA4Damage);
             }
             else if(curCombo == 4) {
+                stopMovement(MA5StopMovingAll,MA5StopMovingY);
                 hitboxAnimation(3,"RAttack5","MediumAttack5",false, MA5KnockbackX,MA5KnockbackY,MA5DashX,MA5DashY,MA5Damage);
             }
 
@@ -587,22 +628,22 @@ public class PlayerAttack : MonoBehaviour
 
                 else if(canAirCombo && curAirCombo > 3 ||canAirCombo && curAirCombo == 0)
                 {
-                    stopMovement(true, true); 
+                    stopMovement(A1StopMovingAll, A1StopMovingY); 
                     hitboxAnimation(1,"AAttack1","airCombo1", true, A1KnockbackX,A1KnockbackY,A1DashX,A1DashY,A1Damage);
                 }
                 else if(canAirCombo && curAirCombo == 1)
                 {
-                    stopMovement(true, true);
+                    stopMovement(A2StopMovingAll, A2StopMovingY);
                     hitboxAnimation(2,"AAttack2","airCombo2", true, A2KnockbackX,A2KnockbackY,A2DashX,A2DashY,A2Damage);
                 }
                 else if(canAirCombo && curAirCombo == 2)
                 {
-                    stopMovement(true, true);
+                    stopMovement(A3StopMovingAll, A3StopMovingY);
                     hitboxAnimation(2,"AAttack3","airCombo3", true, A3KnockbackX,A3KnockbackY,A3DashX,A3DashY,A3Damage);
                 }
                 else if(canAirCombo && curAirCombo == 3 )
                 {
-                    stopMovement(true, true);
+                    stopMovement(A4StopMovingAll, A4StopMovingY);
                     hitboxAnimation(5,"AAttack4","airCombo4", true, A4KnockbackX,A4KnockbackY,A4DashX,A4DashY,A4Damage);
                 }
                 
@@ -610,21 +651,21 @@ public class PlayerAttack : MonoBehaviour
             
             else if(curCombo > 3 || curCombo == 0)
             {
-                stopMovement(true, false);
+                stopMovement(HA1StopMovingAll, HA1StopMovingY);
                 hitboxAnimation(1,"FAttack1","HeavyAttack1", false, HA1KnockbackX,HA1KnockbackY,HA1DashX,HA1DashY,HA1Damage);
             }
             else if(curCombo == 1)
             {
-                stopMovement(true, false);
+                stopMovement(HA2StopMovingAll, HA2StopMovingY);
                 hitboxAnimation(2,"FAttack2","HeavyAttack2", false, HA2KnockbackX,HA2KnockbackY,HA2DashX,HA2DashY,HA2Damage);
             }
             else if(curCombo == 2)
             {
-                stopMovement(true,false);
+                stopMovement(HA3StopMovingAll,HA3StopMovingY);
                 hitboxAnimation(2,"FAttack3","HeavyAttack3", false, HA3KnockbackX,HA3KnockbackY,HA3DashX,HA3DashY,HA3Damage);
             } else if(curCombo == 3) 
             {
-                stopMovement(true,false);
+                stopMovement(HA4StopMovingAll,HA4StopMovingY);
                 hitboxAnimation(3,"FAttack4","HeavyAttack4", false, HA4KnockbackX,HA4KnockbackY,HA4DashX,HA4DashY,HA4Damage);
             }
 
@@ -958,7 +999,10 @@ void resetTimerCheck()
     // Small helper function for dashing
     void dashWithAttack(float x, float y)
     {
-        playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Force);
+        if(stopPlayerMovement){
+            playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
+        }
+        playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
         // playerRigidbody.velocity = new Vector2(x * transform.localScale.x,y); 
     }
 
