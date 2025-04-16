@@ -82,6 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   jumpStrength: 15
+  dashStrength: 10
+  dashTimeVariable: 0.5
   dashOption: 0
   isDashing: 0
   playerSprite: {fileID: 3384557435767292940}
@@ -516,6 +518,7 @@ GameObject:
   - component: {fileID: 2958579564826557497}
   - component: {fileID: 1047962708162707738}
   - component: {fileID: 4236413224688106963}
+  - component: {fileID: 2824378039001655556}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -614,6 +617,20 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4236413224688106963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384557435767292940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91958cb533ae4d84995a54ec9e62991b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimating: 0
+  parentObject: {fileID: 1577864448065103500}
+--- !u!114 &2824378039001655556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
