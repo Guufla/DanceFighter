@@ -12,7 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float movementSpeed = 3f;
 
     [SerializeField] float jumpStrength = 4f;
-    float dashStrength;
+
+    
+    [SerializeField]float dashStrength = 0f;
+
+    [SerializeField]float dashTimeVariable = 0f;
 
     Rigidbody2D playerRigidbody;
 
@@ -85,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
         getMovementInfo();
         isHit();
         handleJumping();
-        dashCheck();
         if(stopMovement == false && isDashing == false && disablePlayerInput == false){
             movement();
         }
@@ -103,12 +106,10 @@ public class PlayerMovement : MonoBehaviour
         if(transform.tag == "Player1"){
             stopMovement = GameManager.Instance.stopP1Movement;
             stopYMovement = GameManager.Instance.stopP1YMovement;
-            dashStrength = GameManager.Instance.dashStrength;
         }
         else{
             stopMovement = GameManager.Instance.stopP2Movement;
             stopYMovement = GameManager.Instance.stopP2YMovement;
-            dashStrength = GameManager.Instance.dashStrength;
         }
     }
 
@@ -217,13 +218,13 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true;
             StartCoroutine(dashBuffer());
             playerRigidbody.AddForce(new Vector2(moveInput.x * dashStrength ,0f), ForceMode2D.Impulse);
+            StartCoroutine(dashTime());
             dashOption = false;
         }
     }
-    public void dashCheck(){
-        if(isDashing && Mathf.Abs(playerRigidbody.velocity.x) < movementSpeed && dashBufferIndicator == true){
-            isDashing = false;
-        }
+    IEnumerator dashTime(){
+        yield return new WaitForSeconds(dashTimeVariable);
+        isDashing = false;
     }
     IEnumerator dashBuffer(){
         dashBufferIndicator = false;

@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     public float hitLagTime; 
-    public float dashStrength; 
     public bool isWaiting;
 
     public int curPlayerCount;
