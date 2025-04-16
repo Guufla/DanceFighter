@@ -34,9 +34,9 @@ public class PlayerGroundCheck : MonoBehaviour
 
         
 
-        Debug.DrawRay(transform.position, new UnityEngine.Vector2(0,-1.2f));
+        Debug.DrawRay(transform.position, new UnityEngine.Vector2(0,-0.2f));
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, UnityEngine.Vector2.down, 1.2f, LayerMask.GetMask("Environment"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, UnityEngine.Vector2.down, 0.2f, LayerMask.GetMask("Environment"));
 
         if (hit.collider != null) {
             playerGroundCheck = true;

@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 4317411795535055341}
   - {fileID: 3759415678901585399}
+  - {fileID: 8957114728260766108}
   - {fileID: 3636114207613432049}
   - {fileID: 3075667055674789092}
   m_Father: {fileID: 0}
@@ -117,106 +118,146 @@ MonoBehaviour:
   comboBufferTime: 0
   isComboBuffered: 0
   playerIndex: 1
-  LA1KnockbackX: 1.5
+  LA1KnockbackX: 2
   LA1KnockbackY: 0
-  LA1DashX: 3
+  LA1DashX: 4
   LA1DashY: 0
-  LA1Damage: 35
-  LA2KnockbackX: 1.5
+  LA1Damage: 20
+  LA1StopMovingAll: 1
+  LA1StopMovingY: 1
+  LA2KnockbackX: 2
   LA2KnockbackY: 0
-  LA2DashX: 3
+  LA2DashX: 4
   LA2DashY: 0
-  LA2Damage: 35
+  LA2Damage: 20
+  LA2StopMovingAll: 1
+  LA2StopMovingY: 1
   LA3KnockbackX: 1.5
-  LA3KnockbackY: 0
-  LA3DashX: 3
+  LA3KnockbackY: 4
+  LA3DashX: 5
   LA3DashY: 0
-  LA3Damage: 50
-  MA1KnockbackX: 0
+  LA3Damage: 45
+  LA3StopMovingAll: 1
+  LA3StopMovingY: 1
+  MA1KnockbackX: 0.5
   MA1KnockbackY: 0
-  MA1DashX: 0
+  MA1DashX: 2
   MA1DashY: 0
-  MA1Damage: 0
-  MA2KnockbackX: 0
+  MA1Damage: 30
+  MA1StopMovingAll: 1
+  MA1StopMovingY: 1
+  MA2KnockbackX: 0.5
   MA2KnockbackY: 0
-  MA2DashX: 0
+  MA2DashX: 2
   MA2DashY: 0
-  MA2Damage: 0
-  MA3KnockbackX: 0
+  MA2Damage: 60
+  MA2StopMovingAll: 1
+  MA2StopMovingY: 1
+  MA3KnockbackX: 1
   MA3KnockbackY: 0
-  MA3DashX: 0
+  MA3DashX: 3
   MA3DashY: 0
-  MA3Damage: 0
-  MA4KnockbackX: 0
+  MA3Damage: 30
+  MA3StopMovingAll: 1
+  MA3StopMovingY: 1
+  MA4KnockbackX: 1.5
   MA4KnockbackY: 0
-  MA4DashX: 0
+  MA4DashX: 4
   MA4DashY: 0
-  MA4Damage: 0
-  MA5KnockbackX: 0
+  MA4Damage: 30
+  MA4StopMovingAll: 1
+  MA4StopMovingY: 1
+  MA5KnockbackX: 1
   MA5KnockbackY: 0
-  MA5DashX: 0
+  MA5DashX: 3
   MA5DashY: 0
-  MA5Damage: 0
-  HA1KnockbackX: 0
+  MA5Damage: 30
+  MA5StopMovingAll: 1
+  MA5StopMovingY: 1
+  HA1KnockbackX: 0.5
   HA1KnockbackY: 0
-  HA1DashX: 0
+  HA1DashX: 1
   HA1DashY: 0
-  HA1Damage: 0
-  HA2KnockbackX: 0
+  HA1Damage: 40
+  HA1StopMovingAll: 1
+  HA1StopMovingY: 1
+  HA2KnockbackX: 0.5
   HA2KnockbackY: 0
-  HA2DashX: 0
+  HA2DashX: 1
   HA2DashY: 0
-  HA2Damage: 0
+  HA2Damage: 40
+  HA2StopMovingAll: 1
+  HA2StopMovingY: 1
   HA3KnockbackX: 0
   HA3KnockbackY: 0
-  HA3DashX: 0
+  HA3DashX: 1
   HA3DashY: 0
-  HA3Damage: 0
+  HA3Damage: 40
+  HA3StopMovingAll: 1
+  HA3StopMovingY: 1
   HA4KnockbackX: 0
   HA4KnockbackY: 0
-  HA4DashX: 0
+  HA4DashX: 4
   HA4DashY: 0
-  HA4Damage: 0
+  HA4Damage: 40
+  HA4StopMovingAll: 1
+  HA4StopMovingY: 1
   UTKnockbackX: 0
-  UTKnockbackY: 0
-  UTDashX: 0
+  UTKnockbackY: 3
+  UTDashX: 1
   UTDashY: 0
-  UTDamage: 0
+  UTDamage: 20
+  UTStopMovingAll: 1
+  UTStopMovingY: 1
   AUTKnockbackX: 0
-  AUTKnockbackY: 0
+  AUTKnockbackY: 3
   AUTDashX: 0
   AUTDashY: 0
-  AUTDamage: 0
-  DTKnockbackX: 0
+  AUTDamage: 25
+  AUTStopMovingAll: 0
+  AUTStopMovingY: 0
+  DTKnockbackX: 0.5
   DTKnockbackY: 0
   DTDashX: 0
   DTDashY: 0
-  DTDamage: 0
-  ADTKnockbackX: 0
+  DTDamage: 20
+  DTStopMovingAll: 1
+  DTStopMovingY: 1
+  ADTKnockbackX: 0.5
   ADTKnockbackY: 0
   ADTDashX: 0
   ADTDashY: 0
-  ADTDamage: 0
+  ADTDamage: 25
+  ADTStopMovingAll: 0
+  ADTStopMovingY: 0
   A1KnockbackX: 0
   A1KnockbackY: 0
   A1DashX: 0
   A1DashY: 0
-  A1Damage: 0
+  A1Damage: 25
+  A1StopMovingAll: 0
+  A1StopMovingY: 0
   A2KnockbackX: 0
   A2KnockbackY: 0
   A2DashX: 0
   A2DashY: 0
-  A2Damage: 0
+  A2Damage: 25
+  A2StopMovingAll: 0
+  A2StopMovingY: 0
   A3KnockbackX: 0
   A3KnockbackY: 0
   A3DashX: 0
   A3DashY: 0
-  A3Damage: 0
+  A3Damage: 25
+  A3StopMovingAll: 0
+  A3StopMovingY: 0
   A4KnockbackX: 0
   A4KnockbackY: 0
   A4DashX: 0
   A4DashY: 0
-  A4Damage: 0
+  A4Damage: 25
+  A4StopMovingAll: 0
+  A4StopMovingY: 0
 --- !u!114 &3798357990056733638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +437,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAnimating: 0
   parentObject: {fileID: 1577864448065103500}
+--- !u!1 &2707398827206449367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8957114728260766108}
+  - component: {fileID: 5162240317463624628}
+  m_Layer: 0
+  m_Name: HeadCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8957114728260766108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707398827206449367}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 202997521186831935}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5162240317463624628
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707398827206449367}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: e100e1124d8e64047a2f97170f8c7c12, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.48809886, y: 1.768702}
+  serializedVersion: 2
+  m_Radius: 0.5894859
 --- !u!1 &3384557435767292940
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +515,7 @@ GameObject:
   - component: {fileID: 4317411795535055341}
   - component: {fileID: 2958579564826557497}
   - component: {fileID: 1047962708162707738}
+  - component: {fileID: 4236413224688106963}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -504,6 +613,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4236413224688106963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384557435767292940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91958cb533ae4d84995a54ec9e62991b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimating: 0
+  parentObject: {fileID: 1577864448065103500}
 --- !u!1 &5985037982581215370
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,8 +1048,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1894238, y: 1.076116}
-  m_Size: {x: 1.0910163, y: 2.158046}
+  m_Offset: {x: -0.47900236, y: 1.0938584}
+  m_Size: {x: 1.1388924, y: 2.1731412}
   m_Direction: 0
 --- !u!61 &1346184509745560882
 BoxCollider2D:
