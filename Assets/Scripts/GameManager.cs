@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
 
     public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here.
 
-    public Boolean stopP1Movement; 
-    public Boolean stopP1YMovement; 
+    public Boolean stopP1Movement; //Use UpdateStopMovement instead
+    public Boolean stopP1YMovement; //Use UpdateStopMovementY instead
 
     public Boolean canInputP1; 
 
@@ -74,8 +74,8 @@ public class GameManager : MonoBehaviour
 
     public float P2AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
 
-    public Boolean stopP2Movement; 
-    public Boolean stopP2YMovement;
+    public Boolean stopP2Movement; //Use UpdateStopMovement instead
+    public Boolean stopP2YMovement; //Use UpdateStopMovementY instead
 
     public Boolean canInputP2; 
     
