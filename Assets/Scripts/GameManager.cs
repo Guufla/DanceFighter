@@ -622,6 +622,11 @@ public class GameManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
+    public void MainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+    }
     private IEnumerator bufferForControllerScreen(float bufferTime){
         yield return new WaitForSeconds(bufferTime);
 
