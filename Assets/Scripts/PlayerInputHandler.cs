@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.iOS;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
@@ -14,6 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
     private PlayerDefense playerDefense;
+    private Pause playerPause;
 
     // Start is called before the first frame update
     void Awake()
@@ -22,15 +22,23 @@ public class PlayerInputHandler : MonoBehaviour
         var movements = FindObjectsOfType<PlayerMovement>();
         var attacks = FindObjectsOfType<PlayerAttack>();
         var defense = FindObjectsOfType<PlayerDefense>();
+        var pause = FindObjectsOfType<Pause>();
         var index = playerInput.playerIndex;
         playerMovement = movements.FirstOrDefault(m => m.GetPlayerIndex() == index);
         playerAttack = attacks.FirstOrDefault(m => m.GetPlayerIndex() == index);
         playerDefense = defense.FirstOrDefault(m => m.GetPlayerIndex() == index);
+        playerPause = pause.FirstOrDefault(m => m.GetPlayerIndex() == index);
 
 
     }
     public void OnMove(CallbackContext context){
         playerMovement.OnMovement(context);
+
+    }
+    public void OnPause(CallbackContext context)
+    {
+        playerPause.OnPause(context);
+
     }
     public void OnJump(CallbackContext context){
         playerMovement.Jump(context);
