@@ -24,7 +24,7 @@ public class PlayerDefense : MonoBehaviour
 
     [Header("Block/Parry")]
     private float blockDamageReduction = 0.3f;
-    private float parryTimeWindow = 0.3f;
+    private float parryTimeWindow = 0.35f;
     
     [Header("Guard Meter System")]
     private float maxGuardMeter = 100f;
