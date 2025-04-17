@@ -862,11 +862,11 @@ public class PlayerAttack : MonoBehaviour
         {
             
             GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerYMovement, 0);
         }
         else{
             GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(2, stopPlayerYMovement, 0);
         }
     }
 
@@ -1003,7 +1003,6 @@ void resetTimerCheck()
             playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
         }
         playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
-        // playerRigidbody.velocity = new Vector2(x * transform.localScale.x,y); 
     }
 
 
