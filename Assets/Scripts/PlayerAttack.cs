@@ -80,6 +80,10 @@ public class PlayerAttack : MonoBehaviour
 
     Boolean disablePlayerInput;
 
+    Boolean isBlocking;
+
+    Boolean isParrying;
+
 
     [Header("Light attack variables (3 hit combo)")]
 
@@ -350,9 +354,13 @@ public class PlayerAttack : MonoBehaviour
         disablePlayerInput = GameManager.Instance.disablePlayerInputs;
         if(transform.tag == "Player1"){
             isOnGround = GameManager.Instance.player1IsOnGround;
+            isBlocking = GameManager.Instance.p1IsBlocking;
+            isParrying = GameManager.Instance.p1IsParrying;
         }
         else{
             isOnGround = GameManager.Instance.player2IsOnGround;
+            isBlocking = GameManager.Instance.p2IsBlocking;
+            isParrying = GameManager.Instance.p2IsParrying;
         }
     }
 

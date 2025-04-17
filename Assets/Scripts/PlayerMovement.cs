@@ -139,23 +139,23 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void handleJumping()
-{
-    // Check if the player is on the ground or performing an air attack
-    if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
     {
-        playerAnimator.SetBool("isJumping", false);
-        // Debug.Log(playerAttack.isAirAttacking);
-    }
-    else
-    {
-        // Check if the player is in the air and not performing an air attack
-        if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+        // Check if the player is on the ground or performing an air attack
+        if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
         {
-            highestYPos = transform.position.y;
-            playerAnimator.SetBool("isJumping", true);
+            playerAnimator.SetBool("isJumping", false);
+            // Debug.Log(playerAttack.isAirAttacking);
+        }
+        else
+        {
+            // Check if the player is in the air and not performing an air attack
+            if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+            {
+                highestYPos = transform.position.y;
+                playerAnimator.SetBool("isJumping", true);
+            }
         }
     }
-}
 
     void movement(){
         // VERY IMPORTANT
@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && groundCheck)
+        if (context.performed && groundCheck && !disablePlayerInput)
         {
             playerRigidbody.velocity += new Vector2(0f, jumpStrength); // Code to jump on pressing space
         }
@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && dashOption && !isDashing)
+        if (context.performed && dashOption && !isDashing && !disablePlayerInput)
         {
             Debug.Log("Dash performed");
             dashBufferIndicator = false;

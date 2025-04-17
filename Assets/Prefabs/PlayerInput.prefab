@@ -182,7 +182,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8601705946124302911}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnDash
+        m_MethodName: OnBlock
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
