@@ -862,11 +862,11 @@ public class PlayerAttack : MonoBehaviour
         {
             
             GameManager.Instance.UpdateStopMovement(1, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(1, stopPlayerYMovement, 0);
         }
         else{
             GameManager.Instance.UpdateStopMovement(2, stopPlayerMovement, 0);
-            GameManager.Instance.UpdateStopMovementY(1, stopPlayerMovement, 0);
+            GameManager.Instance.UpdateStopMovementY(2, stopPlayerYMovement, 0);
         }
     }
 

@@ -2110,6 +2110,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA3DashX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA1KnockbackY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA3KnockbackY
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2011613372581413899, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: dashStrength
       value: 10
