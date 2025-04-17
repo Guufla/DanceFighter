@@ -489,10 +489,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 745533087941980700, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2835900342986305934, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
       propertyPath: m_Name
       value: BaseSceneEnvironment
@@ -550,18 +546,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 299951864}
     - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: p1.Material
-      value: 
-      objectReference: {fileID: 2100000, guid: ec47da2974b6df048a6b996ff2dc0853, type: 2}
-    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: p2.Material
-      value: 
-      objectReference: {fileID: 2100000, guid: b6afe514b71ced349b064ec53ac0563e, type: 2}
-    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: targetShader
-      value: 
-      objectReference: {fileID: 4800000, guid: f94dca28224d4d5b9c090d3003e94a8b, type: 3}
-    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
       propertyPath: p1.EnemyTransform
       value: 
       objectReference: {fileID: 2036644117}
@@ -569,14 +553,6 @@ PrefabInstance:
       propertyPath: p2.EnemyTransform
       value: 
       objectReference: {fileID: 7630277334752839982}
-    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: p1.EffectDecayRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7615158364178669844, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
-      propertyPath: p2.EffectDecayRate
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -922,10 +898,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7162578201017738230, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: 642a96555522ac545a09a7606e1eff5e, type: 2}
     - target: {fileID: 8673183870769298698, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
