@@ -1,11 +1,11 @@
-﻿Shader "Custom/PlayerEffect"
+﻿Shader "Custom/GlitchAndVector"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
         _effect_color ("Effect Color", Color) = (0, 0, 0, 1)
         [HideInInspector] _input_vector ("Input Vector", Vector) = (0, 0, 0, 0) // x, y, z (if needed) are for the vector (w is not used)
-        [HideInInspector] _do_effect ("Input Scale 01", Int) = 0 // 0 <> 1 (false <> true)
+        [HideInInspector] _do_effect ("Do Effect 0<>1", Int) = 0 // 0 <> 1 (false <> true)
         _dist_max ("Distance Max", Float) = 1.0
     }
 

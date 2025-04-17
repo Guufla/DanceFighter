@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BarManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/BarManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HealthBar.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HealthBar.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/GlitchAndVector.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/GlitchAndVector.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EffectManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EffectManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/ConsoleLogger.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/ConsoleLogger.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +135,16 @@
       <workItem from="1744635662470" duration="444000" />
       <workItem from="1744636660518" duration="1033000" />
       <workItem from="1744678569312" duration="44000" />
-      <workItem from="1744682705671" duration="4903000" />
+      <workItem from="1744682705671" duration="5668000" />
+      <workItem from="1744735351830" duration="2859000" />
+      <workItem from="1744754629561" duration="6100000" />
+      <workItem from="1744762916778" duration="2429000" />
+      <workItem from="1744848556710" duration="22000" />
+      <workItem from="1744850689902" duration="3484000" />
+      <workItem from="1744861234387" duration="91000" />
+      <workItem from="1744861843298" duration="6495000" />
+      <workItem from="1744908782547" duration="1988000" />
+      <workItem from="1744931412896" duration="1720000" />
     </task>
     <servers />
   </component>
