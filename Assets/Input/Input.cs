@@ -369,7 +369,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c7be5220-89c3-451e-ae97-750ca66e299c"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -391,7 +391,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""177b3c60-84ae-4a5c-a845-81a68b5fa288"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/o"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -413,7 +413,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f70628ac-8afc-4ef9-ac15-f87caf95aab7"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -501,7 +501,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b72523b5-8ca5-458a-803e-14d938c52631"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -523,7 +523,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""806f3b68-0685-4ee0-a5a9-9c3631e0609f"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": ""Tap(duration=0.3,pressPoint=0.35)"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",

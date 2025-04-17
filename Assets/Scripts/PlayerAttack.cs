@@ -356,11 +356,13 @@ public class PlayerAttack : MonoBehaviour
             isOnGround = GameManager.Instance.player1IsOnGround;
             isBlocking = GameManager.Instance.p1IsBlocking;
             isParrying = GameManager.Instance.p1IsParrying;
+            GameManager.Instance.isP1Attacking = isAttacking;
         }
         else{
             isOnGround = GameManager.Instance.player2IsOnGround;
             isBlocking = GameManager.Instance.p2IsBlocking;
             isParrying = GameManager.Instance.p2IsParrying;
+            GameManager.Instance.isP2Attacking = isAttacking;
         }
     }
 
@@ -1007,10 +1009,14 @@ void resetTimerCheck()
     // Small helper function for dashing
     void dashWithAttack(float x, float y)
     {
-        if(stopPlayerMovement){
-            playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
+        if(!isBlocking && !isParrying)
+        {
+            if(stopPlayerMovement)
+            {
+                playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
+            }
+            playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
         }
-        playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
     }
 
 
@@ -1018,7 +1024,7 @@ void resetTimerCheck()
     public void AttackE(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput)
+        if(context.started && !disablePlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1057,7 +1063,7 @@ void resetTimerCheck()
     public void AttackR(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput)
+        if(context.started && !disablePlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1097,7 +1103,7 @@ void resetTimerCheck()
     public void AttackF(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput)
+        if(context.started && !disablePlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){

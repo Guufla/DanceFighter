@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
     public static int p1WinCounter = 0;
+    
+    public Boolean isP1Attacking; 
 
 
 
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour
     public Boolean canInputP2; 
     
     public Boolean isHitBoxAnimatingP2; 
+
+    public Boolean isP2Attacking; 
 
     public bool P2Aggro; // Tells if the player is in aggro mode
 
