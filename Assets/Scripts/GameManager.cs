@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
 
     public float p1AttackDamage;
 
+    public bool p1IsBlocking;
+
+    public bool p1IsParrying;
+
     
 
 
@@ -100,6 +104,10 @@ public class GameManager : MonoBehaviour
     public float p2HitstunTime; // 
 
     public float p2AttackDamage;
+
+    public bool p2IsBlocking;
+
+    public bool p2IsParrying;
 
     [Header("Offensive mode")]
 

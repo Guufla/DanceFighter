@@ -2047,6 +2047,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseSceneEnvironment
       objectReference: {fileID: 0}
+    - target: {fileID: 3102155837769457601, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4131597370316343747, guid: 0c8da70ebb5e6644f8772d45c68be0f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.0223025
@@ -2262,7 +2266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA3KnockbackY
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA1StopMovingY
