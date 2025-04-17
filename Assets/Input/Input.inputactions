@@ -405,12 +405,67 @@
                 },
                 {
                     "name": "",
+                    "id": "076e83c4-d6c6-408d-be7c-200262396d89",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "806f3b68-0685-4ee0-a5a9-9c3631e0609f",
                     "path": "<Keyboard>/b",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.3,pressPoint=0.35)",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ff770ad-a462-4144-b57c-c0cd0ac24fea",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Tap(duration=0.3,pressPoint=0.35)",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70adc551-23b6-475d-9f50-1fd023e90873",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e911705-1030-4791-8887-1b12eb5d3809",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f304066-feb7-4eca-928e-26852fef8832",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
