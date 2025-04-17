@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ReactiveCombination1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ReactiveCombination1.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ScaleWaveCircle.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ScaleWaveCircle.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/alex-scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/alex-scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/AudioVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ColorAV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/ColorAV.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/DebugAV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/DebugAV.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/LineAV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/LineAV.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/WaveAndCircleAV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/WaveCircle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/WaveAndCircleAV.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioVisuals/WaveCircle.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Scriptables/DefaultLight.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Scriptables/DefaultLight.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Scriptables/DefaultSprite.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Scriptables/DefaultSprite.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +34,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;alex-branch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;polish-work&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -52,6 +43,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Dance Fighter.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\GitHub\DanceFighter\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.48f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\jacri\Documents\GitHub\DanceFighter -debugCodeOptimization" />
@@ -115,6 +114,19 @@
       <workItem from="1740678620301" duration="2272000" />
       <workItem from="1740700965906" duration="12850000" />
       <workItem from="1740758427684" duration="7909000" />
+      <workItem from="1742942877304" duration="1351000" />
+      <workItem from="1743136858128" duration="6545000" />
+      <workItem from="1743286331610" duration="6658000" />
+      <workItem from="1743301189600" duration="6371000" />
+      <workItem from="1743395089339" duration="322000" />
+      <workItem from="1743548672760" duration="4068000" />
+      <workItem from="1743701344312" duration="291000" />
+      <workItem from="1743707290328" duration="752000" />
+      <workItem from="1744353520028" duration="2000" />
+      <workItem from="1744635662470" duration="444000" />
+      <workItem from="1744636660518" duration="1033000" />
+      <workItem from="1744678569312" duration="44000" />
+      <workItem from="1744682705671" duration="4903000" />
     </task>
     <servers />
   </component>

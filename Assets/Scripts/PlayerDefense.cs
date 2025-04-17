@@ -8,7 +8,7 @@ enum DefenseState: int { none,block, parry, guardBreak }
 
 public class PlayerDefense : MonoBehaviour
 {
-    CapsuleCollider2D playerCollider;
+    BoxCollider2D playerCollider;
     GameObject player;
     
     [SerializeField] private GameObject playerSprite;
@@ -29,7 +29,10 @@ public class PlayerDefense : MonoBehaviour
     [Header("Guard Meter System")]
     private float maxGuardMeter = 100f;
     private float guardMeter;
-    private float guardRegenRate = 20f;    
+    private float guardRegenRate = 20f;   
+
+    [SerializeField] private int playerIndex = 0;
+
     private void Awake()
     {
         playerAnimator = playerSprite.GetComponent<Animator>();
@@ -38,7 +41,7 @@ public class PlayerDefense : MonoBehaviour
         Transform playerColliderTransform = transform.Find("PlayerCollider"); // Replace "PlayerCollider" with the actual name of the child
         if (playerColliderTransform != null)
         {
-            playerCollider = playerColliderTransform.GetComponent<CapsuleCollider2D>();
+            playerCollider = playerColliderTransform.GetComponent<BoxCollider2D>();
         }
     
         /*
@@ -55,6 +58,11 @@ public class PlayerDefense : MonoBehaviour
         {
             originalColliderSize = playerCollider.transform.localScale;
         }
+    }
+
+    public int GetPlayerIndex()
+    {
+        return playerIndex;
     }
     
     private void OnEnable() 
@@ -85,7 +93,7 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
-    private void OnBlockStarted(InputAction.CallbackContext context)
+    public void OnBlockStarted(InputAction.CallbackContext context)
     {
         
         if(!playerAnimator.GetBool("isGuardBroken"))
@@ -105,7 +113,7 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
-    private void OnBlockPerformed(InputAction.CallbackContext context)
+    public void OnBlockPerformed(InputAction.CallbackContext context)
     {
         if(!playerAnimator.GetBool("isGuardBroken"))
         {
@@ -118,7 +126,7 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
-    private void OnBlockCanceled(InputAction.CallbackContext context)
+    public void OnBlockCanceled(InputAction.CallbackContext context)
     {
         if (context.interaction is HoldInteraction)
         {
@@ -138,7 +146,7 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
-    private void OnParryPerformed(InputAction.CallbackContext context)
+    public void OnParryPerformed(InputAction.CallbackContext context)
     {
         if (context.interaction is TapInteraction)
         {
