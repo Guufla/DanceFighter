@@ -3,7 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _hue ("Hue", Float) = 1
+        _hue ("Hue", Float) = 1 // 1 <> 7
         _saturation ("Saturation", Float) = 1
         _value ("Value", Float) = 1
     }
@@ -76,7 +76,7 @@
                 float4 samp = tex2D(_MainTex, i.uv);
                 float3 hsv = rgb2hsv(samp.rgb); // hue sat val
                 
-                float hue = hsv.x * _hue; // 0 <> 1
+                float hue = hsv.x * (_hue%7); // 0 <> 7
                 float sat = hsv.y * _saturation; // 0 <> 1
                 float val = hsv.z * _value; // 0 <> 1
                 
