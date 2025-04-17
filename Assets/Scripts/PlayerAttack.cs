@@ -1003,7 +1003,6 @@ void resetTimerCheck()
             playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
         }
         playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
-        // playerRigidbody.velocity = new Vector2(x * transform.localScale.x,y); 
     }
 
 

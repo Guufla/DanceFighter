@@ -1626,6 +1626,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4547084231478467168, guid: ccb33d982cda9904daf19158a2b25ffe, type: 3}
+      propertyPath: noAggroClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c230e97840eacc4e8c40621ccff2aa9, type: 3}
     - target: {fileID: 5584731484714653122, guid: ccb33d982cda9904daf19158a2b25ffe, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -1772,6 +1776,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 753203346}
     - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
+      propertyPath: hitLagTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
       propertyPath: quitButton
       value: 
       objectReference: {fileID: 753203351}
@@ -1895,6 +1903,18 @@ PrefabInstance:
     - target: {fileID: 2788458673006316364, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: dashTimeVariable
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA1StopMovingY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA2StopMovingY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: LA3StopMovingY
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2115,12 +2135,40 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA1KnockbackX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA1KnockbackY
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA2KnockbackX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA2KnockbackY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA3KnockbackX
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: LA3KnockbackY
-      value: 6
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA1StopMovingY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA2StopMovingY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: LA3StopMovingY
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2011613372581413899, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: dashStrength

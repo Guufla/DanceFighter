@@ -205,8 +205,9 @@ public class HitboxCollision : MonoBehaviour
             // Needs to be more complex so that depending on where its hit from there will be a different knockback and stun
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
             
-            StartCoroutine(Knockback());
-
+            //StartCoroutine(Knockback());
+            oppositeRigidBody.AddForce(new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale ), ForceMode2D.Impulse);
+            
             hasCollided = true;
             //Debug.Log(isParrying);
             
@@ -261,7 +262,8 @@ public class HitboxCollision : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         Debug.Log("Hit");
-        oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+        //oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY);
+        oppositeRigidBody.AddForce(new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY ), ForceMode2D.Impulse);
     }
     
     private void ResetIsHit()

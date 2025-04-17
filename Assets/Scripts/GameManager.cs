@@ -445,7 +445,7 @@ public class GameManager : MonoBehaviour
 
         //stops other players movement for knockback
         UpdateStopMovement(2, true, 1);
-        UpdateStopMovementY(2, true, 1);
+        UpdateStopMovementY(2, false, 1);
 
         //if timer is already running the stop it
         if(knockbackCoroutineP1 != null)
@@ -486,7 +486,7 @@ public class GameManager : MonoBehaviour
 
         //stops other players movement for knockback
         UpdateStopMovement(1, true, 1);
-        UpdateStopMovementY(1, true, 1);
+        UpdateStopMovementY(1, false, 1);
 
         if(knockbackCoroutineP2 != null)
         {
