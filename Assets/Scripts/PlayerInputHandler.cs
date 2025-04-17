@@ -35,6 +35,9 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnJump(CallbackContext context){
         playerMovement.Jump(context);
     }
+    public void OnDash(CallbackContext context){
+        playerMovement.Dash(context);
+    }
     public void OnAttackE(CallbackContext context){
         playerAttack.AttackE(context);
     }
@@ -50,7 +53,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnDownPressed(CallbackContext context){
         playerAttack.DownPressed(context);
     }
-    
     public void OnBlock(CallbackContext context){
         if(context.started){
             playerDefense.OnBlockStarted(context);

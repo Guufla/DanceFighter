@@ -20,6 +20,8 @@ public class HitboxCollision : MonoBehaviour
 
     float basicAttackKnockBackY;
 
+    float damageTaken;
+
     //public float playerHealth = 100;
 
     //public Slider healthbar;
@@ -39,6 +41,8 @@ public class HitboxCollision : MonoBehaviour
     private bool hasCollided = false;
     private float hitState = 0f;
     private PlayerAttack playerAttack;
+
+    [SerializeField] GameObject hitEffect;
 
 
 
@@ -112,6 +116,8 @@ public class HitboxCollision : MonoBehaviour
 
             basicAttackKnockBackY = GameManager.Instance.P1AttackKnockBackY;
 
+            damageTaken = GameManager.Instance.p2AttackDamage;
+
             
         }
         else if (player.CompareTag("Player2"))
@@ -119,6 +125,8 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackX = GameManager.Instance.P2AttackKnockBackX;
 
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
+
+            damageTaken = GameManager.Instance.p1AttackDamage;
         }
         
         if(!playerAttack.isAttacking && hasCollided)
@@ -183,6 +191,9 @@ public class HitboxCollision : MonoBehaviour
         
         if (other.CompareTag(oppositePlayer.tag)) 
         {
+            Vector3 position = new Vector3(oppositePlayer.transform.position.x,transform.position.y,transform.position.z);
+            Instantiate(hitEffect,position,Quaternion.identity);
+
             GameManager.Instance.hitLagCheck();
             facingX = player.transform.localScale.x;
 
@@ -194,8 +205,9 @@ public class HitboxCollision : MonoBehaviour
             // Needs to be more complex so that depending on where its hit from there will be a different knockback and stun
             // Velocity of the knockback is determined by the direction facing times the knockback variable. This is done for x and y
             
-            StartCoroutine(Knockback());
-
+            //StartCoroutine(Knockback());
+            oppositeRigidBody.AddForce(new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale ), ForceMode2D.Impulse);
+            
             hasCollided = true;
             //Debug.Log(isParrying);
             
@@ -210,8 +222,8 @@ public class HitboxCollision : MonoBehaviour
                 if(isParrying == true){
                     playerDef.playerAnimator.SetBool("ParryingWhenAttacked", true);
                 }*/
-            
-                playerDef.TakeDamage(50, other, GetComponent<Collider2D>(), playerDef.playerAnimator.GetBool("isBlocking"), isParrying);
+
+                playerDef.TakeDamage(damageTaken, other, GetComponent<Collider2D>(), playerDef.playerAnimator.GetBool("isBlocking"), isParrying);
                 return;
             }
         
@@ -250,7 +262,8 @@ public class HitboxCollision : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         Debug.Log("Hit");
-        oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY * oppositeRigidBody.gravityScale);
+        //oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY);
+        oppositeRigidBody.AddForce(new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY ), ForceMode2D.Impulse);
     }
     
     private void ResetIsHit()
