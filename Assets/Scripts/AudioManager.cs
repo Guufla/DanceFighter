@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         }
         else{
             _instance = this;
-            DontDestroyOnLoad(this); 
+            //DontDestroyOnLoad(this); 
         }
         
     }

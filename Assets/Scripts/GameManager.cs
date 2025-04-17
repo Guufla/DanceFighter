@@ -215,6 +215,7 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        
         if (_instance)
         {
             Debug.LogError("GameManager is already in the scene");
@@ -223,13 +224,15 @@ public class GameManager : MonoBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this); 
+            //DontDestroyOnLoad(this); 
         }
         
     }
 
     void Start()
     {
+        Time.timeScale = 1;
+
         // Sets the ground variables to false by default
         player1IsOnGround = false;
         player2IsOnGround = false;
@@ -305,7 +308,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(!isGameStarted && controllerConnectScreen.gameObject.activeSelf)
+        if(gameOver || roundOver) // If the game is over or the round is over then stop the game
+        {
+            disablePlayerInputs = true;
+        }
+        if (!isGameStarted && controllerConnectScreen.gameObject.activeSelf)
         {
             if(curPlayerCount == 0){
                 player1Joined.gameObject.SetActive(false);
@@ -615,6 +622,9 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame() // When restarting the whole game set the win counters to 0
     {
+
+        countdownText.text = "99";
+        Time.timeScale = 1;
         // Reset win counters
         p1WinCounter = 0;
         p2WinCounter = 0;
@@ -632,8 +642,9 @@ public class GameManager : MonoBehaviour
         winBox2P2.gameObject.SetActive(false);
 
         // Reset the match
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        //Scene currentScene = SceneManager.GetActiveScene();
+        //SceneManager.LoadScene(currentScene.name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private IEnumerator bufferForControllerScreen(float bufferTime){
         yield return new WaitForSeconds(bufferTime);
@@ -645,11 +656,16 @@ public class GameManager : MonoBehaviour
         countdownText.gameObject.SetActive(true);
         StartCoroutine(StartRoundCountdown(3)); // Start the countdown
     }
+    public void MainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
 
     private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
     {
         
         isCountingDown = true;
+        isGameStarted = false;
         countdownText.gameObject.SetActive(true);
         while (countdownTime > 0)
         {
