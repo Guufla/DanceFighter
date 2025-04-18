@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Boolean isDashing;
 
+    public Boolean isDashContinued;
+
     Boolean dashBufferIndicator;
 
     Boolean disablePlayerInput;
@@ -64,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         dashOption = true;
         dashBufferIndicator = false;
         disablePlayerInput = false;
+        isDashContinued = false;
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -87,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         getGroundCheck();
         getMovementInfo();
+        airDashCheck();
         isHit();
         handleJumping();
         if(stopMovement == false && isDashing == false && disablePlayerInput == false){
@@ -211,9 +215,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && dashOption && !isDashing && !disablePlayerInput)
+        if (context.performed && dashOption && !isDashing && !disablePlayerInput && !isDashContinued)
         {
-            Debug.Log("Dash performed");
+            //Debug.Log("Dash performed");
             dashBufferIndicator = false;
             isDashing = true;
             StartCoroutine(dashBuffer());
@@ -222,9 +226,24 @@ public class PlayerMovement : MonoBehaviour
             dashOption = false;
         }
     }
+
+    public void airDashCheck(){
+        if(isDashContinued && groundCheck)
+        {
+            isDashing = false;
+            isDashContinued = false;
+        }
+    }
     IEnumerator dashTime(){
         yield return new WaitForSeconds(dashTimeVariable);
-        isDashing = false;
+        if(groundCheck)
+        {
+            isDashing = false;
+        }
+        else
+        {
+            isDashContinued = true;
+        }
     }
     IEnumerator dashBuffer(){
         dashBufferIndicator = false;
