@@ -165,7 +165,7 @@ public class PlayerDefense : MonoBehaviour
             //Debug.Log(playerAnimator.GetBool("isBlocking"));
             //Debug.Log(playerAnimator.GetBool("isParrying"));
             
-            if(isBlocking == false && isParrying == true){
+            if(isParrying == true && playerAnimator.GetBool("ParryingWhenAttacked") == true){
                 Debug.Log("Parried");
                 playerAnimator.SetBool("ParryingWhenAttacked", false);
                 CancelBlock();
