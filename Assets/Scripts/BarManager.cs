@@ -39,7 +39,6 @@ public class BarManager : MonoBehaviour
     {
         if (GameManager.Instance.roundOver)
         {
-            Debug.Log("ResetDelayedBar");
             ResetDelayedBar(ref pastFillsQueueL);
             ResetDelayedBar(ref pastFillsQueueR);
         }
