@@ -112,7 +112,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _angle: -11.21
-    - _fill: 0.07
+    - _fill: 1
     - _timescale: -0.04
     - _val1: 2.81
     - _val2: 0.41
