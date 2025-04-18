@@ -6,15 +6,23 @@
         _hue ("Hue", Float) = 1 // 1 <> 7
         _saturation ("Saturation", Float) = 1
         _value ("Value", Float) = 1
+        _alpha ("Alpha", Float) = 1
+        _rgb_offset ("RGB Offset", Color) = (0, 0, 0, 0)
+        _transparency_target ("Transparency Target", Color) = (0, 0, 0, 1)
     }
 
     SubShader
     {
         Tags
         {
-            "RenderType" = "Opaque"
-            "RenderPipeline" = "UniversalPipeline"
+            "RenderType"="Transparent"
+            "Queue"="Transparent"
         }
+        
+        Blend SrcAlpha OneMinusSrcAlpha
+
+        ZWrite off
+        Cull off
 
         Pass
         {
@@ -31,6 +39,9 @@
             float _hue;
             float _saturation;
             float _value;
+            float _alpha;
+            float4 _rgb_offset;
+            float4 _transparency_target;
             
             struct appdata
             {
@@ -74,6 +85,8 @@
             fixed4 frag(v2f i) : SV_TARGET
             {
                 float4 samp = tex2D(_MainTex, i.uv);
+                float dist = abs(length(_transparency_target.rgb - samp.rgb))/1.732f;
+                samp += _rgb_offset;
                 float3 hsv = rgb2hsv(samp.rgb); // hue sat val
                 
                 float hue = hsv.x * (_hue%7); // 0 <> 7
@@ -82,7 +95,7 @@
                 
                 hsv = float3(hue, sat, val);
                 
-                return float4(hsv2rgb(hsv), 1);
+                return float4(hsv2rgb(hsv), (1-dist)*_alpha);
             }
 
             

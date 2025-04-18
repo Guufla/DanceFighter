@@ -8,12 +8,15 @@ public class BarManager : MonoBehaviour
 {
     [SerializeField] private Material left;
     [SerializeField] private Material right;
+    [SerializeField] private Material leftFake;
+    [SerializeField] private Material rightFake;
     [SerializeField] private Material leftBack;
     [SerializeField] private Material rightBack;
     [SerializeField] private Material leftOffense;
     [SerializeField] private Material rightOffense;
 
     [SerializeField] private string fillPropertyName;
+    [SerializeField] private float healthBarDelayTime;
 
     private float p1MaxHealth;
     private float p2MaxHealth;
@@ -50,11 +53,13 @@ public class BarManager : MonoBehaviour
         
         left.SetFloat(fillID, leftHealthFill);
         right.SetFloat(fillID, rightHealthFill);
+        leftFake.SetFloat(fillID, rightHealthFill);
+        rightFake.SetFloat(fillID, rightHealthFill);
         leftOffense.SetFloat(fillID, leftOffenseFill);
         rightOffense.SetFloat(fillID, rightOffenseFill);
         
-        DelayBar(leftBack, 6, leftHealthFill, ref pastFillsQueueL);
-        DelayBar(rightBack, 6, rightHealthFill, ref pastFillsQueueR);
+        DelayBar(leftBack, healthBarDelayTime, leftHealthFill, ref pastFillsQueueL);
+        DelayBar(rightBack, healthBarDelayTime, rightHealthFill, ref pastFillsQueueR);
     }
 
     private void DelayBar(Material target, float delayInSeconds, float currFill, ref Queue<float> pastFills)

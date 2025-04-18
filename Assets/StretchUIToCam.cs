@@ -10,6 +10,7 @@ public class StretchUIToCam : MonoBehaviour
 
     [SerializeField] private float referenceCameraSize;
     [SerializeField] private float referenceRectTransformScale;
+    [SerializeField] private float scaleDelta;
 
     private float camToRectRatio; //367
     
@@ -20,7 +21,7 @@ public class StretchUIToCam : MonoBehaviour
 
     private void Update()
     {
-        float scale = cam.orthographicSize / camToRectRatio;
+        float scale = cam.orthographicSize / camToRectRatio + scaleDelta;
         rectTransform.localScale = new Vector3(scale, scale, 1);
     }
 }
