@@ -5,11 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/ValueStep.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HeatDistortion.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HeatDistortion.shader.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/SpriteOutline.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/aura-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/aura-Sheet.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/AuraP1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/AuraP1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/AuraP2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/AuraP2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/AuraP2.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/AuraP2.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HitEffectP1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HitEffectP1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HitEffectP2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HitEffectP2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player1_Outline.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player1_Outline.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player2_Outline.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player2_Outline.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/Distortion.shadergraph" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/Distortion.shadergraph.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BaseScene 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BaseScene 1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Aura.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Aura.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +40,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.11.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50e5acd061cd4a73b7fc8eecbf07e915176600/f1/c6585a9d/Transform.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -30,18 +51,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;polish-work&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "polish-work",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Dance Fighter.exe" />
@@ -126,7 +147,16 @@
       <workItem from="1744635662470" duration="444000" />
       <workItem from="1744636660518" duration="1033000" />
       <workItem from="1744678569312" duration="44000" />
-      <workItem from="1744682705671" duration="4903000" />
+      <workItem from="1744682705671" duration="5668000" />
+      <workItem from="1744735351830" duration="2859000" />
+      <workItem from="1744754629561" duration="6100000" />
+      <workItem from="1744762916778" duration="2429000" />
+      <workItem from="1744848556710" duration="22000" />
+      <workItem from="1744850689902" duration="3484000" />
+      <workItem from="1744861234387" duration="91000" />
+      <workItem from="1744861843298" duration="6495000" />
+      <workItem from="1744908782547" duration="1988000" />
+      <workItem from="1744931412896" duration="1720000" />
     </task>
     <servers />
   </component>

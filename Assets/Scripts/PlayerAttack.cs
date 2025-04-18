@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -79,6 +77,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private int playerIndex = 0;
 
     Boolean disablePlayerInput;
+
+    Boolean isBlocking;
+
+    Boolean isParrying;
+
+    bool disableThisPlayerInput; // Boolean for when the combo reset timer is activated
 
 
     [Header("Light attack variables (3 hit combo)")]
@@ -350,9 +354,19 @@ public class PlayerAttack : MonoBehaviour
         disablePlayerInput = GameManager.Instance.disablePlayerInputs;
         if(transform.tag == "Player1"){
             isOnGround = GameManager.Instance.player1IsOnGround;
+            isBlocking = GameManager.Instance.p1IsBlocking;
+            isParrying = GameManager.Instance.p1IsParrying;
+            GameManager.Instance.isP1Attacking = isAttacking;
+
+            disableThisPlayerInput = GameManager.Instance.p1InputDisabled;
         }
         else{
             isOnGround = GameManager.Instance.player2IsOnGround;
+            isBlocking = GameManager.Instance.p2IsBlocking;
+            isParrying = GameManager.Instance.p2IsParrying;
+            GameManager.Instance.isP2Attacking = isAttacking;
+
+            disableThisPlayerInput = GameManager.Instance.p2InputDisabled;
         }
     }
 
@@ -887,7 +901,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error assigning knockback to players");
+            // Debug.Log("Error assigning knockback to players");
         }
     }
 
@@ -999,10 +1013,14 @@ void resetTimerCheck()
     // Small helper function for dashing
     void dashWithAttack(float x, float y)
     {
-        if(stopPlayerMovement){
-            playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
+        if(!isBlocking && !isParrying)
+        {
+            if(stopPlayerMovement)
+            {
+                playerRigidbody.velocity = new Vector2(0,playerRigidbody.velocity.y);
+            }
+            playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
         }
-        playerRigidbody.AddForce(new Vector2(x * transform.localScale.x ,y), ForceMode2D.Impulse);
     }
 
 
@@ -1010,7 +1028,7 @@ void resetTimerCheck()
     public void AttackE(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput)
+        if(context.started && !disablePlayerInput  && !disableThisPlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1049,7 +1067,7 @@ void resetTimerCheck()
     public void AttackR(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput)
+        if(context.started && !disablePlayerInput  && !disableThisPlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1069,7 +1087,7 @@ void resetTimerCheck()
                 if(hitboxAnimationMethods != null && attackAnimator.GetBool("RAttack1") == true)
                 {
                     hitboxAnimationMethods.QueueNextAttack();
-                    Debug.Log("Queue Attack is called");
+                    // Debug.Log("Queue Attack is called");
                 }
         } 
             
@@ -1089,7 +1107,7 @@ void resetTimerCheck()
     public void AttackF(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput)
+        if(context.started && !disablePlayerInput && !disableThisPlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1123,28 +1141,28 @@ void resetTimerCheck()
     public void UpPressed(CallbackContext context){
 
         // If the input isnt 0 then the player is holding Up
-        if (context.started && !disablePlayerInput)
+        if (context.started && !disablePlayerInput && !disableThisPlayerInput)
         {
-            Debug.Log("UP");
+            // Debug.Log("UP");
             holdingUp = true;
         }
         else if (context.canceled)
         {
-            Debug.Log("NO UP");
+            // Debug.Log("NO UP");
             holdingUp = false;
         }
     }
 
     public void DownPressed(CallbackContext context){
         // If the input isnt 0 then the player is holding Down
-        if (context.started && !disablePlayerInput)
+        if (context.started && !disablePlayerInput  && !disableThisPlayerInput)
         {
-            Debug.Log("DOWN");
+            //Debug.Log("DOWN");
             holdingDown = true;
         }
         else if (context.canceled)
         {
-            Debug.Log("NO DOWN");
+            //Debug.Log("NO DOWN");
             holdingDown = false;
         }
     }

@@ -36,7 +36,7 @@ public class EffectManager : PersistentSingleton<EffectManager>
         }
 
         inputVectorID = Shader.PropertyToID("_input_vector");
-        inputScale01ID = Shader.PropertyToID("_input_scale01");
+        inputScale01ID = Shader.PropertyToID("_do_effect");
 
         Init();
     }

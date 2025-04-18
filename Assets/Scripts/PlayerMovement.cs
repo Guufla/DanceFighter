@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Boolean isDashing;
 
+    public Boolean isDashContinued;
+
     Boolean dashBufferIndicator;
 
     Boolean disablePlayerInput;
@@ -64,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         dashOption = true;
         dashBufferIndicator = false;
         disablePlayerInput = false;
+        isDashContinued = false;
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -87,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         getGroundCheck();
         getMovementInfo();
+        airDashCheck();
         isHit();
         handleJumping();
         if(stopMovement == false && isDashing == false && disablePlayerInput == false){
@@ -139,23 +143,23 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void handleJumping()
-{
-    // Check if the player is on the ground or performing an air attack
-    if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
     {
-        playerAnimator.SetBool("isJumping", false);
-        // Debug.Log(playerAttack.isAirAttacking);
-    }
-    else
-    {
-        // Check if the player is in the air and not performing an air attack
-        if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+        // Check if the player is on the ground or performing an air attack
+        if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
         {
-            highestYPos = transform.position.y;
-            playerAnimator.SetBool("isJumping", true);
+            playerAnimator.SetBool("isJumping", false);
+            // Debug.Log(playerAttack.isAirAttacking);
+        }
+        else
+        {
+            // Check if the player is in the air and not performing an air attack
+            if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+            {
+                highestYPos = transform.position.y;
+                playerAnimator.SetBool("isJumping", true);
+            }
         }
     }
-}
 
     void movement(){
         // VERY IMPORTANT
@@ -203,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && groundCheck)
+        if (context.performed && groundCheck && !disablePlayerInput)
         {
             playerRigidbody.velocity += new Vector2(0f, jumpStrength); // Code to jump on pressing space
         }
@@ -211,9 +215,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && dashOption && !isDashing)
+        if (context.performed && dashOption && !isDashing && !disablePlayerInput && !isDashContinued)
         {
-            Debug.Log("Dash performed");
+            //Debug.Log("Dash performed");
             dashBufferIndicator = false;
             isDashing = true;
             StartCoroutine(dashBuffer());
@@ -222,9 +226,24 @@ public class PlayerMovement : MonoBehaviour
             dashOption = false;
         }
     }
+
+    public void airDashCheck(){
+        if(isDashContinued && groundCheck)
+        {
+            isDashing = false;
+            isDashContinued = false;
+        }
+    }
     IEnumerator dashTime(){
         yield return new WaitForSeconds(dashTimeVariable);
-        isDashing = false;
+        if(groundCheck)
+        {
+            isDashing = false;
+        }
+        else
+        {
+            isDashContinued = true;
+        }
     }
     IEnumerator dashBuffer(){
         dashBufferIndicator = false;

@@ -172,7 +172,19 @@ public class PlayerDefense : MonoBehaviour
     
     private void Update()
     {
-        
+        gameManagerUpdate();
+    }
+
+    public void gameManagerUpdate(){
+        if(transform.tag == "Player1")
+        {
+            GameManager.Instance.p1IsBlocking = playerAnimator.GetBool("isBlocking");
+            GameManager.Instance.p1IsParrying = playerAnimator.GetBool("isParrying");
+        }
+        else{
+            GameManager.Instance.p2IsBlocking = playerAnimator.GetBool("isBlocking");
+            GameManager.Instance.p2IsParrying = playerAnimator.GetBool("isParrying");
+        }
     }
     
     public void TakeDamage(float damage, Collider2D attackCollider, Collider2D attackBoxCollider, bool isBlocking, bool isParrying)
@@ -184,6 +196,7 @@ public class PlayerDefense : MonoBehaviour
             
             if(isBlocking == false && isParrying == true){
                 Debug.Log("Parried");
+                StartCoroutine(ParryPause());
                 playerAnimator.SetBool("ParryingWhenAttacked", false);
                 CancelBlock();
                 return;
@@ -249,6 +262,13 @@ public class PlayerDefense : MonoBehaviour
                 
                 yield return null;
             }
+        }
+
+
+        IEnumerator ParryPause(){
+            Time.timeScale = 0f;
+            yield return new WaitForSeconds(0.5f);
+            Time.timeScale = 1f;
         }
     }
 }

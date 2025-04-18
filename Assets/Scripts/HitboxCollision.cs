@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +44,8 @@ public class HitboxCollision : MonoBehaviour
     private PlayerAttack playerAttack;
 
     [SerializeField] GameObject hitEffect;
+
+    private bool disableOppositePlayerInput;
 
 
 
@@ -99,12 +102,14 @@ public class HitboxCollision : MonoBehaviour
         
         playerAttack = player.GetComponent<PlayerAttack>();
 
-     oppositeRigidBody = oppositePlayer.GetComponent<Rigidbody2D>();
+    oppositeRigidBody = oppositePlayer.GetComponent<Rigidbody2D>();
 
 
-     facingX = 0;
+    facingX = 0;
 
-     facingY = 0;
+    facingY = 0;
+
+    disableOppositePlayerInput = false;
     }
 
 
@@ -118,6 +123,9 @@ public class HitboxCollision : MonoBehaviour
 
             damageTaken = GameManager.Instance.p2AttackDamage;
 
+            GameManager.Instance.p2InputDisabled = disableOppositePlayerInput;
+
+
             
         }
         else if (player.CompareTag("Player2"))
@@ -127,6 +135,8 @@ public class HitboxCollision : MonoBehaviour
             basicAttackKnockBackY = GameManager.Instance.P2AttackKnockBackY;
 
             damageTaken = GameManager.Instance.p1AttackDamage;
+
+            GameManager.Instance.p1InputDisabled = disableOppositePlayerInput;
         }
         
         if(!playerAttack.isAttacking && hasCollided)
@@ -199,6 +209,8 @@ public class HitboxCollision : MonoBehaviour
 
             facingY = player.transform.localScale.y;
 
+            StartCoroutine(Hitstun());
+
             // facing accounts for which way the player is facing
 
 
@@ -213,9 +225,9 @@ public class HitboxCollision : MonoBehaviour
             
             playerDef = oppositePlayer.GetComponent<PlayerDefense>();
             bool isParrying = playerDef.playerAnimator.GetBool("isParrying");
-            Debug.Log(isParrying);
+            //Debug.Log(isParrying);
             if(playerDef.playerAnimator.GetBool("isBlocking") || isParrying){
-                Debug.Log("is this not appearing?");
+                //Debug.Log("is this not appearing?");
             
                 //Debug.Log(isParrying);
                 /*
@@ -261,9 +273,15 @@ public class HitboxCollision : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         //oppositeRigidBody.velocity += new Vector2(basicAttackKnockBackX * facingX * oppositeRigidBody.gravityScale,basicAttackKnockBackY * facingY);
         oppositeRigidBody.AddForce(new Vector2(basicAttackKnockBackX * facingX,basicAttackKnockBackY ), ForceMode2D.Impulse);
+    }
+
+    private IEnumerator Hitstun(){
+        disableOppositePlayerInput = true;
+        yield return new WaitForSeconds(0.6f);
+        disableOppositePlayerInput = false;
     }
     
     private void ResetIsHit()
@@ -274,7 +292,7 @@ public class HitboxCollision : MonoBehaviour
         }
         else
         {
-            Debug.LogError("oppositePlayerAnimator is null in ResetIsHit");
+            //Debug.LogError("oppositePlayerAnimator is null in ResetIsHit");
         }
     }
 }

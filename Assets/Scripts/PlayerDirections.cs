@@ -18,6 +18,8 @@ public class PlayerDirections : MonoBehaviour
 
     bool isOnGround;
 
+    bool isAttacking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,21 +51,25 @@ public class PlayerDirections : MonoBehaviour
         if(currentPlayer == "Player1"){
             isOnGround = GameManager.Instance.player1IsOnGround;
 
+            isAttacking = GameManager.Instance.isP1Attacking;
+
             oppositePlayer = GameManager.Instance.player2;
         }
         else if(currentPlayer == "Player2"){
             isOnGround = GameManager.Instance.player2IsOnGround;
 
+            isAttacking = GameManager.Instance.isP2Attacking;
+
             oppositePlayer = GameManager.Instance.player1;
         }
 
 
-        if(isOnGround && curTrans.position.x < opPlayerTrans.position.x ){ 
+        if(isOnGround && curTrans.position.x < opPlayerTrans.position.x && !isAttacking){ 
             transform.localScale = new Vector2(1f,1f);
             isFacingRight = true;
             isFacingLeft = false;
         }
-        else if(isOnGround && curTrans.position.x > opPlayerTrans.position.x ){
+        else if(isOnGround && curTrans.position.x > opPlayerTrans.position.x && !isAttacking){
             transform.localScale = new Vector2(-1f,1f);
             isFacingRight = false;
             isFacingLeft = true;
