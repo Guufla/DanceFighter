@@ -243,18 +243,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   p1:
-    Material: {fileID: 2100000, guid: ec47da2974b6df048a6b996ff2dc0853, type: 2}
+    Material: {fileID: 2100000, guid: 4bec4b5dbb620aa48949c279446a5ad5, type: 2}
     EnemyTransform: {fileID: 0}
-    EffectDecayRate: 2
+    EffectDecayRate: 0.1
     UpdateInputVector: 0
   p2:
-    Material: {fileID: 2100000, guid: b6afe514b71ced349b064ec53ac0563e, type: 2}
+    Material: {fileID: 2100000, guid: 1f36cabbf6e19b445b98525a31f3b756, type: 2}
     EnemyTransform: {fileID: 0}
-    EffectDecayRate: 2
+    EffectDecayRate: 0.1
     UpdateInputVector: 0
   targetShader: {fileID: 4800000, guid: f94dca28224d4d5b9c090d3003e94a8b, type: 3}
   vcam: {fileID: 0}
   useCamShake: 0
+  useHitShader: 0
   shakeAmplitude: 1.5
   shakeFrequency: 3.69
   shakeFalloffSpeed: 2

@@ -5,34 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/Crowd.shader" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/Crowd.shader.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Stages/stage3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Stages/stage3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneEnvironment.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneEnvironment.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left_Back.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left_Back.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HSVModifier.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/HSVModifier.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP1.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP2.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP2.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HeatDistortion.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HeatDistortion.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Polish.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Polish.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BarManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BarManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EffectManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EffectManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/ConsoleLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/ConsoleLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StretchUIToCam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StretchUIToCam.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PolishWork.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,18 +31,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;polish-work&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Dev2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Dance Fighter.exe" />
