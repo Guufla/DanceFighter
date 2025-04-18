@@ -80,7 +80,7 @@ public class PlayerDefense : MonoBehaviour
         {
             if (context.interaction is HoldInteraction)
             {
-                //playerAnimator.SetBool("isBlocking", true);
+                playerAnimator.SetBool("isBlocking", true);
                 defenseType = DefenseState.block;
                 Debug.Log("Block Started");
                 //playerAnimator.SetBool("isBlocking", true);
@@ -132,7 +132,7 @@ public class PlayerDefense : MonoBehaviour
         {
             if(context.duration <= parryTimeWindow)
             {
-                playerAnimator.SetBool("isBlocking", false);
+                //playerAnimator.SetBool("isBlocking", false);
                 playerAnimator.SetBool("isParrying", true);
                 defenseType = DefenseState.parry;
                 Debug.Log("Parry Performed");
@@ -144,11 +144,14 @@ public class PlayerDefense : MonoBehaviour
     }
     
     void ResetParry()
+{
+    playerAnimator.SetBool("isParrying", false); // Reset parry state
+    if (defenseType == DefenseState.parry) // Only reset defenseType if it was a parry
     {
-        playerAnimator.SetBool("isParrying", false);
-        playerAnimator.SetBool("isBlocking", false);
         defenseType = DefenseState.none;
     }
+    Debug.Log("Parry Reset");
+}
     
     private void Update()
     {

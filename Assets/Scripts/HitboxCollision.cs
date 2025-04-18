@@ -230,10 +230,10 @@ public class HitboxCollision : MonoBehaviour
                 //Debug.Log("is this not appearing?");
             
                 //Debug.Log(isParrying);
-                /*
+                
                 if(isParrying == true){
                     playerDef.playerAnimator.SetBool("ParryingWhenAttacked", true);
-                }*/
+                }
 
                 playerDef.TakeDamage(damageTaken, other, GetComponent<Collider2D>(), playerDef.playerAnimator.GetBool("isBlocking"), isParrying);
                 return;
