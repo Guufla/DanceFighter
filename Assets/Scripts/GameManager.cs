@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     private float offensiveInterval = 1f;//every 1 second increase it by amount
 
-    public int offensiveIncrease = 50; //amount to increase by
+    public int offensiveIncrease = 5; //amount to increase by
 
     public int offensiveDecrease = 50; //amount to decrease every second by when in offensive mode
 

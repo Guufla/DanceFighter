@@ -897,7 +897,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error assigning knockback to players");
+            // Debug.Log("Error assigning knockback to players");
         }
     }
 
@@ -1083,7 +1083,7 @@ void resetTimerCheck()
                 if(hitboxAnimationMethods != null && attackAnimator.GetBool("RAttack1") == true)
                 {
                     hitboxAnimationMethods.QueueNextAttack();
-                    Debug.Log("Queue Attack is called");
+                    // Debug.Log("Queue Attack is called");
                 }
         } 
             
@@ -1139,12 +1139,12 @@ void resetTimerCheck()
         // If the input isnt 0 then the player is holding Up
         if (context.started && !disablePlayerInput)
         {
-            Debug.Log("UP");
+            // Debug.Log("UP");
             holdingUp = true;
         }
         else if (context.canceled)
         {
-            Debug.Log("NO UP");
+            // Debug.Log("NO UP");
             holdingUp = false;
         }
     }
@@ -1153,12 +1153,12 @@ void resetTimerCheck()
         // If the input isnt 0 then the player is holding Down
         if (context.started && !disablePlayerInput)
         {
-            Debug.Log("DOWN");
+            //Debug.Log("DOWN");
             holdingDown = true;
         }
         else if (context.canceled)
         {
-            Debug.Log("NO DOWN");
+            //Debug.Log("NO DOWN");
             holdingDown = false;
         }
     }

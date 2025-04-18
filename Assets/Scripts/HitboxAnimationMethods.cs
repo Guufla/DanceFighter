@@ -62,8 +62,8 @@ public class HitboxAnimationMethods : MonoBehaviour
     
     private void TransitionToNextState()
     {
-        Debug.Log(animator == null);
-        Debug.Log(isNextAttackQueued);
+        //Debug.Log(animator == null);
+        //Debug.Log(isNextAttackQueued);
     
         //Debug.Log(animator != null && isNextAttackQueued);
         
@@ -76,7 +76,7 @@ public class HitboxAnimationMethods : MonoBehaviour
             
             isNextAttackQueued = false;
         }else{
-            Debug.Log("Animator is null");
+            //Debug.Log("Animator is null");
         }
     }
 }
