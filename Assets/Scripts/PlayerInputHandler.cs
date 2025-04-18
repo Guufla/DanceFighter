@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +9,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerAttack playerAttack;
     private PlayerDefense playerDefense;
+    private Pause playerPause;
 
     // Start is called before the first frame update
     void Awake()
@@ -20,17 +19,28 @@ public class PlayerInputHandler : MonoBehaviour
         var attacks = FindObjectsOfType<PlayerAttack>();
         var defense = FindObjectsOfType<PlayerDefense>();
         var index = playerInput.playerIndex;
+        var pause = FindObjectsOfType<Pause>();
         playerMovement = movements.FirstOrDefault(m => m.GetPlayerIndex() == index);
         playerAttack = attacks.FirstOrDefault(m => m.GetPlayerIndex() == index);
         playerDefense = defense.FirstOrDefault(m => m.GetPlayerIndex() == index);
+        playerPause = pause.FirstOrDefault(m => m.GetPlayerIndex() == index);
+
 
 
     }
     public void OnMove(CallbackContext context){
         playerMovement.OnMovement(context);
     }
+    public void OnPause(CallbackContext context)
+    {
+        playerPause.OnPause(context);
+
+    }
     public void OnJump(CallbackContext context){
         playerMovement.Jump(context);
+    }
+    public void OnDash(CallbackContext context){
+        playerMovement.Dash(context);
     }
     public void OnAttackE(CallbackContext context){
         playerAttack.AttackE(context);
@@ -47,7 +57,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnDownPressed(CallbackContext context){
         playerAttack.DownPressed(context);
     }
-    
     public void OnBlock(CallbackContext context){
         if(context.started){
             playerDefense.OnBlockStarted(context);

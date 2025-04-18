@@ -7,6 +7,8 @@ using Vector2 = UnityEngine.Vector2;
 
 public class Camera : MonoBehaviour
 {
+    [SerializeField] private bool isInMenu = false;
+    
     // Allows us to refer to the specific position of both player 1 and 2
     GameObject player1;
     GameObject player2;
@@ -48,6 +50,9 @@ public class Camera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (isInMenu)
+            return;
+        
         cameraPointPosition = transform.position;
 
         player1 = GameManager.Instance.player1;
@@ -73,6 +78,9 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isInMenu)
+            return;
+        
         player1x = player1.transform.position.x;
         player1y = player1.transform.position.y;
 

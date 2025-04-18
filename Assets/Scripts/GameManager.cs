@@ -11,6 +11,16 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
+    public float hitLagTime; 
+    public bool isWaiting;
+
+    public int curPlayerCount;
+
+    public bool lockGameTillEnoughPlayers;
+
+    public bool isGameStarted;
+
+    public bool disablePlayerInputs;
 
 
     [Header("Player1")]
@@ -22,8 +32,8 @@ public class GameManager : MonoBehaviour
 
     public float P1AttackKnockBackY; // When the knockback is set on an attack its y float will be held here.
 
-    public Boolean stopP1Movement; 
-    public Boolean stopP1YMovement; 
+    public Boolean stopP1Movement; //Use UpdateStopMovement instead
+    public Boolean stopP1YMovement; //Use UpdateStopMovementY instead
 
     public Boolean canInputP1; 
 
@@ -31,17 +41,35 @@ public class GameManager : MonoBehaviour
 
     public Slider playerHealthBar; // This is a reference to the player health slider that lets us easily call it from different scripts
 
-    public int P1Health = 100;
+    public float P1Health = 1000;
 
     public Slider p1OffensiveBar; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
     public static int p1WinCounter = 0;
+    
+    public Boolean isP1Attacking; 
+
+    public bool p1InputDisabled;
 
 
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
 
     public bool p1Aggro; // Tells if the player is in aggro mode
+
+    public bool isP1Hitstun; // 
+
+    public float p1HitstunSetTime; //
+
+    public float p1HitstunTime; // 
+
+    public float p1AttackDamage;
+
+    public bool p1IsBlocking;
+
+    public bool p1IsParrying;
+
+    
 
 
     // Player 2 is barely setup rn so none of this does anything yet except for the game object and the ground variable
@@ -54,18 +82,20 @@ public class GameManager : MonoBehaviour
 
     public float P2AttackKnockBackY; // When the knockback is set on an attack its y float will be held here. 
 
-    public Boolean stopP2Movement; 
-    public Boolean stopP2YMovement;
+    public Boolean stopP2Movement; //Use UpdateStopMovement instead
+    public Boolean stopP2YMovement; //Use UpdateStopMovementY instead
 
     public Boolean canInputP2; 
     
     public Boolean isHitBoxAnimatingP2; 
 
+    public Boolean isP2Attacking; 
+
     public bool P2Aggro; // Tells if the player is in aggro mode
 
     public Slider opponentHealth; // This is a reference to the player health slider that lets us easily call it from different scripts
 
-    public int P2Health = 100;
+    public float P2Health = 1000;
 
     public Slider p2Offensive; // This is a reference to the player offensive slider that lets us easily call it from different scripts
 
@@ -73,6 +103,19 @@ public class GameManager : MonoBehaviour
 
     public bool player2IsOnGround; // Tells you if the player is on the ground or not
 
+    public bool isP2Hitstun; // 
+    
+    public float p2HitstunSetTime; //
+
+    public float p2HitstunTime; // 
+
+    public float p2AttackDamage;
+
+    public bool p2IsBlocking;
+
+    public bool p2IsParrying;
+
+    public bool p2InputDisabled;
 
     [Header("Offensive mode")]
 
@@ -84,7 +127,9 @@ public class GameManager : MonoBehaviour
 
     private float offensiveInterval = 1f;//every 1 second increase it by amount
 
-    public int offensiveIncrease = 50; //amount to increase by
+    public int offensiveIncreaseConstant = 10; //amount to increase by
+    
+    public int offensiveIncrease = 100; //amount to increase by
 
     public int offensiveDecrease = 50; //amount to decrease every second by when in offensive mode
 
@@ -98,6 +143,12 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Text")]
+
+    public Image controllerConnectScreen;
+
+    public TMP_Text player1Joined;
+
+    public TMP_Text player2Joined;
 
     public TMP_Text winMessage; // Win message
 
@@ -124,6 +175,7 @@ public class GameManager : MonoBehaviour
     public Image winBox1P2;
 
     public Image winBox2P2;
+
 
     [Header("Buttons")]
 
@@ -169,6 +221,7 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        
         if (_instance)
         {
             Debug.LogError("GameManager is already in the scene");
@@ -177,16 +230,27 @@ public class GameManager : MonoBehaviour
         else
         {
             _instance = this;
-            DontDestroyOnLoad(this); 
+            //DontDestroyOnLoad(this); 
         }
         
     }
 
     void Start()
     {
+        Time.timeScale = 1;
+
         // Sets the ground variables to false by default
         player1IsOnGround = false;
         player2IsOnGround = false;
+        
+
+        disablePlayerInputs = true;
+
+        p1InputDisabled = false;
+
+        p2InputDisabled = false;
+
+        curPlayerCount = 0;
 
         // Sets the health bar values to the player health variables
         // Max health is 100 for now
@@ -213,20 +277,76 @@ public class GameManager : MonoBehaviour
         winBox1P2.gameObject.SetActive(false);
         winBox2P2.gameObject.SetActive(false);
 
+        countdownText.gameObject.SetActive(false);
+
+        controllerConnectScreen.gameObject.SetActive(true);
+        player1Joined.gameObject.SetActive(false);
+        player2Joined.gameObject.SetActive(false);
+
+        isP1Hitstun = false; // 
+
+        p1HitstunSetTime = 0; // 
+
+        p1HitstunTime = 0; // 
+
+        isP2Hitstun = false; // 
+
+        p2HitstunSetTime = 0; // 
+
+        p2HitstunTime = 0; // 
+
+        isWaiting = false;
+
+        isGameStarted = false;
+
         knockbackFrozen[0] = new bool[2];
         knockbackFrozen[1] = new bool[2];
         knockbackFrozenY[0] = new bool[2];
         knockbackFrozenY[1] = new bool[2];
 
-        StartCoroutine(StartRoundCountdown(3)); // Start the countdown
+        if(lockGameTillEnoughPlayers){
+            disablePlayerInputs = true;
+            controllerConnectScreen.gameObject.SetActive(true);
+        }
+        else{
+            controllerConnectScreen.gameObject.SetActive(false);
+            disablePlayerInputs = true;
+            countdownText.gameObject.SetActive(true);
+            StartCoroutine(StartRoundCountdown(3)); // Start the countdown
+        }
 
     }
 
     void Update()
     {
-        if (isCountingDown) return;
+        if(gameOver || roundOver) // If the game is over or the round is over then stop the game
+        {
+            disablePlayerInputs = true;
+        }
+        if (!isGameStarted && controllerConnectScreen.gameObject.activeSelf)
+        {
+            if(curPlayerCount == 0){
+                player1Joined.gameObject.SetActive(false);
+                player2Joined.gameObject.SetActive(false);
+            }
+
+            else if(curPlayerCount == 1){
+                player1Joined.gameObject.SetActive(true);
+            }
+            
+            else if(curPlayerCount == 2 && !isCountingDown)
+            {
+                player1Joined.gameObject.SetActive(true);
+                player2Joined.gameObject.SetActive(true);
+
+                StartCoroutine(bufferForControllerScreen(1f));
+            }
+        }
+
+        if (isCountingDown || !isGameStarted) return;
         offensiveTimer1 += Time.deltaTime; // Calulate the time that has passed
         offensiveTimer2 += Time.deltaTime;
+
 
         if (offensiveTimer1 >= offensiveInterval) // If the time that has passed is greater than the interval (1sec) then do the following
         {
@@ -236,6 +356,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.StateChange();
                 DecreaseOffensiveSlider(p1OffensiveBar, ref isOffensiveP1);
             }
             offensiveTimer1 = 0; // Reset the timer
@@ -249,6 +370,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.StateChange();
                 DecreaseOffensiveSlider(p2Offensive, ref isOffensiveP2);
             }
             offensiveTimer2 = 0;
@@ -276,6 +398,19 @@ public class GameManager : MonoBehaviour
             
         }
     }
+    public void hitLagCheck(){
+        if(!isWaiting){
+            Time.timeScale = 0f;
+            StartCoroutine(Wait(hitLagTime));
+        }
+    }
+
+    IEnumerator Wait(float duration){
+        isWaiting = true;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
+        isWaiting = false;
+    }
 
     private void DecreaseOffensiveSlider(Slider offensiveSlider, ref bool isoffensive)
     {
@@ -299,7 +434,7 @@ public class GameManager : MonoBehaviour
         {
             if (isCountingDown) return;
             // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
-            offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncrease, offensiveSlider.maxValue);
+            offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncreaseConstant, offensiveSlider.maxValue);
 
         }
         
@@ -308,11 +443,11 @@ public class GameManager : MonoBehaviour
     //When player 1 hits player 2 subtract 10 from player 2's health and update the slider
     public void Player1HitsPlayer2()
     {
-        if (isCountingDown) return;
+        if (isCountingDown) return; 
 
         //Debug.Log("Player 1 hits Player 2");
 
-        P2Health -= 10;
+        P2Health -= p1AttackDamage;
         opponentHealth.value = P2Health;
         if (!isOffensiveP1)
         {
@@ -340,7 +475,7 @@ public class GameManager : MonoBehaviour
 
         //stops other players movement for knockback
         UpdateStopMovement(2, true, 1);
-        UpdateStopMovementY(2, true, 1);
+        UpdateStopMovementY(2, false, 1);
 
         //if timer is already running the stop it
         if(knockbackCoroutineP1 != null)
@@ -350,6 +485,9 @@ public class GameManager : MonoBehaviour
 
         //start the knockback timer
         knockbackCoroutineP1 = StartCoroutine(KnockbackTimer(2));
+        
+        // hit effect
+        EffectManager.Instance.OnPlayerHit(EffectManager.Instance.p2);
     }
     //When player 2 hits player 1 subtract 10 from player 2's health and update the slider
     public void Player2HitsPlayer1()
@@ -358,7 +496,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Player 2 hits Player 1");
 
-        P1Health -= 10;
+        P1Health -= p2AttackDamage;
         playerHealthBar.value = P1Health; //when p2 hits p1 add an extra boost to the offensive bar
         if (!isOffensiveP2)
         {
@@ -378,7 +516,7 @@ public class GameManager : MonoBehaviour
 
         //stops other players movement for knockback
         UpdateStopMovement(1, true, 1);
-        UpdateStopMovementY(1, true, 1);
+        UpdateStopMovementY(1, false, 1);
 
         if(knockbackCoroutineP2 != null)
         {
@@ -387,6 +525,9 @@ public class GameManager : MonoBehaviour
 
         //start the knockback timer
         knockbackCoroutineP2 = StartCoroutine(KnockbackTimer(1));
+        
+        // hit effect
+        EffectManager.Instance.OnPlayerHit(EffectManager.Instance.p1);
     }
 
     public void Player1Win()
@@ -459,8 +600,8 @@ public class GameManager : MonoBehaviour
 
 
         // Reset player health
-        P1Health = 100;
-        P2Health = 100;
+        P1Health = playerHealthBar.maxValue;
+        P2Health = playerHealthBar.maxValue;
         playerHealthBar.value = P1Health;
         opponentHealth.value = P2Health;
 
@@ -480,6 +621,7 @@ public class GameManager : MonoBehaviour
         player1.transform.position = new Vector2(-4, -3);
         player2.transform.position = new Vector2(4, -3);
 
+
         StartCoroutine(StartRoundCountdown(3));
 
 
@@ -491,30 +633,48 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame() // When restarting the whole game set the win counters to 0
     {
-        // Reset win counters
-        p1WinCounter = 0;
-        p2WinCounter = 0;
 
-        // Hide buttons and winboxes
-        quitButton.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
-        emptyBox1P1.gameObject.SetActive(true);
-        emptyBox2P1.gameObject.SetActive(true);
-        winBox1P1.gameObject.SetActive(false);
-        winBox2P1.gameObject.SetActive(false);
-        emptyBox1P2.gameObject.SetActive(true);
-        emptyBox2P2.gameObject.SetActive(true);
-        winBox1P2.gameObject.SetActive(false);
-        winBox2P2.gameObject.SetActive(false);
+        // countdownText.text = "99";
+        Time.timeScale = 1;
+        // // Reset win counters
+        // p1WinCounter = 0;
+        // p2WinCounter = 0;
+        //
+        // // Hide buttons and winboxes
+        // quitButton.gameObject.SetActive(false);
+        // restartButton.gameObject.SetActive(false);
+        // emptyBox1P1.gameObject.SetActive(true);
+        // emptyBox2P1.gameObject.SetActive(true);
+        // winBox1P1.gameObject.SetActive(false);
+        // winBox2P1.gameObject.SetActive(false);
+        // emptyBox1P2.gameObject.SetActive(true);
+        // emptyBox2P2.gameObject.SetActive(true);
+        // winBox1P2.gameObject.SetActive(false);
+        // winBox2P2.gameObject.SetActive(false);
 
-        // Reset the match
-        StartCoroutine(RestartMatch(2f));
+        // Reset the game
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    private IEnumerator bufferForControllerScreen(float bufferTime){
+        yield return new WaitForSeconds(bufferTime);
+
+        player1Joined.gameObject.SetActive(false);
+        player2Joined.gameObject.SetActive(false);
+        controllerConnectScreen.gameObject.SetActive(false);
+
+        countdownText.gameObject.SetActive(true);
+        StartCoroutine(StartRoundCountdown(3)); // Start the countdown
+    }
+    public void MainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     private IEnumerator StartRoundCountdown(int countdownTime) // Starts the countdown for the round
     {
         
         isCountingDown = true;
+        isGameStarted = false;
         countdownText.gameObject.SetActive(true);
         while (countdownTime > 0)
         {
@@ -522,11 +682,15 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             countdownTime--;
         }
+        disablePlayerInputs = false;
         countdownText.text = "GO!";
         yield return new WaitForSeconds(1f);
         countdownText.gameObject.SetActive(false);
         isCountingDown = false;
-        StartCoroutine(CountdownTimer());
+        if(!isGameStarted){
+            StartCoroutine(CountdownTimer());
+        }
+        isGameStarted = true;
     }
 
     private IEnumerator CountdownTimer()
@@ -582,7 +746,6 @@ public class GameManager : MonoBehaviour
 
         if(player == 1)
         {
-            // Had to disable these they were causing major problems for some reason
             UpdateStopMovement(1, false, 1);
             UpdateStopMovementY(1, false, 1);
         }
@@ -664,5 +827,14 @@ public class GameManager : MonoBehaviour
                 stopP2YMovement = false;
             }
         }
+    }
+
+    public void playerJoined()
+    {
+        curPlayerCount++;
+    }
+    public void playerLeft()
+    {
+        curPlayerCount--;
     }
 }

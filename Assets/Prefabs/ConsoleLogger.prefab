@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logToConsole: 0
-  logWarnings: 1
-  logErrors: 1
+  logWarnings: 0
+  logErrors: 0

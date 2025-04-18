@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         }
         else{
             _instance = this;
-            DontDestroyOnLoad(this); 
+            //DontDestroyOnLoad(this); 
         }
         
     }
@@ -51,15 +51,16 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
+   
     //to be called in one of the player's scripts when their aggro state changes
     public void StateChange()
     {
-        if(GameManager.Instance.p1Aggro && GameManager.Instance.P2Aggro)
+        if(GameManager.Instance.isOffensiveP1 && GameManager.Instance.isOffensiveP2)
         {
             //both players aggro music
             newClip = bothAggroClip;
         }
-        else if (GameManager.Instance.p1Aggro || GameManager.Instance.P2Aggro)
+        else if (GameManager.Instance.isOffensiveP1 || GameManager.Instance.isOffensiveP2)
         {
             //one player aggro music
             newClip = oneAggroClip;

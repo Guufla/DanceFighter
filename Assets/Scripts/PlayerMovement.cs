@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float jumpStrength = 4f;
 
+    
+    [SerializeField]float dashStrength = 0f;
+
+    [SerializeField]float dashTimeVariable = 0f;
+
     Rigidbody2D playerRigidbody;
 
     Boolean groundCheck;
@@ -20,6 +25,16 @@ public class PlayerMovement : MonoBehaviour
     Boolean stopMovement;
 
     Boolean stopYMovement;
+
+    public Boolean dashOption;
+
+    public Boolean isDashing;
+
+    public Boolean isDashContinued;
+
+    Boolean dashBufferIndicator;
+
+    Boolean disablePlayerInput;
 
     float setGravityScale;
     
@@ -48,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator = playerSprite.GetComponent<Animator>();
         playerDirections = GetComponent<PlayerDirections>();
         playerAttack = GetComponent<PlayerAttack>();
+        dashOption = true;
+        dashBufferIndicator = false;
+        disablePlayerInput = false;
+        isDashContinued = false;
     }
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -71,9 +90,10 @@ public class PlayerMovement : MonoBehaviour
     {
         getGroundCheck();
         getMovementInfo();
+        airDashCheck();
         isHit();
         handleJumping();
-        if(stopMovement == false){
+        if(stopMovement == false && isDashing == false && disablePlayerInput == false){
             movement();
         }
         if(stopYMovement){
@@ -85,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
     void getMovementInfo(){
+        disablePlayerInput = GameManager.Instance.disablePlayerInputs;
+
         if(transform.tag == "Player1"){
             stopMovement = GameManager.Instance.stopP1Movement;
             stopYMovement = GameManager.Instance.stopP1YMovement;
@@ -106,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         if(groundCheck){ //gets the initial and highest y position of the player every time the player is on the ground
             initialYPos = transform.position.y;
             highestYPos = transform.position.y;
+            dashOption = true;
         }
     }
     
@@ -120,23 +143,23 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void handleJumping()
-{
-    // Check if the player is on the ground or performing an air attack
-    if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
     {
-        playerAnimator.SetBool("isJumping", false);
-        // Debug.Log(playerAttack.isAirAttacking);
-    }
-    else
-    {
-        // Check if the player is in the air and not performing an air attack
-        if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+        // Check if the player is on the ground or performing an air attack
+        if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
         {
-            highestYPos = transform.position.y;
-            playerAnimator.SetBool("isJumping", true);
+            playerAnimator.SetBool("isJumping", false);
+            // Debug.Log(playerAttack.isAirAttacking);
+        }
+        else
+        {
+            // Check if the player is in the air and not performing an air attack
+            if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+            {
+                highestYPos = transform.position.y;
+                playerAnimator.SetBool("isJumping", true);
+            }
         }
     }
-}
 
     void movement(){
         // VERY IMPORTANT
@@ -154,7 +177,12 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetLayerWeight(1, 1f);
         }
         
+        //velocity calculations
         Vector2 playerVelocity = new Vector2(moveInput.x * movementSpeed,playerRigidbody.velocity.y); // Only takes in the horizontal movement input
+        if((gameObject.CompareTag("Player1") && GameManager.Instance.isOffensiveP1) || (gameObject.CompareTag("Player2") && GameManager.Instance.isOffensiveP2))
+        {
+            playerVelocity.x *= 1.5f;
+        }
         playerRigidbody.velocity = playerVelocity; // The velocity of the rigid body is the players movement
         
         if(playerDirections.isFacingRight){
@@ -179,9 +207,47 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && groundCheck)
+        if (context.performed && groundCheck && !disablePlayerInput)
         {
             playerRigidbody.velocity += new Vector2(0f, jumpStrength); // Code to jump on pressing space
         }
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed && dashOption && !isDashing && !disablePlayerInput && !isDashContinued)
+        {
+            //Debug.Log("Dash performed");
+            dashBufferIndicator = false;
+            isDashing = true;
+            StartCoroutine(dashBuffer());
+            playerRigidbody.AddForce(new Vector2(moveInput.x * dashStrength ,0f), ForceMode2D.Impulse);
+            StartCoroutine(dashTime());
+            dashOption = false;
+        }
+    }
+
+    public void airDashCheck(){
+        if(isDashContinued && groundCheck)
+        {
+            isDashing = false;
+            isDashContinued = false;
+        }
+    }
+    IEnumerator dashTime(){
+        yield return new WaitForSeconds(dashTimeVariable);
+        if(groundCheck)
+        {
+            isDashing = false;
+        }
+        else
+        {
+            isDashContinued = true;
+        }
+    }
+    IEnumerator dashBuffer(){
+        dashBufferIndicator = false;
+        yield return new WaitForSeconds(0.3f);
+        dashBufferIndicator = true;
     }
 }

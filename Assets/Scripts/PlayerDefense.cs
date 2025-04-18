@@ -8,7 +8,7 @@ enum DefenseState: int { none,block, parry, guardBreak }
 
 public class PlayerDefense : MonoBehaviour
 {
-    CapsuleCollider2D playerCollider;
+    BoxCollider2D playerCollider;
     GameObject player;
     
     [SerializeField] private GameObject playerSprite;
@@ -24,7 +24,7 @@ public class PlayerDefense : MonoBehaviour
 
     [Header("Block/Parry")]
     private float blockDamageReduction = 0.3f;
-    private float parryTimeWindow = 0.5f;
+    private float parryTimeWindow = 0.35f;
     
     [Header("Guard Meter System")]
     private float maxGuardMeter = 100f;
@@ -41,7 +41,7 @@ public class PlayerDefense : MonoBehaviour
         Transform playerColliderTransform = transform.Find("PlayerCollider"); // Replace "PlayerCollider" with the actual name of the child
         if (playerColliderTransform != null)
         {
-            playerCollider = playerColliderTransform.GetComponent<CapsuleCollider2D>();
+            playerCollider = playerColliderTransform.GetComponent<BoxCollider2D>();
         }
     
         /*
@@ -172,7 +172,19 @@ public class PlayerDefense : MonoBehaviour
     
     private void Update()
     {
-        
+        gameManagerUpdate();
+    }
+
+    public void gameManagerUpdate(){
+        if(transform.tag == "Player1")
+        {
+            GameManager.Instance.p1IsBlocking = playerAnimator.GetBool("isBlocking");
+            GameManager.Instance.p1IsParrying = playerAnimator.GetBool("isParrying");
+        }
+        else{
+            GameManager.Instance.p2IsBlocking = playerAnimator.GetBool("isBlocking");
+            GameManager.Instance.p2IsParrying = playerAnimator.GetBool("isParrying");
+        }
     }
     
     public void TakeDamage(float damage, Collider2D attackCollider, Collider2D attackBoxCollider, bool isBlocking, bool isParrying)
@@ -184,6 +196,7 @@ public class PlayerDefense : MonoBehaviour
             
             if(isBlocking == false && isParrying == true){
                 Debug.Log("Parried");
+                StartCoroutine(ParryPause());
                 playerAnimator.SetBool("ParryingWhenAttacked", false);
                 CancelBlock();
                 return;
@@ -249,6 +262,13 @@ public class PlayerDefense : MonoBehaviour
                 
                 yield return null;
             }
+        }
+
+
+        IEnumerator ParryPause(){
+            Time.timeScale = 0f;
+            yield return new WaitForSeconds(0.5f);
+            Time.timeScale = 1f;
         }
     }
 }
