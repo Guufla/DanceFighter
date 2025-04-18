@@ -67,7 +67,6 @@ public class BarManager : MonoBehaviour
         {
             float d = pastFills.Dequeue();
             target.SetFloat(fillID, d);
-            Debug.Log("Dequeuing " + d);
         }
         timeElapsed += Time.deltaTime;
     }

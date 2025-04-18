@@ -312,7 +312,7 @@ MonoBehaviour:
   perObjectOffset: 0
   lookAtPivot: 0
   lineDirFromPivot: {fileID: 5996940793579674210}
-  defaultScale: {x: 0.5, y: 4.8, z: 1}
+  defaultScale: {x: 0.55, y: 4.8, z: 1}
   scaledAxes: {x: 0, y: 5, z: 0}
   isNormalized: 1
   color0: {r: 0.3372549, g: 0.043137256, b: 0.6784314, a: 0.88235295}
@@ -623,7 +623,7 @@ MonoBehaviour:
   perObjectOffset: 0
   lookAtPivot: 0
   lineDirFromPivot: {fileID: 4467955600063329311}
-  defaultScale: {x: 0.3, y: 4.84, z: 1}
+  defaultScale: {x: 0.35, y: 4.84, z: 1}
   scaledAxes: {x: 0, y: 4.59, z: 0}
   isNormalized: 1
   color0: {r: 0.2627451, g: 0.38039216, b: 0.93333334, a: 0.88235295}
@@ -739,7 +739,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.101960786, g: 0.101960786, b: 0.18039216, a: 1}
   m_FlipX: 0

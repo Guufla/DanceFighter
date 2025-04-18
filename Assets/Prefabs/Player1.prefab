@@ -267,7 +267,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -868371131, guid: 41a4cb623fdc50946a53117f7d3c485b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -981,22 +981,22 @@ MonoBehaviour:
   comboBufferTime: 0
   isComboBuffered: 0
   playerIndex: 0
-  LA1KnockbackX: 2
+  LA1KnockbackX: 1
   LA1KnockbackY: 0
   LA1DashX: 4
   LA1DashY: 0
   LA1Damage: 20
   LA1StopMovingAll: 1
-  LA1StopMovingY: 1
-  LA2KnockbackX: 2
+  LA1StopMovingY: 0
+  LA2KnockbackX: 1
   LA2KnockbackY: 0
   LA2DashX: 4
   LA2DashY: 0
   LA2Damage: 20
   LA2StopMovingAll: 1
   LA2StopMovingY: 1
-  LA3KnockbackX: 1.5
-  LA3KnockbackY: 4
+  LA3KnockbackX: 0.5
+  LA3KnockbackY: 2
   LA3DashX: 5
   LA3DashY: 0
   LA3Damage: 45

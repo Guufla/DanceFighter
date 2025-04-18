@@ -14,8 +14,7 @@ public class Pause : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        restartGamePause.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(false);
+        ToggleButtons(false);
     }
 
     public int GetPlayerIndex()
@@ -36,12 +35,19 @@ public class Pause : MonoBehaviour
             Time.timeScale = 0;
             restartGamePause.gameObject.SetActive(true);
             mainMenu.gameObject.SetActive(true);
-
+            ToggleButtons(true);
         }
         else
         {
             Time.timeScale = 1;
+            ToggleButtons(false);
         }
 
+    }
+
+    private void ToggleButtons(bool on)
+    {
+        restartGamePause.gameObject.SetActive(on);
+        mainMenu.gameObject.SetActive(on);
     }
 }

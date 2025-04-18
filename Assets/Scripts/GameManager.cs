@@ -623,27 +623,25 @@ public class GameManager : MonoBehaviour
     public void RestartGame() // When restarting the whole game set the win counters to 0
     {
 
-        countdownText.text = "99";
+        // countdownText.text = "99";
         Time.timeScale = 1;
-        // Reset win counters
-        p1WinCounter = 0;
-        p2WinCounter = 0;
+        // // Reset win counters
+        // p1WinCounter = 0;
+        // p2WinCounter = 0;
+        //
+        // // Hide buttons and winboxes
+        // quitButton.gameObject.SetActive(false);
+        // restartButton.gameObject.SetActive(false);
+        // emptyBox1P1.gameObject.SetActive(true);
+        // emptyBox2P1.gameObject.SetActive(true);
+        // winBox1P1.gameObject.SetActive(false);
+        // winBox2P1.gameObject.SetActive(false);
+        // emptyBox1P2.gameObject.SetActive(true);
+        // emptyBox2P2.gameObject.SetActive(true);
+        // winBox1P2.gameObject.SetActive(false);
+        // winBox2P2.gameObject.SetActive(false);
 
-        // Hide buttons and winboxes
-        quitButton.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
-        emptyBox1P1.gameObject.SetActive(true);
-        emptyBox2P1.gameObject.SetActive(true);
-        winBox1P1.gameObject.SetActive(false);
-        winBox2P1.gameObject.SetActive(false);
-        emptyBox1P2.gameObject.SetActive(true);
-        emptyBox2P2.gameObject.SetActive(true);
-        winBox1P2.gameObject.SetActive(false);
-        winBox2P2.gameObject.SetActive(false);
-
-        // Reset the match
-        //Scene currentScene = SceneManager.GetActiveScene();
-        //SceneManager.LoadScene(currentScene.name);
+        // Reset the game
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private IEnumerator bufferForControllerScreen(float bufferTime){
