@@ -5,19 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/Crowd.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Res/Shaders/Crowd.shader.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Stage/Crowd.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Stage/Crowd.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Stages/stage3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Stages/stage3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneEnvironment.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneEnvironment.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left_Back.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Left_Back.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Polish.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Polish.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/HSVModifier.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/HSVModifier.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Player/HitEffectP2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HSVModifier.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Shaders/HealthBar.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HeatDistortion.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Res/Shaders/HeatDistortion.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Polish.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Polish.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BarManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BarManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/EffectManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EffectManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/ConsoleLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/ConsoleLogger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StretchUIToCam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StretchUIToCam.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +46,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.10.3/Runtime/Behaviours/CinemachineVirtualCamera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.10.3/Runtime/PostProcessing/CinemachineVolumeSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.11.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@14.0.11/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50e5acd061cd4a73b7fc8eecbf07e915176600/f1/c6585a9d/Transform.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -147,7 +163,7 @@
       <workItem from="1744861843298" duration="6495000" />
       <workItem from="1744908782547" duration="1988000" />
       <workItem from="1744931412896" duration="1720000" />
-      <workItem from="1744947438576" duration="4095000" />
+      <workItem from="1744947438576" duration="10380000" />
     </task>
     <servers />
   </component>

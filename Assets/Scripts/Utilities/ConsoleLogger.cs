@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Essentially its Debug.Log, but it's easy to turn on and off any logs we want to
 /// </summary>
-public class ConsoleLogger : PersistentStaticInstance<ConsoleLogger>
+public class ConsoleLogger : StaticInstance<ConsoleLogger>
 {
     [SerializeField] private bool logToConsole = true;
     [SerializeField] private bool logWarnings = true;
