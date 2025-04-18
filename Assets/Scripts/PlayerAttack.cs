@@ -314,14 +314,14 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update(){
-        gameManagerUpdate(); // Used to check if the player is on the ground
-        updateMovement(); // Update function for stopping the player from moving
-
-    }
-    private void FixedUpdate() {
-        attackColliderUpdate(); // Update function for the attack collider
+	// Update is called once per frame
+	private void Update()
+	{
+		gameManagerUpdate();
+		updateMovement();
+	}
+	private void FixedUpdate() {
+        attackColliderUpdate();
         updateAirCombo(); // Used for reseting the aircombo when the player hits the ground
         attacks(); // Update function for the attack system
         resetTimerCheck(); // Update function for resetting the combo timer
@@ -329,9 +329,6 @@ public class PlayerAttack : MonoBehaviour
     public int GetPlayerIndex(){
         return playerIndex;
     }
-
-
-    
 
     void attackColliderUpdate(){
 
@@ -449,7 +446,7 @@ public class PlayerAttack : MonoBehaviour
                 else
                 {
                     // In the air
-                    stopMovement(AUTStopMovingAll, AUTStopMovingY); // Dont stop movement for this
+                    //stopMovement(AUTStopMovingAll, AUTStopMovingY); // Dont stop movement for this
                     hitboxAnimation(4,"AirUpTilt","airUpTilt", true, AUTKnockbackX,AUTKnockbackY,AUTDashX,AUTDashY,AUTDamage);
                     
                 }
@@ -458,7 +455,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 // On the ground
-                stopMovement(UTStopMovingAll, UTStopMovingY); // Stops movement for this
+                //stopMovement(UTStopMovingAll, UTStopMovingY); // Stops movement for this
                 hitboxAnimation(4,"UpTilt","UpTilt", false, UTKnockbackX,UTKnockbackY,UTDashX,UTDashY,UTDamage);
             }
 

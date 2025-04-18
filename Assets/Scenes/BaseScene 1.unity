@@ -1985,6 +1985,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 260958066803666840, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 1868806421}
     - target: {fileID: 1577864448065103500, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -2049,8 +2053,11 @@ PrefabInstance:
       propertyPath: MA5KnockbackY
       value: 0.2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2824378039001655556, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+    - target: {fileID: 2796821515011988314, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+      propertyPath: attackAnimator
+      value: 
+      objectReference: {fileID: 1868806421}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2194,6 +2201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb39b0260f4cba54aa0a57411e2fb31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInMenu: 0
   distance: 0
   maxPlayerDistance: 12
   cameraAdditionAdjustment: 2
@@ -2349,6 +2357,10 @@ PrefabInstance:
       propertyPath: MA5KnockbackY
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 196041515240170557, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: attackAnimator
+      value: 
+      objectReference: {fileID: 302480131}
     - target: {fileID: 4077496784279841329, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.83
@@ -2397,8 +2409,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470193853014631330, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
+      propertyPath: m_Size.y
+      value: 1.09
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    - {fileID: 6552966351884939138, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2412,6 +2431,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4077496784279841329, guid: 9dbab3d3639dac2488b2a78c3521a52a, type: 3}
   m_PrefabInstance: {fileID: 1864030134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1868806421 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1047962708162707738, guid: 54ec9d3a5364f894b9381e0f055088f7, type: 3}
+  m_PrefabInstance: {fileID: 1572297684}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &1918025570 stripped
 RectTransform:
