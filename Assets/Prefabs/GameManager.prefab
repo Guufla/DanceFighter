@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6cb8ac9bdc8f24cb1997679b78bdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitLagTime: 0.1
-  dashStrength: 6
+  hitLagTime: 0.15
   isWaiting: 0
   curPlayerCount: 0
   lockGameTillEnoughPlayers: 0
@@ -61,12 +60,15 @@ MonoBehaviour:
   playerHealthBar: {fileID: 0}
   P1Health: 1000
   p1OffensiveBar: {fileID: 0}
+  isP1Attacking: 0
   player1IsOnGround: 0
   p1Aggro: 0
   isP1Hitstun: 0
   p1HitstunSetTime: 0
   p1HitstunTime: 0
   p1AttackDamage: 0
+  p1IsBlocking: 0
+  p1IsParrying: 0
   player2: {fileID: 0}
   P2AttackKnockBackX: 0
   P2AttackKnockBackY: 0
@@ -74,6 +76,7 @@ MonoBehaviour:
   stopP2YMovement: 0
   canInputP2: 0
   isHitBoxAnimatingP2: 0
+  isP2Attacking: 0
   P2Aggro: 0
   opponentHealth: {fileID: 0}
   P2Health: 1000
@@ -83,6 +86,8 @@ MonoBehaviour:
   p2HitstunSetTime: 0
   p2HitstunTime: 0
   p2AttackDamage: 0
+  p2IsBlocking: 0
+  p2IsParrying: 0
   maxOffensiveBarValue: 1000
   offensiveIncrease: 50
   offensiveDecrease: 50
