@@ -315,22 +315,17 @@ public class PlayerAttack : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        attackColliderUpdate(); // Update function for the attack collider
+    void Update(){
         gameManagerUpdate(); // Used to check if the player is on the ground
+        updateMovement(); // Update function for stopping the player from moving
+
+    }
+    private void FixedUpdate() {
+        attackColliderUpdate(); // Update function for the attack collider
         updateAirCombo(); // Used for reseting the aircombo when the player hits the ground
         attacks(); // Update function for the attack system
-        //resetTimerCheck(); // Update function for resetting the combo timer
-        updateMovement(); // If the player is to have their movement stopped it is sent to here
-
-        
-
-    }
-    
-    private void FixedUpdate() {
-        resetTimerCheck();
-    }
+        resetTimerCheck(); // Update function for resetting the combo timer
+        }
     public int GetPlayerIndex(){
         return playerIndex;
     }

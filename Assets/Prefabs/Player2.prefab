@@ -520,7 +520,6 @@ GameObject:
   - component: {fileID: 2958579564826557497}
   - component: {fileID: 1047962708162707738}
   - component: {fileID: 4236413224688106963}
-  - component: {fileID: 2824378039001655556}
   - component: {fileID: 6400969416245362922}
   m_Layer: 7
   m_Name: Sprite
