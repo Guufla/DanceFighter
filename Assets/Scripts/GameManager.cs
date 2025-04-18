@@ -123,7 +123,9 @@ public class GameManager : MonoBehaviour
 
     private float offensiveInterval = 1f;//every 1 second increase it by amount
 
-    public int offensiveIncrease = 5; //amount to increase by
+    public int offensiveIncreaseConstant = 10; //amount to increase by
+    
+    public int offensiveIncrease = 100; //amount to increase by
 
     public int offensiveDecrease = 50; //amount to decrease every second by when in offensive mode
 
@@ -423,7 +425,7 @@ public class GameManager : MonoBehaviour
         {
             if (isCountingDown) return;
             // when one second passes use this function to add 50 to the bar value but dont go over the max value which is 1000
-            offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncrease, offensiveSlider.maxValue);
+            offensiveSlider.value = Mathf.Min(offensiveSlider.value + offensiveIncreaseConstant, offensiveSlider.maxValue);
 
         }
         
