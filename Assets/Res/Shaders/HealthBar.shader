@@ -3,7 +3,8 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _color1 ("Color1", Color) = (1, 1, 1, 1)
+        [HDR] _color1 ("Color1", Color) = (1, 1, 1, 1)
+        [HDR] _color2 ("Color2", Color) = (1, 1, 1, 1)
         _fill ("Fill Value", Float) = 1 // 0 <> 1
         _angle ("Angle", Float) = -11.21
         _val1 ("Val1", Float) = 1
@@ -34,8 +35,9 @@
             #define TAU 6.28318530718
             
             sampler2D _MainTex;
-            float4 _color1;
             float4 _MainTex_ST;
+            float4 _color1;
+            float4 _color2;
             float _angle;
             float _fill;
             float _val1;
@@ -77,8 +79,11 @@
                 
                 float offset = sawtooth_wave( i.uv.y * TAU * _val2, 1, 1) * 0.01;
                 float t = sawtooth_wave( (i.uv.x + offset - _Time.y * _timescale) * TAU * _val1, 1, 1) * 0.5 + 0.5;
-                float4 c = flagx * lerp(samp, samp.a*float4(0, 0, 0, 1), t*1.5);
-                return c * _color1;
+
+                float4 c1 = lerp(samp, samp.a*float4(0, 0, 0, 1), t*1.5) * _color1;
+                float4 c2 = samp.a*_color2;
+                float4 c = flagx * c1 + (1-flagx) * c2;
+                return c;
             }
             ENDCG
         }

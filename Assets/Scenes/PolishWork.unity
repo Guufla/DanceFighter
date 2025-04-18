@@ -220,42 +220,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1738727744750271038, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
-    - target: {fileID: 1738727744750271038, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888697911615577928, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3399736599954702667, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
       propertyPath: m_Name
       value: CameraAndRendering
@@ -307,30 +271,6 @@ PrefabInstance:
     - target: {fileID: 6117767006680136454, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6140871429345428128, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
-    - target: {fileID: 6140871429345428128, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 7471348169374143623, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8228675091692725029, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8102531266761194395, guid: f5411791dd2a15b47a08a1e18536a4b9, type: 3}
-    - target: {fileID: 8228675091692725029, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377781574499723630, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
-      propertyPath: m_text
-      value: Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8673183870769298698, guid: 631399c53f3170046adf47a555e7bf47, type: 3}
       propertyPath: m_AnchorMax.x
