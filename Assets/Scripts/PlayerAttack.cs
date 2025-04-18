@@ -272,6 +272,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] bool A4StopMovingAll;
     [SerializeField] bool A4StopMovingY;
 
+    bool checkCanAttackBroke;
+
 
     // Start is called before the first frame update
     void Start()
@@ -311,6 +313,8 @@ public class PlayerAttack : MonoBehaviour
         playerRigidbody = transform.GetComponent<Rigidbody2D>();
 
         hitboxAnimationMethods = playerSprite.GetComponent<HitboxAnimationMethods>();
+
+        checkCanAttackBroke = false;
     }
 
 

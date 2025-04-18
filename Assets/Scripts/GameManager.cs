@@ -469,7 +469,7 @@ public class GameManager : MonoBehaviour
         if (isOffensiveP2)
         {
             //if player 2 if in offensive mode and you hit them decrease the offensive bar by 50 but dont go below 0
-            p2Offensive.value = Mathf.Max(p2Offensive.value - offensiveIncrease, 0);
+            //p2Offensive.value = Mathf.Max(p2Offensive.value - offensiveIncrease, 0);
 
         }
 
@@ -511,7 +511,7 @@ public class GameManager : MonoBehaviour
         }
         if (isOffensiveP1)
         {
-            p1OffensiveBar.value = Mathf.Max(p1OffensiveBar.value - offensiveIncrease, 0);
+            //p1OffensiveBar.value = Mathf.Max(p1OffensiveBar.value - offensiveIncrease, 0);
         }
 
         //stops other players movement for knockback
