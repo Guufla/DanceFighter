@@ -82,6 +82,8 @@ public class PlayerAttack : MonoBehaviour
 
     Boolean isParrying;
 
+    bool disableThisPlayerInput; // Boolean for when the combo reset timer is activated
+
 
     [Header("Light attack variables (3 hit combo)")]
 
@@ -355,12 +357,16 @@ public class PlayerAttack : MonoBehaviour
             isBlocking = GameManager.Instance.p1IsBlocking;
             isParrying = GameManager.Instance.p1IsParrying;
             GameManager.Instance.isP1Attacking = isAttacking;
+
+            disableThisPlayerInput = GameManager.Instance.p1InputDisabled;
         }
         else{
             isOnGround = GameManager.Instance.player2IsOnGround;
             isBlocking = GameManager.Instance.p2IsBlocking;
             isParrying = GameManager.Instance.p2IsParrying;
             GameManager.Instance.isP2Attacking = isAttacking;
+
+            disableThisPlayerInput = GameManager.Instance.p2InputDisabled;
         }
     }
 
@@ -1022,7 +1028,7 @@ void resetTimerCheck()
     public void AttackE(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput && !isBlocking && !isParrying)
+        if(context.started && !disablePlayerInput  && !disableThisPlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1061,7 +1067,7 @@ void resetTimerCheck()
     public void AttackR(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput && !isBlocking && !isParrying)
+        if(context.started && !disablePlayerInput  && !disableThisPlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1101,7 +1107,7 @@ void resetTimerCheck()
     public void AttackF(CallbackContext context)
     {
         //if(isComboBuffered) return;
-        if(context.started && !disablePlayerInput && !isBlocking && !isParrying)
+        if(context.started && !disablePlayerInput && !disableThisPlayerInput && !isBlocking && !isParrying)
         {
             // When holding up you perform an uptilt
             if(canInput && holdingUp){
@@ -1135,7 +1141,7 @@ void resetTimerCheck()
     public void UpPressed(CallbackContext context){
 
         // If the input isnt 0 then the player is holding Up
-        if (context.started && !disablePlayerInput)
+        if (context.started && !disablePlayerInput && !disableThisPlayerInput)
         {
             // Debug.Log("UP");
             holdingUp = true;
@@ -1149,7 +1155,7 @@ void resetTimerCheck()
 
     public void DownPressed(CallbackContext context){
         // If the input isnt 0 then the player is holding Down
-        if (context.started && !disablePlayerInput)
+        if (context.started && !disablePlayerInput  && !disableThisPlayerInput)
         {
             //Debug.Log("DOWN");
             holdingDown = true;
