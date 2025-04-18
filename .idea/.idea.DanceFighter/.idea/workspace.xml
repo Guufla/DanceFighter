@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1393d2-9de0-472d-93fd-4cfc7993f774" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DanceFighter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/AudioManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/AudioManager.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneEnvironment.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BaseSceneEnvironment.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CameraAndRendering.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GameManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GameManager.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/HealthBar_Right_Back.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/OffenseBar_Left.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Res/Materials/Bars/Offense_Bar_Right.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BaseScene 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BaseScene 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pause.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pause.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pause.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pause.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerInputHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
