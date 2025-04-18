@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 [Serializable]
@@ -21,9 +22,18 @@ public class EffectManager : PersistentSingleton<EffectManager>
     
     [Space(20)]
     [SerializeField] private Shader targetShader;
+    [SerializeField] private CinemachineVirtualCamera vcam;
+    
+    [SerializeField] private float shakeAmplitude;
+    [SerializeField] private float shakeFrequency;
+    [SerializeField] private float shakeFalloffSpeed;
+    [SerializeField] private float shakeRampupSpeed;
 
+    private CinemachineBasicMultiChannelPerlin noise;
     private int inputVectorID;
     private int inputScale01ID;
+    private Queue<float> deltaShakeQueue = new Queue<float>();
+    private float ampToFreqRatio;
 
     private void Start()
     {
@@ -53,6 +63,9 @@ public class EffectManager : PersistentSingleton<EffectManager>
                 new Vector4(p2.EnemyTransform.position.x, p2.EnemyTransform.position.y, p2.EnemyTransform.position.z,
                     0));
         }
+
+        ampToFreqRatio = shakeAmplitude / shakeFrequency;
+        ShakeHandler();
     }
 
     public void OnPlayerHit(PlayerEffect player)
@@ -65,6 +78,55 @@ public class EffectManager : PersistentSingleton<EffectManager>
             player.shaderEffectCoroutine = null;
             player.UpdateInputVector = false;
         }));
+
+        StartCoroutine(EnqueueShakeDeltas(shakeFrequency / 2));
+    }
+
+    private void ShakeHandler()
+    {
+        if (deltaShakeQueue.Count > 0)
+        {
+            float delta = deltaShakeQueue.Dequeue();
+            
+            if (noise.m_AmplitudeGain < shakeAmplitude)
+                noise.m_AmplitudeGain += delta * ampToFreqRatio;
+            
+            if (noise.m_FrequencyGain < shakeFrequency)
+                noise.m_FrequencyGain += delta;
+        }
+        
+        if (noise.m_AmplitudeGain > 0)
+        {
+            //Debug.Log("1: " + Time.deltaTime * shakeFalloffSpeed);
+            noise.m_AmplitudeGain -= Time.deltaTime * ampToFreqRatio * shakeFalloffSpeed;
+        }
+        else
+        {
+            noise.m_AmplitudeGain = 0;
+        }
+        
+        if (noise.m_FrequencyGain > 0)
+        {
+            //Debug.Log("2: " + Time.deltaTime * shakeFalloffSpeed * ampToFreqRatio);
+            noise.m_FrequencyGain -= Time.deltaTime * shakeFalloffSpeed;
+        }
+        else
+        {
+            noise.m_FrequencyGain = 0;
+        }
+        //Debug.Log("amp = " + noise.m_AmplitudeGain + ", freq = " + noise.m_FrequencyGain);
+    }
+
+    private IEnumerator EnqueueShakeDeltas(float total)
+    {
+        float elapsedVal = 0;
+        while (elapsedVal < total)
+        {
+            float delta = Mathf.Abs(Time.deltaTime * shakeRampupSpeed);
+            elapsedVal += delta;
+            deltaShakeQueue.Enqueue(delta);
+            yield return null;
+        }
     }
 
 
@@ -72,6 +134,7 @@ public class EffectManager : PersistentSingleton<EffectManager>
     {
         p1.Material.SetFloat(inputScale01ID, 0);
         p2.Material.SetFloat(inputScale01ID, 0);
+        noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     private IEnumerator ShaderEffectRoutine(PlayerEffect player, Action onFinish)
