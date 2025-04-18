@@ -272,6 +272,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] bool A4StopMovingAll;
     [SerializeField] bool A4StopMovingY;
 
+    bool checkCanAttackBroke;
+
 
     // Start is called before the first frame update
     void Start()
@@ -311,11 +313,13 @@ public class PlayerAttack : MonoBehaviour
         playerRigidbody = transform.GetComponent<Rigidbody2D>();
 
         hitboxAnimationMethods = playerSprite.GetComponent<HitboxAnimationMethods>();
+
+        checkCanAttackBroke = false;
     }
 
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	 void Update()
     {
         attackColliderUpdate(); // Update function for the attack collider
         gameManagerUpdate(); // Used to check if the player is on the ground
@@ -323,9 +327,6 @@ public class PlayerAttack : MonoBehaviour
         attacks(); // Update function for the attack system
         //resetTimerCheck(); // Update function for resetting the combo timer
         updateMovement(); // If the player is to have their movement stopped it is sent to here
-
-        
-
     }
     
     private void FixedUpdate() {
@@ -334,9 +335,6 @@ public class PlayerAttack : MonoBehaviour
     public int GetPlayerIndex(){
         return playerIndex;
     }
-
-
-    
 
     void attackColliderUpdate(){
 
@@ -454,7 +452,7 @@ public class PlayerAttack : MonoBehaviour
                 else
                 {
                     // In the air
-                    stopMovement(AUTStopMovingAll, AUTStopMovingY); // Dont stop movement for this
+                    //stopMovement(AUTStopMovingAll, AUTStopMovingY); // Dont stop movement for this
                     hitboxAnimation(4,"AirUpTilt","airUpTilt", true, AUTKnockbackX,AUTKnockbackY,AUTDashX,AUTDashY,AUTDamage);
                     
                 }
@@ -463,7 +461,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 // On the ground
-                stopMovement(UTStopMovingAll, UTStopMovingY); // Stops movement for this
+                //stopMovement(UTStopMovingAll, UTStopMovingY); // Stops movement for this
                 hitboxAnimation(4,"UpTilt","UpTilt", false, UTKnockbackX,UTKnockbackY,UTDashX,UTDashY,UTDamage);
             }
 

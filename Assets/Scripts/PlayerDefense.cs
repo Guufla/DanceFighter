@@ -8,7 +8,7 @@ enum DefenseState: int { none,block, parry, guardBreak }
 
 public class PlayerDefense : MonoBehaviour
 {
-    BoxCollider2D playerCollider;
+    CapsuleCollider2D playerCollider;
     GameObject player;
     
     [SerializeField] private GameObject playerSprite;
@@ -17,9 +17,7 @@ public class PlayerDefense : MonoBehaviour
     CapsuleCollider2D attackBoxCollider;
     
     public Vector3 blockCOlliderSizeMultiplier = new Vector3(1.5f, 1.5f, 1.3f); 
-    private Vector3 originalColliderSize;
-    Input inputActions; 
-    
+    private Vector3 originalColliderSize;    
     DefenseState defenseType;
 
     [Header("Block/Parry")]
@@ -29,10 +27,9 @@ public class PlayerDefense : MonoBehaviour
     [Header("Guard Meter System")]
     private float maxGuardMeter = 100f;
     private float guardMeter;
-    private float guardRegenRate = 20f;   
-
+    private float guardRegenRate = 20f;    
+    
     [SerializeField] private int playerIndex = 0;
-
     private void Awake()
     {
         playerAnimator = playerSprite.GetComponent<Animator>();
@@ -41,7 +38,7 @@ public class PlayerDefense : MonoBehaviour
         Transform playerColliderTransform = transform.Find("PlayerCollider"); // Replace "PlayerCollider" with the actual name of the child
         if (playerColliderTransform != null)
         {
-            playerCollider = playerColliderTransform.GetComponent<BoxCollider2D>();
+            playerCollider = playerColliderTransform.GetComponent<CapsuleCollider2D>();
         }
     
         /*
@@ -51,34 +48,12 @@ public class PlayerDefense : MonoBehaviour
             attackBoxCollider = attackBoxColliderTransform.GetComponentInChildren<CapsuleCollider2D>();
         }
         */
-        inputActions = new Input();
         guardMeter = maxGuardMeter;
         
         if(playerCollider != null)
         {
             originalColliderSize = playerCollider.transform.localScale;
         }
-    }
-
-    public int GetPlayerIndex()
-    {
-        return playerIndex;
-    }
-    
-    private void OnEnable() 
-    {
-        inputActions.Player.Block.started += OnBlockStarted;
-        inputActions.Player.Block.performed += OnBlockPerformed;
-        inputActions.Player.Block.canceled += OnBlockCanceled;
-        
-        inputActions.Player.Parry.performed += OnParryPerformed;
-    
-        inputActions.Enable();    
-    }
-    
-    private void OnDisable()
-    {
-        inputActions.Disable();
     }
     
     void getPlayerBlocking()
@@ -93,6 +68,11 @@ public class PlayerDefense : MonoBehaviour
         }
     }
     
+    public int GetPlayerIndex()
+    {
+        return playerIndex;
+    }
+    
     public void OnBlockStarted(InputAction.CallbackContext context)
     {
         
@@ -100,7 +80,7 @@ public class PlayerDefense : MonoBehaviour
         {
             if (context.interaction is HoldInteraction)
             {
-                //playerAnimator.SetBool("isBlocking", true);
+                playerAnimator.SetBool("isBlocking", true);
                 defenseType = DefenseState.block;
                 Debug.Log("Block Started");
                 //playerAnimator.SetBool("isBlocking", true);
@@ -152,7 +132,7 @@ public class PlayerDefense : MonoBehaviour
         {
             if(context.duration <= parryTimeWindow)
             {
-                playerAnimator.SetBool("isBlocking", false);
+                //playerAnimator.SetBool("isBlocking", false);
                 playerAnimator.SetBool("isParrying", true);
                 defenseType = DefenseState.parry;
                 Debug.Log("Parry Performed");
@@ -164,27 +144,18 @@ public class PlayerDefense : MonoBehaviour
     }
     
     void ResetParry()
+{
+    playerAnimator.SetBool("isParrying", false); // Reset parry state
+    if (defenseType == DefenseState.parry) // Only reset defenseType if it was a parry
     {
-        playerAnimator.SetBool("isParrying", false);
-        playerAnimator.SetBool("isBlocking", false);
         defenseType = DefenseState.none;
     }
+    Debug.Log("Parry Reset");
+}
     
     private void Update()
     {
-        gameManagerUpdate();
-    }
-
-    public void gameManagerUpdate(){
-        if(transform.tag == "Player1")
-        {
-            GameManager.Instance.p1IsBlocking = playerAnimator.GetBool("isBlocking");
-            GameManager.Instance.p1IsParrying = playerAnimator.GetBool("isParrying");
-        }
-        else{
-            GameManager.Instance.p2IsBlocking = playerAnimator.GetBool("isBlocking");
-            GameManager.Instance.p2IsParrying = playerAnimator.GetBool("isParrying");
-        }
+        
     }
     
     public void TakeDamage(float damage, Collider2D attackCollider, Collider2D attackBoxCollider, bool isBlocking, bool isParrying)
@@ -194,9 +165,8 @@ public class PlayerDefense : MonoBehaviour
             //Debug.Log(playerAnimator.GetBool("isBlocking"));
             //Debug.Log(playerAnimator.GetBool("isParrying"));
             
-            if(isBlocking == false && isParrying == true){
+            if(isParrying == true && playerAnimator.GetBool("ParryingWhenAttacked") == true){
                 Debug.Log("Parried");
-                StartCoroutine(ParryPause());
                 playerAnimator.SetBool("ParryingWhenAttacked", false);
                 CancelBlock();
                 return;
@@ -262,13 +232,6 @@ public class PlayerDefense : MonoBehaviour
                 
                 yield return null;
             }
-        }
-
-
-        IEnumerator ParryPause(){
-            Time.timeScale = 0f;
-            yield return new WaitForSeconds(0.5f);
-            Time.timeScale = 1f;
         }
     }
 }

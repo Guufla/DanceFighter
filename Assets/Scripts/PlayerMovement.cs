@@ -85,8 +85,8 @@ public class PlayerMovement : MonoBehaviour
         return playerIndex;
     }
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
         getGroundCheck();
         getMovementInfo();
@@ -145,18 +145,20 @@ public class PlayerMovement : MonoBehaviour
     void handleJumping()
     {
         // Check if the player is on the ground or performing an air attack
-        if (transform.position.y == initialYPos || playerAttack.isAirAttacking == true)
+        if (transform.position.y == initialYPos || playerAnimator.GetBool("isAttacking") == true)
         {
             playerAnimator.SetBool("isJumping", false);
+            //playerAnimator.SetLayerWeight(1, 0f);
             // Debug.Log(playerAttack.isAirAttacking);
         }
         else
         {
             // Check if the player is in the air and not performing an air attack
-            if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false)
+            if (transform.position.y > highestYPos && playerAttack.isAirAttacking == false && playerAttack.isAttacking == false)
             {
                 highestYPos = transform.position.y;
                 playerAnimator.SetBool("isJumping", true);
+                //playerAnimator.SetLayerWeight(1, 1f);
             }
         }
     }
