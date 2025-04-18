@@ -195,7 +195,19 @@ MonoBehaviour:
     m_ActionId: 0d9f4aaa-1bf5-487a-b822-6be7dc1c3f73
     m_ActionName: Player/Block[/Keyboard/b]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8601705946124302911}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnParry
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7e93b4ea-ba86-48f9-b1f5-b4f9e754867c
     m_ActionName: Player/Parry[/Keyboard/b]
   - m_PersistentCalls:

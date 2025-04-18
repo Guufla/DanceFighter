@@ -92,7 +92,7 @@
                     "id": "0d9f4aaa-1bf5-487a-b822-6be7dc1c3f73",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -101,7 +101,7 @@
                     "id": "7e93b4ea-ba86-48f9-b1f5-b4f9e754867c",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Tap(duration=0.3,pressPoint=0.3)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -511,7 +511,7 @@
                     "name": "",
                     "id": "45803d1f-6227-4668-a64c-4aacf8d7c161",
                     "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Block",
@@ -544,7 +544,7 @@
                     "name": "",
                     "id": "653e4d3b-d570-4399-9d55-b2e4b111697c",
                     "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.3,pressPoint=0.35)",
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Parry",

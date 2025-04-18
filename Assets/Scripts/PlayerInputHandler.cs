@@ -71,7 +71,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void OnParryPerformed(CallbackContext context)
+    public void OnParry(CallbackContext context)
         {
             playerDefense.OnParryPerformed(context);
         }
