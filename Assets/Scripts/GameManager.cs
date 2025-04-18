@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     
     public Boolean isP1Attacking; 
 
+    public bool p1InputDisabled;
+
 
 
     public bool player1IsOnGround; // Tells you if the player is on the ground or not
@@ -112,6 +114,8 @@ public class GameManager : MonoBehaviour
     public bool p2IsBlocking;
 
     public bool p2IsParrying;
+
+    public bool p2InputDisabled;
 
     [Header("Offensive mode")]
 
@@ -238,8 +242,13 @@ public class GameManager : MonoBehaviour
         // Sets the ground variables to false by default
         player1IsOnGround = false;
         player2IsOnGround = false;
+        
 
         disablePlayerInputs = true;
+
+        p1InputDisabled = false;
+
+        p2InputDisabled = false;
 
         curPlayerCount = 0;
 
