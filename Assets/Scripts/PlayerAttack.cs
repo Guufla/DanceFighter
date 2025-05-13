@@ -327,26 +327,7 @@ public class PlayerAttack : MonoBehaviour
         attacks(); // Update function for the attack system
         //resetTimerCheck(); // Update function for resetting the combo timer
         updateMovement(); // If the player is to have their movement stopped it is sent to here
-        canAttackCatch();
-    }
-    private void canAttackCatch() {
-        if(canAttack == false && isAnimating == true){
-            StartCoroutine(canAttackBroke());
-        }
-
-        if(checkCanAttackBroke == true && canAttack == false){
-            canAttack = true;
-            checkCanAttackBroke = false;
-        }
-        else{
-            checkCanAttackBroke = false;
-        }
         
-    }
-    IEnumerator canAttackBroke(){
-        yield return new WaitForSeconds(3f);
-        checkCanAttackBroke = true;
-
     }
     
     private void FixedUpdate() {
