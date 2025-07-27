@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BaseScene 1.unity
     guid: 2b0e62ca6682345449e45c0a809cad15
+  - enabled: 1
+    path: Assets/Scenes/TrainingRoom.unity
+    guid: ae3887101d16f4947ace4801a80c78ea
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6bbc04bc6854bf140bc132acd1f3f93f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: a9f9b2787b4e1744a804fb708f7c3086, type: 3}
