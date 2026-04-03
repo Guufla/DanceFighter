@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 // Enum that holds which attack is inputted by the player
-enum AttackType : int{
+/*enum AttackType : int{
         none,attackE, attackR, attackF, upTiltE, downTiltE, upTiltR, downTiltR, upTiltF, downTiltF
-    }
+    }*/
 
 
 
